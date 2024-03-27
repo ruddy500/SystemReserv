@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('componentes/menu');
 });
+
+Route::get('/inicio', function () {
+    return view('inicio', ['menu' => view('componentes/menu')]);
+})->name('inicio');
+
+Route::get('/ambientes', function () {
+    return view('ambientes', ['menu' => view('componentes/menu')]);
+})->name('ambientes');
+
+
+
