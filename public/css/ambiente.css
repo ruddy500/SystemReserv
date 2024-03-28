@@ -33,6 +33,20 @@
     /* Color de fondo personalizado */
 }
 
+.bg-custom-lista {
+    background-color: #2B4C6F;
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+.text-white {
+    color: white !important; /* Color del texto en blanco */
+}
+
+.margin{
+    margin-top: 30px;
+}
+
 .btn-custom {
     background-color: #2B4C6F;
     /* Cambiar el color de fondo del botón */
