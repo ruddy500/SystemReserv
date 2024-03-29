@@ -65,6 +65,16 @@
     transition: .5s;
     z-index: var(--z-fixed);
   }
+  .l-navbar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px; /* Grosor de la línea (ajusta según lo necesites) */
+    height: 100%;
+    background-color: #D30C1F; /* Color de la línea */
+  }
+
   .nav {
     height: 100%;
     display: flex;
