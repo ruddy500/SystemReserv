@@ -26,6 +26,7 @@
     /* Establecer el grosor del borde */
     border-style: solid;
     /* Establecer el estilo del borde */
+    font-size: 1.2rem;
 }
 
 .bg-custom {
@@ -52,7 +53,7 @@
     /* Cambiar el color de fondo del botón */
     color: white;
     /* Cambiar el color del texto a blanco */
-    font-size: 1.4rem;
+    font-size: 1rem;
     border-color: #2B4C6F;
     /* Opcional: Cambiar el color del borde */
 }
@@ -68,7 +69,7 @@
     background-color: #28A745;
     color: white;
     border-color: #28A745;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .btn-aceptar:hover {
@@ -78,7 +79,7 @@
 .btn-cancelar {
     background-color: #D30C1F;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .btn-cancelar:hover {
@@ -87,11 +88,19 @@
 }
 
 .h4{
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: rgba(0, 0, 0, 0.59);
     font-weight: normal;
 }
 
+
+.h3{
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.59);
+    font-weight: normal;
+}
+
+
 .form-control {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }

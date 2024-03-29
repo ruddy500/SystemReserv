@@ -13,7 +13,6 @@
 							<thead class="bg-custom-lista">
 								<tr>
 									<th class="text-center h4 text-white">Habilitar</th>
-									<!--<th class="text-center">Nombre de usuario</th>-->
 									<th class="text-center h4 text-white">Nombre de ambiente</th>
 									<th class="text-center h4 text-white">Capacidad</th>
 									<th class="text-center h4 text-white">Opciones</th>
