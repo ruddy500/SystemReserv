@@ -129,26 +129,3 @@ h1{
         font-size: 0px;
     }
 }
-
-
-
-
-
-/*@media screen and (max-width:400px) {
-    header {
-        
-        text-transform: capitalize   
-    }
-    .btn-group-vertical {
-        transition: 0.5s ease-in-out;
-         
-    }
-}
-
-
-@media screen and (max-width:480px) {
-    header {
-        width: 200px;
-        text-transform: capitalize   
-    }
-}*/
