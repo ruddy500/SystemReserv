@@ -7,6 +7,7 @@
 				<div class="card-body bg-custom">
 					<button type="button" class="btn btn-custom margin" data-bs-toggle="modal" data-bs-target="#formularioAmbiente" data-bs-whatever="@mdo"><i class="bi bi-plus-circle-fill"></i>  Registrar ambiente</button>
 					@include('ambientes.ambiente.registrar')
+					@include('componentes.validacion')
 
 					<div class="table-responsive margin">
 						<table class="table table-striped table-hover table-bordered">
