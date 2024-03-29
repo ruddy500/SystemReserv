@@ -13,7 +13,7 @@
     border: none;
     text-decoration: none;
     text-transform: capitalize;
-    transition: all .2s linear;
+    /*transition: all 0.2s linear;*/
     line-height: 1.5;
 }
 html{
@@ -22,7 +22,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background:#f7fbff;
+    background:#ffffff;
     padding-left: 30rem;
 }
 section{
@@ -40,7 +40,7 @@ header{
     z-index: 1000;
     flex-flow: column nowrap;
     padding: 8rem 2rem;
-    width: 30rem;
+    width: 25rem;
     text-align: center;
     border-right: 0.5rem solid rgba(217, 0, 0, 1); /* borde delgado de 1 píxel de ancho, sólido y de color negro */
 }
@@ -65,8 +65,10 @@ header .navbar a{
     font-size: 3em;
 }
 header .navbar a:hover{
-    color: #ff9900;
-    font-size: 3em;
+   /* color: #ff9900;
+    font-size: 3em;*/
+    background-color:rgb(68, 127, 255) ;
+    box-shadow: 0 0 10px rgb(68, 127, 255), 0 0 20px rgb(68, 127, 255), 0 0 20px rgb(68, 127, 255);
 }
 
 .fcyt {
@@ -87,6 +89,7 @@ header .navbar a:hover{
 
 .btn-group-vertical {
     text-align: center; /* Centra los elementos hijos horizontalmente */
+    text-transform: uppercase;
 }
 
 
@@ -104,3 +107,48 @@ h1{
 .container{
     background: rgba(217, 217, 217, 1);
 }
+/*----------------reponsive-----------*/
+@media (max-width:700px) {
+    header{
+        width: 14rem;
+        
+    }
+    body{
+        background:#03ffea;
+        padding-left: 16rem;
+    }
+    .btn-group-vertical{
+        transition: 2s ease-in-out;
+        font-size: 0px;
+    }
+}
+
+@media (max-width:701px) {
+    .btn-group-vertical{
+        transition: 0.5s ease-in-out;
+        font-size: 0px;
+    }
+}
+
+
+
+
+
+/*@media screen and (max-width:400px) {
+    header {
+        
+        text-transform: capitalize   
+    }
+    .btn-group-vertical {
+        transition: 0.5s ease-in-out;
+         
+    }
+}
+
+
+@media screen and (max-width:480px) {
+    header {
+        width: 200px;
+        text-transform: capitalize   
+    }
+}*/
