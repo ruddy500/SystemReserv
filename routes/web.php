@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hola', function () {
+    return view('hola');
+});
+
+Route::get('/ambiente/verdetalles', function () {
+    return view('ambiente.verdetalles');
+});
+
+Route::resource('ambiente','App\Http\Controllers\AmbienteController');
+
+
