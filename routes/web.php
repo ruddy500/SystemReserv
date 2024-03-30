@@ -17,14 +17,15 @@ Route::get('/', function () {
     return view('componentes/menu');
 });
 
-Route::get('/inicio', function () {
-    return view('inicio', ['menu' => view('componentes/menu')]);
-})->name('inicio');
+
 
 Route::get('/ambientes', function () {
     return view('ambientes.index', ['menu' => view('componentes/menu')]);
 })->name('ambientes.index');
 
+Route::get('/inicio', function () {
+    return view('inicio.index', ['menu' => view('componentes/menu')]);
+})->name('inicio.index');
 
 
 

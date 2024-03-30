@@ -16,7 +16,7 @@
                     </a>
                 </div>
                 <div class="nav_list"> 
-                    <a href="{{ route('inicio') }}" class="nav_link active"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a> 
+                    <a href="{{ route('inicio.index') }}" class="nav_link active"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a> 
                     <a href="{{ route('ambientes.index') }}" class="nav_link"> <i class="bi bi-buildings"></i> <span class="nav_name">Ambientes</span> </a>
                 </div>
             </div> 
