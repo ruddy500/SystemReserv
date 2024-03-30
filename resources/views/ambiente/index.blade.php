@@ -21,7 +21,8 @@
                 <td>{{$ambiente->Capacidad}}</td>
                 <td>
                     <button>Horario</button>
-                    <a href="/ambiente/verdetalles">Ver detalles</a>
+                    {{-- <a href="/ambiente/verdetalles">Ver detalles</a> --}}
+                    <a href="{{ route('ambiente.verdetalles', ['ubicacion' => $ambiente->Ubicacion, 'nombre' => $ambiente->Nombre, 'capacidad' => $ambiente->Capacidad]) }}">Ver detalles</a>
                     <button>Editar</button>
                 </td>
             </tr>

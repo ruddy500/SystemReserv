@@ -26,9 +26,10 @@ Route::get('/hola', function () {
 //     return view('ambiente.verdetalles');
 // });
 
-Route::get('/ambiente/verdetalles',[AmbienteDetallesController::class,'verDetalles']);
+// Route::get('/ambiente/verdetalles',[AmbienteDetallesController::class,'verDetalles']);
 
-// Route::get('/ambiente/verdetalles', 'AmbienteDetallesController@verDetalles');
+Route::get('/ambiente/verdetalles/{ubicacion}/{nombre}/{capacidad}', [AmbienteDetallesController::class, 'verDetalles'])
+     ->name('ambiente.verdetalles');
 
 Route::resource('ambiente','App\Http\Controllers\AmbienteController');
 
