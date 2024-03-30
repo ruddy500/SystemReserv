@@ -22,8 +22,9 @@ Route::get('/inicio', function () {
 })->name('inicio');
 
 Route::get('/ambientes', function () {
-    return view('ambientes', ['menu' => view('componentes/menu')]);
-})->name('ambientes');
+    return view('ambientes.index', ['menu' => view('componentes/menu')]);
+})->name('ambientes.index');
+
 
 
 

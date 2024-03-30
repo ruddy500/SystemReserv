@@ -1,0 +1,109 @@
+/* Puedes utilizar las clases de Bootstrap para el contenedor */
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Ajustamos el ancho de la card para ser responsivo */
+.card {
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    /* Establece un ancho máximo para la card */
+    width: 100%;
+    /* 100% de ancho */
+}
+
+.card-header {
+    background-color: #2B4C6F;
+    /* Cambiar el color de fondo del encabezado */
+    color: white;
+    /* Cambiar el color del texto a blanco */
+    border-color: #2B4C6F;
+    /* Opcional: cambiar el color del borde */
+    border-width: 10px;
+    /* Establecer el grosor del borde */
+    border-style: solid;
+    /* Establecer el estilo del borde */
+    font-size: 1.2rem;
+}
+
+.bg-custom {
+    background-color: #D9D9D9;
+    /* Color de fondo personalizado */
+}
+
+.bg-custom-lista {
+    background-color: #2B4C6F;
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+.text-white {
+    color: white !important; /* Color del texto en blanco */
+}
+
+.margin{
+    margin-top: 30px;
+}
+
+.btn-custom {
+    background-color: #2B4C6F;
+    /* Cambiar el color de fondo del botón */
+    color: white;
+    /* Cambiar el color del texto a blanco */
+    font-size: 1rem;
+    border-color: #2B4C6F;
+    /* Opcional: Cambiar el color del borde */
+}
+
+.btn-custom:hover {
+    background-color: #214169;
+    /* Cambiar el color de fondo del botón al pasar el ratón */
+    color: white;
+    /* Mantener el color del texto blanco */
+}
+
+.btn-aceptar {
+    background-color: #28A745;
+    color: white;
+    border-color: #28A745;
+    font-size: 1rem;
+}
+
+.btn-aceptar:hover {
+    background-color: #28A745;
+    color: white;
+}
+.btn-cancelar {
+    background-color: #D30C1F;
+    color: white;
+    font-size: 1rem;
+}
+
+.btn-cancelar:hover {
+    background-color: #D30C1F;
+    color: white;
+}
+
+.h4{
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.59);
+    font-weight: normal;
+}
+
+
+.h3{
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.59);
+    font-weight: normal;
+}
+
+
+.form-control {
+    font-size: 1rem;
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Color del fondo oscuro */
+}
