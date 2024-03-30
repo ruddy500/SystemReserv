@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmbienteDetallesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,13 @@ Route::get('/hola', function () {
     return view('hola');
 });
 
-Route::get('/ambiente/verdetalles', function () {
-    return view('ambiente.verdetalles');
-});
+// Route::get('/ambiente/verdetalles', function () {
+//     return view('ambiente.verdetalles');
+// });
+
+Route::get('/ambiente/verdetalles',[AmbienteDetallesController::class,'verDetalles']);
+
+// Route::get('/ambiente/verdetalles', 'AmbienteDetallesController@verDetalles');
 
 Route::resource('ambiente','App\Http\Controllers\AmbienteController');
 
