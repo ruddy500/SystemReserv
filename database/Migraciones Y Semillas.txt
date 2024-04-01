@@ -1,0 +1,7 @@
+1.Usar uno de estos dos comandos
+php artisan migrate -> Este comando ejecuta todas las migraciones que aún no se han ejecutado
+php artisan migrate:fresh -> Este comando elimina todas las tablas de la base de datos y luego ejecuta todas las migraciones desde el principio.
+                             Usalo cuando quieras modificar una migracion existente
+
+2.Ejecutar las semillas
+php artisan db:seed
