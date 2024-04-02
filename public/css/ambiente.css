@@ -40,6 +40,19 @@
     color: white;
 }
 
+.bg-custom-lista-ambientes-plomo {
+    background-color: rgba(189, 189, 189, 1);
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+.bg-custom-lista-ambientes-blanco {
+    background-color: white;
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+
 .text-white {
     color: white !important; /* Color del texto en blanco */
 }
@@ -106,4 +119,32 @@
 }
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.5); /* Color del fondo oscuro */
+}
+
+
+
+
+
+
+
+.circle, .circle2, .circle3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* Espacio entre los círculos */
+}
+
+.circle {
+    background-color: #6C757D; /* Color gris */
+}
+
+.circle2 {
+    background-color: #3F8EE2; /* Color celeste */
+}
+
+.circle3 {
+    background-color: #28AF06; /* Color verde */
 }
