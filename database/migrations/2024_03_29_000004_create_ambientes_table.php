@@ -17,7 +17,7 @@ class CreateAmbientesTable extends Migration
             $table->id();
             $table->string('Nombre',50);
             $table->string('Ubicacion',100)->nullable();
-            $table->integer('Capacidad');
+            $table->integer('Capacidad')->nullable();
             $table->boolean('Habilitado')->default(true);
             //$table->timestamps();
           

@@ -18,10 +18,10 @@ Route::get('/inicio', function () {
     return view('ambientes.index', ['menu' => view('componentes/menu')]);
 })->name('ambientes.index');
 */
+
 Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [AmbientesController::class, 'mostrar'])->name('ambientes.index');
-
-
+Route::put('/ambiente-editar/{id}', [AmbientesController::class, 'editarAmbiente'])->name('editar.ambiente');
 
 
