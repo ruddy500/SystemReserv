@@ -39,6 +39,23 @@
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
                 </div>
+
+                @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Ambiente registrado correctamente',
+                            text: '{{ session('success') }}',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            
+                            window.location.href = '/';
+                            }
+                        });
+                    </script>
+                @endif
+
             </form>
         </div>
     </div>
