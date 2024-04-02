@@ -13,11 +13,11 @@
                             <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                             <select class="form-control form-select-sm h4" aria-label="Small select example" required>
                                 <option value="" disabled selected>Seleccionar un ambiente</option>
-                                
-                                    <option value="1">Ambiente 1</option>
-                                    <option value="2">Ambiente 2</option>
-                                    <option value="3">Ambiente 3</option>
-                                
+                               <!-- me captura todo los ambientes--> 
+                                @foreach($ambientes as $ambiente)
+                                <option value="{{ $ambiente->id }}">{{ $ambiente->Nombre }}</option>
+                                @endforeach
+                                  
                             </select>
                         </div>
                         <div class="mb-3">
