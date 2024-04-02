@@ -7,14 +7,7 @@ use Illuminate\Http\Request;
 
 class AmbientesController extends Controller
 {
-    public function mostrar()
-    {  
-        $ambientes = Ambientes::all();
-        $idAmbienteSeleccionado = $ambientes->isEmpty() ? null : $ambientes->first()->id;
-        $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('ambientes.index', compact('ambientes', 'menu','idAmbienteSeleccionado'));
-    }
-
+    
     public function editarAmbiente(Request $request, $id)
     {
     // Buscar el ambiente que se desea editar
@@ -34,5 +27,23 @@ class AmbientesController extends Controller
     // Redirigir a una ruta o devolver una respuesta JSON
     return redirect()->route('inicio')->with('success', 'Ambiente editado exitosamente');
 }
+
+    public function guardar(Request $request)
+    {
+        $ambiente = new Ambientes;
+
+        $ambiente->nombre_ambientes_id = $request->ambiente;
+        $ambiente->Capacidad = $request->capacidad;
+        $ambiente->Ubicacion = $request->descripcion;
+
+        $ambiente->save();
+
+        return redirect('/ruta-a-la-que-quieres-redirigir');
+    }
+
+
+
+
+
 
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbientesController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\NombreAmbientesController;
 use App\Http\Controllers\RaizController;
 
 /*
@@ -21,7 +22,7 @@ Route::get('/inicio', function () {
 
 Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
-Route::get('/ambientes', [AmbientesController::class, 'mostrar'])->name('ambientes.index');
-Route::put('/ambiente-editar/{id}', [AmbientesController::class, 'editarAmbiente'])->name('editar.ambiente');
+Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
+Route::post('/ambiente-guardar', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
 
 

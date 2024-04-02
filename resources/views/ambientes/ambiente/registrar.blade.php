@@ -1,9 +1,9 @@
 <div class="modal fade" id="formularioAmbiente" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="row g-3 needs-validation" action="{{ route('editar.ambiente', ['id' => $idAmbienteSeleccionado]) }}" method="POST" novalidate>
+            <form class="row g-3 needs-validation" action="{{ route('guardar.ambiente') }}" method="POST" novalidate>
                 @csrf
-                @method('PUT')
+                <!--'@'method('PUT') -->
                 <div class="modal-header">
                     <h3 class="modal-title h3">Formulario de ambiente</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -15,11 +15,8 @@
                             <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required>
                                 <option value="" disabled selected>Seleccionar un ambiente</option>
                                <!-- me captura todo los ambientes--> 
-                                @foreach($ambientes as $ambiente)
-                                    @php
-                                        $idAmbienteSeleccionado = $ambiente->id;
-                                    @endphp
-                                <option value="{{ $ambiente->id }}">{{ $ambiente->Nombre }}</option>
+                                @foreach($nombreambientes as $nombreambiente)
+                                <option value="{{ $nombreambiente->id }}">{{ $nombreambiente->Nombre }}</option>
                                 @endforeach
                                   
                             </select>

@@ -16,4 +16,8 @@ class Ambientes extends Model
         //y el segundo parametro es la tabla por el cual se relacionan
         return $this->belongsToMany(Horarios::class,'ambiente_horario', 'AmbienteId', 'HorarioId');
     }
+
+    public function nombreambiente() {
+        return $this->hasOne(NombreAmbientes::class,'nombre_ambientes_id', 'id');
+    }
 }
