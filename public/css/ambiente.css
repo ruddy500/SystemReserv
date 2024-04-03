@@ -121,6 +121,24 @@
     background-color: rgba(0, 0, 0, 0.5); /* Color del fondo oscuro */
 }
 
+.btn-horario {
+    background-color: #2B4C6F;
+    /* Cambiar el color de fondo del botón */
+    color: white;
+    /* Cambiar el color del texto a blanco */
+    font-size: 1rem;
+    border-color: #2B4C6F;
+    /* Opcional: Cambiar el color del borde */
+    margin-top: 15px
+}
+
+.btn-horario:hover {
+    background-color: #214169;
+    /* Cambiar el color de fondo del botón al pasar el ratón */
+    color: white;
+    /* Mantener el color del texto blanco */
+}
+
 
 
 
