@@ -64,40 +64,6 @@
 								</tr>
 								@endforeach
 							</thead>
-							
-							<!--Fila Blanca-->
-							{{-- <thead class="bg-custom-lista-ambientes-blanco">
-								<tr>
-									<th class="text-center h4 text-black">
-										<div class="text-center">
-											<div class="form-check form-switch d-inline-block align-middle">
-												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-											</div>
-										</div>
-									</th>
-
-									<th class="text-center h4 text-black">Auditorio 1</th>
-
-									<th class="text-center h4 text-black">150</th>
-
-									<th class="text-center h4 text-black">
-										<div class="d-flex justify-content-center">
-											<div class="circle">
-												<i class="fas fa-calendar-alt" style="color: white;"></i>
-											</div>
-
-											<div class="circle2">
-												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
-											</div>
-
-											<div class="circle3">
-												<i class="fas fa-edit" style="color: white;"></i>
-											</div>
-										</div>
-									</th>
-								</tr>
-							</thead> --}}
 						</table>
 					</div>
 				</div>
