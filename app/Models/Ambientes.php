@@ -18,6 +18,6 @@ class Ambientes extends Model
     }
 
     public function nombreambiente() {
-        return $this->hasOne(NombreAmbientes::class,'nombre_ambientes_id', 'id');
+        return $this->hasOne(NombreAmbientes::class, 'id','nombre_ambientes_id');
     }
 }
