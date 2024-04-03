@@ -18,10 +18,81 @@
 									<th class="text-center h4 text-white">Capacidad</th>
 									<th class="text-center h4 text-white">Opciones</th>
 								</tr>
-							</thead>						
+							</thead>
+							<!-- me muestra todos los ambientes tiene que estar en un foreach-->
+
+							<!--Fila Ploma-->
+							<thead class="bg-custom-lista-ambientes-plomo">
+								<tr>
+									<th class="text-center h4 text-black">
+										<div class="text-center">
+											<div class="form-check form-switch d-inline-block align-middle">
+												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+											</div>
+										</div>
+									</th>
+
+									<th class="text-center h4 text-black">Auditorio 2</th>
+
+									<th class="text-center h4 text-black">200</th>
+
+									<th class="text-center h4 text-black">
+										<div class="d-flex justify-content-center">
+											<div class="circle">
+												<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+													<i class="fas fa-calendar-alt" style="color: white;"></i>	
+												</a>
+												
+											</div>
+
+											<div class="circle2">
+												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+											</div>
+
+											<div class="circle3">
+												<i class="fas fa-edit" style="color: white;"></i>
+											</div>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							
+							<!--Fila Blanca-->
+							<thead class="bg-custom-lista-ambientes-blanco">
+								<tr>
+									<th class="text-center h4 text-black">
+										<div class="text-center">
+											<div class="form-check form-switch d-inline-block align-middle">
+												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+											</div>
+										</div>
+									</th>
+
+									<th class="text-center h4 text-black">Auditorio 1</th>
+
+									<th class="text-center h4 text-black">150</th>
+
+									<th class="text-center h4 text-black">
+										<div class="d-flex justify-content-center">
+											<div class="circle">
+												<i class="fas fa-calendar-alt" style="color: white;"></i>
+											</div>
+
+											<div class="circle2">
+												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+											</div>
+
+											<div class="circle3">
+												<i class="fas fa-edit" style="color: white;"></i>
+											</div>
+										</div>
+									</th>
+								</tr>
+							</thead>
 						</table>
 					</div>
-					
 				</div>
 			</div>
     </div>

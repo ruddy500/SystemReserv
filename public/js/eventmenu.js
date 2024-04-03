@@ -1,37 +1,49 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    const showNavbar = (toggleId, navId, bodyId, headerId) =>{
-      const toggle = document.getElementById(toggleId),
-            nav = document.getElementById(navId),
-            bodypd = document.getElementById(bodyId),
-            headerpd = document.getElementById(headerId)
+  const toggle = document.getElementById('header-toggle'),
+        nav = document.getElementById('nav-bar'),
+        bodypd = document.getElementById('body-pd'),
+        headerpd = document.getElementById('header'),
+        linkColor = document.querySelectorAll('.nav_link');
 
-      // Validate that all variables exist
-      if(toggle && nav && bodypd && headerpd){
-          // show navbar
-          nav.classList.toggle('show-menu')
-          bodypd.classList.toggle('body-pd')
-          headerpd.classList.toggle('body-pd')
+  const showNavbar = () => {
+      // Check if the menu is currently expanded
+      const isMenuExpanded = nav.classList.contains('show-menu');
+
+      // If the menu is expanded, collapse it; otherwise, expand it
+      nav.classList.toggle('show-menu', !isMenuExpanded);
+      bodypd.classList.toggle('body-pd', !isMenuExpanded);
+      headerpd.classList.toggle('body-pd', !isMenuExpanded);
+  };
+
+  if (toggle && nav && bodypd && headerpd) {
+      toggle.addEventListener('click', showNavbar);
+  }
+
+  /*===== LINK ACTIVE =====*/
+  function colorLink(event) {
+      // Remove the 'active' class from all links
+      linkColor.forEach(l => l.classList.remove('active'));
+
+      // Add the 'active' class to the clicked link
+      this.classList.add('active');
+
+      // Save the current selection in session storage
+      sessionStorage.setItem('selectedLink', this.href);
+  }
+
+  // Load the saved selection from session storage
+  const selectedLink = sessionStorage.getItem('selectedLink');
+  if (selectedLink) {
+      // Remove the 'active' class from all links
+      linkColor.forEach(l => l.classList.remove('active'));
+
+      // Add the 'active' class to the saved link
+      const linkElement = document.querySelector(`.nav_link[href="${selectedLink}"]`);
+      if (linkElement) {
+          linkElement.classList.add('active');
       }
-    }
+  }
 
-    showNavbar('header-toggle','nav-bar','body-pd','header')
+  linkColor.forEach(l => l.addEventListener('click', colorLink));
+});
 
-    /*===== LINK ACTIVE =====*/
-    const linkColor = document.querySelectorAll('.nav_link')
-
-    function colorLink(){
-       if(linkColor){
-         linkColor.forEach(l=> l.classList.remove('active'))
-         this.classList.add('active')
-       }
-    }
-    /*function colorLink() {
-      event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-      $('.nav_link').removeClass('active'); // Remover la clase 'active' de todos los enlaces
-      $(this).addClass('active'); // Agregar la clase 'active' al enlace clickeado
-    }
-    
-    $('.nav_link').on('click', colorLink);*/
-
-    linkColor.forEach(l=> l.addEventListener('click', colorLink))
-  });

@@ -40,6 +40,19 @@
     color: white;
 }
 
+.bg-custom-lista-ambientes-plomo {
+    background-color: rgba(189, 189, 189, 1);
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+.bg-custom-lista-ambientes-blanco {
+    background-color: white;
+    /* Color de fondo personalizado */
+    color: white;
+}
+
+
 .text-white {
     color: white !important; /* Color del texto en blanco */
 }
@@ -107,3 +120,58 @@
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.5); /* Color del fondo oscuro */
 }
+
+.btn-horario {
+    background-color: #2B4C6F;
+    /* Cambiar el color de fondo del botón */
+    color: white;
+    /* Cambiar el color del texto a blanco */
+    font-size: 1rem;
+    border-color: #2B4C6F;
+    /* Opcional: Cambiar el color del borde */
+    margin-top: 30px
+}
+
+.btn-horario:hover {
+    background-color: #214169;
+    /* Cambiar el color de fondo del botón al pasar el ratón */
+    color: white;
+    /* Mantener el color del texto blanco */
+}
+
+
+
+
+
+
+
+.circle, .circle2, .circle3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* Espacio entre los círculos */
+}
+
+.circle {
+    background-color: #6C757D; /* Color gris */
+}
+
+.circle2 {
+    background-color: #3F8EE2; /* Color celeste */
+}
+
+.circle3 {
+    background-color: #28AF06; /* Color verde */
+}
+.select-container {
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+}
+  
+.select-container select {
+    margin-right: 10px; /* Espacio entre los select */
+}
+  
+
