@@ -29,4 +29,11 @@ class NombreAmbientesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('ambientes.ver', compact('nombreambientes', 'menu'));
     }
+    public function editarAmbiente()
+    {  
+        $nombreambientes = NombreAmbientes::all();
+        
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('ambientes.editar', compact('nombreambientes', 'menu'));
+    }
 }

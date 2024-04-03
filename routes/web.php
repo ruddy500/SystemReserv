@@ -25,6 +25,7 @@ Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
 Route::get('/ambientes/horario', [NombreAmbientesController::class, 'mostrarHorario'])->name('ambientes.horario');
 Route::get('/ambientes/ver', [NombreAmbientesController::class, 'verAmbiente'])->name('ambientes.ver');
+Route::get('/ambientes/editar', [NombreAmbientesController::class, 'editarAmbiente'])->name('ambientes.editar');
 Route::post('/ambiente-guardar', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
 
 
