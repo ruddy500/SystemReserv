@@ -42,16 +42,20 @@
 											<div class="circle">
 												<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
 													<i class="fas fa-calendar-alt" style="color: white;"></i>	
-												</a>
-												
+												</a>	
 											</div>
 
 											<div class="circle2">
-												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+												<a href="#" class="btn btn-fab" title="Ver"> 
+													<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+												</a>	
 											</div>
 
 											<div class="circle3">
-												<i class="fas fa-edit" style="color: white;"></i>
+												<a href="#" class="btn btn-fab" title="Editar"> 
+													<i class="fas fa-edit" style="color: white;"></i>	
+												</a>
+												
 											</div>
 										</div>
 									</th>
