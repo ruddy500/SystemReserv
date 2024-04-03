@@ -139,6 +139,19 @@
     /* Mantener el color del texto blanco */
 }
 
+#horario-tabla th {
+    background-color: #b0b0b0; /* Color de fondo de encabezado 909090 */
+}
+
+#horario-tabla th, #horario-tabla td {
+    border-color:#b0b0b0 ; /* Color de borde 909090 */
+}
+#horario-tabla tbody {
+    background-color: #FFFFFF; /* Color de fondo del tbody en blanco */
+}
+
+
+
 
 
 
