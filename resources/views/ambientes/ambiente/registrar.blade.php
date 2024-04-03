@@ -40,22 +40,45 @@
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
                 </div>
-
+                
                 @if(session('success'))
                     <script>
                         Swal.fire({
                             icon: 'success',
-                            title: 'Ambiente registrado correctamente',
                             text: '{{ session('success') }}',
-                            allowOutsideClick: false
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                            
-                            window.location.href = '/';
-                            }
                         });
                     </script>
                 @endif
+
+                @if(session('message'))
+                    <script>
+                        Swal.fire({
+                            icon: 'warning',
+                            text: '{{ session('message') }}',
+                        });
+                    </script>
+                @endif
+
+                @if (session('error'))
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: '{{ session('error') }}',
+                        });
+                    </script>
+                @endif
+
+                @if ($errors->any())
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de validación',
+                            html: "{!! implode('<br>', $errors->all()) !!}",
+                        });
+                    </script>
+                @endif
+
 
             </form>
         </div>
