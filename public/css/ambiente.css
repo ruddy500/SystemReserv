@@ -148,3 +148,12 @@
 .circle3 {
     background-color: #28AF06; /* Color verde */
 }
+.select-container {
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+}
+  
+.select-container select {
+    margin-right: 10px; /* Espacio entre los select */
+}
+  
+

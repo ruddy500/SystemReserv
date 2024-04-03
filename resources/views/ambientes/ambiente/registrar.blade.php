@@ -14,13 +14,12 @@
                             <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                             <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required>
                                 <option value="" disabled selected>Seleccionar un ambiente</option>
-                               <!-- me captura todo los ambientes--> 
+                               <!-- me captura todo los ambientes -->
                                 @foreach($nombreambientes as $nombreambiente)
                                 <option value="{{ $nombreambiente->id }}">{{ $nombreambiente->Nombre }}</option>
-                                @endforeach
-                                  
+                                @endforeach 
                             </select>
-                        </div>
+                        </div> 
                         <div class="mb-3">
                             <label for="capacidad-name" class="col-form-label h4">Capacidad:</label>
                             <input type="number" name= "capacidad" class="form-control" id="capacidad-name" required minlength="3" maxlength="100" min="30" max="200">
