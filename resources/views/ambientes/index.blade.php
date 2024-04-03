@@ -40,7 +40,10 @@
 									<th class="text-center h4 text-black">
 										<div class="d-flex justify-content-center">
 											<div class="circle">
-												<i class="fas fa-calendar-alt" style="color: white;"></i>
+												<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+													<i class="fas fa-calendar-alt" style="color: white;"></i>	
+												</a>
+												
 											</div>
 
 											<div class="circle2">
@@ -90,7 +93,6 @@
 							</thead>
 						</table>
 					</div>
-					
 				</div>
 			</div>
     </div>

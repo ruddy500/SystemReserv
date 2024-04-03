@@ -23,6 +23,7 @@ Route::get('/inicio', function () {
 Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
+Route::get('/ambientes/horario', [NombreAmbientesController::class, 'mostrarHorario'])->name('ambientes.horario');
 Route::post('/ambiente-guardar', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
 
 

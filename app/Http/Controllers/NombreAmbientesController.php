@@ -15,4 +15,11 @@ class NombreAmbientesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('ambientes.index', compact('nombreambientes', 'menu'));
     }
+    public function mostrarHorario()
+    {  
+        $nombreambientes = NombreAmbientes::all();
+
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('ambientes.horario', compact('nombreambientes', 'menu'));
+    }
 }
