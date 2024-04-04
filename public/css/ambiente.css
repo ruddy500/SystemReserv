@@ -83,6 +83,12 @@
     border-color: #2B4C6F;
 }
 
+.horario-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 .btn-custom:hover {
     background-color: #214169;
     /* Cambiar el color de fondo del botón al pasar el ratón */
@@ -95,6 +101,7 @@
     color: white;
     border-color: #28A745;
     font-size: 1rem;
+    margin-left: 10px; /* Espacio entre los botones */
 }
 
 .btn-aceptar:hover {
@@ -105,11 +112,27 @@
     background-color: #D30C1F;
     color: white;
     font-size: 1rem;
+    margin-left: 10px; /* Espacio entre los botones */
 }
 
 .btn-cancelar:hover {
     background-color: #D30C1F;
     color: white;
+}
+
+.btn-horario {
+    background-color: #2B4C6F;
+    color: white;
+    font-size: 1rem;
+    border-color: #2B4C6F;
+    margin-top: 30px
+}
+
+.btn-horario:hover {
+    background-color: #214169;
+    /* Cambiar el color de fondo del botón al pasar el ratón */
+    color: white;
+    /* Mantener el color del texto blanco */
 }
 
 .h4{
@@ -129,21 +152,6 @@
 }
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.5); /* Color del fondo oscuro */
-}
-
-.btn-horario {
-    background-color: #2B4C6F;
-    color: white;
-    font-size: 1rem;
-    border-color: #2B4C6F;
-    margin-top: 30px
-}
-
-.btn-horario:hover {
-    background-color: #214169;
-    /* Cambiar el color de fondo del botón al pasar el ratón */
-    color: white;
-    /* Mantener el color del texto blanco */
 }
 
 #horario-tabla th {
