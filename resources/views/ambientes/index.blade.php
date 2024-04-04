@@ -20,78 +20,95 @@
 								</tr>
 							</thead>
 							<!-- me muestra todos los ambientes tiene que estar en un foreach-->
+                           
+                            @for ($i = 0; $i < $tamAmbientes ; $i++)
 
-							<!--Fila Ploma-->
-							<thead class="bg-custom-lista-ambientes-plomo">
-								<tr>
-									<th class="text-center h4 text-black">
-										<div class="text-center">
-											<div class="form-check form-switch d-inline-block align-middle">
-												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+								@if ($i % 2 == 0)
+								<!--Fila Ploma-->
+								<thead class="bg-custom-lista-ambientes-plomo">
+									<tr>
+										<th class="text-center h4 text-black">
+											<div class="text-center">
+												<div class="form-check form-switch d-inline-block align-middle">
+													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+												</div>
 											</div>
-										</div>
-									</th>
+										</th>
+                                        <th class="text-center h4 text-black">{{$ambientes[$i]->nombreambiente->Nombre}}</th>
+										<th class="text-center h4 text-black">{{$ambientes[$i]->Capacidad}}</th>
+										
+										<th class="text-center h4 text-black">
+											<div class="d-flex justify-content-center">
+												<div class="circle">
+													<i class="fas fa-calendar-alt" style="color: white;"></i>
+												</div>
 
-									<th class="text-center h4 text-black">Auditorio 2</th>
+												<div class="circle2">
+													<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+												</div>
 
-									<th class="text-center h4 text-black">200</th>
-
-									<th class="text-center h4 text-black">
-										<div class="d-flex justify-content-center">
-											<div class="circle">
-												<i class="fas fa-calendar-alt" style="color: white;"></i>
+												<div class="circle3">
+													<i class="fas fa-edit" style="color: white;"></i>
+												</div>
 											</div>
-
-											<div class="circle2">
-												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+										</th>
+									</tr>
+								</thead>
+								
+								@else
+								<!--Fila Blanca-->
+								<thead class="bg-custom-lista-ambientes-blanco">
+									<tr>
+										<th class="text-center h4 text-black">
+											<div class="text-center">
+												<div class="form-check form-switch d-inline-block align-middle">
+													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+												</div>
 											</div>
+										</th>
+                                         
+										<th class="text-center h4 text-black">{{$ambientes[$i]->nombreambiente->Nombre}}</th>
+										<th class="text-center h4 text-black">{{$ambientes[$i]->Capacidad}}</th>
+	
+										<th class="text-center h4 text-black">
+											<div class="d-flex justify-content-center">
+												<div class="circle">
+													<i class="fas fa-calendar-alt" style="color: white;"></i>
+												</div>
 
-											<div class="circle3">
-												<i class="fas fa-edit" style="color: white;"></i>
+												<div class="circle2">
+													<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
+												</div>
+
+												<div class="circle3">
+													<i class="fas fa-edit" style="color: white;"></i>
+												</div>
 											</div>
-										</div>
-									</th>
-								</tr>
-							</thead>
-							
-							<!--Fila Blanca-->
-							<thead class="bg-custom-lista-ambientes-blanco">
-								<tr>
-									<th class="text-center h4 text-black">
-										<div class="text-center">
-											<div class="form-check form-switch d-inline-block align-middle">
-												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-											</div>
-										</div>
-									</th>
+										</th>
+									</tr>
+								
+								</thead>		
+								@endif
 
-									<th class="text-center h4 text-black">Auditorio 1</th>
+							@endfor					
+	
 
-									<th class="text-center h4 text-black">150</th>
-
-									<th class="text-center h4 text-black">
-										<div class="d-flex justify-content-center">
-											<div class="circle">
-												<i class="fas fa-calendar-alt" style="color: white;"></i>
-											</div>
-
-											<div class="circle2">
-												<i class="bi bi-box-arrow-up-right" style="color: white;"></i>
-											</div>
-
-											<div class="circle3">
-												<i class="fas fa-edit" style="color: white;"></i>
-											</div>
-										</div>
-									</th>
-								</tr>
-							</thead>
 						</table>
 					</div>
 					
 				</div>
 			</div>
     </div>
+
+	<script>
+        $(document).ready(function() {
+            // Función para recargar la página después de cerrar el modal
+            $('#formularioAmbiente').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        });
+    </script>
+
 @endsection

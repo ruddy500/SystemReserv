@@ -10,7 +10,7 @@ class NombreAmbientes extends Model
     use HasFactory;
     public $timestamps = false;
     public function ambiente() {
-        return $this->belongsTo(NombreAmbientes::class,'id', 'id');
+        return $this->hasOne(Ambientes::class, 'nombre_ambientes_id');
     }
 
 }
