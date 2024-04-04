@@ -10,10 +10,14 @@ class Horarios extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public function dias(){
 
-        //primer parametro es el modelo con el que se relaciona 
-        //y el segundo parametro es la tabla por el cual se relacionan
+    public function dias(){
+         /**
+         * Esta línea de código define una relación muchos a muchos entre los modelos 
+         * Horarios y Ambientes, utilizando una tabla pivot llamada hambiente_horarios, 
+         * donde HorarioId y AmbienteId son las claves externas que vinculan los registros
+         * de ambas tablas en la tabla pivot
+         * */
         return $this->belongsToMany(Ambientes::class,'ambiente_horario','HorarioId','AmbienteId');
     }
 }
