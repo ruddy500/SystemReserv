@@ -12,17 +12,21 @@
 
                         <div class="mb-3">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccione dia</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select name="" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
+                                <option value="1">Lunes</option>
+                                <option value="2">Martes</option>
+                                <option value="3">Miercoles</option>
+                                <option value="1">Jueves</option>
+                                <option value="2">Viernes</option>
+                                <option value="3">Sábado</option>
                             </select>
                         </div> 
                         <div class="mb-3">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccione horario</option>
+                            <select name="" class="selectpicker custom-select form-control btn-lg" title="Seleccione horario">
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>

@@ -3,17 +3,15 @@
         <div class="modal-content">
             <form class="row g-3 needs-validation" action="{{ route('guardar.ambiente') }}" method="POST" novalidate>
                 @csrf
-                <!--'@'method('PUT') -->
+                <!--'@'method('PUT') xd -->
                 <div class="modal-header">
                     <h3 class="modal-title h3">Formulario de ambiente</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                         <div class="mb-3">
                             <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
-                            <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required>
-                                <option value="" disabled selected>Seleccionar un ambiente</option>
+                            <select name="ambiente" class="selectpicker form-control form-select-sm h4" data-live-search="true" data-size="5" title="Seleccione un ambiente">
                                <!-- me captura todo los ambientes -->
                                 @foreach($nombreambientes as $nombreambiente)
                                 <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
