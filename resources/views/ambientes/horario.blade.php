@@ -10,8 +10,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select name= "dia" class="form-select" aria-label="Default select example">
-                                <option selected>Seleccione dia</option>
+                            <select name="" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
                                <!--captura los dias-->
                                 @foreach ($dias as $dia)
                                 <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
