@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 /* Puedes utilizar las clases de Bootstrap para el contenedor */
 .container {
     padding-right: 15px;
@@ -10,29 +11,45 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 800px;
-    /* Establece un ancho máximo para la card */
     width: 100%;
-    /* 100% de ancho */
 }
 
+.vercard {
+    max-width: 1000px;
+}
+
+.details-card{
+    margin-top: 30px;
+    max-width: 900px;
+}
 .card-header {
     background-color: #2B4C6F;
-    /* Cambiar el color de fondo del encabezado */
     color: white;
-    /* Cambiar el color del texto a blanco */
     border-color: #2B4C6F;
-    /* Opcional: cambiar el color del borde */
     border-width: 10px;
-    /* Establecer el grosor del borde */
     border-style: solid;
-    /* Establecer el estilo del borde */
     font-size: 1.2rem;
+}
+
+.details-header{
+    background-color: #D9D9D9;
+    color: rgb(0, 0, 0);
+    border-color: #D9D9D9;
+    border-width: 3px;
+    border-style: solid;
+    font-size: 1rem;
 }
 
 .bg-custom {
     background-color: #D9D9D9;
     /* Color de fondo personalizado */
 }
+
+.bg-content {
+    background-color: #ffffff;
+    /* Color de fondo personalizado */
+}
+
 
 .bg-custom-lista {
     background-color: #2B4C6F;
@@ -42,13 +59,11 @@
 
 .bg-custom-lista-ambientes-plomo {
     background-color: rgba(189, 189, 189, 1);
-    /* Color de fondo personalizado */
     color: white;
 }
 
 .bg-custom-lista-ambientes-blanco {
     background-color: white;
-    /* Color de fondo personalizado */
     color: white;
 }
 
@@ -63,12 +78,9 @@
 
 .btn-custom {
     background-color: #2B4C6F;
-    /* Cambiar el color de fondo del botón */
     color: white;
-    /* Cambiar el color del texto a blanco */
     font-size: 1rem;
     border-color: #2B4C6F;
-    /* Opcional: Cambiar el color del borde */
 }
 
 .btn-custom:hover {
@@ -106,13 +118,11 @@
     font-weight: normal;
 }
 
-
 .h3{
     font-size: 1.2rem;
     color: rgba(0, 0, 0, 0.59);
     font-weight: normal;
 }
-
 
 .form-control {
     font-size: 1rem;
@@ -123,12 +133,9 @@
 
 .btn-horario {
     background-color: #2B4C6F;
-    /* Cambiar el color de fondo del botón */
     color: white;
-    /* Cambiar el color del texto a blanco */
     font-size: 1rem;
     border-color: #2B4C6F;
-    /* Opcional: Cambiar el color del borde */
     margin-top: 30px
 }
 
@@ -149,14 +156,6 @@
 #horario-tabla tbody {
     background-color: #FFFFFF; /* Color de fondo del tbody en blanco */
 }
-
-
-
-
-
-
-
-
 
 .circle, .circle2, .circle3 {
     width: 30px;
