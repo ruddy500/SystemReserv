@@ -37,17 +37,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>poner switch</td>
-                        <td>Lunes</td>
-                        <td>06:45-08:15</td>
-                        
+                        <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                        @include('ambientes.ambiente.editHorario')
+                            <td>poner switch</td>
+                            <td>Lunes</td>
+                            <td>06:45-08:15</td>
                         </tr>
 
-                        <tr>
-                        <td>poner switch</td>
-                        <td>Lunes</td>
-                        <td>15:45-17:15</td>
+                        <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                        @include('ambientes.ambiente.editHorario')
+                            <td>poner switch</td>
+                            <td>Lunes</td>
+                            <td>15:45-17:15</td>
                         </tr>
                     </tbody>
                 </table>
