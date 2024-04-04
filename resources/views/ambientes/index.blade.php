@@ -20,53 +20,103 @@
 								</tr>
 							</thead>
 							<!-- me muestra todos los ambientes tiene que estar en un foreach-->
+                            @for ($i = 0; $i < $tamAmbientes ; $i++)
 
-							<!--Fila Ploma-->
-							<thead class="bg-custom-lista-ambientes-plomo">
-								@foreach($ambientes as $ambiente)
-								<tr>
-									<th class="text-center h4 text-black">
-										<div class="text-center">
-											<div class="form-check form-switch d-inline-block align-middle">
-												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-												<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+								@if ($i % 2 == 0)
+								<!--Fila Ploma-->
+								<thead class="bg-custom-lista-ambientes-plomo">
+									<tr>
+										<th class="text-center h4 text-black">
+											<div class="text-center">
+												<div class="form-check form-switch d-inline-block align-middle">
+													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+												</div>
 											</div>
-										</div>
-									</th>
-									
-									<th class="text-center h4 text-black">{{$ambiente->nombreambiente->Nombre}}</th>
-									
-									
-									<th class="text-center h4 text-black">{{$ambiente->Capacidad}}</th>
-									
-									<th class="text-center h4 text-black">
-										<div class="d-flex justify-content-center">
+										</th>
+                                        <th class="text-center h4 text-black">{{$ambientes[$i]->nombreambiente->Nombre}}</th>
+										<th class="text-center h4 text-black">{{$ambientes[$i]->Capacidad}}</th>
+										
+										<th class="text-center h4 text-black">
+											<div class="d-flex justify-content-center">
+												<div class="circle">
+													<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+														<i class="fas fa-calendar-alt" style="color: white;"></i>	
+													</a>
+												</div>
+
+												<div class="circle2">
+													<a href="{{ route('ambientes.ver') }}" class="btn btn-fab" title="Ver"> 
+														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+													</a>
+												</div>
+
+												<div class="circle3">
+													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+														<i class="fas fa-edit" style="color: white;"></i>	
+													</a>
+												</div>
+											</div>
+										</th>
+									</tr>
+								</thead>
+								
+								@else
+								<!--Fila Blanca-->
+								<thead class="bg-custom-lista-ambientes-blanco">
+									<tr>
+										<th class="text-center h4 text-black">
+											<div class="text-center">
+												<div class="form-check form-switch d-inline-block align-middle">
+													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+												</div>
+											</div>
+										</th>
+                                         
+										<th class="text-center h4 text-black">{{$ambientes[$i]->nombreambiente->Nombre}}</th>
+										<th class="text-center h4 text-black">{{$ambientes[$i]->Capacidad}}</th>
+	
+										<th class="text-center h4 text-black">
+											<div class="d-flex justify-content-center">
 											<div class="circle">
-												<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
-													<i class="fas fa-calendar-alt" style="color: white;"></i>	
-												</a>	
-											</div>
+													<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+														<i class="fas fa-calendar-alt" style="color: white;"></i>	
+													</a>
+												</div>
 
-											<div class="circle2">
-												<a href="{{ route('ambientes.ver') }}" class="btn btn-fab" title="Ver"> 
-													<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-												</a>	
-											</div>
+												<div class="circle2">
+													<a href="{{ route('ambientes.ver') }}" class="btn btn-fab" title="Ver"> 
+														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+													</a>
+												</div>
 
-											<div class="circle3">
-												<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
-													<i class="fas fa-edit" style="color: white;"></i>	
-												</a>
-												
+												<div class="circle3">
+													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+														<i class="fas fa-edit" style="color: white;"></i>	
+													</a>
+												</div>
 											</div>
-										</div>
-									</th>
-								</tr>
-								@endforeach
-							</thead>
+										</th>
+									</tr>
+								
+								</thead>		
+								@endif
+
+							@endfor		
 						</table>
 					</div>
 				</div>
 			</div>
     </div>
+
+	<script>
+        $(document).ready(function() {
+            // Función para recargar la página después de cerrar el modal
+            $('#formularioAmbiente').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        });
+    </script>
+
 @endsection

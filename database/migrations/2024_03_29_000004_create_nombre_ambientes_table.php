@@ -23,6 +23,6 @@ class CreateNombreAmbientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nombre_aula');
+        Schema::dropIfExists('nombre_ambientes');
     }
 }
