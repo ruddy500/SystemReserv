@@ -59,7 +59,7 @@
 							</thead>
 							
 							<!--Fila Blanca-->
-							<thead class="bg-custom-lista-ambientes-blanco">
+							{{-- <thead class="bg-custom-lista-ambientes-blanco">
 								<tr>
 									<th class="text-center h4 text-black">
 										<div class="text-center">
@@ -90,7 +90,7 @@
 										</div>
 									</th>
 								</tr>
-							</thead>
+							</thead> --}}
 						</table>
 					</div>
 					
