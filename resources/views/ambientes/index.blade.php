@@ -23,6 +23,7 @@
 
 							<!--Fila Ploma-->
 							<thead class="bg-custom-lista-ambientes-plomo">
+								@foreach($ambientes as $ambiente)
 								<tr>
 									<th class="text-center h4 text-black">
 										<div class="text-center">
@@ -32,11 +33,12 @@
 											</div>
 										</div>
 									</th>
-
-									<th class="text-center h4 text-black">Auditorio 2</th>
-
-									<th class="text-center h4 text-black">200</th>
-
+									
+									<th class="text-center h4 text-black">{{$ambiente->nombreambiente->Nombre}}</th>
+									
+									
+									<th class="text-center h4 text-black">{{$ambiente->Capacidad}}</th>
+									
 									<th class="text-center h4 text-black">
 										<div class="d-flex justify-content-center">
 											<div class="circle">
@@ -53,6 +55,7 @@
 										</div>
 									</th>
 								</tr>
+								@endforeach
 							</thead>
 							
 							<!--Fila Blanca-->
