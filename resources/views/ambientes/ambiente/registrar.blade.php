@@ -16,7 +16,7 @@
                                 <option value="" disabled selected>Seleccionar un ambiente</option>
                                <!-- me captura todo los ambientes -->
                                 @foreach($nombreambientes as $nombreambiente)
-                                <option value="{{ $nombreambiente->id }}">{{ $nombreambiente->Nombre }}</option>
+                                <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
                                 @endforeach 
                             </select>
                         </div> 

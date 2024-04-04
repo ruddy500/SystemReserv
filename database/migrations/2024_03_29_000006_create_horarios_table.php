@@ -18,16 +18,16 @@ class CreateHorariosTable extends Migration
             $table->boolean('Estado')->default(true);
 
             $table->foreignId('DiaId')
-                 ->nullable()
-                 ->constrained('dias')
-                 ->cascadeOnUpdate()
-                 ->nullOnDelete();
+                ->nullable()
+                ->constrained('dias')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             
             $table->foreignId('PeriodoId')
-            ->nullable()
-            ->constrained('periodos')
-            ->cascadeOnUpdate()
-            ->nullOnDelete();
+                ->nullable()
+                ->constrained('periodos')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
         
             
             

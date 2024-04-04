@@ -21,6 +21,8 @@ class AmbientesController extends Controller
     public function guardar(Request $request)
     { 
         //dd($request->all());
+        
+        //me da el id del  ambiente seleccionado
         $ambienteID = $request->ambiente;
         $nombreAmbiente = NombreAmbientes::find($ambienteID); 
 
@@ -48,8 +50,7 @@ class AmbientesController extends Controller
                 $nombreAmbiente->save();
     
                 return redirect()->back()->with('success', 'Ambiente registrado exitosamente.');
-                //return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente');
-                
+                 
             }else{
                 return redirect('ambientes')->with('message' , 'Existe el ambiente');
             }
@@ -64,7 +65,30 @@ class AmbientesController extends Controller
 
     }
 
-      
+    public function verAmbiente()
+    {  
+        $ambientes= Ambientes::all();
+        //dd($ambientes);
+         //Obtener el tamaño de la colección de ambientes
+        $tamAmbientes = $ambientes->count();
+        $nombreambientes = NombreAmbientes::all();
+
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('ambientes.ver', compact('nombreambientes','ambientes', 'menu'));
+    }
+    
+    public function editarAmbiente()
+    {  
+        $ambientes= Ambientes::all();
+        //dd($ambientes);
+         //Obtener el tamaño de la colección de ambientes
+        $tamAmbientes = $ambientes->count();
+        $nombreambientes = NombreAmbientes::all();
+
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('ambientes.editar', compact('nombreambientes','ambientes', 'menu'));
+    }
+     
  /*   public function editarAmbiente(Request $request, $id)
     {
     // Buscar el ambiente que se desea editar
