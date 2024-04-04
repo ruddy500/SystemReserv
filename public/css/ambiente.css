@@ -193,5 +193,41 @@
 .select-container select {
     margin-right: 10px; /* Espacio entre los select */
 }
-  
+.custom-select .form-control{
+   height: 2.3rem;
+}
+.custom-select .btn{
+    height: 2.3rem;
+}
+.custom-select .btn:focus {
+    border-color: #86b7fe; /* Color celeste */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Sombra celeste */
+}
+.bs-deselect-all {
+    display: none;
+}
+.bs-select-all{
+    font-size: 1rem;
+}
+.bs-select-all .form-control{
+    font-size: 1rem;
+}
+/* Establecer el tamaño del campo de opciones */
+.bootstrap-select .dropdown-menu {
+    max-height: 10rem; /* Altura máxima del menú desplegable */
+    overflow-y: auto; /* Habilitar el desplazamiento vertical si el contenido excede la altura máxima */
+}
 
+/* Ajustar el tamaño del menú desplegable al tamaño del campo de selección */
+.bootstrap-select.show > .dropdown-menu {
+    top: calc(100% + 5px); /* Posición del menú desplegable */
+    width: 100%; /* Ancho del menú desplegable */
+    max-width: 100%; /* Ancho máximo del menú desplegable */
+    left: 0; /* Posición del menú desplegable */
+    border-radius: 1; /* Eliminar el borde redondeado */
+}
+@media (max-width: 768px) {
+    .bootstrap-select .dropdown-menu {
+        max-width: calc(100% - 32px); /* Ancho máximo del menú desplegable en pantallas pequeñas */
+    }
+}

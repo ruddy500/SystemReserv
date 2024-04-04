@@ -47,3 +47,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   linkColor.forEach(l => l.addEventListener('click', colorLink));
 });
 
+$(document).ready(function() {
+    $('#horario-select').selectpicker();
+    $('.bs-select-all').text('Seleccionar todo');
+    $('.bs-deselect-all').remove();
+    $(window).resize(function() {
+        // Re inicializar el selectpicker 
+        setTimeout(function() {
+            $('#horario-select').selectpicker('refresh');
+        }, 100);
+    });
+});

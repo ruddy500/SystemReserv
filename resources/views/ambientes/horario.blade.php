@@ -17,11 +17,15 @@
                     </div>
                     <div class="col">
                         <label for="horario-name" class="col-form-label h4">Horario:</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Seleccione horario</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select id="horario-select" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario">
+                            <option value="1">Uno</option>
+                            <option value="2">Dos</option>
+                            <option value="3">Tres</option>
+                            <option value="4">Cuatro</option>
+                            <option value="5">Cinco</option>
+                            <option value="6">Seis</option>
+                            <option value="7">Siete</option>
+                            <!-- Agregar más opciones aquí si es necesario -->
                         </select>
                     </div>
                 </div>
