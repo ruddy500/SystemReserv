@@ -10,8 +10,9 @@
                 </div>
                 <div class="modal-body">
                         <div class="mb-3">
-                            <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
-                            <select name="ambiente" class="selectpicker form-control form-select-sm h4" data-live-search="true" data-size="5" title="Seleccione un ambiente">
+                        <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
+                            <select name="ambiente" class="form-control" required>
+                                <option value="" disabled selected >Selecciona una aula</option>
                                <!-- me captura todo los ambientes -->
                                 @foreach($nombreambientes as $nombreambiente)
                                 <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
