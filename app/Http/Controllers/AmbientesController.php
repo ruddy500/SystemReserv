@@ -64,16 +64,26 @@ class AmbientesController extends Controller
 
     }
 
-    public function verAmbiente()
+    public function verAmbiente($nombre)
     {  
-        $ambientes= Ambientes::all();
-        //dd($ambientes);
-         //Obtener el tamaño de la colección de ambientes
-        $tamAmbientes = $ambientes->count();
-        $nombreambientes = NombreAmbientes::all();
+        // $ambientes= Ambientes::all();
+        // //dd($ambientes);
+        //  //Obtener el tamaño de la colección de ambientes
+        // $tamAmbientes = $ambientes->count();
+        // $nombreambientes = NombreAmbientes::all();
 
-        $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('ambientes.ver', compact('nombreambientes','ambientes', 'menu'));
+        // $menu = view('componentes/menu'); // Crear la vista del menú
+        // return view('ambientes.ver', compact('nombreambientes','ambientes', 'menu'));
+        try {
+            
+            $nombre = Ambientes::find($nombre); 
+            // $nombre = $nombre;
+            $menu = view('componentes/menu'); // Crear la vista del menú
+            return view('ambientes.ver', compact('nombre', 'menu'));
+        } catch (\Exception $e) {
+            // Manejar la excepción
+            return redirect()->back()->with('error', 'Ha ocurrido un error al mostrar el ambiente.');
+        }
     }
     
     public function editarAmbiente()

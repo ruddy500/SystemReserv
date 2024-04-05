@@ -46,7 +46,7 @@
 												</div>
 
 												<div class="circle2">
-													<a href="{{ route('ambientes.ver') }}" class="btn btn-fab" title="Ver"> 
+													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
@@ -86,7 +86,7 @@
 												</div>
 
 												<div class="circle2">
-													<a href="{{ route('ambientes.ver') }}" class="btn btn-fab" title="Ver"> 
+													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
