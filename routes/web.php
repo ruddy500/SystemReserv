@@ -25,10 +25,11 @@ Route::get('/inicio', function () {
 Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
-Route::get('/ambientes/horario', [HorariosController::class, 'mostrarHorario'])->name('ambientes.horario');
-Route::post('/ambientes/horario-añadir',[HorariosController::class,'añadirHorario'])->name('ambientes.horario.añadir');
+Route::post('/ambientes', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
+Route::get('/ambientes/horario/{ambiente}', [HorariosController::class, 'mostrarHorario'])->name('ambientes.horario');
+Route::post('/ambientes/horario/',[HorariosController::class,'añadirHorario'])->name('ambientes.horario.añadir');
 Route::get('/ambientes/ver', [AmbientesController::class, 'verAmbiente'])->name('ambientes.ver');
 Route::get('/ambientes/editar', [AmbientesController::class, 'editarAmbiente'])->name('ambientes.editar');
-Route::post('/ambiente-guardar', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
+
 
 

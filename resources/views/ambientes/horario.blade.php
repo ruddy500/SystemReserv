@@ -9,11 +9,22 @@
             
                 <form class="row g-3 needs-validation" action="{{ route('ambientes.horario.añadir') }}" method="POST" novalidate>
                     @csrf
+<<<<<<< HEAD
                     @include('componentes.validacion')
                     <div class="row">
                         <div class="col">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
                             <select class="form-control" required>
+=======
+                    <!-- Este campo oculto capturará el ID del ambiente y 
+                        lo enviará junto con el formulario cuando se envíe.-->
+                    <input type="hidden" name="ambiente" value="{{ $ambiente }}">
+                    
+                    <div class="row">
+                        <div class="col">
+                            <label for="dia-name" class="col-form-label h4">Día:</label>
+                            <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
+>>>>>>> 973a6ea83cd289f209f027b8b451ca4d40d5eb89
                                <!--captura los dias-->
                                <option value="" disabled selected >Seleccione un dia</option>
                                 @foreach ($dias as $dia)
@@ -24,7 +35,11 @@
                         </div>
                         <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
+<<<<<<< HEAD
                             <select id="horario-select" name="horario" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
+=======
+                            <select id="horario-select" name="horario[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario">
+>>>>>>> 973a6ea83cd289f209f027b8b451ca4d40d5eb89
                                 <!-- Captura los periodos -->
                                 
                                 @foreach ($periodos as $periodo)

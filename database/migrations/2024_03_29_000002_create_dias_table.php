@@ -16,6 +16,7 @@ class CreateDiasTable extends Migration
         Schema::create('dias', function (Blueprint $table) {
             $table->id();
             $table->string('Dia',10);
+            $table->boolean('Usado')->default(false);
             //$table->timestamps();
         });
     }

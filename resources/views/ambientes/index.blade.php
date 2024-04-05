@@ -40,7 +40,7 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 												<div class="circle">
-													<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
@@ -80,7 +80,7 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 											<div class="circle">
-													<a href="{{ route('ambientes.horario') }}" class="btn btn-fab" title="Horario"> 
+													<a href="{{ route('ambientes.horario',['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>

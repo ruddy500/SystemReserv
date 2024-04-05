@@ -18,10 +18,9 @@ class AmbientesController extends Controller
         //$ambientes= Ambientes::with('horarios')->get();
         //$ambientes= Ambientes::has('horarios')->get(); te devuelven los ambientes que si tienen al menos una relacion con horarios
     
+    
     public function guardar(Request $request)
-    { 
-        //dd($request->all());
-        
+    {      
         //me da el id del  ambiente seleccionado
         $ambienteID = $request->ambiente;
         $nombreAmbiente = NombreAmbientes::find($ambienteID); 
@@ -49,7 +48,7 @@ class AmbientesController extends Controller
                 $nombreAmbiente->Usado = true;
                 $nombreAmbiente->save();
     
-                return redirect()->back()->with('success', 'Ambiente registrado exitosamente.');
+                return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente.');
                  
             }else{
                 return redirect('ambientes')->with('message' , 'Existe el ambiente');
