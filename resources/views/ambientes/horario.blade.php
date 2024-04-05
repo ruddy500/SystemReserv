@@ -1,17 +1,21 @@
 @extends('index')
 
 @section('ambientes/horario')
+
 <div class="container mt-3">
 		<div class="card">
 			<h3 class="card-header">Formulario registro de horario</h3>
             <div class="card-body bg-custom">
-                <form action="{{ route('ambientes.horario.añadir') }}" method="POST">
+            
+                <form class="row g-3 needs-validation" action="{{ route('ambientes.horario.añadir') }}" method="POST" novalidate>
                     @csrf
+                    @include('componentes.validacion')
                     <div class="row">
                         <div class="col">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select name="" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
+                            <select class="form-control" required>
                                <!--captura los dias-->
+                               <option value="" disabled selected >Seleccione un dia</option>
                                 @foreach ($dias as $dia)
                                 <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
                                 @endforeach
@@ -20,8 +24,9 @@
                         </div>
                         <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
-                            <select id="horario-select" name="horario" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario">
+                            <select id="horario-select" name="horario" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
                                 <!-- Captura los periodos -->
+                                
                                 @foreach ($periodos as $periodo)
                                 <option value= "{{ $periodo->id }}"> {{ $periodo->HoraIntervalo }} </option>
                                 @endforeach
@@ -70,4 +75,5 @@
             </div>
         </div>
 </div>
+
 @endsection@
