@@ -30,6 +30,41 @@
                                     </tr>
                                 </tbody>                        
                             </table>
+                            
+                        <table id="horario-tabla" class="table caption-top">
+                                    <thead class="table_encabezado_color text-center">
+                                        <td colspan="3">Horarios</td>
+                                    </thead>    
+                        <thead class="text-center">
+                                <tr>
+                                    <th class="col">Día</th>
+                                    <th scope="col">Horario</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+
+                            <thead class="text-center">
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td>15:45</td>
+                                    <td>Libre</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td>15:45</td>
+                                    <td>Libre</td>
+                                </tr>
+                            
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td>15:45</td>
+                                    <td>Libre</td>
+                                </tr>
+                                
+                            </thead>
+                        </table>
+
                         </div>
 
                     </div>
