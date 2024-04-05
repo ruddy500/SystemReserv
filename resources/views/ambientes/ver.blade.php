@@ -6,11 +6,7 @@
 			<h3 class="card-header">Ambiente {{$nombre->nombreambiente->Nombre}}</h3>
             <div class="card-body bg-content">
                 <div class ="card details-card">
-                    <h4 class="card-header details-header">Detalle de ambiente</h3>
-                    <h1>Nombre de Ambiente {{$nombre->nombreambiente->Nombre}}</h1>                        
-                    <h1>Capacidad {{$nombre->Capacidad}}</h1>                        
-                    <h1>Descripcion: {{$nombre->Ubicacion}}</h1>                        
-                    
+                    <h4 class="card-header details-header">Detalle de ambiente</h3>                                    
                     <div class="card-body bg-content">
                         <div>
                             <table class="table table-bordered">
@@ -20,16 +16,16 @@
                                     </tr>
                                     <tr>
                                         <td>Nombre de Ambiente</td>
-                                        <td>Auditorio</td>
+                                        <td>{{$nombre->nombreambiente->Nombre}}</td>
                                     </tr>
                                     <tr>
                                         <td>Capacidad</td>
-                                        <td>40</td>
+                                        <td>{{$nombre->Capacidad}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">Descripción:
                                             <br>
-                                            aqui se muestra las descripcion del ambiente
+                                            {{$nombre->Ubicacion}}
                                         </td>
                                     </tr>
                                 </tbody>                        
