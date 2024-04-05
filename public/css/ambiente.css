@@ -226,6 +226,16 @@
     left: 0; /* Posición del menú desplegable */
     border-radius: 1; /* Eliminar el borde redondeado */
 }
+.table_encabezado_color{
+    background-color: #214169;
+}
+
+.table_encabezado_color td{
+    background-color: #214169;
+    color: #FFFFFF;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .bootstrap-select .dropdown-menu {
         max-width: calc(100% - 32px); /* Ancho máximo del menú desplegable en pantallas pequeñas */
