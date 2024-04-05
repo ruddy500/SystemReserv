@@ -7,10 +7,14 @@
             <div class="card-body bg-custom">
                 <form action="{{ route('ambientes.horario.añadir') }}" method="POST">
                     @csrf
+                    <!-- Este campo oculto capturará el ID del ambiente y 
+                        lo enviará junto con el formulario cuando se envíe.-->
+                    <input type="hidden" name="ambiente" value="{{ $ambiente }}">
+                    
                     <div class="row">
                         <div class="col">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select name="" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
+                            <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día">
                                <!--captura los dias-->
                                 @foreach ($dias as $dia)
                                 <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
@@ -20,7 +24,7 @@
                         </div>
                         <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
-                            <select id="horario-select" name="horario" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario">
+                            <select id="horario-select" name="horario[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario">
                                 <!-- Captura los periodos -->
                                 @foreach ($periodos as $periodo)
                                 <option value= "{{ $periodo->id }}"> {{ $periodo->HoraIntervalo }} </option>

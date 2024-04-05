@@ -3,37 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dias;
+use App\Models\Ambientes;
 use App\Models\Horarios;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
 
 class HorariosController extends Controller
 {
-    public function mostrarHorario()
+    public function mostrarHorario($ambiente)
     {  
-        //dd($ambientes);
+        //dd($ambiente);
         $dias = Dias::all();
         $periodos = Periodos::all();
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         
         //Envia los datos menu,dias,periodos a la vista ambientes.horario
-        return view('ambientes.horario', compact('menu','dias','periodos'));
+        return view('ambientes.horario', compact('ambiente','menu','dias','periodos'));
     }
+    
+    /*public function guardar2(Request $request){
+            
+        $selecciones = $request->horario;
+        return view('ambientes/prueba', compact('selecciones'));
+        }
+    */
 
     public function añadirHorario(Request $request){
-        //captura los id de dia selecciondado y de horario seleccionado
-        $diaId = $request->dia;
-        $horarioId = $request->horario;
-        //dd($request->all());
-        $horario = new Horarios;
-        $horario->DiaId = $diaId ;
-        $horario->PeriodoId = $horarioId;
-        $horario->save();
+        
+        $diaId = $request->dia; // ID del día
+        $dia = Dias::find($diaId);// Obtén el modelo Dia
+        //dd($request->ambiente);
+        
+        if (!$dia->Usado) {
+        $dia->Usado = true;
+        $dia->save();
+        // Adjunta los periodos al día
+        $periodoIds = $request->horario; // IDs de los periodos seleccionados
+        $dia->periodos()->attach($periodoIds);
+    
+        // Obtén el ID del ambiente desde la solicitud
+        $ambienteId = $request->ambiente;
+    
+        // Obtén el modelo Ambiente
+        $ambiente = Ambientes::find($ambienteId);
+    
+        // Adjunta los períodos al ambiente en la tabla pivote
+        $ambiente->horarios()->attach($diaId);
 
-        //$nombreAmbiente = NombreAmbientes::find($ambienteID);
-       
-        return redirect()->back();
+        
+      
+    
+            return redirect()->back();
+    
+        }else{
+            return redirect()->back();
+        }
+        
 
     }
 }
