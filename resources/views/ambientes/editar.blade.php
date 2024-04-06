@@ -4,7 +4,7 @@
 
 <div class="container mt-3">
 		<div class="card">
-			<h3 class="card-header">Editar ambiente</h3>
+			<h3 class="card-header">Editar ambienteeeee</h3>
             <div class="card-body bg-custom">
             <form action="{{ route('ambientes.actualizar', $idAmbiente->id) }}" method="POST" novalidate class="row g-3 needs-validation">
             @csrf
