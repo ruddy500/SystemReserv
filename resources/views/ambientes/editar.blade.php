@@ -40,30 +40,104 @@
                     <div class="invalid-feedback">Inserte una descripcion entre 10 a 50 caracteres</div>
                 </div>
                 <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
-                <table id="horario-tabla" class="table caption-top">
-                    <thead>
-                        <tr>
-                        <th scope="col">Habilitar</th>
-                        <th scope="col">Día</th>
-                        <th scope="col">Horario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                        @include('ambientes.ambiente.editHorario')
-                            <td>poner switch</td>
-                            <td>Lunes</td>
-                            <td>06:45-08:15</td>
-                        </tr>
+                
+                <div class="table-responsive" style="max-height: 160px; overflow-y: auto;">
+                    <table id="horario-tabla" class="table caption-top">
+                        <thead>
+                            <tr>
+                            <th scope="col">Habilitar</th>
+                            <th scope="col">Día</th>
+                            <th scope="col">Horario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                                <td>Lunes</td>
+                                <td>06:45-08:15</td>
+                            </tr>
 
-                        <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                        @include('ambientes.ambiente.editHorario')
-                            <td>poner switch</td>
-                            <td>Lunes</td>
-                            <td>15:45-17:15</td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                    
+                                <td>Lunes</td>
+                                <td>15:45-17:15</td>
+                            </tr>
+
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                                <td>Lunes</td>
+                                <td>15:45-17:15</td>
+                            </tr>
+
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                                <td>Lunes</td>
+                                <td>15:45-17:15</td>
+                            </tr>
+
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                                <td>Lunes</td>
+                                <td>15:45-17:15</td>
+                            </tr>
+
+                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                            @include('ambientes.ambiente.editHorario')
+                                <td>
+                                    <div class="text-center">
+										<div class="form-check form-switch d-inline-block align-middle">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+										</div>
+									</div>
+                                </td>
+                                <td>Lunes</td>
+                                <td>15:45-17:15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button type="button" class="btn btn-cancelar">Cancelar</button>

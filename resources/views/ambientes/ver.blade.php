@@ -31,11 +31,12 @@
                                 </tbody>                        
                             </table>
                             
-                        <table id="horario-tabla" class="table caption-top">
-                                    <thead class="table_encabezado_color text-center">
-                                        <td colspan="3">Horarios</td>
-                                    </thead>    
-                        <thead class="text-center">
+                        <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
+                            <table id="horario-tabla" class="table caption-top">
+                                <thead class="table_encabezado_color text-center">
+                                    <td colspan="3">Horarios</td>
+                                </thead>    
+                            <thead class="text-center">
                                 <tr>
                                     <th class="col">Día</th>
                                     <th scope="col">Horario</th>
@@ -64,6 +65,8 @@
                                 
                             </thead>
                         </table>
+
+                        </div>
 
                         </div>
 

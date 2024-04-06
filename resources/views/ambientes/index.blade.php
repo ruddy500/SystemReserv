@@ -9,7 +9,7 @@
 					@include('ambientes.ambiente.registrar')
 					@include('componentes.validacion')
 
-					<div class="table-responsive margin">
+					<div class="table-responsive margin" style="max-height: 250px; overflow-y: auto;">
 						<table class="table table-striped table-hover table-bordered">
 							<thead class="bg-custom-lista">
 								<tr>
