@@ -13,15 +13,17 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
-                            <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required>
-                                <option value="" disabled selected >Selecciona una aula</option>
+                            <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                <option value="" disabled selected >Seleccione aula</option>
                                 <!-- Aqui recoger el dato de nombre de ambiente -->
                                 <option value="" >Poner nombre ambiente 1</option>
                                 <option value="" >Poner nombre ambiente 2</option>
                                 <option value="" >Poner nombre ambiente 3</option>
+                                <option value="" >Poner nombre ambiente 4</option>
+                                <option value="" >Poner nombre ambiente 5</option>
+                                <option value="" >Poner nombre ambiente 6</option>
+                                <option value="" >Poner nombre ambiente 7</option>
                             </select>
-                            <div class="valid-feedback">Aula seleccionada</div>
-                            <div class="invalid-feedback">Seleccione un aula para el cambio</div>
                         </div>
                     </div>
                     <div class="col">
@@ -140,11 +142,29 @@
                 </div>
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button id="cancelar" type="button" class="btn btn-cancelar">Cancelar</button>
                 </div>
             </form>
             </div>
         </div>
 </div>
+<script>
+    $('#cancelar').on('click', function() {
+        Swal.fire({
+        title: "¿Estas Seguro que deseas Salir?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar" ,
+        cancelButtonText: "Cancelar",
+        allowOutsideClick: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/ambientes';
+        }
+        });
+    });
+</script>
 
 @endsection

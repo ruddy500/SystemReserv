@@ -11,8 +11,8 @@
                 <div class="modal-body">
                         <div class="mb-3">
                         <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
-                            <select name="ambiente" class="form-control" required>
-                                <option value="" disabled selected >Selecciona una aula</option>
+                            <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                <option value="" disabled selected >Seleccione aula</option>
                                <!-- me captura todo los ambientes -->
                                 @foreach($nombreambientes as $nombreambiente)
                                 <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="cancelar" type="button" class="btn btn-cancelar" >Cancelar</button>
                 </div>
                 
                 @if(session('success'))
@@ -77,10 +77,26 @@
                     </script>
                 @endif
 
-
             </form>
         </div>
     </div>
 </div>
 
-
+<script>
+    $('#cancelar').on('click', function() {
+        Swal.fire({
+        title: "¿Estas Seguro que deseas Salir?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar" ,
+        cancelButtonText: "Cancelar",
+        allowOutsideClick: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/ambientes';
+        }
+        });
+    });
+</script>
