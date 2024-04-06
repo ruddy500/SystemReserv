@@ -52,7 +52,7 @@
 												</div>
 
 												<div class="circle3">
-													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>
@@ -92,7 +92,7 @@
 												</div>
 
 												<div class="circle3">
-													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>

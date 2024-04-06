@@ -23,19 +23,10 @@ class AmbientesController extends Controller
     {      
         //me da el id del  ambiente seleccionado
         $ambienteID = $request->ambiente;
+        //busca el nombre del ambiente por medio de ese id 
         $nombreAmbiente = NombreAmbientes::find($ambienteID); 
 
-        try {
-            /* Genera errores de validacion
-            $request->validate(['campo' => 'required',]);
-            */
-
-            /* Genera una excepción de tipo \Exception con un mensaje específico adjunto.
-               Esta línea de código puede ser utilizada para simular un error interno o para indicar que ha ocurrido un problema inesperado en tu aplicación
-            
-               throw new \Exception("Este es un error interno generado de forma intencional.");
-            */
-            
+        try {        
             if(!$nombreAmbiente->Usado){
             
                 $ambiente = new Ambientes;
@@ -86,16 +77,27 @@ class AmbientesController extends Controller
         }
     }
     
-    public function editarAmbiente()
+    public function editarAmbiente($idAmbiente)
     {  
-        $ambientes= Ambientes::all();
-        //dd($ambientes);
-         //Obtener el tamaño de la colección de ambientes
-        $tamAmbientes = $ambientes->count();
-        $nombreambientes = NombreAmbientes::all();
+        try {
+            
+            $idAmbiente = Ambientes::find($idAmbiente);
+            $menu = view('componentes/menu'); // Crear la vista del menú
+            return view('ambientes.editar', compact('idAmbiente', 'menu'));
+            } 
+        catch (\Exception $e) 
+            {
+                // Manejar la excepción
+                return redirect()->back()->with('error', 'Ha ocurrido un error al editar ambiente el ambiente.');
+            }
+    }
 
-        $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('ambientes.editar', compact('nombreambientes','ambientes', 'menu'));
+    public function actualizarAmbiente(Request $request, $idAmbiente){
+        $ambienteEditado = Ambientes::find($idAmbiente); 
+        $ambienteEditado->Capacidad = $request->capacidad;
+        $ambienteEditado->Ubicacion = $request->descripcion;
+        $ambienteEditado->save();
+        return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
     }
      
  /*   public function editarAmbiente(Request $request, $id)
