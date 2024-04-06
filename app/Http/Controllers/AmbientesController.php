@@ -92,9 +92,25 @@ class AmbientesController extends Controller
             }
     }
 
+//     public function actualizarAmbiente(Request $request, $idAmbiente){
+//    // dd($request->all());      
+//         $ambienteEditado = Ambientes::find($idAmbiente);
+//         $ambienteEditado->Capacidad = $request->capacidad;
+//         $ambienteEditado->Ubicacion = $request->descripcion;
+//         $ambienteEditado->save();
+    
+//         return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
+//     }
+
+
+
+
     public function actualizarAmbiente(Request $request, $idAmbiente){
         try{
-        $ambienteEditado = Ambientes::find($idAmbiente); 
+
+            
+
+            $ambienteEditado = Ambientes::find($idAmbiente); 
         
             $ambienteEditado->Capacidad = $request->capacidad;
             $ambienteEditado->Ubicacion = $request->descripcion;
