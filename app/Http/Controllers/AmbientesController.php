@@ -93,11 +93,23 @@ class AmbientesController extends Controller
     }
 
     public function actualizarAmbiente(Request $request, $idAmbiente){
+        try{
         $ambienteEditado = Ambientes::find($idAmbiente); 
-        $ambienteEditado->Capacidad = $request->capacidad;
-        $ambienteEditado->Ubicacion = $request->descripcion;
-        $ambienteEditado->save();
-        return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
+        
+            $ambienteEditado->Capacidad = $request->capacidad;
+            $ambienteEditado->Ubicacion = $request->descripcion;
+            $ambienteEditado->save();
+        
+            return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
+       
+        } catch (ValidationException $e) {
+            // Manejar errores de validación
+            return redirect('ambientes')->withErrors($e->validator->errors());
+        } catch (\Exception $e) {
+            // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
+            return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
+        }
+        }
     }
      
  /*   public function editarAmbiente(Request $request, $id)
@@ -120,9 +132,3 @@ class AmbientesController extends Controller
     return redirect()->route('inicio')->with('success', 'Ambiente editado exitosamente');
 }
 */
-
-
-
-
-
-}
