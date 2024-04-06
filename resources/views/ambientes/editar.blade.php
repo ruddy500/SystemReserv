@@ -4,7 +4,7 @@
 
 <div class="container mt-3">
 		<div class="card">
-			<h3 class="card-header">Editar ambienteeeee</h3>
+			<h3 class="card-header">Editar ambiente</h3>
             <div class="card-body bg-custom">
             <form action="{{ route('ambientes.actualizar', $idAmbiente->id) }}" method="POST" novalidate class="row g-3 needs-validation">
             @csrf
@@ -74,7 +74,10 @@
                 </table> --}}
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar">Cancelar</button>
+                    <button type="button" class="btn btn-cancelar" onclick="window.history.back();">Cancelar</button>
+                    
+                    {{-- <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button> --}}
+                </div>
                 </div>
             </form>
             </div>
