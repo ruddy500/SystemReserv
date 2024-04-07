@@ -14,7 +14,7 @@ class CreateHorariosTable extends Migration
     public function up()
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->boolean('Estado')->default(true);
 
             $table->foreignId('DiaId')

@@ -14,7 +14,7 @@ class CreateAmbientesTable extends Migration
     public function up()
     {
         Schema::create('ambientes', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('Ubicacion',100)->nullable();
             $table->integer('Capacidad')->nullable();
             $table->boolean('Habilitado')->default(true);

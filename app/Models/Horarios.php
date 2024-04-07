@@ -11,7 +11,7 @@ class Horarios extends Model
 
     public $timestamps = false;
 
-    public function dias(){
+    public function ambientes(){ //estoy cambiando el nombre de dias a ambientes
          /**
          * Esta línea de código define una relación muchos a muchos entre los modelos 
          * Horarios y Ambientes, utilizando una tabla pivot llamada hambiente_horarios, 
@@ -19,5 +19,8 @@ class Horarios extends Model
          * de ambas tablas en la tabla pivot
          * */
         return $this->belongsToMany(Ambientes::class,'ambiente_horario','HorarioId','AmbienteId');
-    }
+
 }
+}
+
+
