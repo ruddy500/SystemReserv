@@ -76,12 +76,14 @@ class AmbientesController extends Controller
     $dia = Dias::find($diaId);
     $dia->periodos()->sync($periodos);
 
+    
+
     // Obtener el ambiente específico y asociar los períodos al ambiente
     $ambienteEspecifico = Ambientes::find($ambienteId);
     foreach ($periodos as $periodoId) {
         $ambienteEspecifico->horarios()->attach($periodoId);
     }
-
+    //dd($horarios);
     return redirect()->back()->with('success', 'Horario guardado exitosamente.');
     }
 
