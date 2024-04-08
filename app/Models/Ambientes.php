@@ -11,15 +11,10 @@ class Ambientes extends Model
     public $timestamps = false;
     
     public function horarios(){
-        /**
-         * Esta línea de código define una relación muchos a muchos entre los modelos 
-         * Ambientes y Horarios, utilizando una tabla pivot llamada ambiente_horario, 
-         * donde AmbienteId y HorarioId son las claves externas que vinculan los registros
-         *  de ambas tablas en la tabla pivot 
-         * */
+        
+        return $this->hasMany(Horarios::class,'ambientes_id');
 
-        return $this->belongsToMany(Horarios::class,'ambiente_horario', 'AmbienteId', 'HorarioId');
-    } 
+    }
 
     public function nombreambiente() {
         /**

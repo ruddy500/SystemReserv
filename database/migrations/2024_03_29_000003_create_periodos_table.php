@@ -30,3 +30,4 @@ class CreatePeriodosTable extends Migration
         Schema::dropIfExists('periodos');
     }
 }
+

@@ -10,7 +10,7 @@
                     @include('componentes.validacion')
                     <!-- Este campo oculto capturará el ID del ambiente y 
                         lo enviará junto con el formulario cuando se envíe.-->
-                    <input type="hidden" name="ambiente" value="{{ $ambiente }}">
+                    {{-- <input type="hidden" name="ambiente" value="{{ $ambienteId  }}"> --}}
                     
                     <div class="row">
                         <div class="col">
@@ -40,37 +40,6 @@
                     </div>
                 </form>
 
-
-                <!-- PRUEBA DE TABLA DE HORARIOS DISPONIBLES -->
-                <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
-                <table id="horario-tabla" class="table caption-top">
-                    <thead>
-                        <tr>
-                        <th scope="col">Dia</th>
-                        <th scope="col">Horario</th>
-                        <th scope="col">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>Lunes</td>
-                        <td>06:45-08:15</td>
-                        <td>Libre</td>
-                        </tr>
-
-                        <tr>
-                        <td>Lunes</td>
-                        <td>15:45-17:15</td>
-                        <td>Libre</td>
-                        </tr>
-
-                        <tr>
-                        <td>Martes</td>
-                        <td>Todos los horarios</td>
-                        <td>Libre</td>
-                        </tr>
-                    </tbody>
-                </table>
             
             </div>
         </div>

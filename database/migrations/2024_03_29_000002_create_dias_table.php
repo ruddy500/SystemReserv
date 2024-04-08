@@ -14,10 +14,11 @@ class CreateDiasTable extends Migration
     public function up()
     {
         Schema::create('dias', function (Blueprint $table) {
+            
             $table->id();
             $table->string('Dia',10);
             $table->boolean('Usado')->default(false);
-            //$table->timestamps();
+            
         });
     }
 
@@ -31,3 +32,4 @@ class CreateDiasTable extends Migration
         Schema::dropIfExists('dias');
     }
 }
+

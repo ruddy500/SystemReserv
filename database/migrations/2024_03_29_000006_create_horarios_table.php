@@ -14,24 +14,28 @@ class CreateHorariosTable extends Migration
     public function up()
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->boolean('Estado')->default(true);
-
-            $table->foreignId('DiaId')
-                ->nullable()
-                ->constrained('dias')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-            
-            $table->foreignId('PeriodoId')
-                ->nullable()
-                ->constrained('periodos')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+        $table->id();
+        $table->boolean('Estado')->default(true);
         
-            
-            
-        });
+        $table->foreignId('dias_id')
+            ->nullable()
+            ->constrained('dias')
+            ->cascadeOnDelete() // Acción en eliminación
+            ->cascadeOnUpdate(); // Acción en actualización
+        
+        $table->foreignId('periodos_id')
+            ->nullable()
+            ->constrained('periodos')
+            ->cascadeOnDelete() // Acción en eliminación
+            ->cascadeOnUpdate(); // Acción en actualización
+        
+        $table->foreignId('ambientes_id')
+            ->nullable()
+            ->constrained('ambientes')
+            ->cascadeOnDelete() // Acción en eliminación
+            ->cascadeOnUpdate(); // Acción en actualización
+    });
+
     }
 
     /**
@@ -43,4 +47,5 @@ class CreateHorariosTable extends Migration
     {
         Schema::dropIfExists('horarios');
     }
+
 }

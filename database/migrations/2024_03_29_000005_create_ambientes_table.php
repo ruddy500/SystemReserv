@@ -14,16 +14,17 @@ class CreateAmbientesTable extends Migration
     public function up()
     {
         Schema::create('ambientes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('Ubicacion',100)->nullable();
             $table->integer('Capacidad')->nullable();
             $table->boolean('Habilitado')->default(true);
+
             $table->foreignId('nombre_ambientes_id')
                 ->nullable()
                 ->constrained('nombre_ambientes')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-
+                ->cascadeOnDelete();
+                
+    
             //$table->timestamps();
           
         });

@@ -12,7 +12,8 @@ class CreateNombreAmbientesTable extends Migration
             $table->id();
             $table->string('Nombre',50);
             $table->boolean('Usado')->default(false);
-            
+
+    
         });
     }
 
