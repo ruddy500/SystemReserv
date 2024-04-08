@@ -18,12 +18,13 @@ class CreateAmbientesTable extends Migration
             $table->string('Ubicacion',100)->nullable();
             $table->integer('Capacidad')->nullable();
             $table->boolean('Habilitado')->default(true);
+
             $table->foreignId('nombre_ambientes_id')
                 ->nullable()
                 ->constrained('nombre_ambientes')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-
+                ->cascadeOnDelete();
+                
+    
             //$table->timestamps();
           
         });

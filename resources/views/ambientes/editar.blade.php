@@ -1,6 +1,14 @@
 @extends('index')
 
 @section('ambientes/editar')
+<!--{ { dd(get_defined_vars())}} -->
+<?php 
+use App\Models\Dias;
+use App\Models\Periodos; // Assuming you need Periodos model
+
+$horario = $ambiente->horarios()->get();
+?>
+
 
 <div class="container mt-3">
 		<div class="card">
@@ -8,6 +16,8 @@
             <div class="card-body bg-custom">
             <form class="row g-3 needs-validation" action="" method="POST" novalidate>
             @csrf
+            <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
+            
             @include('componentes.validacion')
                 <div class="row">
                     <div class="col">
@@ -53,90 +63,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                                <td>Lunes</td>
-                                <td>06:45-08:15</td>
-                            </tr>
+                            <!-- Recorrer con un for-->
+                           
+                         @foreach ($horario as $fila)
+                         @php
+    
+                             $diaId = $fila->dias_id;
+                             $dia = Dias::find($diaId)->Dia;
 
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                    
-                                <td>Lunes</td>
-                                <td>15:45-17:15</td>
-                            </tr>
+                             $periodoId = $fila->periodos_id;
+                             $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                             
+                         @endphp
 
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                                <td>Lunes</td>
-                                <td>15:45-17:15</td>
-                            </tr>
+                    <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
+                        @include('ambientes.ambiente.editHorario')
+                           
+                            <td>
+                                <div class="text-center">
+                                    <div class="form-check form-switch d-inline-block align-middle">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                    </div>
+                                </div>
+                            </td>
 
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                                <td>Lunes</td>
-                                <td>15:45-17:15</td>
-                            </tr>
+                            <td>{{ $dia }}</td>
+                            <td>{{ $periodo }}</td>
+                    </tr>
 
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                                <td>Lunes</td>
-                                <td>15:45-17:15</td>
-                            </tr>
 
-                            <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
-                            @include('ambientes.ambiente.editHorario')
-                                <td>
-                                    <div class="text-center">
-										<div class="form-check form-switch d-inline-block align-middle">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-											<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-										</div>
-									</div>
-                                </td>
-                                <td>Lunes</td>
-                                <td>15:45-17:15</td>
-                            </tr>
+
+                             
+                  @endforeach
+                 
                         </tbody>
                     </table>
                 </div>

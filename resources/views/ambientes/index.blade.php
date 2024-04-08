@@ -1,6 +1,10 @@
 @extends('index')
 
 @section('ambientes')
+<?php
+	use App\Models\Dias;
+?>
+
 	<div class="container mt-3">
 			<div class="card">
 				<h3 class="card-header">Ambientes</h3>
@@ -24,6 +28,15 @@
 
 								@if ($i % 2 == 0)
 								<!--Fila Ploma-->
+								<?php
+
+								$dias = Dias::all();
+
+									foreach ($dias as $dia) {
+									$dia->Usado = false;
+									$dia->save();
+									}
+								?>
 								<thead class="bg-custom-lista-ambientes-plomo">
 									<tr>
 										<th class="text-center h4 text-black">
@@ -39,6 +52,7 @@
 										
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
+												
 												<div class="circle">
 													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
@@ -63,6 +77,15 @@
 								
 								@else
 								<!--Fila Blanca-->
+								<?php
+
+									foreach ($dias as $dia) {
+
+									$dia->Usado = false;
+									$dia->save();
+									}
+								?>
+								
 								<thead class="bg-custom-lista-ambientes-blanco">
 									<tr>
 										<th class="text-center h4 text-black">

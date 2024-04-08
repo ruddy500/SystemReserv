@@ -19,7 +19,7 @@ class Dias extends Model
          * recuperamos los datos adicionales de la tabla intermedia 'horarios',
          * en este caso el atributo 'Estado'
          * */
-        return $this->belongsToMany(Periodos::class, 'horarios','DiaId', 'PeriodoId')->withPivot('Estado');
+        return $this->belongsToMany(Periodos::class,'horarios');
     }
     
 }

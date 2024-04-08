@@ -1,6 +1,15 @@
 @extends('index')
 
 @section('ambientes/horario')
+<!--{ { dd(get_defined_vars())}} -->
+<?php 
+use App\Models\Dias;
+use App\Models\Periodos; // Assuming you need Periodos model
+
+$horario = $ambiente->horarios()->get();
+?>
+
+
 <div class="container mt-3">
 		<div class="card">
 			<h3 class="card-header">Formulario registro de horario</h3>
@@ -9,9 +18,9 @@
                     @csrf
                     @include('componentes.validacion')
                     <!-- Este campo oculto capturará el ID del ambiente y 
-                        lo enviará junto con el formulario cuando se envíe.-->
-                    <input type="hidden" name="ambiente" value="{{ $ambiente }}">
+                        lo enviará junto con el formulario cuando se envíe.Si pongo esto tengo que obligar a enviar ese dato-->
                     
+                         <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
                         <div class="col">
                             <label for="dia-name" class="col-form-label h4">Día:</label>
@@ -20,12 +29,12 @@
                                 @foreach ($dias as $dia)
                                 <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
                                 @endforeach
-
+                               
                             </select>
                         </div>
                         <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
-                            <select id="horario-select" name="horario[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
+                            <select id="horario-select" name="periodos[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
                                 <!-- Captura los periodos -->
                                 @foreach ($periodos as $periodo)
                                 <option value= "{{ $periodo->id }}"> {{ $periodo->HoraIntervalo }} </option>
@@ -53,31 +62,31 @@
                             <th scope="col">Estado</th>
                             </tr>
                         </thead>
-                        <tbody >
-                            <tr>
-                            <td>Lunes</td>
-                            <td>06:45-08:15</td>
-                            <td>Libre</td>
-                            </tr>
+                         <!-- recorre el horario capturado y vamos obteniendo sus ids de dia y 
+                              de periodo , luego buscamos su equivalencia -->
 
-                            <tr>
-                            <td>Lunes</td>
-                            <td>15:45-17:15</td>
-                            <td>Libre</td>
-                            </tr>
+                         @foreach ($horario as $fila)
+                                @php
+           
+                                    $diaId = $fila->dias_id;
+                                    $dia = Dias::find($diaId)->Dia;
 
-                            <tr>
-                            <td>Martes</td>
-                            <td>Todos los horarios</td>
-                            <td>Libre</td>
-                            </tr>
+                                    $periodoId = $fila->periodos_id;
+                                    $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                                    
+                                    $estado = ($fila->Estado) ? "Libre" : "Ocupado";
+                                @endphp
 
-                            <tr>
-                            <td>Martes</td>
-                            <td>Todos los horarios</td>
-                            <td>Libre</td>
-                            </tr>
-                        </tbody>
+                                <tbody >
+                                    <tr>
+                                    <td>{{ $dia }}</td>
+                                    <td>{{ $periodo }}</td>
+                                    <td>{{ $estado }}</td>
+                                    </tr>
+                                </tbody>
+                                    
+                         @endforeach
+                        
                     </table>
                 </div>
 
