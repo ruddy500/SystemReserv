@@ -1,6 +1,11 @@
 @extends('index')
 
 @section('ambientes')
+<!--{ { dd(get_defined_vars())}}-->
+<?php
+	use App\Models\Dias;
+?>
+
 	<div class="container mt-3">
 			<div class="card">
 				<h3 class="card-header">Ambientes</h3>
@@ -9,7 +14,7 @@
 					@include('ambientes.ambiente.registrar')
 					@include('componentes.validacion')
 
-					<div class="table-responsive margin">
+					<div class="table-responsive margin" style="max-height: 250px; overflow-y: auto;">
 						<table class="table table-striped table-hover table-bordered">
 							<thead class="bg-custom-lista">
 								<tr>
@@ -24,6 +29,7 @@
 
 								@if ($i % 2 == 0)
 								<!--Fila Ploma-->
+								
 								<thead class="bg-custom-lista-ambientes-plomo">
 									<tr>
 										<th class="text-center h4 text-black">
@@ -39,20 +45,26 @@
 										
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
-												<div class="circle">
-													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
+												
+												<div class="circle"><!--añadi id-->
+													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]->id]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
 
-												<div class="circle2">
-													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
+												<div class="circle2"> <!--modifique nombre-->
+													<a href="{{ route('ambientes.ver',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
 
+<<<<<<< HEAD
 												<div class="circle3">
 													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
+=======
+												<div class="circle3"><!--añadi parametro ambiente-->
+													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
+>>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>
@@ -80,19 +92,23 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 											<div class="circle">
-													<a href="{{ route('ambientes.horario',['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
+													<a href="{{ route('ambientes.horario',['ambiente' => $ambientes[$i]->id]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
 
 												<div class="circle2">
-													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
+													<a href="{{ route('ambientes.ver',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
 
 												<div class="circle3">
+<<<<<<< HEAD
 													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
+=======
+													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
+>>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>

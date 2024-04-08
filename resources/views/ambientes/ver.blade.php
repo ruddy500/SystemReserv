@@ -1,9 +1,19 @@
 @extends('index')
 
 @section('ambientes/ver')
+
+<?php 
+use App\Models\Dias;
+use App\Models\Periodos; // Assuming you need Periodos model
+
+$horario = $ambiente->horarios()->get();
+?>
+
+<!--{ {dd(get_defined_vars())}} -->
+
 <div class="container mt-3">
 		<div class="card vercard">
-			<h3 class="card-header">Ambiente {{$nombre->nombreambiente->Nombre}}</h3>
+			<h3 class="card-header">Ambiente {{$ambiente->nombreambiente->Nombre}}</h3>
             <div class="card-body bg-content">
                 <div class ="card details-card">
                     <h4 class="card-header details-header">Detalle de ambiente</h3>                                    
@@ -16,26 +26,27 @@
                                     </tr>
                                     <tr>
                                         <td>Nombre de Ambiente</td>
-                                        <td>{{$nombre->nombreambiente->Nombre}}</td>
+                                        <td>{{$ambiente->nombreambiente->Nombre}}</td>
                                     </tr>
                                     <tr>
                                         <td>Capacidad</td>
-                                        <td>{{$nombre->Capacidad}}</td>
+                                        <td>{{$ambiente->Capacidad}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">Descripción:
                                             <br>
-                                            {{$nombre->Ubicacion}}
+                                            {{$ambiente->Ubicacion}}
                                         </td>
                                     </tr>
                                 </tbody>                        
                             </table>
                             
-                        <table id="horario-tabla" class="table caption-top">
-                                    <thead class="table_encabezado_color text-center">
-                                        <td colspan="3">Horarios</td>
-                                    </thead>    
-                        <thead class="text-center">
+                        <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
+                            <table id="horario-tabla" class="table caption-top">
+                                <thead class="table_encabezado_color text-center">
+                                    <td colspan="3">Horarios</td>
+                                </thead>    
+                            <thead class="text-center">
                                 <tr>
                                     <th class="col">Día</th>
                                     <th scope="col">Horario</th>
@@ -44,26 +55,41 @@
                             </thead>
 
                             <thead class="text-center">
-                                <tr>
-                                    <td>Lunes</td>
-                                    <td>15:45</td>
-                                    <td>Libre</td>
-                                </tr>
                                 
-                                <tr>
-                                    <td>Lunes</td>
-                                    <td>15:45</td>
-                                    <td>Libre</td>
-                                </tr>
+                            <!-- recorre el horario capturado y vamos obteniendo sus ids de dia y 
+                              de periodo , luego buscamos su equivalencia -->
+                              
+                            @foreach ($horario as $fila)
+                                @php
+            
+                                    $diaId = $fila->dias_id;
+                                    $dia = Dias::find($diaId)->Dia;
+
+                                    $periodoId = $fila->periodos_id;
+                                    $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                                    
+                                    $estado = ($fila->Estado) ? "Libre" : "Ocupado";
+                                @endphp
+                                
+                                @if ($estado == "Libre")
+                                    <tbody >
+                                        <tr>
+                                        <td>{{ $dia }}</td>
+                                        <td>{{ $periodo }}</td>
+                                        <td>{{ $estado }}</td>
+                                        </tr>
+                                    </tbody>  
+                                @endif
+                                    
+                            @endforeach
+                         
                             
-                                <tr>
-                                    <td>Lunes</td>
-                                    <td>15:45</td>
-                                    <td>Libre</td>
-                                </tr>
+
                                 
                             </thead>
                         </table>
+
+                        </div>
 
                         </div>
 

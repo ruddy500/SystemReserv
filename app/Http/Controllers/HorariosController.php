@@ -3,77 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dias;
+use App\Models\Horarios;
 use App\Models\Ambientes;
-use App\Models\Periodos;
 use Illuminate\Http\Request;
 
 class HorariosController extends Controller
 {
-    // public function mostrarHorario($ambiente)
-    // {  
-    //     //dd($ambiente);
-    //     $dias = Dias::all();
-    //     $periodos = Periodos::all();
-
-
-    //     $menu = view('componentes/menu'); // Crear la vista del menú
-       
-    //     //Envia los datos menu,dias,periodos a la vista ambientes.horario
-    //     return view('ambientes.horario', compact('ambiente','menu','dias','periodos'));
-    // }
-
-   /* public function mostrarHorario($ambiente)
-    {  
-        //dd($ambiente);
-       
-        $ambienteEs = Ambientes::find($ambiente)->Periodos;
-
-        $menu = view('componentes/menu'); // Crear la vista del menú
-        
-        //Envia los datos menu,dias,periodos a la vista ambientes.horario
-        return view('ambientes.horario', compact('ambiente','menu','dias','periodos','ambienteEs'));
-    }
-    
-  */
-
-
+   
     public function añadirHorario(Request $request)
-    {  
-        //$ambiente = Ambientes::findOrFail($ambienteId);
-       // $nombreAmbiente = $ambiente->nombre;
-      $horarios = $request->horario;
-
-     $intervalos = [];
-      foreach ($horarios as $horario) {
-        $modeloperiodo = Periodos::find($horario);
-        $intervalos[]=$modeloperiodo -> HoraIntervalo;
-      }
+    {   //dd($request->all());
+    
+      //$input = $request->except('_token'); // Excluye el campo _token de los datos
+      $periodosId = $request->periodos;
       
-    $cadena= implode(', ',$intervalos);
-    
-    $diaId = $request->dia;
-    $ambienteId = $ambiente;
-    //dd($diaId,$ambiente);
-    
-    $dia = Dias::find($diaId);
-    
-    // Asociar los períodos al día
-    $dia->periodos()->attach($horarios);
-    
-    $ambienteEspecifico = Ambientes::find($ambienteId);
-    $ambienteEspecifico -> Periodos = $cadena;
-    //$ambienteEspecifico->horarios()->sync($horarios);
+      $ambienteId = $request->ambiente;
 
-    $ambienteEspecifico->save();
+      $diaId = $request->dia;  
+      $dia = Dias::find($diaId);
+      
+      //obtengo el horario con el dia y el ambiente especifico
+      $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)
+                          ->where('ambientes_id',$ambienteId)->get();
+      
+      if ($horariosDiaAmbiente->isEmpty()) {
+          // Asociar los períodos al día en la base de datos...pero no en la variable
+        $dia->periodos()->attach($periodosId);
+        //dd($horarios);
+        $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)->get();
 
-    // Asociar los períodos al ambiente específico
-    $ambienteEspecifico->horarios()->attach($horarios);
-    
-        //dd($diaId,$periodos,$ambienteId);
+        foreach ($horariosDiaAmbiente as $horario){
+          
+          if(is_null($horario ->ambientes_id)){
+            $horario ->ambientes_id = $ambienteId;
+            $horario->save();
 
+          }
         
+       }
+         
+      }
+      //dd($ambiente->horarios()->get());
         return redirect()->back()->with('success', 'Horario guardado exitosamente.');
     }
 
 }
-

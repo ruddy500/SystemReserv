@@ -14,7 +14,7 @@
                             <label for="dia-name" class="col-form-label h4">Día:</label>
                             <select name="" class="form-control" required>
 
-                                <option value="" disabled selected >Selecciona el dia</option>
+                                <option value="" disabled selected >Seleccione día</option>
 
                                 <option value="1">Lunes</option>
                                 <option value="2">Martes</option>
@@ -23,15 +23,13 @@
                                 <option value="2">Viernes</option>
                                 <option value="3">Sábado</option>
                             </select>
-                            <div class="valid-feedback">Dia seleccionado</div>
-                            <div class="invalid-feedback">Seleccione el dia correspondiente</div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
                             <select name="" class="form-control" required>
 
-                                <option value="" disabled selected >Selecciona el horario</option>
+                                <option value="" disabled selected >Seleccione horario</option>
 
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -41,15 +39,33 @@
                                 <option value="3">Three</option>
                             </select>
 
-                            <div class="valid-feedback">Horario seleccionado</div>
-                            <div class="invalid-feedback">Seleccione el horario correspondiente</div>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="cancelar2" type="button" class="btn btn-cancelar">Cancelar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+<script>
+    $('#cancelar2').on('click', function() {
+        Swal.fire({
+        title: "¿Estas Seguro que deseas Salir?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar" ,
+        cancelButtonText: "Cancelar",
+        allowOutsideClick: false
+        }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/ambientes/editar';
+        }
+        });
+    });
+</script>

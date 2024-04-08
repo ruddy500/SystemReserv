@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -21,6 +22,7 @@ class AmbientesController extends Controller
         //$ambientes= Ambientes::with('horarios')->get();
         //$ambientes= Ambientes::has('horarios')->get(); te devuelven los ambientes que si tienen al menos una relacion con horarios
     
+        
     
     public function guardar(Request $request)
     {      
@@ -69,19 +71,23 @@ class AmbientesController extends Controller
 
     public function verAmbiente($indice)
     {       $nombreRuta = Route::currentRouteName();
-            $nombre = Ambientes::find($indice); //captura un ambiente especifico
+            $ambiente= Ambientes::find($indice); //captura un ambiente especifico
             $menu = view('componentes/menu'); // Crear la vista del menú
             
         try {
             
             if($nombreRuta== 'ambientes.horario'){
+                
                 $dias = Dias::all();
                 $periodos = Periodos::all();
-                return view('ambientes.horario', compact('dias','periodos', 'menu'));
+                return view('ambientes.horario', compact('ambiente','dias','periodos', 'menu'));
             }else{
-
-                return view('ambientes.ver', compact('nombre', 'menu'));
+                if($nombreRuta=='ambientes.ver'){
+                    return view('ambientes.ver', compact('ambiente', 'menu'));
     
+                }else{  
+                    return view('ambientes.editar', compact('ambiente', 'menu'));}
+                
             }
 
            } catch (\Exception $e) {
@@ -90,10 +96,6 @@ class AmbientesController extends Controller
         }
     }
 
-    public function añadirAmbiente($request)
-    {
-        dd($request->all());
-    }
     
     public function editarAmbiente()
     {  
