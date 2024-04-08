@@ -21,19 +21,25 @@ class HorariosController extends Controller
       $diaId = $request->dia;  
       $dia = Dias::find($diaId);
       
-      if (!$dia->Usado) {
-          // Asociar los períodos al día
+      //obtengo el horario con el dia y el ambiente especifico
+      $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)
+                          ->where('ambientes_id',$ambienteId)->get();
+      
+      if ($horariosDiaAmbiente->isEmpty()) {
+          // Asociar los períodos al día en la base de datos...pero no en la variable
         $dia->periodos()->attach($periodosId);
-        
-        $horarios = Horarios::where('dias_id',$diaId)->get();
+        //dd($horarios);
+        $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)->get();
 
-        //dd($horario);
-        foreach ($horarios as $horario){
-          $horario ->ambientes_id = $ambienteId;
-          $horario->save();
-         }
-         $dia->Usado = true;
-         $dia->save();
+        foreach ($horariosDiaAmbiente as $horario){
+          
+          if(is_null($horario ->ambientes_id)){
+            $horario ->ambientes_id = $ambienteId;
+            $horario->save();
+
+          }
+        
+       }
          
       }
       //dd($ambiente->horarios()->get());

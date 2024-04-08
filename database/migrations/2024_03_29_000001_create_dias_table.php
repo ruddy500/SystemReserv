@@ -17,7 +17,6 @@ class CreateDiasTable extends Migration
             
             $table->id();
             $table->string('Dia',10);
-            $table->boolean('Usado')->default(false);
             
         });
     }

@@ -81,9 +81,12 @@ class AmbientesController extends Controller
                 $periodos = Periodos::all();
                 return view('ambientes.horario', compact('ambiente','dias','periodos', 'menu'));
             }else{
-
-                return view('ambientes.ver', compact('ambiente', 'menu'));
+                if($nombreRuta=='ambientes.ver'){
+                    return view('ambientes.ver', compact('ambiente', 'menu'));
     
+                }else{  
+                    return view('ambientes.editar', compact('ambiente', 'menu'));}
+                
             }
 
            } catch (\Exception $e) {

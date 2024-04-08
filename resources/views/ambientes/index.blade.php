@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('ambientes')
+<!--{ { dd(get_defined_vars())}}-->
 <?php
 	use App\Models\Dias;
 ?>
@@ -28,15 +29,7 @@
 
 								@if ($i % 2 == 0)
 								<!--Fila Ploma-->
-								<?php
-
-								$dias = Dias::all();
-
-									foreach ($dias as $dia) {
-									$dia->Usado = false;
-									$dia->save();
-									}
-								?>
+								
 								<thead class="bg-custom-lista-ambientes-plomo">
 									<tr>
 										<th class="text-center h4 text-black">
@@ -53,20 +46,20 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 												
-												<div class="circle">
-													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
+												<div class="circle"><!--añadi id-->
+													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]->id]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
 
-												<div class="circle2">
-													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
+												<div class="circle2"> <!--modifique nombre-->
+													<a href="{{ route('ambientes.ver',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
 
-												<div class="circle3">
-													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+												<div class="circle3"><!--añadi parametro ambiente-->
+													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>
@@ -77,15 +70,6 @@
 								
 								@else
 								<!--Fila Blanca-->
-								<?php
-
-									foreach ($dias as $dia) {
-
-									$dia->Usado = false;
-									$dia->save();
-									}
-								?>
-								
 								<thead class="bg-custom-lista-ambientes-blanco">
 									<tr>
 										<th class="text-center h4 text-black">
@@ -103,19 +87,19 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 											<div class="circle">
-													<a href="{{ route('ambientes.horario',['ambiente' => $ambientes[$i]]) }}" class="btn btn-fab" title="Horario"> 
+													<a href="{{ route('ambientes.horario',['ambiente' => $ambientes[$i]->id]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
 
 												<div class="circle2">
-													<a href="{{ route('ambientes.ver',['nombre' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
+													<a href="{{ route('ambientes.ver',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
 
 												<div class="circle3">
-													<a href="{{ route('ambientes.editar') }}" class="btn btn-fab" title="Editar"> 
+													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
 												</div>
