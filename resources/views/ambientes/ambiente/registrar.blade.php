@@ -44,6 +44,7 @@
                         Swal.fire({
                             icon: 'success',
                             text: '{{ session('success') }}',
+                            confirmButtonText: 'Aceptar'
                         });
                     </script>
                 @endif
@@ -53,6 +54,7 @@
                         Swal.fire({
                             icon: 'warning',
                             text: '{{ session('message') }}',
+                            confirmButtonText: 'Aceptar'
                         });
                     </script>
                 @endif
@@ -63,6 +65,7 @@
                             icon: 'error',
                             title: 'Error',
                             text: '{{ session('error') }}',
+                            confirmButtonText: 'Aceptar'
                         });
                     </script>
                 @endif
@@ -73,6 +76,7 @@
                             icon: 'error',
                             title: 'Error de validación',
                             html: "{!! implode('<br>', $errors->all()) !!}",
+                            confirmButtonText: 'Aceptar'
                         });
                     </script>
                 @endif
@@ -85,18 +89,14 @@
 <script>
     $('#cancelar').on('click', function() {
         Swal.fire({
-        title: "¿Estas Seguro que deseas Salir?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Aceptar" ,
-        cancelButtonText: "Cancelar",
-        allowOutsideClick: false
+            title: "¿Estás seguro que deseas salir?",
+            icon: "warning",
+            confirmButtonColor: "#28a745",
+            confirmButtonText: "Aceptar"
         }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '/ambientes';
-        }
+            if (result.isConfirmed) {
+                window.location.href = '/ambientes';
+            }
         });
     });
 </script>

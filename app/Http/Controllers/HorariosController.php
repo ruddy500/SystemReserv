@@ -70,6 +70,8 @@ class HorariosController extends Controller
         
        }
          
+      }else{
+        return redirect()->back()->with('message' , 'Existe el horario');
       }
       //dd($ambiente->horarios()->get());
         return redirect()->back()->with('success', 'Horario guardado exitosamente.');

@@ -47,6 +47,25 @@ $horario = $ambiente->horarios()->get();
                             <button type="submit" class="btn btn-horario margin-end" data-bs-target="#" data-bs-whatever="@mdo">Añadir</button>
                         </div>
                     </div>
+                @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            text: '{{ session('success') }}',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    </script>
+                @endif
+
+                @if(session('message'))
+                    <script>
+                        Swal.fire({
+                            icon: 'warning',
+                            text: '{{ session('message') }}',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    </script>
+                @endif
                 </form>
 
 
