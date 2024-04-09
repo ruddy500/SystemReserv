@@ -55,32 +55,61 @@
                  {{-- esta parte del formulario no tiene funcionalidad, falta q se actualice el horario --}}
 
 
-                {{-- <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
+                <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
                 <table id="horario-tabla" class="table caption-top">
                     <thead>
                         <tr>
                         <th scope="col">Habilitar</th>
                         <th scope="col">Día</th>
                         <th scope="col">Horario</th>
+                        <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
                         @include('ambientes.ambiente.editHorario')
-                            <td>poner switch</td>
+                            <td>
+                                <div class="text-center">
+									<div class="form-check form-switch d-inline-block align-middle">
+										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+										<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+									</div>
+								</div>
+                            </td>
                             <td>Lunes</td>
                             <td>06:45-08:15</td>
+                            <td>
+                                <div class="circle3">
+								    <a href="#" class="btn btn-fab" title="Editar">
+										<i class="fas fa-edit" style="color: white;"></i>  
+									</a>
+								</div>
+                            </td>
                         </tr>
 
 
                         <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
                         @include('ambientes.ambiente.editHorario')
-                            <td>poner switch</td>
+                            <td>
+                                <div class="text-center">
+								    <div class="form-check form-switch d-inline-block align-middle">
+										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+										<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+									</div>
+								</div>
+                            </td>
                             <td>Lunes</td>
                             <td>15:45-17:15</td>
+                            <td>
+                                <div class="circle3">
+								    <a href="#" class="btn btn-fab" title="Editar">
+										<i class="fas fa-edit" style="color: white;"></i>  
+									</a>
+								</div>
+                            </td>
                         </tr>
                     </tbody>
-                </table> --}}
+                </table> 
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button type="button" class="btn btn-cancelar" onclick="window.history.back();">Cancelar</button>
