@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -96,19 +95,44 @@ class AmbientesController extends Controller
         }
     }
 
-    
-    public function editarAmbiente()
+    public function editarAmbiente($idAmbiente)
     {  
-        $ambientes= Ambientes::all();
-        //dd($ambientes);
-         //Obtener el tamaño de la colección de ambientes
-        $tamAmbientes = $ambientes->count();
-        $nombreambientes = NombreAmbientes::all();
-
-        $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('ambientes.editar', compact('nombreambientes','ambientes', 'menu'));
+        try {
+           
+            $idAmbiente = Ambientes::find($idAmbiente);
+            $menu = view('componentes/menu'); // Crear la vista del menú
+            return view('ambientes.editar', compact('idAmbiente', 'menu'));
+            }
+        catch (\Exception $e)
+            {
+                // Manejar la excepción
+                return redirect()->back()->with('error', 'Ha ocurrido un error al editar ambiente el ambiente.');
+            }
     }
-     
- 
+
+
+    public function actualizarAmbiente(Request $request, $idAmbiente){
+        try{
+
+
+           
+
+
+            $ambienteEditado = Ambientes::find($idAmbiente);
+       
+            $ambienteEditado->Capacidad = $request->capacidad;
+            $ambienteEditado->Ubicacion = $request->descripcion;
+            $ambienteEditado->save();
+       
+            return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
+       
+        } catch (ValidationException $e) {
+            // Manejar errores de validación
+            return redirect('ambientes')->withErrors($e->validator->errors());
+        } catch (\Exception $e) {
+            // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
+            return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
+        }
+        }
 
 }

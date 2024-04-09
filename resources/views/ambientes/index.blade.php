@@ -58,14 +58,9 @@
 													</a>
 												</div>
 
-<<<<<<< HEAD
 												<div class="circle3">
-													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
-=======
-												<div class="circle3"><!--añadi parametro ambiente-->
-													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
->>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
-														<i class="fas fa-edit" style="color: white;"></i>	
+													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar">
+														<i class="fas fa-edit" style="color: white;"></i>  
 													</a>
 												</div>
 											</div>
@@ -104,12 +99,8 @@
 												</div>
 
 												<div class="circle3">
-<<<<<<< HEAD
-													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
-=======
-													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
->>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
-														<i class="fas fa-edit" style="color: white;"></i>	
+													<a href="{{ route('ambientes.editar',['idAmbiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar">
+														<i class="fas fa-edit" style="color: white;"></i>  
 													</a>
 												</div>
 											</div>
@@ -136,3 +127,4 @@
     </script>
 
 @endsection
+

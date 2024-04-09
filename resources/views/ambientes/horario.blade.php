@@ -18,12 +18,7 @@ $horario = $ambiente->horarios()->get();
                     @csrf
                     @include('componentes.validacion')
                     <!-- Este campo oculto capturará el ID del ambiente y 
-<<<<<<< HEAD
-                        lo enviará junto con el formulario cuando se envíe.-->
-                    {{-- <input type="hidden" name="ambiente" value="{{ $ambienteId  }}"> --}}
-=======
                         lo enviará junto con el formulario cuando se envíe.Si pongo esto tengo que obligar a enviar ese dato-->
->>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
                     
                          <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
@@ -54,8 +49,6 @@ $horario = $ambiente->horarios()->get();
                     </div>
                 </form>
 
-<<<<<<< HEAD
-=======
 
                 <!-- PRUEBA DE TABLA DE HORARIOS DISPONIBLES -->
                 <div>
@@ -98,7 +91,6 @@ $horario = $ambiente->horarios()->get();
                 </div>
 
                 </div>
->>>>>>> cd50250e37d4ad6656e5c163abeb87d9f091cc85
             
             </div>
         </div>
