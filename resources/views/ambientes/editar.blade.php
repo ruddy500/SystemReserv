@@ -91,9 +91,6 @@ $horario = $ambiente->horarios()->get();
                             <td>{{ $dia }}</td>
                             <td>{{ $periodo }}</td>
                     </tr>
-
-
-
                              
                   @endforeach
                  

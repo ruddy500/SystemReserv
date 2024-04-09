@@ -28,7 +28,6 @@ class HorariosController extends Controller
       if ($horariosDiaAmbiente->isEmpty()) {
           // Asociar los períodos al día en la base de datos...pero no en la variable
         $dia->periodos()->attach($periodosId);
-        //dd($horarios);
         $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)->get();
 
         foreach ($horariosDiaAmbiente as $horario){

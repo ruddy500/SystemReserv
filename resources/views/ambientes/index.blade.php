@@ -29,13 +29,19 @@
 
 								@if ($i % 2 == 0)
 								<!--Fila Ploma-->
-								
 								<thead class="bg-custom-lista-ambientes-plomo">
 									<tr>
 										<th class="text-center h4 text-black">
 											<div class="text-center">
 												<div class="form-check form-switch d-inline-block align-middle">
-													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													<!-- aumente esto abajo ,checked name="estado_atributo" onchange="cambiarEstado()" -->
+													
+													@if ($ambientes[$i]->Habilitado)
+														<input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$ambientes[$i]->id}}" data-id="{{$ambientes[$i]->id}}" onchange="cambiarEstado(this)" checked>
+													@else
+														<input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$ambientes[$i]->id}}" data-id="{{$ambientes[$i]->id}}" onchange="cambiarEstado(this)">
+													@endif
+
 													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
 												</div>
 											</div>
@@ -46,19 +52,19 @@
 										<th class="text-center h4 text-black">
 											<div class="d-flex justify-content-center">
 												
-												<div class="circle"><!--añadi id-->
+												<div class="circle">
 													<a href="{{ route('ambientes.horario', ['ambiente' => $ambientes[$i]->id]) }}" class="btn btn-fab" title="Horario"> 
 														<i class="fas fa-calendar-alt" style="color: white;"></i>	
 													</a>
 												</div>
 
-												<div class="circle2"> <!--modifique nombre-->
+												<div class="circle2">
 													<a href="{{ route('ambientes.ver',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Ver"> 
 														<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 													</a>
 												</div>
 
-												<div class="circle3"><!--añadi parametro ambiente-->
+												<div class="circle3">
 													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar"> 
 														<i class="fas fa-edit" style="color: white;"></i>	
 													</a>
@@ -66,8 +72,8 @@
 											</div>
 										</th>
 									</tr>
-								</thead>
 								
+								</thead>
 								@else
 								<!--Fila Blanca-->
 								<thead class="bg-custom-lista-ambientes-blanco">
@@ -75,7 +81,14 @@
 										<th class="text-center h4 text-black">
 											<div class="text-center">
 												<div class="form-check form-switch d-inline-block align-middle">
-													<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+													
+													@if ($ambientes[$i]->Habilitado)
+													<input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$ambientes[$i]->id}}" data-id="{{$ambientes[$i]->id}}" onchange="cambiarEstado(this)" checked>
+												    @else
+													<input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$ambientes[$i]->id}}" data-id="{{$ambientes[$i]->id}}" onchange="cambiarEstado(this)">
+													@endif
+												
+													
 													<label class="form-check-label" for="flexSwitchCheckChecked"></label>
 												</div>
 											</div>
@@ -107,7 +120,7 @@
 										</th>
 									</tr>
 								
-								</thead>		
+								</thead>	
 								@endif
 
 							@endfor		
@@ -117,6 +130,37 @@
 			</div>
     </div>
 
+	
+   <!--Para cambiar el estado de mi Habilitado de ambiente -->
+	<script>
+		function cambiarEstado(checkbox) {
+    var isChecked = checkbox.checked;
+    var ambienteId = checkbox.getAttribute("data-id");
+    
+    fetch('/ambientes/' + ambienteId + '/cambiar-estado', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            estado: isChecked
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+    </script>
+		
+
+	
 	<script>
         $(document).ready(function() {
             // Función para recargar la página después de cerrar el modal
@@ -125,5 +169,8 @@
             });
         });
     </script>
+
+
+
 
 @endsection

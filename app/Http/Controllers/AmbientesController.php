@@ -12,17 +12,23 @@ use Illuminate\Validation\ValidationException;
 
 class AmbientesController extends Controller
 {
+    protected $fillable = [
+        'Habilitado',
+    ];
 
-         /*Ambientes::with('horarios'): Imagina que tienes una caja llena de ‘Ambientes’. 
-        Cada ‘Ambiente’ tiene un listado de ‘horarios’ asociados. Con esta parte del código
-        , estás diciendo: “Quiero todos los ‘Ambientes’, 
-        y también quiero que cada ‘Ambiente’ traiga su listado de ‘horarios’”.*/
-        
-        //$ambientes= Ambientes::with('horarios')->get();
-        //$ambientes= Ambientes::has('horarios')->get(); te devuelven los ambientes que si tienen al menos una relacion con horarios
-    
-        
-    
+    public function cambiarEstado(Request $request, $id)
+    {
+        // Encuentra el ambiente por su ID
+        $ambiente = Ambientes::findOrFail($id);
+
+        // Actualiza el estado "Habilitado" del ambiente según la solicitud
+        $ambiente->Habilitado = $request->estado;
+        $ambiente->save();
+
+        // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
+        return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+    }
+ 
     public function guardar(Request $request)
     {      
         //me da el id del  ambiente seleccionado

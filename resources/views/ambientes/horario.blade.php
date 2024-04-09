@@ -4,7 +4,7 @@
 <!--{ { dd(get_defined_vars())}} -->
 <?php 
 use App\Models\Dias;
-use App\Models\Periodos; // Assuming you need Periodos model
+use App\Models\Periodos;
 
 $horario = $ambiente->horarios()->get();
 ?>
