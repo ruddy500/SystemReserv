@@ -17,7 +17,7 @@ class AmbientesController extends Controller
     ];
 
     public function cambiarEstado(Request $request, $id)
-    {
+    {   
         // Encuentra el ambiente por su ID
         $ambiente = Ambientes::findOrFail($id);
 

@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('ambientes/editar')
-<!--{ { dd(get_defined_vars())}} -->
+<!--{ { dd(get_defined_vars()) }} -->
 <?php 
 use App\Models\Dias;
 use App\Models\Periodos; // Assuming you need Periodos model
@@ -63,26 +63,32 @@ $horario = $ambiente->horarios()->get();
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Recorrer con un for-->
-                           
+                            <!-- Recorrer con un for -->
+                         
                          @foreach ($horario as $fila)
-                         @php
-    
+                         <?php
+        
                              $diaId = $fila->dias_id;
                              $dia = Dias::find($diaId)->Dia;
 
                              $periodoId = $fila->periodos_id;
                              $periodo = Periodos::find($periodoId)->HoraIntervalo;
                              
-                         @endphp
+                         ?>
 
                     <tr data-bs-toggle="modal" data-bs-target="#formularioHorario" data-bs-whatever="@mdo">
                         @include('ambientes.ambiente.editHorario')
                            
                             <td>
                                 <div class="text-center">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                    <div class="form-check form-switch d-inline-block align-middle">        
+                                           <!--aqui se añade el boton swith segun su estado-->
+                                            @if ($fila->Estado)
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$fila->id}}" data-id="{{$fila->periodos_id}}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
+                                            @else
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{$fila->id}}" data-id="{{$fila->periodos_id}}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
+                                            @endif
+                                        
                                         <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                                     </div>
                                 </div>
@@ -105,6 +111,43 @@ $horario = $ambiente->horarios()->get();
             </div>
         </div>
 </div>
+
+ <!--Para cambiar el estado de mi Habilitado de ambiente -->
+ <script>
+    function cambiarEstado(checkbox) {
+var isChecked = checkbox.checked;
+// Obtener el valor del atributo data-id
+var ambienteId = checkbox.getAttribute("data-id");
+// Dividir la cadena en partes usando el delimitador "-"
+var partes = ambienteId.split("-");
+
+var horarioId = partes[0];
+var ambienteId = partes[1];
+var diaId = partes[2];
+
+fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: JSON.stringify({
+        estado: isChecked
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+}
+
+</script>
+    
+
+
 <script>
     $('#cancelar').on('click', function() {
         Swal.fire({
