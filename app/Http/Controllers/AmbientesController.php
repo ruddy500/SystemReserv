@@ -13,15 +13,18 @@ use Illuminate\Validation\ValidationException;
 class AmbientesController extends Controller
 {
 
-         /*Ambientes::with('horarios'): Imagina que tienes una caja llena de ‘Ambientes’. 
-        Cada ‘Ambiente’ tiene un listado de ‘horarios’ asociados. Con esta parte del código
-        , estás diciendo: “Quiero todos los ‘Ambientes’, 
-        y también quiero que cada ‘Ambiente’ traiga su listado de ‘horarios’”.*/
-        
-        //$ambientes= Ambientes::with('horarios')->get();
-        //$ambientes= Ambientes::has('horarios')->get(); te devuelven los ambientes que si tienen al menos una relacion con horarios
-    
-        
+    public function cambiarEstado(Request $request, $id)
+    {   
+        // Encuentra el ambiente por su ID
+        $ambiente = Ambientes::findOrFail($id);
+
+        // Actualiza el estado "Habilitado" del ambiente según la solicitud
+        $ambiente->Habilitado = $request->estado;
+        $ambiente->save();
+
+        // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
+        return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+    }
     
     public function guardar(Request $request)
     {      
@@ -68,9 +71,9 @@ class AmbientesController extends Controller
 
     }
 
-    public function verAmbiente($indice)
+    public function verAmbiente($idAmbiente)
     {       $nombreRuta = Route::currentRouteName();
-            $ambiente= Ambientes::find($indice); //captura un ambiente especifico
+            $ambiente= Ambientes::find($idAmbiente); //captura un ambiente especifico
             $menu = view('componentes/menu'); // Crear la vista del menú
             
         try {
@@ -94,22 +97,6 @@ class AmbientesController extends Controller
             return redirect()->back()->with('error', 'Ha ocurrido un error al mostrar el ambiente.');
         }
     }
-
-    public function editarAmbiente($idAmbiente)
-    {  
-        try {
-           
-            $idAmbiente = Ambientes::find($idAmbiente);
-            $menu = view('componentes/menu'); // Crear la vista del menú
-            return view('ambientes.editar', compact('idAmbiente', 'menu'));
-            }
-        catch (\Exception $e)
-            {
-                // Manejar la excepción
-                return redirect()->back()->with('error', 'Ha ocurrido un error al editar ambiente el ambiente.');
-            }
-    }
-
 
     public function actualizarAmbiente(Request $request, $idAmbiente){
         try{

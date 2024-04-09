@@ -9,7 +9,36 @@ use Illuminate\Http\Request;
 
 class HorariosController extends Controller
 {
-   
+   //es importante poner las variables en el mismo orden en el que se meten en la ruta
+  public function cambiarEstado(Request $request,$idPeriodo,$idAmbiente,$idDia)
+  {
+    
+    // Encuentra el ambiente por su ID
+    $ambiente = Ambientes::findOrFail($idAmbiente);
+
+    // Encuentra el horario específico por día y periodo
+    $horarioEsp = $ambiente->horarios()
+              ->where('dias_id', $idDia)
+              ->where('periodos_id', $idPeriodo)
+              ->first();
+
+        
+    // Verifica si el horario específico existe
+    if ($horarioEsp) {
+      
+        // Cambia y guarda el estado
+        $horarioEsp->Estado = $request->estado;
+        $horarioEsp->save();
+
+        // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
+        return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+    } else {
+        // Si no se encuentra el horario específico, responde con un mensaje de error
+        return response()->json(['success' => false, 'message' => 'Horario específico no encontrado']);
+    }
+   }
+
+
     public function añadirHorario(Request $request)
     {   //dd($request->all());
     
