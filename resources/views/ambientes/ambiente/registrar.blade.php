@@ -91,7 +91,7 @@
         Swal.fire({
             title: "Cancelado!",
             icon: "warning",
-            confirmButtonColor: "#28a745",
+            confirmButtonColor: "#7066e0",
             confirmButtonText: "Aceptar"
         }).then((result) => {
             if (result.isConfirmed) {
