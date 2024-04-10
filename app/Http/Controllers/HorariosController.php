@@ -39,42 +39,57 @@ class HorariosController extends Controller
    }
 
 
-    public function añadirHorario(Request $request)
-    {   //dd($request->all());
-    
-      //$input = $request->except('_token'); // Excluye el campo _token de los datos
-      $periodosId = $request->periodos;
-      
-      $ambienteId = $request->ambiente;
-
-      $diaId = $request->dia;  
-      $dia = Dias::find($diaId);
-      
-      //obtengo el horario con el dia y el ambiente especifico
-      $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)
-                          ->where('ambientes_id',$ambienteId)->get();
-      
-      if ($horariosDiaAmbiente->isEmpty()) {
-          // Asociar los períodos al día en la base de datos...pero no en la variable
-        $dia->periodos()->attach($periodosId);
-        //dd($horarios);
-        $horariosDiaAmbiente = Horarios::where('dias_id',$diaId)->get();
-
-        foreach ($horariosDiaAmbiente as $horario){
-          
-          if(is_null($horario ->ambientes_id)){
-            $horario ->ambientes_id = $ambienteId;
-            $horario->save();
-
-          }
-        
+   public function añadirHorario(Request $request)
+   {   
+       try {
+           $ambienteId = $request->ambiente;
+           $diaId = $request->dia;
+   
+           // Verificar si hay un solo periodo seleccionado
+           if (count($request->periodos) == 1) {
+               // Verificar si ya existe un horario para este día, ambiente y periodo
+               $horarioExistente = Horarios::where('dias_id', $diaId)
+                                           ->where('ambientes_id', $ambienteId)
+                                           ->where('periodos_id', $request->periodos[0])
+                                           ->exists();
+   
+               if (!$horarioExistente) {
+                   // Crear un nuevo horario
+                   $nuevoHorario = new Horarios();
+                   $nuevoHorario->dias_id = $diaId;
+                   $nuevoHorario->ambientes_id = $ambienteId;
+                   $nuevoHorario->periodos_id = $request->periodos[0];
+                   $nuevoHorario->save();
+   
+                   return redirect()->back()->with('success', 'Horario guardado exitosamente.');
+               } else {
+                   return redirect()->back()->with('message', 'El horario ya existe.');
+               }
+           } else {
+               // Verificar si ya existen horarios para este día y ambiente
+               $horariosExistentes = Horarios::where('dias_id', $diaId)
+                                              ->where('ambientes_id', $ambienteId)
+                                              ->whereIn('periodos_id', $request->periodos)
+                                              ->get();
+   
+               foreach ($request->periodos as $periodoId) {
+                   // Verificar si el horario ya existe para este periodo
+                   $horarioExistente = $horariosExistentes->firstWhere('periodos_id', $periodoId);
+   
+                   if (!$horarioExistente) {
+                       // Crear un nuevo horario
+                       $nuevoHorario = new Horarios();
+                       $nuevoHorario->dias_id = $diaId;
+                       $nuevoHorario->ambientes_id = $ambienteId;
+                       $nuevoHorario->periodos_id = $periodoId;
+                       $nuevoHorario->save();
+                   }
+               }
+   
+               return redirect()->back()->with('success', 'Horarios guardados exitosamente.');
+           }
+       } catch (\Exception $e) {
+           return redirect()->back()->with('error', 'Ocurrió un error al procesar la solicitud.');
        }
-         
-      }else{
-        return redirect()->back()->with('message' , 'Existe el horario');
-      }
-      //dd($ambiente->horarios()->get());
-        return redirect()->back()->with('success', 'Horario guardado exitosamente.');
-    }
-
+   }
 }
