@@ -1,54 +1,92 @@
+<!--{ { dd(get_defined_vars()) }}--> 
+<?php 
+use App\Models\Dias;
+use App\Models\Periodos; 
+    $periodos = Periodos::all();
+    $dias = Dias::all();
+ ?>
+                
 <div class="modal fade" id="formularioHorario" tabindex="-1" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="row g-3 needs-validation" action="" method="POST" novalidate>
-
-                <!--'@'method('PUT') -->
-                <div class="modal-header">
-                    <h3 class="modal-title h3">Editar horario</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                        <div class="mb-3">
-                            <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select name="" class="form-control" required>
-
-                                <option value="" disabled selected >Seleccione día</option>
-
-                                <option value="1">Lunes</option>
-                                <option value="2">Martes</option>
-                                <option value="3">Miercoles</option>
-                                <option value="1">Jueves</option>
-                                <option value="2">Viernes</option>
-                                <option value="3">Sábado</option>
-                            </select>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="horario-name" class="col-form-label h4">Horario:</label>
-                            <select name="" class="form-control" required>
-
-                                <option value="" disabled selected >Seleccione horario</option>
-
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button id="cancelar2" type="button" class="btn btn-cancelar">Cancelar</button>
-                </div>
-            </form>
-        </div>
+      <div class="modal-content">
+        <form action="{{ route('actualizar.horario') }}" method="POST">
+          @csrf
+          @method('PUT')
+          
+          <input type="hidden" name="dia_id" id="diaIdInput"> 
+          <input type="hidden" name="periodo_id" id="periodoIdInput"> 
+          <input type="hidden" name="ambiente_id" id="ambienteIdInput"> 
+       
+      
+          <div class="modal-header">
+            <h3 class="modal-title h3">Editar horario</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+        
+            <div class="mb-3">
+              <label for="dia" class="col-form-label h4">Día:</label>
+              <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día" required>
+                <!--captura los dias-->
+                 @foreach ($dias as $dia)
+                 <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
+                 @endforeach
+                
+             </select>
+      </div>
+            <div class="mb-3">
+              <label for="horario" class="col-form-label h4">Horario:</label>
+              <select name="horario" class="selectpicker custom-select form-control btn-lg" title="Seleccione horario" required>
+                              
+                @foreach ($periodos as $periodo)
+                <option value= "{{ $periodo->id }}"> {{ $periodo->HoraIntervalo }} </option>
+                @endforeach
+    
+                                
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-aceptar">Aceptar</button>
+            <button id="cancelar2" type="button" class="btn btn-cancelar">Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+
+  <script>
+$(document).ready(function() {
+  var modalOpened = false;
+
+  $('#formularioHorario').on('show.bs.modal', function (event) {
+    if (!modalOpened) {
+      modalOpened = true;
+
+      var button = $(event.relatedTarget); // Botón que activa el modal
+      var diaId = button.data('dia-id'); // Obtener dia ID desde el botón
+      var periodoId = button.data('periodo-id'); // Obtener periodo ID desde el botón
+      var ambienteId = button.data('ambiente-id'); // Obtener ID del ambiente desde el botón
+
+      // Imprimir los valores una sola vez
+      console.log("Dia ID:", diaId);
+      console.log("Periodo ID:", periodoId);
+      console.log("Ambiente ID:", ambienteId);
+
+      $('#diaIdInput').val(diaId);
+      $('#periodoIdInput').val(periodoId);
+      $('#ambienteIdInput').val(ambienteId);
+   
+
+    }
+  });
+
+  $('#formularioHorario').on('hide.bs.modal', function (event) {
+    modalOpened = false;
+  });
+});</script>
+
 
 
 <script>

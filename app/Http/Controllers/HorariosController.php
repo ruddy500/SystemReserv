@@ -9,6 +9,42 @@ use Illuminate\Http\Request;
 
 class HorariosController extends Controller
 {
+
+
+    public function actualizarPeriodo(Request $request){
+        //dd($request->all());
+        //ids del boton editar
+        $idAmbiente = $request -> ambiente_id;
+        $idDia = $request -> dia_id;
+        $idPeriodo = $request -> periodo_id;
+    
+      //ids de dia seleccionado y horario
+        $idDiaSelec = $request -> dia;
+        $idPeriodoSelec = $request -> horario;
+
+        $ambiente = Ambientes::findOrFail($idAmbiente);
+        $horarioEsp = $ambiente->horarios()
+              ->where('dias_id', $idDia)
+              ->where('periodos_id', $idPeriodo)
+              ->first();
+
+            if ($horarioEsp) {
+      
+                // Cambia y guarda el estado
+                $horarioEsp->dias_id =  $idDiaSelec;
+                $horarioEsp->periodos_id = $idPeriodoSelec;
+
+                $horarioEsp->save();
+        
+                // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
+                return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+            } else {
+                // Si no se encuentra el horario específico, responde con un mensaje de error
+                return response()->json(['success' => false, 'message' => 'Horario específico no encontrado']);
+            }
+
+    }
+    
    //es importante poner las variables en el mismo orden en el que se meten en la ruta
   public function cambiarEstado(Request $request,$idPeriodo,$idAmbiente,$idDia)
   {
