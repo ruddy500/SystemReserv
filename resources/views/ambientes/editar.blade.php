@@ -136,4 +136,6 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 </script>
   
 
+
+
 @endsection

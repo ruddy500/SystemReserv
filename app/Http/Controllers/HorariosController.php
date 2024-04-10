@@ -37,10 +37,10 @@ class HorariosController extends Controller
                 $horarioEsp->save();
         
                 // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
-                return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+                return redirect()->back()->with('success','Estado actualizado correctamente');
             } else {
                 // Si no se encuentra el horario específico, responde con un mensaje de error
-                return response()->json(['success' => false, 'message' => 'Horario específico no encontrado']);
+                return redirect()->back()->with('message', 'El horario no existe.');   
             }
 
     }
@@ -67,10 +67,10 @@ class HorariosController extends Controller
         $horarioEsp->save();
 
         // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
-        return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
+        return redirect()->back()->with('success','Estado actualizado correctamente');
     } else {
         // Si no se encuentra el horario específico, responde con un mensaje de error
-        return response()->json(['success' => false, 'message' => 'Horario específico no encontrado']);
+        return redirect()->back()->with('message', 'Horario especifico no encontrado.');    
     }
    }
 

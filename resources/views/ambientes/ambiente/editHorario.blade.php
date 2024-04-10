@@ -107,3 +107,23 @@ $(document).ready(function() {
         });
     });
 </script>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+@endif
+
+@if(session('message'))
+<script>
+    Swal.fire({
+        icon: 'warning',
+        text: '{{ session('message') }}',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+@endif
