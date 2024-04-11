@@ -138,8 +138,6 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 }
 
 </script>
-<<<<<<< HEAD
-=======
 
 <script>
     $('#cancelar').on('click', function() {
