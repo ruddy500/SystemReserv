@@ -38,62 +38,64 @@ $horario = $ambiente->horarios()->get();
                 </div>
                 <div class="mb-3">
                     <label for="descripcion-ubiacion-text" class="col-form-label h4">Descripción de ubicación:</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion-ubicacion-text" required>{{ $ambiente->Ubicacion }}</textarea>
-                    <div class="valid-feedback">Descripción válida</div>
+                    <textarea class="form-control" name="descripcion" id="descripcion-ubicacion-text" required minlength="10" maxlength="50">{{ $ambiente->Ubicacion }}</textarea>
+                    
                     <div class="invalid-feedback">Inserte una descripción entre 10 a 50 caracteres</div>
                 </div>
 
                 <!-- Otras partes del formulario ... -->
 
                 <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
-                <table id="horario-tabla" class="table caption-top">
-                    <thead>
-                        <tr>
-                            <th scope="col">Habilitar</th>
-                            <th scope="col">Día</th>
-                            <th scope="col">Horario</th>
-                            <th scope="col">Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($horario as $fila)
-                        <?php
-                            $diaId = $fila->dias_id;
-                            $dia = Dias::find($diaId)->Dia;
+                <div class="table-responsive margin" style="max-height: 200px; overflow-y: auto;">
+                    <table id="horario-tabla" class="table caption-top">
+                        <thead >
+                            <tr>
+                                <th class="text-center" scope="col">Habilitar</th>
+                                <th class="text-center" scope="col">Día</th>
+                                <th class="text-center"  scope="col">Horario</th>
+                                <th class="text-left" scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($horario as $fila)
+                            <?php
+                                $diaId = $fila->dias_id;
+                                $dia = Dias::find($diaId)->Dia;
 
-                            $periodoId = $fila->periodos_id;
-                            $periodo = Periodos::find($periodoId)->HoraIntervalo;
-                        ?>
-                        <tr>
-                            <td>
-                                <div class="text-center">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        @if ($fila->Estado)
-                                        <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
-                                        @else
-                                        <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
-                                        @endif
-                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                $periodoId = $fila->periodos_id;
+                                $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                            ?>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <div class="form-check form-switch d-inline-block align-middle">
+                                            @if ($fila->Estado)
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
+                                            @else
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
+                                            @endif
+                                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>{{ $dia }}</td>
-                            <td>{{ $periodo }}</td>
-                            <td>
-                                <div class="circle3">
-                                    <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
-                                        
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table> 
+                                </td>
+                                <td>{{ $dia }}</td>
+                                <td>{{ $periodo }}</td>
+                                <td>
+                                    <div class="circle4">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
+                                            
+                                            <i class="fas fa-edit" style="color: white;"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar" onclick="window.history.back();">Cancelar</button>
+                    <button id="cancelar" type="button" class="btn btn-cancelar" >Cancelar</button>
                 </div>
             </form>
         </div>
@@ -136,5 +138,53 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 }
 
 </script>
+<<<<<<< HEAD
+=======
+
+<script>
+    $('#cancelar').on('click', function() {
+        Swal.fire({
+            title: "Cancelado!",
+            icon: "warning",
+            confirmButtonColor: "#7066e0",
+            confirmButtonText: "Aceptar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/ambientes';
+            }
+        });
+    });
+</script>
+
+<script>
+    // Obtener el textarea
+    const descripcionTextarea = document.getElementById('descripcion-ubicacion-text');
+    const validFeedback = document.getElementById('valid-feedback');
+
+    // Agregar un evento de escucha para cuando cambie el contenido
+    descripcionTextarea.addEventListener('input', function() {
+        // Obtener el valor del textarea
+        const descripcionValue = descripcionTextarea.value;
+
+        // Expresión regular para validar letras y espacios
+        const regex = /^[a-zA-Z\s]*$/;
+
+        // Verificar si el valor cumple con la expresión regular
+        if (regex.test(descripcionValue)) {
+            // Si es válido, mostrar el mensaje de validación
+            descripcionTextarea.setCustomValidity('');
+            descripcionTextarea.classList.remove('is-invalid');
+            descripcionTextarea.classList.add('is-valid');
+            validFeedback.style.display = 'block'; // Mostrar el mensaje de validación
+        } else {
+            // Si no es válido, mostrar el mensaje de error
+            descripcionTextarea.setCustomValidity(' ');
+            descripcionTextarea.classList.remove('is-valid');
+            descripcionTextarea.classList.add('is-invalid');
+            validFeedback.style.display = 'none'; // Ocultar el mensaje de validación
+        }
+    });
+</script>
+>>>>>>> 5752a161ddfd4eff1c45add6d61c8491956e34d4
 
 @endsection

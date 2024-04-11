@@ -87,6 +87,11 @@
     margin-top: 50px; /* Ajusta el valor según tus necesidades */
   }
 
+  .nav_list a{
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
   .nav_list a:hover {
     color: white;
     box-shadow: 0 0 0 #ffffff, 
@@ -155,10 +160,10 @@
     }
     .l-navbar {
       left: 0;
-      --nav-width: 68px;
+      --nav-width: 78px;
     }
     body {
-      margin-left: 2.5rem !important;
+      margin-left: 3.5rem !important;
     }
 
     .nav_list i {
