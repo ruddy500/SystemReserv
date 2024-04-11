@@ -28,9 +28,9 @@
 
                         <div class="mb-3">
                             <label for="descripcion-ubiacion-text" class="col-form-label h4">Descripción de ubicación:</label>
-                            <textarea class="form-control" name = "descripcion" id="descripcion-ubicacion-text" required minlength="10" maxlength="50"></textarea>
-                            <div class="valid-feedback">Descripcion válida</div>
-                            <div class="invalid-feedback">Inserte una descripcion entre 10 a 50 caracteres</div>
+                            <textarea class="form-control" name="descripcion" id="descripcion-ubicacion-text" required minlength="10" maxlength="50" ></textarea>
+                            <div class="invalid-feedback">Inserte una descripción entre 10 a 50 caracteres</div>
+                            
                         </div>
                     
                 </div>
@@ -98,5 +98,35 @@
                 window.location.href = '/ambientes';
             }
         });
+    });
+</script>
+
+<script>
+    // Obtener el textarea
+    const descripcionTextarea = document.getElementById('descripcion-ubicacion-text');
+    const validFeedback = document.getElementById('valid-feedback');
+
+    // Agregar un evento de escucha para cuando cambie el contenido
+    descripcionTextarea.addEventListener('input', function() {
+        // Obtener el valor del textarea
+        const descripcionValue = descripcionTextarea.value;
+
+        // Expresión regular para validar letras y espacios
+        const regex = /^[a-zA-Z\s]*$/;
+
+        // Verificar si el valor cumple con la expresión regular
+        if (regex.test(descripcionValue)) {
+            // Si es válido, mostrar el mensaje de validación
+            descripcionTextarea.setCustomValidity('');
+            descripcionTextarea.classList.remove('is-invalid');
+            descripcionTextarea.classList.add('is-valid');
+            validFeedback.style.display = 'block'; // Mostrar el mensaje de validación
+        } else {
+            // Si no es válido, mostrar el mensaje de error
+            descripcionTextarea.setCustomValidity(' ');
+            descripcionTextarea.classList.remove('is-valid');
+            descripcionTextarea.classList.add('is-invalid');
+            validFeedback.style.display = 'none'; // Ocultar el mensaje de validación
+        }
     });
 </script>

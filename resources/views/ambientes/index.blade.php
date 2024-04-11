@@ -14,7 +14,7 @@
 					@include('ambientes.ambiente.registrar')
 					@include('componentes.validacion')
 
-					<div class="table-responsive margin" style="max-height: 250px; overflow-y: auto;">
+					<div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
 						<table class="table table-striped table-hover table-bordered">
 							<thead class="bg-custom-lista">
 								<tr>
@@ -129,7 +129,7 @@
 			</div>
     </div>
 
-   <!--Para cambiar el estado de mi Habilitado de ambiente -->
+   <!--Le da funcionalidad a mi switch de cambiar el estado de mi Habilitado de ambiente -->
    <script>	
 	function cambiarEstado(checkbox) {
 	var isChecked = checkbox.checked;
@@ -164,6 +164,7 @@
             });
         });
     </script>
+
 
 @endsection
 

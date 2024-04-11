@@ -8,6 +8,7 @@ use App\Models\NombreAmbientes;
 use App\Models\Dias;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 
 class AmbientesController extends Controller
@@ -58,7 +59,7 @@ class AmbientesController extends Controller
                 return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente.');
                  
             }else{
-                return redirect('ambientes')->with('message' , 'Existe el ambiente');
+                return redirect('ambientes')->with('message' , 'El ambiente ya se encuentra registrado');
             }
                    
         } catch (ValidationException $e) {
@@ -97,6 +98,7 @@ class AmbientesController extends Controller
             return redirect()->back()->with('error', 'Ha ocurrido un error al mostrar el ambiente.');
         }
     }
+
 
     public function actualizarAmbiente(Request $request, $idAmbiente){
         try{

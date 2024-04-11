@@ -16,7 +16,7 @@ $horario = $ambiente->horarios()->get();
 			<h3 class="card-header">Ambiente {{$ambiente->nombreambiente->Nombre}}</h3>
             <div class="card-body bg-content">
                 <div class ="card details-card">
-                    <h4 class="card-header details-header">Detalle de ambiente</h3>                                    
+                    <h3 class="card-header details-header">Detalle de ambiente</h3>                                    
                     <div class="card-body bg-content">
                         <div>
                             <table class="table table-bordered">
@@ -25,12 +25,12 @@ $horario = $ambiente->horarios()->get();
                                         <td colspan="2">Detalle</td>
                                     </tr>
                                     <tr>
-                                        <td>Nombre de Ambiente</td>
-                                        <td>{{$ambiente->nombreambiente->Nombre}}</td>
+                                        <td style="width: 50%;">Nombre de Ambiente</td>
+                                        <td style="width: 50%;">{{$ambiente->nombreambiente->Nombre}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Capacidad</td>
-                                        <td>{{$ambiente->Capacidad}}</td>
+                                        <td style="width: 50%;">Capacidad</td>
+                                        <td style="width: 50%;">{{$ambiente->Capacidad}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">Descripción:
@@ -72,7 +72,7 @@ $horario = $ambiente->horarios()->get();
                                 @endphp
                                 
                                 @if ($estado == "Libre")
-                                    <tbody >
+                                    <tbody class="text-center">
                                         <tr>
                                         <td>{{ $dia }}</td>
                                         <td>{{ $periodo }}</td>
