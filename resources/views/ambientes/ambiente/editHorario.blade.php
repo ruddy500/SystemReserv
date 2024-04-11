@@ -54,13 +54,11 @@
 <script>
     $('#cancelar2').on('click', function() {
         Swal.fire({
-        title: "¿Estas Seguro que deseas Salir?",
+        title: "Cancelado",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#28a745",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#7066e0",
         confirmButtonText: "Aceptar" ,
-        cancelButtonText: "Cancelar",
         allowOutsideClick: false
         }).then((result) => {
         if (result.isConfirmed) {
