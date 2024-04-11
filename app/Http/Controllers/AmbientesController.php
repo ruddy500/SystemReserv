@@ -59,7 +59,7 @@ class AmbientesController extends Controller
                 return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente.');
                  
             }else{
-                return redirect('ambientes')->with('message' , 'Existe el ambiente');
+                return redirect('ambientes')->with('message' , 'El ambiente ya se encuentra registrado');
             }
                    
         } catch (ValidationException $e) {
