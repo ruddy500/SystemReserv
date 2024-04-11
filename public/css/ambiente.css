@@ -186,6 +186,17 @@
 .circle3 {
     background-color: #28AF06; /* Color verde */
 }
+
+.circle4{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #28AF06; /* Color verde */
+}
+
 .select-container {
     display: flex; /* Utiliza flexbox para alinear los elementos */
 }

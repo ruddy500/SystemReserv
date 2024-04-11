@@ -81,7 +81,7 @@ $horario = $ambiente->horarios()->get();
                                 <td>{{ $dia }}</td>
                                 <td>{{ $periodo }}</td>
                                 <td>
-                                    <div class="circle3">
+                                    <div class="circle4">
                                         <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
                                             
                                             <i class="fas fa-edit" style="color: white;"></i>
