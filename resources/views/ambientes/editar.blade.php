@@ -183,6 +183,5 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
         }
     });
 </script>
->>>>>>> 5752a161ddfd4eff1c45add6d61c8491956e34d4
 
 @endsection
