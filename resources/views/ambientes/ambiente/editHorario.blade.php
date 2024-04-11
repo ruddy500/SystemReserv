@@ -1,4 +1,4 @@
-<!--{ { dd(get_defined_vars()) }}--> 
+<!--{ { dd(get_defined_vars()) }} -->
 <?php 
 use App\Models\Dias;
 use App\Models\Periodos; 
@@ -49,7 +49,7 @@ use App\Models\Periodos;
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-aceptar">Aceptar</button>
-            <button id="cancelar2" type="button" class="btn btn-cancelar">Cancelar</button>
+            <button id="cancelar2" type="button" class="btn btn-cancelar" data-ambiente-id="{{ $ambiente->id }}" >Cancelar</button>
           </div>
         </form>
       </div>
@@ -93,6 +93,8 @@ $(document).ready(function() {
 
 <script>
     $('#cancelar2').on('click', function() {
+      var ambienteId = $(this).data('ambiente-id'); // Capturar el ID del ambiente del atributo de datos
+       
         Swal.fire({
         title: "Cancelado",
         icon: "warning",
@@ -102,7 +104,7 @@ $(document).ready(function() {
         allowOutsideClick: false
         }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '/ambientes/editar';
+            window.location.href = '/ambientes/editar/' + ambienteId;
         }
         });
     });
