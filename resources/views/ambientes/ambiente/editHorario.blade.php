@@ -12,7 +12,7 @@ use App\Models\Periodos;
         <form action="{{ route('actualizar.horario') }}" method="POST">
           @csrf
           @method('PUT')
-          
+          <!-- Captura los datos enviados los el boton editar para poder usarlos en la ruta actualizar.horario -->
           <input type="hidden" name="dia_id" id="diaIdInput"> 
           <input type="hidden" name="periodo_id" id="periodoIdInput"> 
           <input type="hidden" name="ambiente_id" id="ambienteIdInput"> 
@@ -56,6 +56,8 @@ use App\Models\Periodos;
     </div>
   </div>
 
+  <!--Captura los datos de una fila con darle click al boton editar.
+    Los datos que captura son diaId periodoId y ambienteId y lo envia al modal -->
   <script>
 $(document).ready(function() {
   var modalOpened = false;
@@ -73,7 +75,7 @@ $(document).ready(function() {
       console.log("Dia ID:", diaId);
       console.log("Periodo ID:", periodoId);
       console.log("Ambiente ID:", ambienteId);
-
+      //envia los datos al modal 
       $('#diaIdInput').val(diaId);
       $('#periodoIdInput').val(periodoId);
       $('#ambienteIdInput').val(ambienteId);

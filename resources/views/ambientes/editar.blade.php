@@ -102,6 +102,8 @@ $horario = $ambiente->horarios()->get();
 
 @include('ambientes.ambiente.editHorario')
 
+
+<!--Le da funcionalidad a mi switch de cambiar el atributo Estado de  Horario-->
 <script>
     function cambiarEstado(checkbox) {
 var isChecked = checkbox.checked;
@@ -134,8 +136,5 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 }
 
 </script>
-  
-
-
 
 @endsection

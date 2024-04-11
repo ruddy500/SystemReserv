@@ -129,7 +129,7 @@
 			</div>
     </div>
 
-   <!--Para cambiar el estado de mi Habilitado de ambiente -->
+   <!--Le da funcionalidad a mi switch de cambiar el estado de mi Habilitado de ambiente -->
    <script>	
 	function cambiarEstado(checkbox) {
 	var isChecked = checkbox.checked;
