@@ -48,15 +48,15 @@ $horario = $ambiente->horarios()->get();
                 <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
                 <div class="table-responsive margin" style="max-height: 200px; overflow-y: auto;">
                     <table id="horario-tabla" class="table caption-top">
-                        <thead>
+                        <thead >
                             <tr>
-                                <th scope="col">Habilitar</th>
-                                <th scope="col">Día</th>
-                                <th scope="col">Horario</th>
-                                <th scope="col">Editar</th>
+                                <th class="text-center" scope="col">Habilitar</th>
+                                <th class="text-center" scope="col">Día</th>
+                                <th class="text-center"  scope="col">Horario</th>
+                                <th class="text-left" scope="col">Editar</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @foreach ($horario as $fila)
                             <?php
                                 $diaId = $fila->dias_id;
@@ -67,7 +67,7 @@ $horario = $ambiente->horarios()->get();
                             ?>
                             <tr>
                                 <td>
-                                    <div class="text-center">
+                                    <div>
                                         <div class="form-check form-switch d-inline-block align-middle">
                                             @if ($fila->Estado)
                                             <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
