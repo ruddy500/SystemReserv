@@ -93,7 +93,7 @@ $horario = $ambiente->horarios()->get();
                 </table> 
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                    <button type="button" class="btn btn-cancelar" onclick="window.history.back();">Cancelar</button>
+                    <button id="cancelar" type="button" class="btn btn-cancelar" >Cancelar</button>
                 </div>
             </form>
         </div>
@@ -134,8 +134,21 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 }
 
 </script>
-  
 
+<script>
+    $('#cancelar').on('click', function() {
+        Swal.fire({
+            title: "Cancelado!",
+            icon: "warning",
+            confirmButtonColor: "#7066e0",
+            confirmButtonText: "Aceptar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/ambientes';
+            }
+        });
+    });
+</script>
 
 
 @endsection
