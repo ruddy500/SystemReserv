@@ -46,51 +46,53 @@ $horario = $ambiente->horarios()->get();
                 <!-- Otras partes del formulario ... -->
 
                 <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
-                <table id="horario-tabla" class="table caption-top">
-                    <thead>
-                        <tr>
-                            <th scope="col">Habilitar</th>
-                            <th scope="col">Día</th>
-                            <th scope="col">Horario</th>
-                            <th scope="col">Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($horario as $fila)
-                        <?php
-                            $diaId = $fila->dias_id;
-                            $dia = Dias::find($diaId)->Dia;
+                <div class="table-responsive margin" style="max-height: 200px; overflow-y: auto;">
+                    <table id="horario-tabla" class="table caption-top">
+                        <thead>
+                            <tr>
+                                <th scope="col">Habilitar</th>
+                                <th scope="col">Día</th>
+                                <th scope="col">Horario</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($horario as $fila)
+                            <?php
+                                $diaId = $fila->dias_id;
+                                $dia = Dias::find($diaId)->Dia;
 
-                            $periodoId = $fila->periodos_id;
-                            $periodo = Periodos::find($periodoId)->HoraIntervalo;
-                        ?>
-                        <tr>
-                            <td>
-                                <div class="text-center">
-                                    <div class="form-check form-switch d-inline-block align-middle">
-                                        @if ($fila->Estado)
-                                        <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
-                                        @else
-                                        <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
-                                        @endif
-                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                $periodoId = $fila->periodos_id;
+                                $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                            ?>
+                            <tr>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="form-check form-switch d-inline-block align-middle">
+                                            @if ($fila->Estado)
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
+                                            @else
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
+                                            @endif
+                                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>{{ $dia }}</td>
-                            <td>{{ $periodo }}</td>
-                            <td>
-                                <div class="circle3">
-                                    <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
-                                        
-                                        <i class="fas fa-edit" style="color: white;"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table> 
+                                </td>
+                                <td>{{ $dia }}</td>
+                                <td>{{ $periodo }}</td>
+                                <td>
+                                    <div class="circle3">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
+                                            
+                                            <i class="fas fa-edit" style="color: white;"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <div class="horario-footer">
                     <button type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button id="cancelar" type="button" class="btn btn-cancelar" >Cancelar</button>

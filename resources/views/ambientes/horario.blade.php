@@ -72,9 +72,9 @@ $horario = $ambiente->horarios()->get();
                 <!-- PRUEBA DE TABLA DE HORARIOS DISPONIBLES -->
                 <div>
                 <label for="tablehorario-name" class="col-form-label h4">Horarios disponibles:</label>
-                <div class="table-responsive" style="max-height: 180px; overflow-y: auto;">
+                <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
                     <table id="horario-tabla" class="table caption-top">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                             <th scope="col">Dia</th>
                             <th scope="col">Horario</th>
@@ -96,7 +96,7 @@ $horario = $ambiente->horarios()->get();
                                     $estado = ($fila->Estado) ? "Libre" : "Ocupado";
                                 @endphp
 
-                                <tbody >
+                                <tbody class="text-center">
                                     <tr>
                                     <td>{{ $dia }}</td>
                                     <td>{{ $periodo }}</td>
