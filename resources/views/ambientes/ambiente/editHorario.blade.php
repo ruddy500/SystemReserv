@@ -98,7 +98,7 @@ $(document).ready(function() {
         Swal.fire({
         title: "Cancelado",
         icon: "warning",
-        showCancelButton: true,
+        showCancelButton: false,
         confirmButtonColor: "#7066e0",
         confirmButtonText: "Aceptar" ,
         allowOutsideClick: false

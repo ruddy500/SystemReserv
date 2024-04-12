@@ -142,7 +142,7 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
 <script>
     $('#cancelar').on('click', function() {
         Swal.fire({
-            title: "Cancelado!",
+            title: "Cancelado",
             icon: "warning",
             confirmButtonColor: "#7066e0",
             confirmButtonText: "Aceptar"
