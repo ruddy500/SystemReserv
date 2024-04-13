@@ -10,7 +10,7 @@
         background-repeat: no-repeat;
     }
     .user_card {
-        height: 400px;
+        height: 500px;
         width: 350px;
         margin-top: auto;
         margin-bottom: auto;
@@ -24,9 +24,10 @@
         -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border-radius: 5px;
+        opacity: 0.85; /* Ajusta este valor según la opacidad deseada */
 
     }
-    .brand_logo_container {
+    /*.brand_logo_container {
         position: absolute;
         height: 170px;
         width: 170px;
@@ -35,7 +36,7 @@
         background: #60a3bc;
         padding: 10px;
         text-align: center;
-    }
+    }*/
     .brand_logo {
         height: 150px;
         width: 150px;
