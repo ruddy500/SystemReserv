@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Iniciar Sesion</h1>
+    <a href="{{route('register.index')}}">Register</a>
     <div>
     <form class="mt-4" method="POST" action="">
         @csrf
@@ -18,13 +19,11 @@
         <input type="password"  placeholder="Password"
         id="password" name="password">
         
-        {{-- @error('message')        
-          <p>* {{ $message }}</p>
-        @enderror --}}
-
         @error('message')        
-          <p>*Error</p>
+          <p>* {{ $message }}</p>
         @enderror
+
+        
         
     
         <button type="submit" >Send</button>

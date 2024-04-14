@@ -11,21 +11,31 @@ use App\Models\Ambientes;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 
+// Route::get('/', function () {
+//     return view('home')->middleware('auth');
+// });
+
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'create'])
     ->name('register.index');
 
 Route::post('/register', [RegisterController::class, 'store'])
+    ->middleware('guest')
     ->name('register.store');
 
 Route::get('/login', [SessionController::class, 'create'])
+    ->middleware('guest')
     ->name('login.index');
 
 Route::post('/login', [SessionController::class, 'store'])
     ->name('login.store');
+
+Route::get('/logout', [SessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('login.destroy');
 
 
 
