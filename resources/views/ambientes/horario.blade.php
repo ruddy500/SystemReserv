@@ -23,7 +23,7 @@ $horario = $ambiente->horarios()->get();
                          <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
                         <div class="col">
-                            <label for="dia-name" class="col-form-label h4">Díaaaaaaaaaaa:</label>
+                            <label for="dia-name" class="col-form-label h4">Día:</label>
                             <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día" required>
                                <!--captura los dias-->
                                 @foreach ($dias as $dia)

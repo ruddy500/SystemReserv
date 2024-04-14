@@ -9,7 +9,7 @@ class Periodos extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public function dias(){
+    public function fechas(){
         /**
          * Esta línea de código define una relación muchos a muchos entre los modelos 
          * Periodos y Dias, utilizando una tabla pivot llamada horarios, 
@@ -18,6 +18,6 @@ class Periodos extends Model
          * recuperamos los datos adicionales de la tabla intermedia 'horarios',
          * en este caso el atributo 'Estado'
          * */
-        return $this->belongsToMany(Dias::class,'periodos');
+        return $this->belongsToMany(Fechas::class,'periodos');
     }
 }
