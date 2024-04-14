@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dias;
+//use App\Models\Dias;
+use App\Models\Fechas;
 use App\Models\Horarios;
 use App\Models\Ambientes;
 use Illuminate\Http\Request;
@@ -77,14 +78,45 @@ class HorariosController extends Controller
     public function añadirHorario(Request $request){ 
       
         try {
+
+            //obtener fecha de la vista en formato "d-m-y"
+            $fechita = $request->fecha;
+            //dd($fechita);
+            $fechaEntera = strtotime($fechita);
+            //obtener dia de la fecha seleccionada
+            $dia_fecha = date("d", $fechaEntera);
+            //obtener mes de la fecha seleccionada
+            $mes_fecha = date("m", $fechaEntera);
+            //obtener anio la fecha seleccionada
+            $anio_fecha = date("y", $fechaEntera);
+
+            $nuevaFecha = new Fechas();
+            $nuevaFecha->dia = $dia_fecha;
+            $nuevaFecha->mes =   $mes_fecha;
+            $nuevaFecha->anio =   $anio_fecha;
+           //guardamos en la tabla fecha el registro de la fecha q seleccionamos
+            $nuevaFecha->save();
+            //obtenemos el id de la nuevaFecha
+            $id_nuevaFecha = $nuevaFecha->id;
+            // dd($id_nuevaFecha);
+            // dd($nuevaFecha);
             $ambienteId = $request->ambiente;
-            $diaId = $request->dia;
+
+           // $diaId = $request->dia;
             $periodosId = $request->periodos;
-             
+            // dd($ambienteId);
+                 // Crear un nuevo horario
+                    $nuevoHorario = new Horarios();
+                    $nuevoHorario->fechas_id = $id_nuevaFecha;
+                    $nuevoHorario->ambientes_id = $ambienteId;
+                    $nuevoHorario->periodos_id = $periodosId[0];
+                    $nuevoHorario->save();
+                    dd($nuevoHorario);
+
             // Verificar si hay un solo periodo seleccionado
             if (count($periodosId) == 1){
                 // Verificar si ya existe un horario para este día, ambiente y periodo
-                $horarioExistente = Horarios::where('dias_id', $diaId)
+                $horarioExistente = Horarios::where('fechas_id', $fechita)
                                             ->where('ambientes_id', $ambienteId)
                                             ->where('periodos_id', $periodosId[0])
                                             ->exists();

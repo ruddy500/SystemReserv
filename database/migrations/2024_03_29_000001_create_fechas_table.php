@@ -15,10 +15,9 @@ class CreateFechasTable extends Migration
     {
         Schema::create('fechas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('dia');
-            $table->unsignedTinyInteger('mes');
-            $table->unsignedSmallInteger('anio');
-            $table->timestamps();
+            $table->integer('dia')->nullable();
+            $table->integer('mes')->nullable();
+            $table->integer('anio')->nullable();
         });
     }
 

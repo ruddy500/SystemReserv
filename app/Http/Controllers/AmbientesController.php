@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Models\Ambientes;
 use App\Models\NombreAmbientes;
-use App\Models\Dias;
+//use App\Models\Dias;
+use App\Models\Fechas;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -81,9 +82,11 @@ class AmbientesController extends Controller
             
             if($nombreRuta== 'ambientes.horario'){
                 
-                $dias = Dias::all();
+               // $dias = Dias::all();
+                $fechas = Fechas::all();
                 $periodos = Periodos::all();
-                return view('ambientes.horario', compact('ambiente','dias','periodos', 'menu'));
+               // dd($fechas);
+                return view('ambientes.horario', compact('ambiente','fechas','periodos', 'menu'));
             }else{
                 if($nombreRuta=='ambientes.ver'){
                     return view('ambientes.ver', compact('ambiente', 'menu'));
