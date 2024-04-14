@@ -103,7 +103,14 @@ class HorariosController extends Controller
             $ambienteId = $request->ambiente;
 
            // $diaId = $request->dia;
-            $periodosId = $request->periodos;
+            // $periodosId = $request->periodos;
+            // $horarioExistente = Horarios::where('fechas_id', $id_nuevaFecha)
+            // ->where('ambientes_id', $ambienteId)
+            // ->where('periodos_id', $periodosId[0])
+            // ->exists();
+            // dd($horarioExistente);
+
+
             // dd($ambienteId);
                  // Crear un nuevo horario
                     $nuevoHorario = new Horarios();
@@ -111,7 +118,7 @@ class HorariosController extends Controller
                     $nuevoHorario->ambientes_id = $ambienteId;
                     $nuevoHorario->periodos_id = $periodosId[0];
                     $nuevoHorario->save();
-                    dd($nuevoHorario);
+                    // dd($nuevoHorario);
 
             // Verificar si hay un solo periodo seleccionado
             if (count($periodosId) == 1){
@@ -120,29 +127,29 @@ class HorariosController extends Controller
                                             ->where('ambientes_id', $ambienteId)
                                             ->where('periodos_id', $periodosId[0])
                                             ->exists();
-               
+                                            dd($horarioExistente);
                 if (!$horarioExistente) {
                     // Crear un nuevo horario
                     $nuevoHorario = new Horarios();
                        
                     if($diaId == 6){
-                        $periodosComparar = [1,2,3,4];
-                        //convertimos el periodoId en entero
-                        $periodoIdConv = intval($periodosId[0]);
+                    //     $periodosComparar = [1,2,3,4];
+                    //     //convertimos el periodoId en entero
+                    //     $periodoIdConv = intval($periodosId[0]);
                       
                         if(in_array($periodoIdConv, $periodosComparar)){
                                 
-                            $nuevoHorario->dias_id = $diaId;
-                            $nuevoHorario->ambientes_id = $ambienteId;
-                            $nuevoHorario->periodos_id = $periodosId[0];
-                            $nuevoHorario->save();
+                    //         $nuevoHorario->dias_id = $diaId;
+                    //         $nuevoHorario->ambientes_id = $ambienteId;
+                    //         $nuevoHorario->periodos_id = $periodosId[0];
+                    //         $nuevoHorario->save();
                             
                         }else{
                             return redirect()->back()->with('message', 'No se puede crear ese horario para el dia sabado.');
                         }
                         
                     }else{
-                            $nuevoHorario->dias_id = $diaId;
+                            $nuevoHorario->fechas_id = $id_nuevaFecha;
                             $nuevoHorario->ambientes_id = $ambienteId;
                             $nuevoHorario->periodos_id = $periodosId[0];
                             $nuevoHorario->save();
@@ -150,10 +157,10 @@ class HorariosController extends Controller
                         }
                         return redirect()->back()->with('success', 'Horario guardado exitosamente.');   
                     
-                    } else {
+                    }else {
                     return redirect()->back()->with('message', 'El horario ya existe.');
                 }
-            } else {
+            }else {
                 // pido registro de horarios para este día , periodos  y ambiente.
                 $horariosExistentes = Horarios::where('dias_id', $diaId)
                                                 ->where('ambientes_id', $ambienteId)
