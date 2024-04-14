@@ -88,6 +88,19 @@ $horario = $ambiente->horarios()->get();
            
                                     // $diaId = $fila->dias_id;
                                     // $dia = Dias::find($diaId)->Dia;
+                                    $fechaId = $fila->fechas_id;
+                                    $fechaD = Fechas::find($fechaId)->dia;
+                                    $fechaM = Fechas::find($fechaId)->mes;
+                                    $fechaY = Fechas::find($fechaId)->anio;
+                                    if($fechaD < 10){
+                                        $fechaD = "0".$fechaD;
+                                    }
+                                    
+                                    if($fechaM < 10){
+                                        $fechaM = "0".$fechaM;
+                                    }
+                                    $fechaCompleta = $fechaD."-".$fechaM."-".$fechaY;
+
 
                                     $periodoId = $fila->periodos_id;
                                     $periodo = Periodos::find($periodoId)->HoraIntervalo;
@@ -98,6 +111,7 @@ $horario = $ambiente->horarios()->get();
                                 <tbody class="text-center">
                                     <tr>
                                     {{-- <td>{{ $dia }}</td> --}}
+                                    <td>{{ $fechaCompleta }}</td>
                                     <td>{{ $periodo }}</td>
                                     <td>{{ $estado }}</td>
                                     </tr>

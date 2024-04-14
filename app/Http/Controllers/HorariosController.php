@@ -116,7 +116,7 @@ class HorariosController extends Controller
             // Verificar si hay un solo periodo seleccionado
             if (count($periodosId) == 1){
                 // Verificar si ya existe un horario para este día, ambiente y periodo
-                $horarioExistente = Horarios::where('fechas_id', $fechita)
+                $horarioExistente = Horarios::where('fechas_id', $id_nuevaFecha)
                                             ->where('ambientes_id', $ambienteId)
                                             ->where('periodos_id', $periodosId[0])
                                             ->exists();
