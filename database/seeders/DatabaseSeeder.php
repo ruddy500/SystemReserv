@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DiasTableSeeder::class,
             PeriodosTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado
+            // UsersTableSeeder::class
         ]);
     }
 }
