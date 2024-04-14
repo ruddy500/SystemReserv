@@ -1,0 +1,1 @@
+<h1>hola soy el administrador {{auth()->user()->name}}</h1>

@@ -10,6 +10,7 @@ use App\Models\Ambientes;
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\AdminController;
 
 // Route::get('/', function () {
 //     return view('home')->middleware('auth');
@@ -18,6 +19,8 @@ use App\Http\Controllers\SessionController;
 Route::get('/', function () {
     return view('home');
 })->middleware('auth');
+
+// Route::get('/adminvistaAdmin')->name('vistaAdmin');
 
 Route::get('/register', [RegisterController::class, 'create'])
     ->name('register.index');
@@ -38,6 +41,9 @@ Route::get('/logout', [SessionController::class, 'destroy'])
     ->name('login.destroy');
 
 
+Route::get('/admin',[AdminController::class,'index'])
+->middleware('auth.admin')
+->name('admin.index');
 
 
 // Route::get('/',[RaizController::class,'mostrar']);

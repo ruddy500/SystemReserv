@@ -20,14 +20,14 @@ class SessionController extends Controller
                 'message' => 'The email or password is incorrect, please try again',
             ]);
         }
-        //  else {
+         else {
 
-        //     if(auth()->user()->role == 'admin') {
-        //         return redirect()->route('admin.index');
-        //     } else {
-        //         return redirect()->to('/');
-        //     }
-        // }
+            if(auth()->user()->role == 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->to('/');
+            }
+        }
         return redirect()->to('/');
     }
 
