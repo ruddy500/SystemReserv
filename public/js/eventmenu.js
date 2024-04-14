@@ -58,3 +58,12 @@ $(document).ready(function() {
         }, 100);
     });
 });
+
+document.getElementById('userAdminBtn').addEventListener('click', function() {
+    var salirLink = document.getElementById('salirLink');
+    if (salirLink.style.display === 'none') {
+        salirLink.style.display = 'block';
+    } else {
+        salirLink.style.display = 'none';
+    }
+});
