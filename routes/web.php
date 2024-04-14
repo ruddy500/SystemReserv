@@ -8,8 +8,21 @@ use App\Http\Controllers\HorariosController;
 use App\Http\Controllers\RaizController;
 use App\Models\Ambientes;
 
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionController;
 
-Route::get('/',[RaizController::class,'mostrar']);
+Route::get('/',function(){return view('home');});
+
+Route::get('/register', [RegisterController::class, 'create'])
+    ->name('register.index');
+
+Route::get('/login', [SessionController::class, 'create'])
+    ->name('login.index');
+
+
+
+
+// Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
 Route::post('/ambientes', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
