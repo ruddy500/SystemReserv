@@ -15,6 +15,9 @@
 					@include('componentes.validacion')
 
 					<div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+						{{-- aqui es donde estar el ID de cada usuario para relacionar  --}}
+						{{-- <h3>El usuario es {{auth()->user()->name}}</h3>
+                    	<h3>su id es: {{auth()->user()->id}}</h3> --}}     
 						<table class="table table-striped table-hover table-bordered">
 							<thead class="bg-custom-lista">
 								<tr>

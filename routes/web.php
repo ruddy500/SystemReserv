@@ -12,13 +12,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
 
-// Route::get('/', function () {
-//     return view('home')->middleware('auth');
-// });
+ Route::get('/',[RaizController::class,'mostrar'])->middleware('auth');
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('home');
+// })->middleware('auth');
 
 // Route::get('/adminvistaAdmin')->name('vistaAdmin');
 

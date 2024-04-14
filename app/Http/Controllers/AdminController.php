@@ -9,6 +9,7 @@ class AdminController extends Controller
     //
     public function index() {
 
-        return 'Administrador usuario';
+        // return 'Administrador usuario';
+        return redirect('/');
     }
 }
