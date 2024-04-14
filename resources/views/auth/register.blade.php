@@ -7,6 +7,44 @@
     <title>Registro</title>
 </head>
 <body>
-    <h1>Registro</h1>
+    <div >
+
+  <h1>Register</h1>
+
+  <form class="mt-4" method="POST" action="">
+    @csrf
+
+    <input type="text" placeholder="Name"
+    id="name" name="name">
+
+    @error('name')        
+      <p>* {{ $message }}</p>
+    @enderror
+
+    <input type="email"  placeholder="Email"
+    id="email" name="email">
+
+    @error('email')        
+      <p>* {{ $message }}</p>
+    @enderror
+
+    <input type="password" placeholder="Password"
+    id="password" name="password">
+
+    @error('password')        
+      <p >* {{ $message }}</p>
+    @enderror
+
+    <input type="password"
+    placeholder="Password confirmation" id="password_confirmation" 
+    name="password_confirmation">
+
+    <button type="submit">Send</button>
+
+
+  </form>
+
+
+</div>
 </body>
 </html>

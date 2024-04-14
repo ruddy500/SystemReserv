@@ -8,5 +8,29 @@
 </head>
 <body>
     <h1>Iniciar Sesion</h1>
+    <div>
+    <form class="mt-4" method="POST" action="">
+        @csrf
+    
+        <input type="email"  placeholder="Email"
+        id="email" name="email">
+    
+        <input type="password"  placeholder="Password"
+        id="password" name="password">
+        
+        {{-- @error('message')        
+          <p>* {{ $message }}</p>
+        @enderror --}}
+
+        @error('message')        
+          <p>*Error</p>
+        @enderror
+        
+    
+        <button type="submit" >Send</button>
+    
+    
+      </form>
+    </div>
 </body>
 </html>
