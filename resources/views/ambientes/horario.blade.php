@@ -23,7 +23,7 @@ $horario = $ambiente->horarios()->get();
                          <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
                         <div class="col">
-                            <label for="dia-name" class="col-form-label h4">Día:</label>
+                            <label for="dia-name" class="col-form-label h4">Díaaaaaaaaaaa:</label>
                             <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día" required>
                                <!--captura los dias-->
                                 @foreach ($dias as $dia)
@@ -41,6 +41,14 @@ $horario = $ambiente->horarios()->get();
                                 @endforeach
                             </select>
                         </div>
+
+                        <!-- CAMPO DE FECHA CON CALENDARIO -->
+                        <label for="fecha-name" class="col-form-label h4">Fecha:</label>
+                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                            <input class="form-control" type="text" readonly />
+                            <span class="input-group-addon"></span>
+                        </div>
+                        
                     </div>
                     <div class="col-auto">
                         <div class="d-flex justify-content-end">

@@ -104,7 +104,7 @@ class HorariosController extends Controller
                             $nuevoHorario->ambientes_id = $ambienteId;
                             $nuevoHorario->periodos_id = $periodosId[0];
                             $nuevoHorario->save();
-
+                            
                         }else{
                             return redirect()->back()->with('message', 'No se puede crear ese horario para el dia sabado.');
                         }
