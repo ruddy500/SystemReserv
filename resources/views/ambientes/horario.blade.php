@@ -104,6 +104,8 @@ $horario = $ambiente->horarios()->get();
 
                                     $periodoId = $fila->periodos_id;
                                     $periodo = Periodos::find($periodoId)->HoraIntervalo;
+
+                                    
                                     
                                     $estado = ($fila->Estado) ? "Libre" : "Ocupado";
                                 @endphp
