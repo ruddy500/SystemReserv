@@ -36,7 +36,7 @@
                      <input type="password" required class="login__input" id="login-pass" placeholder=" ">
 					  <!--===============  ETIQUETA ===============-->
                      <label for="login-pass" class="login__label">Contraseña</label>
-                     <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                     <i class="bi bi-eye-fill login__eye" id="login-eye"></i>
                   </div>
                </div>
             </div>
