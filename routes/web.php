@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbientesController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\NombreAmbientesController;
 use App\Http\Controllers\HorariosController;
 use App\Http\Controllers\RaizController;
-use App\Models\Ambientes;
+use Illuminate\Support\Facades\Auth;
 
+
+//Auth::routes();
 
 Route::get('/',[RaizController::class,'mostrar']);
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
@@ -24,6 +27,5 @@ Route::post('/ambientes/editar/{idHorario}/{idAmbiente}/{idDia}/cambiar-estado',
 
 Route::put('/ambientes/editar/horario',[HorariosController::class,'actualizarPeriodo'])->name('actualizar.horario');
 Route::put('/ambientes/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/login',[LoginController::class,'logear'])->name('loging');
