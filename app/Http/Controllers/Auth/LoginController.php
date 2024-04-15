@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/inicio';
 
     /**
      * Create a new controller instance.
@@ -43,18 +43,18 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        dd(Auth::attempt($credentials));
+        //dd(Auth::attempt($credentials));
 
         if (Auth::attempt($credentials)) {
             // La autenticación ha sido exitosa
             $user = Auth::user();
             // Haz lo que necesites después de autenticar al usuario, por ejemplo, redirigirlo a una página de inicio
-            //return redirect('/inicio');
+            return view('/inicio');
         }
     
         // La autenticación ha fallado
         // Redirigir de vuelta con un mensaje de error
-        return redirect()->back()->with('error', 'Credenciales incorrectas. Por favor, intenta nuevamente.');
+        //return redirect()->back()->with('error', 'Credenciales incorrectas. Por favor, intenta nuevamente.');
     
         
 
