@@ -17,9 +17,9 @@ class CreateHorariosTable extends Migration
         $table->id();
         $table->boolean('Estado')->default(true);
         
-        $table->foreignId('dias_id')
+        $table->foreignId('fechas_id')
             ->nullable()
-            ->constrained('dias')
+            ->constrained('fechas')
             ->cascadeOnDelete() // Acción en eliminación
             ->cascadeOnUpdate(); // Acción en actualización
         

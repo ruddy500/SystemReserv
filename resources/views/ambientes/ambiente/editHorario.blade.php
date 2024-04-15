@@ -1,9 +1,9 @@
 <!--{ { dd(get_defined_vars()) }} -->
 <?php 
-use App\Models\Dias;
+use App\Models\Fechas;
 use App\Models\Periodos; 
     $periodos = Periodos::all();
-    $dias = Dias::all();
+    $fechas = Fechas::all();
  ?>
                 
 <div class="modal fade" id="formularioHorario" tabindex="-1" role="dialog">
@@ -13,7 +13,7 @@ use App\Models\Periodos;
           @csrf
           @method('PUT')
           <!-- Captura los datos enviados los el boton editar para poder usarlos en la ruta actualizar.horario -->
-          <input type="hidden" name="dia_id" id="diaIdInput"> 
+          <input type="hidden" name="fecha_id" id="fechaIdInput"> 
           <input type="hidden" name="periodo_id" id="periodoIdInput"> 
           <input type="hidden" name="ambiente_id" id="ambienteIdInput"> 
        
@@ -26,14 +26,21 @@ use App\Models\Periodos;
             
         
             <div class="mb-3">
-              <label for="dia" class="col-form-label h4">Día:</label>
+              {{-- <label for="dia" class="col-form-label h4">Día:</label>
               <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día" required>
                 <!--captura los dias-->
                  @foreach ($dias as $dia)
                  <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
                  @endforeach
                 
-             </select>
+             </select> --}}
+
+                <!-- CAMPO DE FECHA CON CALENDARIO -->
+                <label for="fecha-name" class="col-form-label h4">Fecha:</label>
+                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                    <input name="fecha" class="form-control" type="text" readonly />
+                    <span class="input-group-addon"></span>
+                </div>
       </div>
             <div class="mb-3">
               <label for="horario" class="col-form-label h4">Horario:</label>
@@ -67,16 +74,16 @@ $(document).ready(function() {
       modalOpened = true;
 
       var button = $(event.relatedTarget); // Botón que activa el modal
-      var diaId = button.data('dia-id'); // Obtener dia ID desde el botón
+      var diaId = button.data('fecha-id'); // Obtener dia ID desde el botón
       var periodoId = button.data('periodo-id'); // Obtener periodo ID desde el botón
       var ambienteId = button.data('ambiente-id'); // Obtener ID del ambiente desde el botón
 
       // Imprimir los valores una sola vez
-      console.log("Dia ID:", diaId);
+      console.log("Fecha ID:", fechaId);
       console.log("Periodo ID:", periodoId);
       console.log("Ambiente ID:", ambienteId);
       //envia los datos al modal 
-      $('#diaIdInput').val(diaId);
+      $('#fechaIdInput').val(fechaId);
       $('#periodoIdInput').val(periodoId);
       $('#ambienteIdInput').val(ambienteId);
    

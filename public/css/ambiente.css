@@ -275,6 +275,27 @@
 
 /*HASTA AQUI*/
 
+#datepick {
+    width: 200px;
+    margin-left: 40%;
+    margin-top: 2%;
+}
+
+.input-group-addon:after {
+    content: '\f073';
+    font-family: 'Font Awesome 5 Free';
+    width: 30px; 
+    height: 37.6px;
+    display: inline-block;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;   
+    border: 1px solid rgb(223, 222, 222);
+}
+
 @media (max-width: 768px) {
     .bootstrap-select .dropdown-menu {
         max-width: calc(100% - 32px); /* Ancho máximo del menú desplegable en pantallas pequeñas */

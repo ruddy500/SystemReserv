@@ -3,7 +3,8 @@
 @section('ambientes/horario')
 <!--{ { dd(get_defined_vars())}} -->
 <?php 
-use App\Models\Dias;
+//use App\Models\Dias;
+use App\Models\Fechas;
 use App\Models\Periodos; // Assuming you need Periodos model
 
 $horario = $ambiente->horarios()->get();
@@ -23,16 +24,6 @@ $horario = $ambiente->horarios()->get();
                          <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
                         <div class="col">
-                            <label for="dia-name" class="col-form-label h4">Día:</label>
-                            <select name="dia" class="selectpicker custom-select form-control btn-lg" title="Seleccione día" required>
-                               <!--captura los dias-->
-                                @foreach ($dias as $dia)
-                                <option value="{{ $dia->id }}"> {{ $dia->Dia }} </option>
-                                @endforeach
-                               
-                            </select>
-                        </div>
-                        <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
                             <select id="horario-select" name="periodos[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
                                 <!-- Captura los periodos -->
@@ -41,6 +32,14 @@ $horario = $ambiente->horarios()->get();
                                 @endforeach
                             </select>
                         </div>
+
+                        <!-- CAMPO DE FECHA CON CALENDARIO -->
+                        <label for="fecha-name" class="col-form-label h4">Fecha:</label>
+                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                            <input name="fecha" class="form-control" type="text" readonly />
+                            <span class="input-group-addon"></span>
+                        </div>
+                        
                     </div>
                     <div class="col-auto">
                         <div class="d-flex justify-content-end">
@@ -76,7 +75,7 @@ $horario = $ambiente->horarios()->get();
                     <table id="horario-tabla" class="table caption-top">
                         <thead class="text-center">
                             <tr>
-                            <th scope="col">Dia</th>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Horario</th>
                             <th scope="col">Estado</th>
                             </tr>
@@ -87,18 +86,34 @@ $horario = $ambiente->horarios()->get();
                          @foreach ($horario as $fila)
                                 @php
            
-                                    $diaId = $fila->dias_id;
-                                    $dia = Dias::find($diaId)->Dia;
+                                    // $diaId = $fila->dias_id;
+                                    // $dia = Dias::find($diaId)->Dia;
+                                    $fechaId = $fila->fechas_id;
+                                    $fechaD = Fechas::find($fechaId)->dia;
+                                    $fechaM = Fechas::find($fechaId)->mes;
+                                    $fechaY = Fechas::find($fechaId)->anio;
+                                    if($fechaD < 10){
+                                        $fechaD = "0".$fechaD;
+                                    }
+                                    
+                                    if($fechaM < 10){
+                                        $fechaM = "0".$fechaM;
+                                    }
+                                    $fechaCompleta = $fechaD."-".$fechaM."-".$fechaY;
+
 
                                     $periodoId = $fila->periodos_id;
                                     $periodo = Periodos::find($periodoId)->HoraIntervalo;
+
+                                    
                                     
                                     $estado = ($fila->Estado) ? "Libre" : "Ocupado";
                                 @endphp
 
                                 <tbody class="text-center">
                                     <tr>
-                                    <td>{{ $dia }}</td>
+                                    {{-- <td>{{ $dia }}</td> --}}
+                                    <td>{{ $fechaCompleta }}</td>
                                     <td>{{ $periodo }}</td>
                                     <td>{{ $estado }}</td>
                                     </tr>
