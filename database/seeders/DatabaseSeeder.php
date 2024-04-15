@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             NombreAmbientesTableSeeder::class,
             DiasTableSeeder::class,
             PeriodosTableSeeder::class,
+            UsuariosTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado
         ]);
     }
