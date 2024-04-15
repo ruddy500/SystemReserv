@@ -6,6 +6,8 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\NombreAmbientesController;
 use App\Http\Controllers\HorariosController;
 use App\Http\Controllers\RaizController;
+//IMPORTAR CONTROLADOR DE VISTA ADMIN
+use App\Http\Controllers\ReservasAdminController;
 use App\Models\Ambientes;
 
 
@@ -24,3 +26,9 @@ Route::post('/ambientes/editar/{idHorario}/{idAmbiente}/{idDia}/cambiar-estado',
 
 Route::put('/ambientes/editar/horario',[HorariosController::class,'actualizarPeriodo'])->name('actualizar.horario');
 Route::put('/ambientes/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
+
+// RUTA PARA LA VISTA DE RESERVAS DEL ADMINISTRADOR
+//Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name('reservas.admin.principal');
+Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name('reservas.admin.principal');
+Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
+Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
