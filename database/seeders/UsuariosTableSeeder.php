@@ -17,10 +17,11 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-          Usuarios::create(['nombre'=>"juan",
-                            'email'=>"juan@gmail.com",
-                            'password' => Hash::make("hola123")
-         ]);
+        // createUser();
        
     }
+
+    // public function createUser(){
+    //     $user = Usuarios::create(request('Jurgen','jurgen@gmail.com',bycript('1234')));
+    // }
 }

@@ -8,7 +8,8 @@ class RaizController extends Controller
 {
     public function mostrar(){    
         
-        return view('auth/login');  
-      //return view('componentes/menu');
+        // return view('auth/login');  
+      return view('componentes/menu');
+      
     }
 }

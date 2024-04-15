@@ -7,14 +7,21 @@
 ?>
 
 	<div class="container mt-3">
+		{{-- seccion que impime usuario --}}
+		{{-- <h3>El usuario es {{auth()->user()->name}}</h3>
+		<h3>su id es: {{auth()->user()->id}}</h3> --}}
+
 			<div class="card">
 				<h3 class="card-header">Ambientes</h3>
 				<div class="card-body bg-custom">
 					<button type="button" class="btn btn-custom margin" data-bs-toggle="modal" data-bs-target="#formularioAmbiente" data-bs-whatever="@mdo"><i class="bi bi-plus-circle-fill"></i>  Registrar ambiente</button>
 					@include('ambientes.ambiente.registrar')
 					@include('componentes.validacion')
+					
+					
 
 					<div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+					
 						<table class="table table-striped table-hover table-bordered">
 							<thead class="bg-custom-lista">
 								<tr>
@@ -114,6 +121,7 @@
 													<a href="{{ route('ambientes.editar',['ambiente' => $ambientes[$i]->id ]) }}" class="btn btn-fab" title="Editar">
 														<i class="fas fa-edit" style="color: white;"></i>  
 													</a>
+													
 												</div>
 											</div>
 										</th>
