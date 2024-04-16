@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             NombreAmbientesTableSeeder::class,
-            DiasTableSeeder::class,
             PeriodosTableSeeder::class,
             UsuariosTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado

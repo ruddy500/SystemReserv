@@ -3,7 +3,7 @@
 @section('ambientes/editar')
 <!--{ { dd(get_defined_vars()) }} -->
 <?php 
-use App\Models\Dias;
+use App\Models\Fechas;
 use App\Models\Periodos; // Assuming you need Periodos model
 $horario = $ambiente->horarios()->get();
 ?>
@@ -51,7 +51,7 @@ $horario = $ambiente->horarios()->get();
                         <thead >
                             <tr>
                                 <th class="text-center" scope="col">Habilitar</th>
-                                <th class="text-center" scope="col">Día</th>
+                                <th class="text-center" scope="col">Fecha</th>
                                 <th class="text-center"  scope="col">Horario</th>
                                 <th class="text-left" scope="col">Editar</th>
                             </tr>
@@ -59,9 +59,23 @@ $horario = $ambiente->horarios()->get();
                         <tbody class="text-center">
                             @foreach ($horario as $fila)
                             <?php
-                                $diaId = $fila->dias_id;
-                                $dia = Dias::find($diaId)->Dia;
+                                // $diaId = $fila->dias_id;
+                                // $dia = Dias::find($diaId)->Dia;
+                                //Fechas
+                                $fechaId = $fila->fechas_id;
+                                    $fechaD = Fechas::find($fechaId)->dia;
+                                    $fechaM = Fechas::find($fechaId)->mes;
+                                    $fechaY = Fechas::find($fechaId)->anio;
+                                    if($fechaD < 10){
+                                        $fechaD = "0".$fechaD;
+                                    }
+                                    
+                                    if($fechaM < 10){
+                                        $fechaM = "0".$fechaM;
+                                    }
+                                    $fechaCompleta = $fechaD."-".$fechaM."-".$fechaY;
 
+                                    //periodos
                                 $periodoId = $fila->periodos_id;
                                 $periodo = Periodos::find($periodoId)->HoraIntervalo;
                             ?>
@@ -70,19 +84,19 @@ $horario = $ambiente->horarios()->get();
                                     <div>
                                         <div class="form-check form-switch d-inline-block align-middle">
                                             @if ($fila->Estado)
-                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)" checked>
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $fechaId }}" onchange="cambiarEstado(this)" checked>
                                             @else
-                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $diaId }}" onchange="cambiarEstado(this)">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $fechaId }}" onchange="cambiarEstado(this)">
                                             @endif
                                             <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $dia }}</td>
+                                <td>{{ $fechaCompleta }}</td>
                                 <td>{{ $periodo }}</td>
                                 <td>
                                     <div class="circle4">
-                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-dia-id="{{ $diaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-fecha-id="{{ $fechaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
                                             
                                             <i class="fas fa-edit" style="color: white;"></i>
                                         </a>

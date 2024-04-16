@@ -3,9 +3,9 @@
 @section('ambientes/ver')
 
 <?php 
-use App\Models\Dias;
+//use App\Models\Dias;
 use App\Models\Periodos; // Assuming you need Periodos model
-
+use App\Models\Fechas;
 $horario = $ambiente->horarios()->get();
 ?>
 
@@ -48,7 +48,7 @@ $horario = $ambiente->horarios()->get();
                                 </thead>    
                             <thead class="text-center">
                                 <tr>
-                                    <th class="col">Día</th>
+                                    <th class="col">Fecha</th>
                                     <th scope="col">Horario</th>
                                     <th scope="col">Estado</th>
                                 </tr>
@@ -62,19 +62,34 @@ $horario = $ambiente->horarios()->get();
                             @foreach ($horario as $fila)
                                 @php
             
-                                    $diaId = $fila->dias_id;
-                                    $dia = Dias::find($diaId)->Dia;
-
-                                    $periodoId = $fila->periodos_id;
-                                    $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                                    //  $fehchaId = $fila->fechas_id;
+                                    //  $fechaId = Fechas::find($fechaId);
+                                    //  $fechaId = $fechaId->dia;
+                                    //  $fechaId = $fechaId->mes;
+                                    //  $fechaId = $fechaId->anio;
+                                    $fechaId = $fila->fechas_id;
+                                    $fechaD = Fechas::find($fechaId)->dia;
+                                    $fechaM = Fechas::find($fechaId)->mes;
+                                    $fechaY = Fechas::find($fechaId)->anio;
+                                    if($fechaD < 10){
+                                        $fechaD = "0".$fechaD;
+                                    }
                                     
+                                    if($fechaM < 10){
+                                        $fechaM = "0".$fechaM;
+                                    }
+                                    $fechaCompleta = $fechaD."-".$fechaM."-".$fechaY;
+                                    //periodos
+                                    $periodoId = $fila->periodos_id;  
+                                    $periodo = Periodos::find($periodoId)->HoraIntervalo;
+                                  //  dd($periodo);
                                     $estado = ($fila->Estado) ? "Libre" : "Ocupado";
                                 @endphp
                                 
                                 @if ($estado == "Libre")
                                     <tbody class="text-center">
                                         <tr>
-                                        <td>{{ $dia }}</td>
+                                        <td>{{ $fechaCompleta }}</td>
                                         <td>{{ $periodo }}</td>
                                         <td>{{ $estado }}</td>
                                         </tr>
