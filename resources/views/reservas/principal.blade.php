@@ -10,14 +10,16 @@
 					<div class="row">
 						<div class="col-md-4 col-md-offset-8 text-center">
 							<div class="btn-group btn-group-raised">
-							  <a href="#" class="btn btn-primary custom-btn">Asignadas</a>
+							  <a href="{{ route('reservas.asignadasDocente') }}" class="btn btn-primary custom-btn">Asignadas</a>
 							  <span class="divider"></span> <!-- Línea blanca --> 
-							  <a href="#" class="btn btn-primary custom-btn">Pendientes</a>
+							  <a href="{{ route('reservas.pendientesDocente') }}" class="btn btn-primary custom-btn">Pendientes</a>
                               <span class="divider"></span> <!-- Línea blanca --> 
 							  <a href="#" class="btn btn-primary custom-btn btn-reserva" >Registrar reserva</a>
 							</div>
 						</div>
 					</div>
+                    @yield('contenido-asignadas')
+					@yield('contenido-pendientes')
 	            </div>
         	</div>
         </div>

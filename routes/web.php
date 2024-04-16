@@ -40,6 +40,9 @@ Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'
 
 // Ruta para la vista del docente
 Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.principal');
+Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
+Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
+
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
