@@ -19,6 +19,12 @@ class AdminAuth
         if (auth()->check()) {
             if (auth()->user()->role == 'admin') {
                 return $next($request);
+            }else{
+                if (auth()->user()->role == 'docente') {
+                    return $next($request);
+                }else{
+                    //decidir que retornar si no es ninguno de esto usuarios
+                }
             }
         }
 
@@ -26,6 +32,6 @@ class AdminAuth
         //     return $next($request);
         // }
 
-        return redirect()->to('/');
+     
     }
 }

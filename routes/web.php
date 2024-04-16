@@ -39,10 +39,10 @@ Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
-Route::get('/login', function () {
+/*Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
-
+*/
 Route::get('/register', [RegisterController::class, 'create'])
     ->middleware('guest')
     ->name('register.index');
@@ -60,7 +60,3 @@ Route::post('/login', [SessionsController::class, 'store'])
 Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
-
-    Route::get('/admin', [AdminController::class, 'index'])
-    ->middleware('auth.admin')
-    ->name('admin.index');

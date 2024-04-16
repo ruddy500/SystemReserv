@@ -16,10 +16,20 @@
                     </a>
                 </div>
                 <div class="nav_list"> 
-                    <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a> 
-                    <a href="{{ route('ambientes.index') }}" class="nav_link" title="Ambiente"> <i class="bi bi-buildings"></i> <span class="nav_name">Ambientes</span> </a>
-                    <a href="{{ route('reservas.admin.principal') }}" class="nav_link" title="Reserva"><i class="bi bi-journal-check"></i><span class="nav_name">Reservas</span> </a>
-                    <div id="menu">
+                     <!--añade el menu apropiado segun el rol que tenga -->
+                     @if (auth()->check())
+                         @if (auth()->user()->role == 'admin')
+                         
+                         <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a> 
+                         <a href="{{ route('ambientes.index') }}" class="nav_link" title="Ambiente"> <i class="bi bi-buildings"></i> <span class="nav_name">Ambientes</span> </a>
+                         <a href="{{ route('reservas.admin.principal') }}" class="nav_link" title="Reserva"><i class="bi bi-journal-check"></i><span class="nav_name">Reservas</span> </a>
+     
+                         @else
+                         <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a>  
+                         @endif
+                     @endif
+                    
+                     <div id="menu">
                         <button id="userAdminBtn">
                             <i class="bi bi-person-circle"></i> UserAdmin
                         </button>
