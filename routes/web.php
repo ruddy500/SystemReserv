@@ -35,12 +35,12 @@ Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 
-Route::get('/register', [RegisterController::class, 'create'])
-    ->middleware('guest')
-    ->name('register.index');
+// Route::get('/register', [RegisterController::class, 'create'])
+//     ->middleware('guest')
+//     ->name('register.index');
 
-Route::post('/register', [RegisterController::class, 'store'])
-    ->name('register.store');
+// Route::post('/register', [RegisterController::class, 'store'])
+//     ->name('register.store');
 
 Route::get('/login', [SessionsController::class, 'create'])
     ->middleware('guest')
