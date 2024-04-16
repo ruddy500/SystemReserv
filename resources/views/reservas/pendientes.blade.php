@@ -32,7 +32,7 @@
 							</a>
 						</div>
                         <div class="circle5">
-                            <a href="#" class="btn btn-fab" title="Horario"> 
+                            <a href="#" class="btn btn-fab" title="Eliminar"> 
                             <i class="bi bi-trash3-fill" style="color: white;"></i>	
 							</a>						
 				    	</div>
