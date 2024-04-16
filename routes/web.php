@@ -12,6 +12,7 @@ use App\Models\Ambientes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -42,12 +43,12 @@ Route::get('/login', function () {
     return view('auth/login');
 })->name('login');
 
-// Route::get('/register', [RegisterController::class, 'create'])
-//     ->middleware('guest')
-//     ->name('register.index');
+Route::get('/register', [RegisterController::class, 'create'])
+    ->middleware('guest')
+    ->name('register.index');
 
-// Route::post('/register', [RegisterController::class, 'store'])
-//     ->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])
+    ->name('register.store');
 
 Route::get('/login', [SessionsController::class, 'create'])
     ->middleware('guest')
@@ -60,3 +61,6 @@ Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
 
+    Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('auth.admin')
+    ->name('admin.index');
