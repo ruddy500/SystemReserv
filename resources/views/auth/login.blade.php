@@ -1,73 +1,63 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+      <link rel="stylesheet" href="css/login.css">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+      <title>Sistema de Reservas FCyT</title>
+   </head>
+   <body>
+      <div class="login">
+         <img src="imagenes/FondoLogin.jpg" alt="login image" class="login__img">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+         <form class="login__form" action=""  method="POST">
+         {{-- <form action="{{ route('loging') }}" method="POST" class="login__form"> --}}
+            @csrf
+			<div class="LogoFcyt">
+				<img src="{{ asset('imagenes/fcyt-Login.png') }}" alt="l" class="logo-fcyt">
+			</div>
+            <div class="login__content">
+               <div class="login__box">
+			      <i class="bi bi-person-fill"></i>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                  <div class="login__box-input">
+					 <!--=============== eNTRADA DE DATOS PARA EL CORREO ELECTRONICO ===============-->
+                     <input type="email" name="email" required autocomplete="email" required class="login__input" id="email" placeholder=" ">
+                     {{-- id="login-email"  --}}
+					  <!--=============== ETIQUETA ===============-->
+                     <label for="login-email" class="login__label">Correo Electronico</label>
+                  </div>
+               </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+               <div class="login__box">
+			   	  <i class="bi bi-lock-fill"></i>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                  <div class="login__box-input">
+					 <!--=============== Entrada de DATO PARA LA CONTRASEÑA===============-->
+                     <input type="password" name= "password" required autocomplete="current-password" required class="login__input" id="password" placeholder=" ">
+                     {{-- id="login-pass" --}}
+					  <!--===============  ETIQUETA ===============-->
+                     <label for="login-pass" class="login__label">Contraseña</label>
+                     <i class="bi bi-eye-fill login__eye" id="login-eye"></i>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+
+            <div class="login__check">
+				 <!--=============== Check para recordar contraseña ===============-->
+               <div class="login__check-group">
+                  <input type="checkbox" class="login__check-input" id="login-check">
+                  <label for="login-check" class="login__check-label">Recordar Contraseña</label>
+               </div>
+				 <!--=============== refencia para recuperar contraseña ===============-->
+               <a href="#" class="login__forgot">Olvidaste tu contraseña?</a>
+            </div>
+			 <!--=============== boton de iniciar sesion ===============-->
+            <button type="submit" class="login__button">Iniciar Sesion</button>
+         </form>
+      </div>
+      <script src="js/scriptLogin.js"></script>
+   </body>
+</html>
