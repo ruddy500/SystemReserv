@@ -20,14 +20,24 @@
                 <th class="text-center h4 text-black">06:45</th>
                 <th class="text-center h4 text-black">11:15</th>
                 <th class="text-center h4 text-black">
-                    <!-- <div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center">
                         <div class="circle2">
-						    <a href="#" class="btn btn-fab" title="Ver"> 
-							    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-						    </a>
-                        </div>
-					</div> -->
-                </th>
+							<a href="#" class="btn btn-fab" title="Ver"> 
+								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+							</a>
+						</div>
+						<div class="circle3">
+							<a href="#" class="btn btn-fab" title="Editar">
+								<i class="fas fa-edit" style="color: white;"></i>  
+							</a>
+						</div>
+                        <div class="circle5">
+                            <a href="#" class="btn btn-fab" title="Horario"> 
+                            <i class="bi bi-trash3-fill" style="color: white;"></i>	
+							</a>						
+				    	</div>
+					</div>
+				</th>
             </tr>
         </thead>
         <!-- Fila blanca -->
@@ -38,14 +48,24 @@
                 <th class="text-center h4 text-black">15:45</th>
                 <th class="text-center h4 text-black">17:15</th>
                 <th class="text-center h4 text-black">
-                    <!-- <div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center">
                         <div class="circle2">
-						    <a href="#" class="btn btn-fab" title="Ver"> 
-							    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-						    </a>
-                        </div>
-					</div> -->
-                </th>
+							<a href="#" class="btn btn-fab" title="Ver"> 
+								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+							</a>
+						</div>
+						<div class="circle3">
+							<a href="#" class="btn btn-fab" title="Editar">
+								<i class="fas fa-edit" style="color: white;"></i>  
+							</a>
+						</div>
+                        <div class="circle5">
+                            <a href="#" class="btn btn-fab" title="Horario"> 
+                            <i class="bi bi-trash3-fill" style="color: white;"></i>	
+							</a>						
+				    	</div>
+					</div>
+				</th>
             </tr>	
         </thead>
 	</table>
