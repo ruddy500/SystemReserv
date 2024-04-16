@@ -24,9 +24,12 @@ class SessionsController extends Controller
 
     //para cerrar sesion
     public function destroy() {
-
         auth()->logout();
-
-        return redirect()->to('/');
+    
+        return redirect()->to('/')->withHeaders([
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+            'Expires' => 'Sat, 01 Jan 2000 00:00:00 GMT',
+        ]);
     }
 }
