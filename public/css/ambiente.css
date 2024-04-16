@@ -67,6 +67,15 @@
     color: white;
 }
 
+.bg-custom-lista-fila-plomo {
+    background-color: rgba(189, 189, 189, 1);
+    color: white;
+}
+
+.bg-custom-lista-fila-blanco {
+    background-color: white;
+    color: white;
+}
 
 .text-white {
     color: white !important; /* Color del texto en blanco */
@@ -247,7 +256,24 @@
     text-align: center;
 }
 
-/* ******************************************************** */
+/*CSS DE LOS BOTONES DE RESERVA*/
+.custom-btn {
+    background-color: #214169;
+    border-color: #214169;
+}
+
+.custom-btn:hover,
+.custom-btn:focus,
+.custom-btn:active {
+    background-color: #214169;
+    border-color: #214169;
+}
+
+.divider {
+    margin: 0 1px; /* Espaciado entre los botones*/
+}
+
+/*HASTA AQUI*/
 
 #datepick {
     width: 200px;
@@ -270,7 +296,6 @@
     border: 1px solid rgb(223, 222, 222);
 }
 
-/* *************************************************************** */
 @media (max-width: 768px) {
     .bootstrap-select .dropdown-menu {
         max-width: calc(100% - 32px); /* Ancho máximo del menú desplegable en pantallas pequeñas */

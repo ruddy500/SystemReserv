@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\NombreAmbientes;
+use App\Models\Usuarios;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NombreAmbientesTableSeeder::class,
             PeriodosTableSeeder::class,
+            UsuariosTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado
         ]);
     }
