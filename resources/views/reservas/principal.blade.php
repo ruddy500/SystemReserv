@@ -14,12 +14,13 @@
 							  <span class="divider"></span> <!-- Línea blanca --> 
 							  <a href="{{ route('reservas.pendientesDocente') }}" class="btn btn-primary custom-btn">Pendientes</a>
                               <span class="divider"></span> <!-- Línea blanca --> 
-							  <a href="#" class="btn btn-primary custom-btn btn-reserva" >Registrar reserva</a>
+							  <a href="{{ route('reservas.registrar') }}" class="btn btn-primary custom-btn btn-reserva" >Registrar reserva</a>
 							</div>
 						</div>
 					</div>
                     @yield('contenido-asignadas')
 					@yield('contenido-pendientes')
+					@yield('contenido-registrar')
 	            </div>
         	</div>
         </div>

@@ -23,6 +23,16 @@ $horario = $ambiente->horarios()->get();
                     
                          <input type="hidden" name="ambiente" value="{{ $ambiente->id }}">
                     <div class="row">
+
+                        <div class="col">
+                            <!-- CAMPO DE FECHA CON CALENDARIO -->
+                            <label for="fecha-name" class="col-form-label h4">Fecha:</label>
+                            <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                <input name="fecha" class="form-control" type="text" readonly />
+                                <span class="input-group-addon"></span>
+                            </div>
+                        </div>
+                        
                         <div class="col">
                             <label for="horario-name" class="col-form-label h4">Horario:</label>
                             <select id="horario-select" name="periodos[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione horario" required>
@@ -31,13 +41,6 @@ $horario = $ambiente->horarios()->get();
                                 <option value= "{{ $periodo->id }}"> {{ $periodo->HoraIntervalo }} </option>
                                 @endforeach
                             </select>
-                        </div>
-
-                        <!-- CAMPO DE FECHA CON CALENDARIO -->
-                        <label for="fecha-name" class="col-form-label h4">Fecha:</label>
-                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                            <input name="fecha" class="form-control" type="text" readonly />
-                            <span class="input-group-addon"></span>
                         </div>
                         
                     </div>
