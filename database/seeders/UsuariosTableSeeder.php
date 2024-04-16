@@ -17,11 +17,19 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
-        // createUser();
+        $user = new Usuarios;
+        $user->name = 'Admin';
+        $user->email = 'Admin@gmail.com';
+        $user->password ='1234';
+        $user->save();
+
+        $user1 = new Usuarios;
+        $user1->name = 'Docente';
+        $user1->email = 'Docen@gmail.com';
+        $user1->password ='1234';
+        $user1->save();
+    
        
     }
 
-    // public function createUser(){
-    //     $user = Usuarios::create(request('Jurgen','jurgen@gmail.com',bycript('1234')));
-    // }
 }
