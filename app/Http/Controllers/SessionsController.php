@@ -25,6 +25,8 @@ class SessionsController extends Controller
     //para cerrar sesion
     public function destroy() {
 
-        
+        auth()->logout();
+
+        return redirect()->to('/');
     }
 }
