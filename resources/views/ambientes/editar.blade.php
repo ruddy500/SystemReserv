@@ -88,7 +88,7 @@ $horario = $ambiente->horarios()->get();
                                             @else
                                             <input class="form-check-input" type="checkbox" role="switch" name="habilitado" id="habilitado_{{ $fila->id }}" data-id="{{ $fila->periodos_id }}-{{ $ambiente->id }}-{{ $fechaId }}" onchange="cambiarEstado(this)">
                                             @endif
-                                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                            <label class="form-check-label" for="habilitado_{{ $fila->id }}"></label>
                                         </div>
                                     </div>
                                 </td>
@@ -130,9 +130,11 @@ var partes = ambienteId.split("-");
 
 var horarioId = partes[0];
 var ambienteId = partes[1];
-var diaId = partes[2];
-
-fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado', {
+var fechaId = partes[2];
+console.log(horarioId);
+console.log(ambienteId);
+console.log(fechaId);
+fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+fechaId+'/cambiar-estado', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -142,13 +144,7 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+diaId+'/cambiar-estado',
         estado: isChecked
     })
 })
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+
 }
 
 </script>
