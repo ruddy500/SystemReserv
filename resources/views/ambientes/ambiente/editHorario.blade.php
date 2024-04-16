@@ -74,7 +74,7 @@ $(document).ready(function() {
       modalOpened = true;
 
       var button = $(event.relatedTarget); // Botón que activa el modal
-      var diaId = button.data('fecha-id'); // Obtener dia ID desde el botón
+      var fechaId = button.data('fecha-id'); // Obtener dia ID desde el botón
       var periodoId = button.data('periodo-id'); // Obtener periodo ID desde el botón
       var ambienteId = button.data('ambiente-id'); // Obtener ID del ambiente desde el botón
 

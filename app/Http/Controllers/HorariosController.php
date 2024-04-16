@@ -16,25 +16,29 @@ class HorariosController extends Controller
     public function actualizarPeriodo(Request $request){
       //  dd($request->all());
         //ids del boton editar
+        // $fechaId = $fila->fechas_id;
+        // $fechaD = Fechas::find($fechaId)->dia;
+
         $idAmbiente = $request -> ambiente_id;
-        $idFecha = $request -> fechaId;
+      //  $idFecha = $request -> fecha_id;
         $idPeriodo = $request -> periodo_id;
         //dd($idAmbiente);
-       //dd($idFecha,$idFecha,$idPeriodo);
+       //dd($idFecha,$idAmbiente,$idPeriodo);
       //ids de dia seleccionado y horario
-        $idFechaSelec = $request -> fecha;
-        $idPeriodoSelec = $request -> horario;
 
+       // $idFechaSelec = $request -> fecha;
+        $idPeriodoSelec = $request -> horario;
+       // dd($idPeriodoSelec);
         $ambiente = Ambientes::findOrFail($idAmbiente);
         $horarioEsp = $ambiente->horarios()
-              ->where('fechas_id', $idFecha)
+            //  ->where('fechas_id', $idFecha)
               ->where('periodos_id', $idPeriodo)
               ->first();
-
+//
             if ($horarioEsp) {
       
                 // Cambia y guarda el estado
-                $horarioEsp->fechas_id =  $idFechaSelec;
+         //       $horarioEsp->fechas_id =  $idFechaSelec;
                 $horarioEsp->periodos_id = $idPeriodoSelec;
 
                 $horarioEsp->save();
@@ -91,7 +95,7 @@ class HorariosController extends Controller
             $mes_fecha = date("m", $fechaEntera);
             //obtener anio la fecha seleccionada
             $anio_fecha = date("y", $fechaEntera);
-
+           // dd($request->ambiente);
                     // Verificar si ya existe un horario para la misma fecha y período
         $horariosExistente = Horarios::where('fechas_id', function($query) use ($dia_fecha, $mes_fecha, $anio_fecha) {
             $query->select('id')
@@ -99,8 +103,11 @@ class HorariosController extends Controller
                 ->where('dia', $dia_fecha)
                 ->where('mes', $mes_fecha)
                 ->where('anio', $anio_fecha);
-        })->whereIn('periodos_id', $request->periodos)->exists();
+        })->whereIn('periodos_id', $request->periodos)
+        ->where('ambientes_id', $request->ambiente) // Agregar la condición del ambiente
+        ->exists();
 
+        
         if ($horariosExistente) {
             // return response()->json(['message' => 'Al menos uno de los periodos ya está asignado para esta fecha'], 400);
             return redirect()->back()->with('message', 'El horario ya existe.');
@@ -114,7 +121,7 @@ class HorariosController extends Controller
            //guardamos en la tabla fecha el registro de la fecha q seleccionamos
             $nuevaFecha->save();
             //obtenemos el id de la nuevaFecha
-            $id_nuevaFecha = $nuevaFecha->id;
+           // $id_nuevaFecha = $nuevaFecha->id;
             $ambienteId = $request->ambiente;
         //    dd($ambienteId);
              //aqui captura los ids de los periodos que seleccionamos en la vista

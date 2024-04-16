@@ -80,7 +80,7 @@ $horario = $ambiente->horarios()->get();
                             <th scope="col">Estado</th>
                             </tr>
                         </thead>
-                         <!-- recorre el horario capturado y vamos obteniendo sus ids de dia y 
+                         <!-- recorre el horario capturado y vamos obteniendo sus ids de fecha y 
                               de periodo , luego buscamos su equivalencia -->
 
                          @foreach ($horario as $fila)
