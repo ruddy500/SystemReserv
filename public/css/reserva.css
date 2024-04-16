@@ -1,0 +1,10 @@
+
+.btn-reserva {
+    width: 150px; /* El botón ocupará el 100% del ancho disponible */
+}
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+    .btn-reserva {
+        width: 100%; 
+    }
+}
