@@ -9,9 +9,13 @@ use App\Http\Controllers\RaizController;
 //IMPORTAR CONTROLADOR DE VISTA ADMIN
 use App\Http\Controllers\ReservasAdminController;
 use App\Models\Ambientes;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 
 
-Route::get('/',[RaizController::class,'mostrar']);
+
+Route::get('/',[RaizController::class,'mostrar'])->middleware('auth'); //inicio del proyecto
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
 Route::post('/ambientes', [AmbientesController::class, 'guardar'])->name('guardar.ambiente');
@@ -33,6 +37,26 @@ Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name
 Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
 
-Auth::routes();
+// Route::post('/login',[LoginController::class,'logear'])->name('loging');
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/register', [RegisterController::class, 'create'])
+//     ->middleware('guest')
+//     ->name('register.index');
+
+// Route::post('/register', [RegisterController::class, 'store'])
+//     ->name('register.store');
+
+Route::get('/login', [SessionsController::class, 'create'])
+    ->middleware('guest')
+    ->name('login.index');
+
+Route::post('/login', [SessionsController::class, 'store'])
+    ->name('login.store');
+
+Route::get('/logout', [SessionsController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('login.destroy');
+
