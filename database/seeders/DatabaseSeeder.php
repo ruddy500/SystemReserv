@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $user1->email = 'Docen@gmail.com';
         $user1->password ='1234';
         $user1->save();
-        
+        ////
         // \App\Models\User::factory(10)->create();
         $this->call([
             NombreAmbientesTableSeeder::class,
