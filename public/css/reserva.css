@@ -2,6 +2,12 @@
 .btn-reserva {
     width: 150px; /* El botón ocupará el 100% del ancho disponible */
 }
+
+#btn-siguiente {
+    float: right; /* Alinea el botón a la derecha */
+}
+
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 767px) {
     .btn-reserva {

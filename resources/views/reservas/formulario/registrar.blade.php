@@ -14,12 +14,13 @@
             <div class="col">
                 <!-- Seleccionable de fecha -->
                 <label for="fecha-name" class="col-form-label h4">Fecha:</label>
-                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                <div id="datepicker-reserva" class="input-group date" data-date-format="dd-mm-yyyy">
                     <input name="fecha" class="form-control" type="text" readonly />
                     <span class="input-group-addon"></span>
                 </div>
             </div>
         </div>
+        @include('reservas.formulario.horariosDisponibles')
     </div>
 </div>
 @endsection
