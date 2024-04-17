@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Models\Fechas;
 use App\Models\Horarios;
 use App\Models\Ambientes;
-use App\Models\Periodos;
 use Illuminate\Http\Request;
 
 class HorariosController extends Controller
@@ -14,17 +13,27 @@ class HorariosController extends Controller
 
 
     public function actualizarPeriodo(Request $request){
-      //  dd($request->all());
+       
         //ids del boton editar
         $idAmbiente = $request -> ambiente_id;
-        $idFecha = $request -> fechaId;
+        $idFecha = $request -> fecha_id;
         $idPeriodo = $request -> periodo_id;
-        //dd($idAmbiente);
-       //dd($idFecha,$idFecha,$idPeriodo);
-      //ids de dia seleccionado y horario
-        $idFechaSelec = $request -> fecha;
-        $idPeriodoSelec = $request -> horario;
+       
+        //fecha seleccionado estaba como string y se descompuso 
+        $FechaSelec = $request -> fecha;
 
+        //descompone la fecha 
+        $partes_fecha = explode("-", $FechaSelec);
+        //lo volvi integer
+        $diaSelec = intval($partes_fecha[0]);
+        $mesSelec = intval($partes_fecha[1]);
+        //tome los ultimos digitos de año
+        $año_ultimos_digitos = substr($partes_fecha[2], -2);
+        //lo volvi integer
+        $añoSelec = intval($año_ultimos_digitos);
+        //id del periodo seleccionado
+        $idPeriodoSelec = $request -> horario;
+        
         $ambiente = Ambientes::findOrFail($idAmbiente);
         $horarioEsp = $ambiente->horarios()
               ->where('fechas_id', $idFecha)
@@ -33,12 +42,20 @@ class HorariosController extends Controller
 
             if ($horarioEsp) {
       
-                // Cambia y guarda el estado
-                $horarioEsp->fechas_id =  $idFechaSelec;
-                $horarioEsp->periodos_id = $idPeriodoSelec;
+                // Cambia y guarde la nueva fecha
+                
+                $fechaEsp = Fechas::findOrFail($idFecha);
+                $fechaEsp->dia = $diaSelec;
+                $fechaEsp->mes = $mesSelec;
+                $fechaEsp->anio = $añoSelec;
 
-                $horarioEsp->save();
-        
+                $fechaEsp->save();
+                
+                // Cambia y guarada el nuevo periodo id
+                $horarioEsp -> periodos_id = $idPeriodoSelec;
+
+                $horarioEsp -> save();
+
                 // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
                 return redirect()->back()->with('success','Horario actualizado correctamente');
             } else {
