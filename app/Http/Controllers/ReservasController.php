@@ -28,4 +28,14 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.formulario.registrar', compact('menu'));
     }
+    public function materias()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.formulario.materiasDocente', compact('menu'));
+    }
+    public function formFinal()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.formulario.formFinal', compact('menu'));
+    }
 }

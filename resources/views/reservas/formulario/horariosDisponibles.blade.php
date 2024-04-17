@@ -10,5 +10,5 @@
 			</tr>
 		</thead>
     </table>
-    <button type="button" class="btn btn-custom margin" id="btn-siguiente">Siguiente</button>
+	<a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
 </div>
