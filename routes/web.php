@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReservasController;
 
 
 
@@ -27,16 +28,24 @@ Route::get('/ambientes/ver/{ambiente}', [AmbientesController::class, 'verAmbient
 Route::get('/ambientes/editar/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.editar');
 
 Route::post('/ambientes/{id}/cambiar-estado', [AmbientesController::class, 'cambiarEstado']);
-Route::post('/ambientes/editar/{idHorario}/{idAmbiente}/{idDia}/cambiar-estado', [HorariosController::class, 'cambiarEstado']);
+Route::post('/ambientes/editar/{idHorario}/{idAmbiente}/{idFecha}/cambiar-estado', [HorariosController::class, 'cambiarEstado']);
 
 Route::put('/ambientes/editar/horario',[HorariosController::class,'actualizarPeriodo'])->name('actualizar.horario');
 Route::put('/ambientes/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
 
 // RUTA PARA LA VISTA DE RESERVAS DEL ADMINISTRADOR
-//Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name('reservas.admin.principal');
 Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name('reservas.admin.principal');
 Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
+
+// Ruta para la vista del docente
+Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.principal');
+Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
+Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
+Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name('reservas.registrar');
+Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
+Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
+
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

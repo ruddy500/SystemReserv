@@ -174,7 +174,7 @@
     background-color: #FFFFFF; /* Color de fondo del tbody en blanco */
 }
 
-.circle, .circle2, .circle3 {
+.circle, .circle2, .circle3, .circle5{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -206,6 +206,9 @@
     background-color: #28AF06; /* Color verde */
 }
 
+.circle5{
+    background-color: #E61212 ; /* Color rojo*/
+}
 .select-container {
     display: flex; /* Utiliza flexbox para alinear los elementos */
 }

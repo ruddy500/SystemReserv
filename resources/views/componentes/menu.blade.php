@@ -26,6 +26,7 @@
      
                          @else
                          <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a>  
+                         <a href="{{ route('reservas.principal') }}" class="nav_link" title="Reserva"><i class="bi bi-journal-check"></i><span class="nav_name">Reservas</span> </a>
                          @endif
                      @endif
                     

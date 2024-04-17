@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Models\Fechas;
 use App\Models\Horarios;
 use App\Models\Ambientes;
-use App\Models\Periodos;
 use Illuminate\Http\Request;
 
 class HorariosController extends Controller
@@ -14,7 +13,7 @@ class HorariosController extends Controller
 
 
     public function actualizarPeriodo(Request $request){
-      //  dd($request->all());
+       
         //ids del boton editar
         // $fechaId = $fila->fechas_id;
         // $fechaD = Fechas::find($fechaId)->dia;
@@ -29,6 +28,25 @@ class HorariosController extends Controller
        // $idFechaSelec = $request -> fecha;
         $idPeriodoSelec = $request -> horario;
        // dd($idPeriodoSelec);
+
+        $idFecha = $request -> fecha_id;
+        $idPeriodo = $request -> periodo_id;
+       
+        //fecha seleccionado estaba como string y se descompuso 
+        $FechaSelec = $request -> fecha;
+
+        //descompone la fecha 
+        $partes_fecha = explode("-", $FechaSelec);
+        //lo volvi integer
+        $diaSelec = intval($partes_fecha[0]);
+        $mesSelec = intval($partes_fecha[1]);
+        //tome los ultimos digitos de año
+        $año_ultimos_digitos = substr($partes_fecha[2], -2);
+        //lo volvi integer
+        $añoSelec = intval($año_ultimos_digitos);
+        //id del periodo seleccionado
+        $idPeriodoSelec = $request -> horario;
+        
         $ambiente = Ambientes::findOrFail($idAmbiente);
         $horarioEsp = $ambiente->horarios()
             //  ->where('fechas_id', $idFecha)
@@ -36,6 +54,7 @@ class HorariosController extends Controller
               ->first();
 //
             if ($horarioEsp) {
+
                 // return response()->json(['message' => 'Al menos uno de los periodos ya está asignado para esta fecha'], 400);
                 return redirect()->back()->with('message', 'El horario ya existe.');
             }
@@ -45,8 +64,21 @@ class HorariosController extends Controller
          //       $horarioEsp->fechas_id =  $idFechaSelec;
                 $horarioEsp->periodos_id = $idPeriodoSelec;
 
-                $horarioEsp->save();
-        
+      
+                // Cambia y guarde la nueva fecha
+                
+                $fechaEsp = Fechas::findOrFail($idFecha);
+                $fechaEsp->dia = $diaSelec;
+                $fechaEsp->mes = $mesSelec;
+                $fechaEsp->anio = $añoSelec;
+
+                $fechaEsp->save();
+                
+                // Cambia y guarada el nuevo periodo id
+                $horarioEsp -> periodos_id = $idPeriodoSelec;
+
+                $horarioEsp -> save();
+
                 // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
                 return redirect()->back()->with('success','Horario actualizado correctamente');
             } else {
@@ -57,32 +89,32 @@ class HorariosController extends Controller
     }
     
    //es importante poner las variables en el mismo orden en el que se meten en la ruta
-    public function cambiarEstado(Request $request,$idPeriodo,$idAmbiente,$idDia){
+   public function cambiarEstado(Request $request,$idPeriodo,$idAmbiente,$idFecha){
         
-            // Encuentra el ambiente por su ID
-            $ambiente = Ambientes::findOrFail($idAmbiente);
+    // Encuentra el ambiente por su ID
+    $ambiente = Ambientes::findOrFail($idAmbiente);
 
-            // Encuentra el horario específico por día y periodo
-            $horarioEsp = $ambiente->horarios()
-                    ->where('dias_id', $idDia)
-                    ->where('periodos_id', $idPeriodo)
-                    ->first();
+    // Encuentra el horario específico por día y periodo
+    $horarioEsp = $ambiente->horarios()
+            ->where('fechas_id', $idFecha)
+            ->where('periodos_id', $idPeriodo)
+            ->first();
 
-                
-            // Verifica si el horario específico existe
-            if ($horarioEsp) {
-            
-                // Cambia y guarda el estado
-                $horarioEsp->Estado = $request->estado;
-                $horarioEsp->save();
+        
+    // Verifica si el horario específico existe
+    if ($horarioEsp) {
+    
+        // Cambia y guarda el estado
+        $horarioEsp->Estado = $request->estado;
+        $horarioEsp->save();
 
-                // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
-                return redirect()->back()->with('success','Estado actualizado correctamente');
-            } else {
-                // Si no se encuentra el horario específico, responde con un mensaje de error
-                return redirect()->back()->with('message', 'Horario especifico no encontrado.');    
-            }
+        // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
+        return redirect()->back()->with('success','Estado actualizado correctamente');
+    } else {
+        // Si no se encuentra el horario específico, responde con un mensaje de error
+        return redirect()->back()->with('message', 'Horario especifico no encontrado.');    
     }
+}
 
 
     public function añadirHorario(Request $request){ 

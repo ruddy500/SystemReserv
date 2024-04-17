@@ -28,6 +28,7 @@ class UsuariosTableSeeder extends Seeder
         $user1->name = 'Docente';
         $user1->email = 'Docen@gmail.com';
         $user1->password ='1234';
+        $user1->role = 'docente';
         $user1->save();
     
        
