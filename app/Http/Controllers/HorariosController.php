@@ -36,7 +36,11 @@ class HorariosController extends Controller
               ->first();
 //
             if ($horarioEsp) {
-      
+                // return response()->json(['message' => 'Al menos uno de los periodos ya está asignado para esta fecha'], 400);
+                return redirect()->back()->with('message', 'El horario ya existe.');
+            }
+            if ($horarioEsp) {
+            
                 // Cambia y guarda el estado
          //       $horarioEsp->fechas_id =  $idFechaSelec;
                 $horarioEsp->periodos_id = $idPeriodoSelec;
