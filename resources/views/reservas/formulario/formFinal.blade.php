@@ -14,9 +14,9 @@
 
             <div class="mb-3">
                 <label for="motivo-text" class="col-form-label h4">Motivo:</label>
-                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="5" maxlength="50"></textarea>
+                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="30" maxlength="200"></textarea>
                 <div class="invalid-feedback">
-                    Inserte un motivo entre 5 a 50 caracteres
+                    Inserte un motivo entre 30 a 2000 caracteres
                 </div>
             </div>
 
@@ -46,7 +46,13 @@
                         text: 'Solicitud de reserva registrada Exitosamente',
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
-                        backdrop: true
+                        backdrop: true,
+                        allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+                    }).then((result) => {
+                        // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
+                        if (result.isConfirmed) {
+                            window.location.href = '/reservas'; // ruta a la que quieres redirigir al usuario
+                        }
                     });
                 }
 
@@ -60,8 +66,14 @@
                 text: 'Cancelado',
                 icon: 'warning',
                 confirmButtonText: 'Aceptar',
-                backdrop: true
-            });
+                backdrop: true,
+                allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+            }).then((result) => {
+                        // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
+                        if (result.isConfirmed) {
+                            window.location.href = '/reservas'; //  ruta a la que quieres redirigir al usuario
+                        }
+                    });;
         });
     })();
 </script>
