@@ -51,12 +51,12 @@
                 <th class="text-center h4 text-black">
 					<div class="d-flex justify-content-center">
                         <div class="circle2">
-							<a href="#" class="btn btn-fab" title="Ver"> 
+							<a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
 								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 							</a>
 						</div>
 						<div class="circle3">
-							<a href="#" class="btn btn-fab" title="Editar">
+							<a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
 								<i class="fas fa-edit" style="color: white;"></i>  
 							</a>
 						</div>
