@@ -15,7 +15,7 @@
                 <!-- Seleccionable de fecha -->
                 <label for="fecha-name" class="col-form-label h4">Fecha:</label>
                 <div id="datepicker-reserva" class="input-group date" data-date-format="dd-mm-yyyy">
-                    <input name="fecha" class="form-control" type="text" readonly />
+                    <input name="fecha" class="form-control" type="text" readonly placeholder="dd-mm-aaaa"/>
                     <span class="input-group-addon"></span>
                 </div>
             </div>
