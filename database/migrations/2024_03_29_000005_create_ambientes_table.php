@@ -23,9 +23,14 @@ class CreateAmbientesTable extends Migration
                 ->nullable()
                 ->constrained('nombre_ambientes')
                 ->cascadeOnDelete();
+            
+        
+            $table->foreignId('reservas_id')
+                ->nullable()
+                ->constrained('reservas')
+                ->cascadeOnDelete() // Acción en eliminación
+                ->cascadeOnUpdate(); // Acción en actualización
                 
-    
-            //$table->timestamps();
           
         });
     }

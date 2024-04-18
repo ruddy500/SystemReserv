@@ -5,7 +5,7 @@ namespace Database\Seeders;
 
 use App\Models\Usuarios;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+
 
 
 class UsuariosTableSeeder extends Seeder
