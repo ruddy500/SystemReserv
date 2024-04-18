@@ -45,6 +45,7 @@ Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes
 Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name('reservas.registrar');
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
 Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
+Route::get('/reservas/ver',[ReservasController::class,'verReserva'])->name('reservas.ver');
 
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');

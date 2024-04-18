@@ -38,4 +38,10 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.formulario.formFinal', compact('menu'));
     }
+    //FUNCION MOSTRAR VENTANA VER
+    public function verReserva()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.ver', compact('menu'));
+    }
 }
