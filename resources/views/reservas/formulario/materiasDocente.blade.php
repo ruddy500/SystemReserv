@@ -14,6 +14,34 @@
                         <th class="text-center h4 text-white">Selección</th>
                     </tr>
                 </thead>
+                <!-- Fila Ploma -->
+                <thead class="bg-custom-lista-fila-plomo">	
+                    <tr>
+                        <th class="text-center h4 text-black">Introduccion a la programación</th>
+                        <th class="text-center h4 text-black">2</th>
+                        <th class="text-center h4 text-black">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <!-- Fila blanca -->
+                <thead class="bg-custom-lista-fila-blanco">
+                    <tr>
+                        <th class="text-center h4 text-black">Arquitectura de computadoras</th>
+                        <th class="text-center h4 text-black">3</th>
+                        <th class="text-center h4 text-black">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>	
+                </thead>
             </table>
             <a href="{{ route('reservas.formFinal') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
         </div>
