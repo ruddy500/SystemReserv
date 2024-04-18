@@ -14,11 +14,14 @@
                         <th class="text-center h4 text-white">Selección</th>
                     </tr>
                 </thead>
+                
+                @for ($i = 0; $i < $tamMaterias ; $i++)
+				@if ($i % 2 == 0)
                 <!-- Fila Ploma -->
                 <thead class="bg-custom-lista-fila-plomo">	
                     <tr>
-                        <th class="text-center h4 text-black">Introduccion a la programación</th>
-                        <th class="text-center h4 text-black">2</th>
+                        <th class="text-center h4 text-black">{{$materias[$i]->Nombre}}</th>
+                        <th class="text-center h4 text-black">{{$materias[$i]->Grupo}}</th>
                         <th class="text-center h4 text-black">
                             <div class="d-flex justify-content-center">
                                 <div>
@@ -28,11 +31,12 @@
                         </th>
                     </tr>
                 </thead>
+                @else
                 <!-- Fila blanca -->
                 <thead class="bg-custom-lista-fila-blanco">
                     <tr>
-                        <th class="text-center h4 text-black">Arquitectura de computadoras</th>
-                        <th class="text-center h4 text-black">3</th>
+                        <th class="text-center h4 text-black">{{$materias[$i]->Nombre}}</th>
+                        <th class="text-center h4 text-black">{{$materias[$i]->Grupo}}</th>
                         <th class="text-center h4 text-black">
                             <div class="d-flex justify-content-center">
                                 <div>
@@ -42,6 +46,9 @@
                         </th>
                     </tr>	
                 </thead>
+                @endif
+
+				@endfor	
             </table>
             <a href="{{ route('reservas.formFinal') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
         </div>
