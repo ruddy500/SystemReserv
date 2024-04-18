@@ -42,14 +42,30 @@
                             </table>
                             <!-- TABLA DE DETALLE DE RESERVA -->
                             <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
-                            <table id="horario-tabla" class="table caption-top">
+                            <table id="horario-tabla" class="table caption-top table-bordered ">
                                 <thead class="table_encabezado_color text-center">
                                     <td colspan="3">Detalle de materia</td>
                                     <thead class="text-center">
                                         <tr>
-                                            <th class="col">Materia</th>
-                                            <th scope="col">Grupo</th>
+                                            <th class="col" style="width: 70%;">Materia</th>
+                                            <th scope="col" style="width: 30%;">Grupo</th>
                                         </tr>
+                                    </thead>
+                                    <thead class="text-center">
+                                        <tbody class="text-center">
+                                            <tr>
+                                                <td>Introducción a la programación</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Introducción a la programación</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Introducción a la programación</td>
+                                                <td>2</td>
+                                            </tr>
+                                        </tbody> 
                                     </thead>
                                 </thead> 
                             </table>
