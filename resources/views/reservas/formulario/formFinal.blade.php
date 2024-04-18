@@ -3,10 +3,10 @@
 @section('contenido-registrar')
 <div class="card-body bg-content">
     <div class="mb-3">
-        <form  class="row g-3 needs-validation" novalidate>
+        <form class="row g-3 needs-validation" novalidate>
             <div class="mb-3">
                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
-                <input type="number" name= "cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="30" max="200" required>
+                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="30" max="200" required>
                 <div class="invalid-feedback">
                     Inserte un rango entre 30 a 200 de cantidad
                 </div>
@@ -14,7 +14,7 @@
 
             <div class="mb-3">
                 <label for="motivo-text" class="col-form-label h4">Motivo:</label>
-                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="5" maxlength="50" ></textarea>                       
+                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="5" maxlength="50"></textarea>
                 <div class="invalid-feedback">
                     Inserte un motivo entre 5 a 50 caracteres
                 </div>
@@ -22,33 +22,47 @@
 
             <div class="modal-footer">
                 <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                <button id="cancelar" type="button" class="btn btn-cancelar" >Cancelar</button>
+                <button id="cancelar" type="button" class="btn btn-cancelar">Cancelar</button>
             </div>
-
         </form>
-    
     </div>
 </div>
+
 <script>
-// Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
-(function () {
-  'use strict'
+    (function () {
+        'use strict';
 
-  // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
-  var forms = document.querySelectorAll('.needs-validation')
+        var forms = document.querySelectorAll('.needs-validation');
 
-  // Bucle sobre ellos y evitar el envío
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    // Si el formulario es válido, mostrar SweetAlert2
+                    event.preventDefault(); // Agrega esta línea
+                    Swal.fire({
+                        text: 'Solicitud de reserva registrada Exitosamente',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar',
+                        backdrop: true
+                    });
+                }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+        // Agrega un evento de clic al botón "Cancelar"
+        document.getElementById('cancelar').addEventListener('click', function() {
+            Swal.fire({
+                text: 'Cancelado',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar',
+                backdrop: true
+            });
+        });
+    })();
 </script>
 @endsection
