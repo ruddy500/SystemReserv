@@ -1,5 +1,5 @@
 @extends('index')
-
+{{-- {{ dd(get_defined_vars()) }}  --}}
 @section('reservas/principal')
 <div class="container mt-3">
 	<div class="card">
