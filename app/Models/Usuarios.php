@@ -13,6 +13,17 @@ class Usuarios extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
+
+
+
+    public function materias(){
+        return $this->belongsToMany(Materias::class, 'docentes_materias','docentes_id','materias_id');
+    }
+    
+    public function reservas(){
+        return $this->hasMany(Reservas::class, 'docentes_id');
+    }
+    
     /**
      * The attributes that are mass assignable.
 

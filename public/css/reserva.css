@@ -6,6 +6,9 @@
 #btn-siguiente {
     float: right; /* Alinea el botón a la derecha */
 }
+#formularioEditReserva .modal-content.edith-reserva label {
+    text-align: left;
+}
 
 
 /* Estilos para dispositivos móviles */

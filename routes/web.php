@@ -17,6 +17,7 @@ use App\Http\Controllers\ReservasController;
 
 
 
+
 Route::get('/',[RaizController::class,'mostrar'])->middleware('auth'); //inicio del proyecto
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
@@ -51,7 +52,11 @@ Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'
 // Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
 
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
+
+Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias'); //materias de docentes version 2
+
 Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
+Route::get('/reservas/ver',[ReservasController::class,'verReserva'])->name('reservas.ver');
 
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Periodos extends Model
+class PeriodosSeleccionado extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    
-    public function fechas(){       
-        return $this->belongsToMany(Fechas::class,'periodos');
+
+    public function reserva(){
+        return $this->belongsTo(Reservas::class, 'reservas_id');
     }
 }

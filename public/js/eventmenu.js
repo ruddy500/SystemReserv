@@ -73,7 +73,7 @@ $(function () {
     language: 'es',
     autoclose: true,
     todayHighlight: true,
-    }).datepicker('update', new Date());
+    }).datepicker('', new Date());
 
     // Evento que se dispara al cambiar la fecha
     $("#datepicker-reserva").on('changeDate', function (e) {

@@ -162,7 +162,13 @@
     background-color: transparent;
     border: none;
     color: white;
-  }
+    display: flex;
+    align-items: center; /* Alinear verticalmente */
+}
+
+#userAdminBtn i {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+}
   
   #salirLink {
      display: none; 

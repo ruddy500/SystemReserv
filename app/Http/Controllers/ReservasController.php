@@ -7,6 +7,9 @@ use App\Models\Horarios;
 use App\Models\Fechas;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
+use App\Models\Materias; 
+
+use App\Models\DocentesMaterias;
 
 class ReservasController extends Controller
 {
@@ -67,9 +70,14 @@ class ReservasController extends Controller
     }
 
     public function materias()
-    {  
+    {   $materias_docentes= DocentesMaterias::all(); //guarda la tabla materias docentes
+        $materias= Materias::all(); //guarda la tabla materias
+
+        $tamMaterias = $materias->count();  //tamanio de materias docentes
+        $tam = $materias_docentes->count(); //tamanio de la tabla docentes_materias
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.formulario.materiasDocente', compact('menu'));
+        return view('reservas.formulario.materiasDocente', compact('materias_docentes','tam','materias','tamMaterias','menu'));
     }
     public function formFinal()
     {  
@@ -113,6 +121,7 @@ class ReservasController extends Controller
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
+        }
             //dd($fecha->id, $ambiente->id);
          //  dd($horarios);
       //     return view('reservas.formulario.registrar');
@@ -120,8 +129,9 @@ class ReservasController extends Controller
         $periodo = Periodos::find($horario->periodos_id);
         $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
     }
-           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios'));}
-        }
+           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios'));
+    }
+        
         
        
     //  foreach ($horarios as $horario) {
@@ -129,4 +139,12 @@ class ReservasController extends Controller
     //     $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
     // }
   // dd($horario->nombre_periodo);
+
+    //FUNCION MOSTRAR VENTANA VER
+    public function verReserva()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.ver', compact('menu'));
     }
+}
+

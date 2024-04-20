@@ -31,16 +31,22 @@
                      @endif
                     
                      <div id="menu">
-                        <button id="userAdminBtn">
-                            <i class="bi bi-person-circle"></i> UserAdmin
-                        </button>
-                        <a href="#" id="salirLink" style="display: none;">
-                            <i class="bi bi-box-arrow-right"></i> Salir
-                        </a>
-                        {{-- se puede ver la informacion del usuario --}}
-                        <h3>El usuario es {{auth()->user()->name}}</h3>
-                        <h3>su id es: {{auth()->user()->id}}</h3>
-                        <a href="{{route('login.destroy')}}">logOut</a>
+                        @if (auth()->user()->role == 'admin')
+                            <a href="{{route('login.destroy')}}" id="salirLink" style="display: none;">
+                                <i class="bi bi-box-arrow-right"></i> Salir
+                            </a>
+                            <button id="userAdminBtn">
+                                <i class="bi bi-person-circle"></i>User: Admin
+                            </button>
+                        @else
+                            <a href="{{route('login.destroy')}}" id="salirLink" style="display: none;">
+                                <i class="bi bi-box-arrow-right"></i> Salir
+                            </a>
+                            <button id="userAdminBtn">
+                                <i class="bi bi-person-circle"></i>User: {{auth()->user()->name}}
+                            </button>
+                        @endif
+                        
                     </div>
                 </div>
             </div> 
