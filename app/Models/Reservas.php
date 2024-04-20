@@ -18,4 +18,13 @@ class Reservas extends Model
     public function ambientes(){
         return $this->hasMany(Ambientes::class, 'reservas_id');
     }
+
+    public function materiasSeleccionado(){
+        return $this->hasMany(MateriasSeleccionado::class, 'reservas_id');
+    }
+
+    public function periodosSeleccionado(){
+        return $this->hasMany(PeriodosSeleccionado::class, 'reservas_id');
+    }
+    
 }

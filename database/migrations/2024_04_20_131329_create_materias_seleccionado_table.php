@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservasTable extends Migration
+class CreateMateriasSeleccionadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,16 @@ class CreateReservasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservas', function (Blueprint $table) {
+        Schema::create('materias_seleccionado', function (Blueprint $table) {
             $table->id();
-            $table->integer('CantEstudiante')->nullable();
-            $table->string('Motivo',10)->nullable();
-            $table->string('Estado',10)->nullable();
-            $table->integer('fecha')->nullable();
-
             
-            $table->foreignId('docentes_id')
+            $table->foreignId('reservas_id')
                 ->nullable()
-                ->constrained('usuarios')
+                ->constrained('reservas')
                 ->cascadeOnDelete() // Acción en eliminación
                 ->cascadeOnUpdate(); // Acción en actualización
-
+            
+            $table->integer('materias_id')->nullable();
         });
     }
 
@@ -37,6 +33,6 @@ class CreateReservasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservas');
+        Schema::dropIfExists('materias_seleccionado');
     }
 }
