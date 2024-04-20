@@ -33,7 +33,7 @@
 							@include('reservas.editar')
 						</div>
                         <div class="circle5">
-                            <a href="#" class="btn btn-fab" title="Eliminar"> 
+                            <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
                             <i class="bi bi-trash3-fill" style="color: white;"></i>	
 							</a>						
 				    	</div>
@@ -51,17 +51,17 @@
                 <th class="text-center h4 text-black">
 					<div class="d-flex justify-content-center">
                         <div class="circle2">
-							<a href="#" class="btn btn-fab" title="Ver"> 
+							<a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
 								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
 							</a>
 						</div>
 						<div class="circle3">
-							<a href="#" class="btn btn-fab" title="Editar">
+							<a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
 								<i class="fas fa-edit" style="color: white;"></i>  
 							</a>
 						</div>
                         <div class="circle5">
-                            <a href="#" class="btn btn-fab" title="Eliminar"> 
+                            <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
                             <i class="bi bi-trash3-fill" style="color: white;"></i>	
 							</a>						
 				    	</div>
@@ -71,4 +71,32 @@
         </thead>
 	</table>
 </div>
+<script>
+    // Agrega un evento de clic al botón de eliminar
+    document.getElementById('eliminar').addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la acción por defecto del botón
+
+        Swal.fire({
+            title: '¿Estás seguro de eliminar la solicitud de reserva?',
+            text: 'No podrás revertir este cambio',
+            icon: 'warning',
+            iconColor: 'red', // Color del icono
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: 'green', // Color del botón "Aceptar"
+            cancelButtonColor: 'red' // Color del botón "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    text: 'Solicitud de reserva eliminada exitosamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                    // El color del botón "Aceptar" es el color por defecto
+                });
+            }
+        });
+    });
+</script>
+
 @endsection
