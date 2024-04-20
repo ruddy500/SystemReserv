@@ -38,26 +38,39 @@
     <table class="table table-striped table-hover table-bordered">
         <thead class="bg-custom-lista">
             <tr>
-                {{-- <th class="text-center h4 text-white">Hora inicio</th> --}}
-				<th class="text-center h4 text-white">Periodo</th>
-                {{-- <th class="text-center h4 text-white">Hora fin</th> --}}
+                <th class="text-center h4 text-white">Hora inicio</th>
+				{{-- <th class="text-center h4 text-white">Periodo</th> --}}
+                <th class="text-center h4 text-white">Hora fin</th>
                 <th class="text-center h4 text-white">Estado</th>
                 <th class="text-center h4 text-white">Selección</th>
             </tr>
         </thead>
         <tbody>
             
-            @if(isset($horarios))
-            {{-- {{ dd(get_defined_vars()) }} --}}
-            @foreach($horarios as $horario)
-                <tr>
-                    <td>{{ $horario->nombre_periodo }}</td>
-                    <td>{{ $horario->Estado }}</td>
-                    {{-- <td>{{ $periodo->Estado }}</td>
-                    <td>Seleccionar</td> --}}
-                </tr>
-            @endforeach
-        @endif
+        
+
+        @if(isset($horarios))
+    @foreach($horarios as $horario)
+        <tr>
+            @php
+                // Dividir el período en hora de inicio y hora de fin
+                $horas = explode('-', $horario->nombre_periodo);
+            @endphp
+            <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
+            <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
+            <td>{{ $horario->Estado }}</td>
+            <td class="text-center h4 text-black">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+    @endforeach
+@endif
+
         </tbody>
     </table>
     <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>
