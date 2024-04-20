@@ -12,7 +12,7 @@
     </table>
 	<a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
 </div>  --}}
-{{-- {{ dd(get_defined_vars()) }} --}}
+{{ dd(get_defined_vars()) }}
 
 <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
     <table class="table table-striped table-hover table-bordered">
@@ -27,14 +27,14 @@
         </thead>
         <tbody>
             
-            {{-- @foreach($horarios as $horario)
+            @foreach($horarios as $horario)
                 <tr>
                     <td>{{ $horario->nombre_periodo }}</td>
                     <td>{{ $horario->Estado }}</td>
-                    <td>{{ $periodo->Estado }}</td>
-                    <td>Seleccionar</td>
+                    {{-- <td>{{ $periodo->Estado }}</td>
+                    <td>Seleccionar</td> --}}
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
     <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>

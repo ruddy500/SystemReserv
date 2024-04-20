@@ -72,19 +72,21 @@ class ReservasController extends Controller
                     ->where('mes',$mes_fecha)
                     ->where('anio', $anio_fecha)
                     ->first();
+
+                    //dd($ambiente->id);
         
         if ($fecha) {
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
             // dd($fecha->id, $ambiente->id);
-             dd($horarios);
+           //dd($horarios);
         }
        
-    //  foreach ($horarios as $horario) {
-    //     $periodo = Periodos::find($horario->periodos_id);
-    //     $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
-    // }
+     foreach ($horarios as $horario) {
+        $periodo = Periodos::find($horario->periodos_id);
+        $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
+    }
   // dd($horario->nombre_periodo);
         return view('reservas.formulario.horariosDisponibles', compact('horarios'));
     }
