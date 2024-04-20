@@ -1,6 +1,7 @@
 @extends('reservas/principal')
 
 @section('contenido-registrar')
+
 <div class="card-body bg-content">
     <div class="mb-3">
         <!-- Tabla que se mostrará cuando se seleccione una fecha -->
@@ -15,40 +16,43 @@
                     </tr>
                 </thead>
                 
-                @for ($i = 0; $i < $tamMaterias ; $i++)
-				@if ($i % 2 == 0)
-                <!-- Fila Ploma -->
-                <thead class="bg-custom-lista-fila-plomo">	
-                    <tr>
-                        <th class="text-center h4 text-black">{{$materias[$i]->Nombre}}</th>
-                        <th class="text-center h4 text-black">{{$materias[$i]->Grupo}}</th>
-                        <th class="text-center h4 text-black">
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                </div>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                @else
-                <!-- Fila blanca -->
-                <thead class="bg-custom-lista-fila-blanco">
-                    <tr>
-                        <th class="text-center h4 text-black">{{$materias[$i]->Nombre}}</th>
-                        <th class="text-center h4 text-black">{{$materias[$i]->Grupo}}</th>
-                        <th class="text-center h4 text-black">
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                </div>
-                            </div>
-                        </th>
-                    </tr>	
-                </thead>
-                @endif
+                
+                @for ($i = 0; $i < $tam; $i++)
+                    @if($materias_docentes[$i]->docentes_id == auth()->user()->id)
+                        @if ($i % 2 == 0)
+                        <!-- Fila Ploma -->
+                        <thead class="bg-custom-lista-fila-plomo">	
+                            <tr>
+                                <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Nombre}}</th>
+                                <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Grupo}}</th>
+                                <th class="text-center h4 text-black">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        @else
+                        <!-- Fila blanca -->
+                        <thead class="bg-custom-lista-fila-blanco">
+                            <tr>
+                                <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Nombre}}</th>
+                                <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Grupo}}</th>
+                                <th class="text-center h4 text-black">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>	
+                        </thead>
+                        @endif
+                    @endif
+				@endfor
 
-				@endfor	
             </table>
             <a href="{{ route('reservas.formFinal') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
         </div>

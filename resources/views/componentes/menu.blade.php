@@ -46,6 +46,7 @@
                                 <i class="bi bi-person-circle"></i>User: {{auth()->user()->name}}
                             </button>
                         @endif
+                        
                     </div>
                 </div>
             </div> 

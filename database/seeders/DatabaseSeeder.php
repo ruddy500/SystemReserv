@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PeriodosTableSeeder::class,
             UsuariosTableSeeder::class,
             MateriasTableSeeder::class,
+            DocentesMateriasTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado
         ]);
     }

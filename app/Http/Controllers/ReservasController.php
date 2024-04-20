@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Materias;
+use App\Models\Materias; 
+
+use App\Models\DocentesMaterias;
 
 class ReservasController extends Controller
 {
@@ -30,13 +32,14 @@ class ReservasController extends Controller
         return view('reservas.formulario.registrar', compact('menu'));
     }
     public function materias()
-    {   
-        $materias= Materias::all();
-        $tamMaterias = $materias->count();
-        $nombreMaterias = Materias::all();
+    {   $materias_docentes= DocentesMaterias::all(); //guarda la tabla materias docentes
+        $materias= Materias::all(); //guarda la tabla materias
+
+        $tamMaterias = $materias->count();  //tamanio de materias docentes
+        $tam = $materias_docentes->count(); //tamanio de la tabla docentes_materias
 
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.formulario.materiasDocente', compact('materias','tamMaterias','nombreMaterias','menu'));
+        return view('reservas.formulario.materiasDocente', compact('materias_docentes','tam','materias','tamMaterias','menu'));
     }
     public function formFinal()
     {  

@@ -1,6 +1,7 @@
 @extends('reservas/principal')
 
 @section('contenido-registrar')
+
 <div class="card-body bg-content">
     <div class="mb-3">
         <div class="row">
