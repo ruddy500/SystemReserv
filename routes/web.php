@@ -24,6 +24,8 @@ Route::post('/ambientes', [AmbientesController::class, 'guardar'])->name('guarda
 Route::get('/ambientes/horario/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.horario');
 Route::post('/ambientes/horario',[HorariosController::class,'añadirHorario'])->name('ambientes.horario.añadir');
 
+// Route::post('/reservas/registrar',[ReservasController::class,'registrar'])->name('reservas.consultarPeriodos');
+
 Route::get('/ambientes/ver/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.ver');
 Route::get('/ambientes/editar/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.editar');
 
@@ -43,6 +45,11 @@ Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.p
 Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
 Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
 Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name('reservas.registrar');
+
+Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'])->name('reservas.consultarPeriodos');
+
+// Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
+
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
 Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
 
