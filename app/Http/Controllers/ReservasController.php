@@ -251,6 +251,7 @@ class ReservasController extends Controller
             $ultimoRegistro->CantEstudiante = $cantidadest; // Por ejemplo, asignar un valor a cantidadEstudiante
             $ultimoRegistro->Motivo = $request->motivo; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->docentes_id = $request->usuario; // Por ejemplo, asignar un valor a motivo
+            $ultimoRegistro->Estado = "pendiente"; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->save();
         } 
 
