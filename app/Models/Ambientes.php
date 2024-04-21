@@ -19,8 +19,8 @@ class Ambientes extends Model
         return $this->belongsTo(NombreAmbientes::class, 'nombre_ambientes_id');
     }
 
-    public function reserva(){
-        return $this->belongsTo(Reservas::class, 'reservas_id');
+    public function reservas(){
+        return $this->belongsToMany(Reservas::class,'reservas_ambiente');
     }
 
 }

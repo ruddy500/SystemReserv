@@ -16,7 +16,7 @@ class Reservas extends Model
     }
 
     public function ambientes(){
-        return $this->hasMany(Ambientes::class, 'reservas_id');
+        return $this->belongsToMany(Ambientes::class,'reservas_ambiente');
     }
 
     public function materiasSeleccionado(){

@@ -33,8 +33,9 @@
                 </div>
             </form>
         </div>
-
+       
         <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST">
+            
             @csrf
         {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
 <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">

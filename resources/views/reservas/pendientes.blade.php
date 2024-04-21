@@ -1,6 +1,13 @@
 @extends('reservas/principal')
 
 @section('contenido-pendientes')
+<?php
+use App\Models\Reservas;
+use App\Models\Fechas;
+
+$reservas = Reservas::all();
+$tamReservas = Reservas::count();
+?>
 <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
 	<table class="table table-striped table-hover table-bordered">
 		<thead class="bg-custom-lista">
@@ -12,7 +19,21 @@
                 <th class="text-center h4 text-white">Opciones</th>
 			</tr>
 		</thead>
-        <!-- Fila Ploma -->
+       @for ( $i = 0 ; $i  < $tamReservas ; $i++)
+        @if ($i % 2 == 0)
+             <!-- Fila Ploma -->
+             
+             <?php
+            $ambiente = $reservas[$i]->ambientes()->first();
+             dd($i,$ambiente);
+             $nombre = NombreAmbientes::where('id', $ambienteId)->first()->Nombre;
+             //$fecha = Fechas::where('id', $reservas[$i]->fecha)->first();
+             $fechaId = $reservas[$i] ->fecha;
+             $fecha = Fechas::where('id', $fechaId)->first();
+             $periodosSeleccionados = $reservas[$i]->periodosSeleccionado();
+             //dd($periodosSeleccionados);
+             ?>
+
         <thead class="bg-custom-lista-fila-plomo">	
             <tr>
                 <th class="text-center h4 text-black">691 A</th>
@@ -41,7 +62,9 @@
 				</th>
             </tr>
         </thead>
-        <!-- Fila blanca -->
+            
+        @else
+            <!-- Fila blanca -->
         <thead class="bg-custom-lista-fila-blanco">
             <tr>
                 <th class="text-center h4 text-black">692 B</th>
@@ -69,7 +92,11 @@
 				</th>
             </tr>	
         </thead>
-	</table>
+
+        @endif
+           
+       @endfor
+    </table>
 </div>
 <script>
     // Agrega un evento de clic al botón de eliminar

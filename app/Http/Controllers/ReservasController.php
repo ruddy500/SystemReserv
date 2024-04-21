@@ -12,7 +12,7 @@ use App\Models\MateriasSeleccionado;
 use App\Models\Reservas;
 use App\Models\DocentesMaterias;
 use App\Models\PeriodosSeleccionado;
-
+use App\Models\ReservasAmbiente;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -102,6 +102,10 @@ class ReservasController extends Controller
          $ambienteId = $request->input('ambiente');
          
          $ambiente = Ambientes::where('nombre_ambientes_id', $ambienteId)->first();
+         $reservasAmbiente = new ReservasAmbiente();
+         $reservasAmbiente -> ambientes_id = $ambiente->id;
+         $reservasAmbiente ->save();
+         
          $fechita = $request->fecha;
          //dd($fechita);
         // dd($$request->fecha_id);
@@ -139,7 +143,7 @@ class ReservasController extends Controller
         //dd($horario);
     }
        //dd($nombreambientes,$menu,$horarios);
-           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios'));
+           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios','ambienteId'));
     }
         
         
@@ -185,6 +189,8 @@ class ReservasController extends Controller
             $reserva = new Reservas();
             $reserva->fecha=$idFecha;
             $reserva->save();
+
+
             //guardar relacion de periodos en base de datos
             $periodos = new PeriodosSeleccionado();
             $periodos -> reservas_id = $reserva->id;
@@ -232,13 +238,15 @@ class ReservasController extends Controller
                 
             }
             
-            
+
+            //$ultimoRegistroRA = ReservasAmbiente::orderBy('id', 'desc')->first(); 
             $ultimaReserva = new Reservas();
             $ultimoRegistro = $ultimaReserva->orderBy('id', 'desc')->first();
             $ultimoId = $ultimoRegistro->id;
+            //$ultimoRegistroRA->reservas_id = $ultimoId;
+            //$ultimoRegistroRA ->save();
             // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
             MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
-
 
 
         } else {
@@ -256,10 +264,11 @@ class ReservasController extends Controller
         print_r($request->cantidad);
 
         // Instanciar la clase Reserva
-        $reserva = new Reservas();
+        //$reserva = new Reservas();
 
         // Obtener el último registro
         $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+
 
         if ($ultimoRegistro) {
             // Actualizar el registro si existe
@@ -268,6 +277,10 @@ class ReservasController extends Controller
             $ultimoRegistro->docentes_id = $request->usuario; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->Estado = "pendiente"; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->save();
+            
+            $ultimoRegistroRA = ReservasAmbiente::orderBy('id', 'desc')->first(); 
+            $ultimoRegistroRA->reservas_id = $ultimoRegistro->id;
+            $ultimoRegistroRA ->save();
         } 
 
         // $reserva = new Reservas();
