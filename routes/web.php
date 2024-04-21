@@ -54,6 +54,7 @@ Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
 // aqui se enviara para guardar la solicitud
 Route::post('/reservas/materias', [ReservasController::class,'guardar'])->name('reservas.guardar');
+//Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
 
 // materias enviadas
 Route::post('/reservas/formFinal', [ReservasController::class,'guardarReserva'])->name('reservas.guardarReserva');
@@ -66,7 +67,7 @@ Route::post('/reservas/horarios',[ReservasController::class, 'store'])->name('ch
 //Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias'); //materias de docentes version 2
 
 Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
-Route::get('/reservas/ver',[ReservasController::class,'verReserva'])->name('reservas.ver');
+Route::get('/reservas/ver',[ReservasController::class,'verReserva'])->name('reservas.ver');// materias seleccionadas por id de reserva
 
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');

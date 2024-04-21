@@ -51,22 +51,27 @@
                                             <th scope="col" style="width: 30%;">Grupo</th>
                                         </tr>
                                     </thead>
-                                    <thead class="text-center">
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>Introducción a la programación</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Introducción a la programación</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Introducción a la programación</td>
-                                                <td>2</td>
-                                            </tr>
-                                        </tbody> 
-                                    </thead>
+                                    @for ($i = 0; $i < $tam; $i++)
+                                        @if($seleccionado[$i]->reservas_id == 2)
+                        
+                                        <thead class="text-center">
+                                            <tbody class="text-center">
+                                                <tr>
+                                                    <td>{{$materias[$seleccionado[$i]->materias_id-1]->Nombre}}</td>
+                                                    <td>{{$materias[$seleccionado[$i]->materias_id-1]->Grupo}}</th></td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>Introducción a la programación</td>
+                                                    <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Introducción a la programación</td>
+                                                    <td>2</td>
+                                                </tr> -->
+                                            </tbody> 
+                                        </thead>
+                                        @endif
+				                    @endfor
                                 </thead> 
                             </table>
                         </div>
