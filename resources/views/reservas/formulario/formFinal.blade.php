@@ -3,7 +3,9 @@
 @section('contenido-registrar')
 <div class="card-body bg-content">
     <div class="mb-3">
-        <form class="row g-3 needs-validation" novalidate>
+        <form  action="{{ route('reservas.guardarReserva') }}" method="post">
+            @csrf
+            {{-- <form class="row g-3 needs-validation" novalidate> --}}
             <div class="mb-3">
                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
                 <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="30" max="200" required>
@@ -14,11 +16,15 @@
 
             <div class="mb-3">
                 <label for="motivo-text" class="col-form-label h4">Motivo:</label>
+
                 <textarea class="form-control" name="motivo" id="motivo-text" required minlength="30" maxlength="200"></textarea>
+
                 <div class="invalid-feedback">
                     Inserte un motivo entre 30 a 2000 caracteres
                 </div>
             </div>
+
+            <input type="hidden" name="usuario" value="{{auth()->user()->id}}"> {{-- aqui se enviara id del usuario --}}
 
             <div class="modal-footer">
                 <button type="submit" class="btn btn-aceptar">Aceptar</button>
@@ -51,7 +57,7 @@
                     }).then((result) => {
                         // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
                         if (result.isConfirmed) {
-                            window.location.href = '/reservas'; // ruta a la que quieres redirigir al usuario
+                            // window.location.href = '/reservas'; // ruta a la que quieres redirigir al usuario
                         }
                     });
                 }
@@ -71,7 +77,7 @@
             }).then((result) => {
                         // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
                         if (result.isConfirmed) {
-                            window.location.href = '/reservas'; //  ruta a la que quieres redirigir al usuario
+                            window.location.href = '{{ route("reservas.cancelarReserva") }}'; //  ruta a la que quieres redirigir al usuario
                         }
                     });;
         });

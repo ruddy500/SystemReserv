@@ -1,10 +1,7 @@
 @extends('reservas/principal')
 
 @section('contenido-registrar')
-<?php
-$dato = session('dato');
-?>
-{{-- {{ dd(get_defined_vars()) }} --}}
+
 <div class="card-body bg-content">
     <div class="mb-3">
         <!-- Tabla que se mostrará cuando se seleccione una fecha -->
@@ -19,6 +16,8 @@ $dato = session('dato');
                     </tr>
                 </thead>
                 
+                <form id="reservasForm" action="{{ route('reservas.guardar') }}" method="post">
+                @csrf
                 
                 @for ($i = 0; $i < $tam; $i++)
                     @if($materias_docentes[$i]->docentes_id == auth()->user()->id)
@@ -31,7 +30,7 @@ $dato = session('dato');
                                 <th class="text-center h4 text-black">
                                     <div class="d-flex justify-content-center">
                                         <div>
-                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel{{$i}}" name="options[]" value="{{$materias[$materias_docentes[$i]->materias_id-1]->Grupo}}" aria-label="...">
                                         </div>
                                     </div>
                                 </th>
@@ -46,7 +45,9 @@ $dato = session('dato');
                                 <th class="text-center h4 text-black">
                                     <div class="d-flex justify-content-center">
                                         <div>
-                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel{{$i}}" name="options[]" value="{{$materias[$materias_docentes[$i]->materias_id-1]->id}}" aria-label="...">
+
+                                        <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
                                         </div>
                                     </div>
                                 </th>
@@ -55,9 +56,31 @@ $dato = session('dato');
                         @endif
                     @endif
 				@endfor
-
+            </form> 
             </table>
-            <a href="{{ route('reservas.formFinal') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a>
+            {{-- <a href="{{ route('reservas.formFinal') }}" class="btn btn-primary custom-btn" id="btn-siguiente" >Siguiente</a> --}}
+            <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a>
+                
+                <!-- Script para enviar el formulario al hacer clic en el enlace -->
+                {{-- <script>
+                    document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+                        event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
+                        document.getElementById('reservasForm').submit(); // Enviar el formulario manualmente
+                    });
+                </script> --}}
+
+                <!-- Script para enviar el formulario y redirigir al hacer clic en el enlace "Siguiente" -->
+            <script>
+                document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+                    event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
+                    
+                    // Envía el formulario manualmente
+                    document.getElementById('reservasForm').submit(); 
+                    
+                    // Redirigir al usuario a la ruta especificada por 'reservas.formFinal'
+                    // window.location.href = "{{ route('reservas.formFinal') }}";
+                });
+            </script>
         </div>
     </div>
 </div>

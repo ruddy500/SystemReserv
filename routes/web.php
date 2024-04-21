@@ -52,6 +52,15 @@ Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'
 // Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
 
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
+// aqui se enviara para guardar la solicitud
+Route::post('/reservas/materias', [ReservasController::class,'guardar'])->name('reservas.guardar');
+
+// materias enviadas
+Route::post('/reservas/formFinal', [ReservasController::class,'guardarReserva'])->name('reservas.guardarReserva');
+
+// para cancelar una reserva
+Route::get('/reservas/cancelar', [ReservasController::class,'cancelarReserva'])->name('reservas.cancelarReserva');
+
 Route::post('/reservas/horarios',[ReservasController::class, 'store'])->name('checkbox.store');
 
 //Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias'); //materias de docentes version 2

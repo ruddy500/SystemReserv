@@ -7,7 +7,10 @@ use App\Models\Horarios;
 use App\Models\Fechas;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
-use App\Models\Materias; 
+use App\Models\Materias;
+use App\Models\MateriasSeleccionado;
+use App\Models\Reservas;
+
 
 use App\Models\DocentesMaterias;
 
@@ -109,7 +112,7 @@ class ReservasController extends Controller
         // dd($request->ambiente);
         //$fecha = $request->input('fecha');
 
-
+        // $horarios = new Horarios();
        // $fechita = $request->fecha;
         $fecha = Fechas::where('dia', $dia_fecha)
                     ->where('mes',$mes_fecha)
@@ -165,15 +168,106 @@ class ReservasController extends Controller
         $idPeriodo1 = $dato1%10;
         $idPeriodo2 = $dato2%10;
 
+        $idFecha = intval($dato1 / 10);   //para recoger el id de la fecha en entero
+
         if ($idPeriodo1+1 == $idPeriodo2) {
             
         // dd($idPeriodo1,$idPeriodo2);
-        dd($options);
-            return redirect()->route('reservas.materias')->with('dato', $options);
+        // dd($options);
+        // dd($idFecha);
+            return redirect()->route('reservas.materias')->with('dato', $idFecha);
         }
         
         // dd($idPeriodo1,$idPeriodo2);
         
+    }
+
+
+
+
+
+    //funcion para asignar a la tabla pivote
+    public function guardar(Request $request)
+    {  
+        // $menu = view('componentes/menu'); // Crear la vista del menú
+        // return view('reservas.ver', compact('menu'));
+        $options = $request->input('options');
+        $usuario = $request->usuario;
+        
+        // dd($options);
+
+
+
+        
+
+        // // Establecer los valores
+        // $materiaSeleccionada->reservas_id = $idReserva;
+        // $materiaSeleccionada->materias_id = $idMateria;
+
+        // // Guardar en la base de datos
+        // $materiaSeleccionada->save();
+
+
+    
+        if (is_array($options)) {
+            for ($i=0; $i <count($options) ; $i++) { 
+                $id = $options[$i];
+                $materiaSeleccionada = new MateriasSeleccionado();
+                // $materiasABuscar = Materias::find($id);
+                // $usuarioAbuscar = Usuarios::find($usuario);
+                $materiaSeleccionada->materias_id=$id;
+                // Guardar en la base de datos
+                $materiaSeleccionada->save();
+    
+                // $usuarioAbuscar->materias()->attach($materiasABuscar->id);
+                // print_r($materiasABuscar->Nombre);
+            }
+        } else {
+            // Manejo de error: $options no es un array
+            // Por ejemplo, podrías registrar un mensaje de error o redirigir con un mensaje de error.
+        }
+        // for ($i=0; $i <count($options) ; $i++) { 
+        //     $id = $options[$i];
+        //     $materiaSeleccionada = new MateriasSeleccionado();
+        //     // $materiasABuscar = Materias::find($id);
+        //     // $usuarioAbuscar = Usuarios::find($usuario);
+        //     $materiaSeleccionada->materias_id=$id;
+        //     // Guardar en la base de datos
+        //     $materiaSeleccionada->save();
+
+        //     // $usuarioAbuscar->materias()->attach($materiasABuscar->id);
+        //     // print_r($materiasABuscar->Nombre);
+        // }
+        
+        // Redirigir al usuario a la ruta 'reservas.formFinal'
+        return redirect()->route('reservas.formFinal');
+    }
+
+    public function guardarReserva(Request $request){
+        $cantidadest=$request->cantidad;
+        print_r($request->cantidad);
+        $reserva = new Reservas();
+        $reserva->CantEstudiante = $cantidadest;
+        $reserva->Motivo = $request->motivo;
+        $reserva->docentes_id=$request->usuario;
+        $reserva->save();
+
+        // print_r($request->motivo);
+        // print_r($request->cantidad);
+
+        $materiaSeleccionada = new MateriasSeleccionado();
+
+        // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+        MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $reserva->id]);
+
+        return redirect()->route('reservas.principal');
+    }
+
+    public function cancelarReserva(){
+        $materiasSeleccionado = new MateriasSeleccionado();
+        // eliminar todas las meteriasSeleccionadas que tengan null
+        $materiasSeleccionado->whereNull('reservas_id')->delete();
+        return redirect()->route('reservas.principal');
     }
 }
 
