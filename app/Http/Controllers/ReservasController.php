@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use App\Models\Materias; 
 
 use App\Models\DocentesMaterias;
+use App\Models\MateriasSeleccionado;
+
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class ReservasController extends Controller
 {
@@ -142,9 +146,15 @@ class ReservasController extends Controller
 
     //FUNCION MOSTRAR VENTANA VER
     public function verReserva()
-    {  
+    {   
+        $seleccionado= MateriasSeleccionado::all(); //guarda la tabla materias_seleccionado 
+        $materias= Materias::all(); //guarda la tabla materias
+
+        $tamMaterias = $materias->count();  //tamanio de materias docentes
+        $tam = $seleccionado->count(); //tamanio de la tabla materias_seleccionado
+       
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.ver', compact('menu'));
+        return view('reservas.ver', compact('tamMaterias','tam','seleccionado','materias','menu'));
     }
 }
 
