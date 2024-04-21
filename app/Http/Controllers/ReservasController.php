@@ -70,7 +70,8 @@ class ReservasController extends Controller
     }
 
     public function materias()
-    {   $materias_docentes= DocentesMaterias::all(); //guarda la tabla materias docentes
+    {  //dd($fechaId);
+         $materias_docentes= DocentesMaterias::all(); //guarda la tabla materias docentes
         $materias= Materias::all(); //guarda la tabla materias
 
         $tamMaterias = $materias->count();  //tamanio de materias docentes
@@ -125,10 +126,13 @@ class ReservasController extends Controller
             //dd($fecha->id, $ambiente->id);
          //  dd($horarios);
       //     return view('reservas.formulario.registrar');
+     
        foreach ($horarios as $horario) {
         $periodo = Periodos::find($horario->periodos_id);
         $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
+        //dd($horario);
     }
+       //dd($nombreambientes,$menu,$horarios);
            return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios'));
     }
         
@@ -145,6 +149,31 @@ class ReservasController extends Controller
     {  
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.ver', compact('menu'));
+    }
+
+    public function store(Request $request)
+    {
+        $options = $request->input('options');
+        
+        foreach ($options as &$option) {
+            $option = intval(str_replace('-', '', $option));
+            // $option = str_replace('-', '', $option);
+        }
+        $dato1 = $options[0];
+        $dato2 = $options[1];
+        
+        $idPeriodo1 = $dato1%10;
+        $idPeriodo2 = $dato2%10;
+
+        if ($idPeriodo1+1 == $idPeriodo2) {
+            
+        // dd($idPeriodo1,$idPeriodo2);
+        dd($options);
+            return redirect()->route('reservas.materias')->with('dato', $options);
+        }
+        
+        // dd($idPeriodo1,$idPeriodo2);
+        
     }
 }
 

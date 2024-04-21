@@ -52,8 +52,9 @@ Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'
 // Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
 
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
+Route::post('/reservas/horarios',[ReservasController::class, 'store'])->name('checkbox.store');
 
-Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias'); //materias de docentes version 2
+//Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias'); //materias de docentes version 2
 
 Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name('reservas.formFinal');
 Route::get('/reservas/ver',[ReservasController::class,'verReserva'])->name('reservas.ver');

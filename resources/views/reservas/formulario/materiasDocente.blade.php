@@ -1,7 +1,10 @@
 @extends('reservas/principal')
 
 @section('contenido-registrar')
-
+<?php
+$dato = session('dato');
+?>
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="card-body bg-content">
     <div class="mb-3">
         <!-- Tabla que se mostrará cuando se seleccione una fecha -->
