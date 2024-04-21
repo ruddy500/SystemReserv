@@ -24,13 +24,8 @@ $tamReservas = Reservas::count();
              <!-- Fila Ploma -->
              
              <?php
-            $ambiente = $reservas[$i]->ambientes()->first();
-             dd($i,$ambiente);
-             $nombre = NombreAmbientes::where('id', $ambienteId)->first()->Nombre;
-             //$fecha = Fechas::where('id', $reservas[$i]->fecha)->first();
-             $fechaId = $reservas[$i] ->fecha;
-             $fecha = Fechas::where('id', $fechaId)->first();
-             $periodosSeleccionados = $reservas[$i]->periodosSeleccionado();
+           
+            
              //dd($periodosSeleccionados);
              ?>
 
