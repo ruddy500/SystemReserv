@@ -13,6 +13,7 @@ use App\Models\Reservas;
 
 
 use App\Models\DocentesMaterias;
+use App\Models\PeriodosSeleccionado;
 
 class ReservasController extends Controller
 {
@@ -155,7 +156,7 @@ class ReservasController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   //dd($request->all());
         $options = $request->input('options');
         
         foreach ($options as &$option) {
@@ -176,7 +177,17 @@ class ReservasController extends Controller
             $reserva = new Reservas();
             $reserva->fecha=$idFecha;
             $reserva->save();
+            //guardar relacion de periodos en base de datos
+            $periodos = new PeriodosSeleccionado();
+            $periodos -> reservas_id = $reserva->id;
+            $periodos -> periodos_id = $idPeriodo1;
+            $periodos->save();
 
+        
+            $periodos2 = new PeriodosSeleccionado();
+            $periodos2 -> reservas_id = $reserva->id;
+            $periodos2 -> periodos_id = $idPeriodo2;
+            $periodos2->save();
         // dd($idPeriodo1,$idPeriodo2);
         // dd($options);
         // dd($idFecha);

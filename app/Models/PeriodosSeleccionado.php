@@ -9,6 +9,7 @@ class PeriodosSeleccionado extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $table = 'periodos_seleccionado';
 
     public function reserva(){
         return $this->belongsTo(Reservas::class, 'reservas_id');
