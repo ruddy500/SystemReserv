@@ -67,8 +67,8 @@ $tamReservas = Reservas::count();
              $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
              $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
             //dd($horaInicio,$horaFin);
-            
-
+            //xd
+ 
              ?>
 
         <thead class="bg-custom-lista-fila-plomo">	
