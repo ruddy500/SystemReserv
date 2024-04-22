@@ -55,10 +55,13 @@
             @php
                 // Dividir el período en hora de inicio y hora de fin
                 $horas = explode('-', $horario->nombre_periodo);
+                $estado = ($horario->Estado) ? "Libre" : "Ocupado";
             @endphp
             <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
             <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
-            <td>{{ $horario->Estado }}</td>
+            <td>{{ $estado}}</td>
+
+            {{-- CHECKBOX SELECCIONABLE --}}
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
@@ -66,6 +69,7 @@
                     </div>
                 </div>
             </td>
+            {{-- ************************************* --}}
 
         </tr>
     @endforeach

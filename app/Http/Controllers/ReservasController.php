@@ -121,6 +121,8 @@ class ReservasController extends Controller
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
+        }else{
+            return redirect()->back()->with('message', 'No hay registros.'); 
         }
             //dd($fecha->id, $ambiente->id);
          //  dd($horarios);

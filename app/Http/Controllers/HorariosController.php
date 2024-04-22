@@ -131,7 +131,11 @@ class HorariosController extends Controller
             $mes_fecha = date("m", $fechaEntera);
             //obtener anio la fecha seleccionada
             $anio_fecha = date("y", $fechaEntera);
-           // dd($request->ambiente);
+            //dd($mes_fecha);
+
+            //$registroAmbientes = Ambientes::all();
+            //dd($registroAmbientes);
+            
                     // Verificar si ya existe un horario para la misma fecha y período
         $horariosExistente = Horarios::where('fechas_id', function($query) use ($dia_fecha, $mes_fecha, $anio_fecha) {
             $query->select('id')
@@ -142,7 +146,8 @@ class HorariosController extends Controller
         })->whereIn('periodos_id', $request->periodos)
         ->where('ambientes_id', $request->ambiente) // Agregar la condición del ambiente
         ->exists();
-
+        // dd($request->periodos);
+        // dd($request->ambiente);
         
         if ($horariosExistente) {
             // return response()->json(['message' => 'Al menos uno de los periodos ya está asignado para esta fecha'], 400);
@@ -177,4 +182,5 @@ class HorariosController extends Controller
             }
     
 } 
+
 }
