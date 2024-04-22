@@ -81,7 +81,7 @@ $tamReservas = Reservas::count();
                     <th class="text-center h4 text-black">
                         <div class="d-flex justify-content-center">
                             <div class="circle2">
-                                <a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
+                                <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                     <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                 </a>
                             </div>
@@ -115,7 +115,7 @@ $tamReservas = Reservas::count();
                     <th class="text-center h4 text-black">
                         <div class="d-flex justify-content-center">
                             <div class="circle2">
-                                <a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
+                                <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                     <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                 </a>
                             </div>

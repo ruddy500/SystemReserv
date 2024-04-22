@@ -160,7 +160,7 @@ class ReservasController extends Controller
   // dd($horario->nombre_periodo);
 
     //FUNCION MOSTRAR VENTANA VER
-    public function verReserva()
+    public function verReserva($idReserva)
     {   
         $seleccionado= MateriasSeleccionado::all(); //guarda la tabla materias_seleccionado 
         $materias= Materias::all(); //guarda la tabla materias
@@ -169,7 +169,7 @@ class ReservasController extends Controller
         $tam = $seleccionado->count(); //tamanio de la tabla materias_seleccionado
        
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.ver', compact('tamMaterias','tam','seleccionado','materias','menu'));
+        return view('reservas.ver', compact('idReserva','tamMaterias','tam','seleccionado','materias','menu'));
     }
 
     public function store(Request $request)
