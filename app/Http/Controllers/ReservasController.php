@@ -31,11 +31,13 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.asignadas', compact('menu'));
     }
+
     public function pendientes()
     {  
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.pendientes', compact('menu'));
     }
+    
     public function registrar()
     {  
          $nombreambientes = NombreAmbientes::all();
@@ -319,5 +321,10 @@ class ReservasController extends Controller
         // $materiasSeleccionado->whereNull('reservas_id')->delete();
         return redirect()->route('reservas.principal');
     }
+
+    
+
+
+
 }
 

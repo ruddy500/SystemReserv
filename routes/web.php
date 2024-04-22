@@ -45,9 +45,9 @@ Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'
 Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.principal');
 Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
 Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
-Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name('reservas.registrar');
+// Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name('reservas.registrar');
 
-Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'])->name('reservas.consultarPeriodos');
+// Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'])->name('reservas.consultarPeriodos');
 
 // Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
 
@@ -70,7 +70,9 @@ Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name
 
 Route::get('/reservas/ver/{idReserva}',[ReservasController::class,'verReserva'])->name('reservas.ver');// materias seleccionadas por id de reserva
 
+Route::get('/reservas/pendientesDocente/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.editar');
 
+Route::put('/reservas/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
     return view('auth/login');

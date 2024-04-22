@@ -2,6 +2,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content edith-reserva">
             <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+
+                {{-- <form action="{{ route('actualizar.horario') }}" method="POST">
+                    @csrf
+                    @method('PUT') --}}
+
                 <div class="modal-header">
                     <h3 class="modal-title h3">Formulario edición de reserva</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -9,10 +14,18 @@
                 <div class="modal-body">
                     <div class="mb-3 text-start">
                         <label for="ambiente-name" class="form-label h4">Ambiente:</label>
-                        <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required>
-                            <option value="" disabled selected>Seleccione aula</option>
-                            <option value="aula1">Aula 1</option>
+                        <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required disabled>
+                            <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
+                           
                         </select>
+
+                        {{-- <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
+                        <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required disabled>
+                            <!-- Aquí recoge el dato de nombre de ambiente -->
+                            <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
+                        </select> --}}
+
+
                         <div class="invalid-feedback">
                         </div>
                     </div>

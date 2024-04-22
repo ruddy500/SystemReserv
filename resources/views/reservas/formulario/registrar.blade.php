@@ -38,6 +38,7 @@
             
             @csrf
         {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
+        @if(isset($horarios))
 <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
     <table class="table table-striped table-hover table-bordered">
         <thead class="bg-custom-lista">
@@ -53,7 +54,7 @@
             
         
 
-        @if(isset($horarios))
+        {{-- @if(isset($horarios)) --}}
     @foreach($horarios as $horario)
         <tr>
             @php

@@ -15,7 +15,11 @@ $reservasAmbiente = ReservasAmbiente::all();
 $tamReservas = Reservas::count();
 ?>
 <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
-	<table class="table table-striped table-hover table-bordered">
+
+    {{-- <form action="{{ route('ambientes.actualizar', $ambiente->id) }}" method="POST" novalidate class="row g-3 needs-validation"> --}}
+        {{-- @method('PUT') --}}
+        
+        <table class="table table-striped table-hover table-bordered">
 		<thead class="bg-custom-lista">
 			<tr>
 			    <th class="text-center h4 text-white">Ambiente</th>
@@ -85,12 +89,22 @@ $tamReservas = Reservas::count();
                                     <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                 </a>
                             </div>
+
+                            {{-- ICONO DE EDITAR RESERVA --}}
                             <div class="circle3">
                                 <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
                                     <i class="fas fa-edit" style="color: white;"></i>  
                                 </a>
                                 @include('reservas.editar')
                             </div>
+
+                            {{-- <div class="circle4">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-fecha-id="{{ $fechaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
+                                    
+                                    <i class="fas fa-edit" style="color: white;"></i>
+                                </a>
+                            </div> --}}
+
                             <div class="circle5">
                                 <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
                                 <i class="bi bi-trash3-fill" style="color: white;"></i>	
