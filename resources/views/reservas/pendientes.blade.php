@@ -68,7 +68,7 @@ $tamReservas = Reservas::count();
              $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
              $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
             //dd($horaInicio,$horaFin);
-            //xd
+            
  
              ?>
              @if ($estadoReserva == "pendiente")
