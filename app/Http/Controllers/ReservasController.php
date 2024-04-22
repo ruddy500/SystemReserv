@@ -132,9 +132,9 @@ class ReservasController extends Controller
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
-                                $reservasAmbiente = new ReservasAmbiente();
-                                $reservasAmbiente -> ambientes_id = $ambiente->id;
-                                $reservasAmbiente ->save();
+                                // $reservasAmbiente = new ReservasAmbiente();
+                                // $reservasAmbiente -> ambientes_id = $ambiente->id;
+                                // $reservasAmbiente ->save();
         }else{
             return redirect()->back()->with('message', 'No hay registros.'); 
         }
@@ -175,46 +175,90 @@ class ReservasController extends Controller
     public function store(Request $request)
     {   //dd($request->all());
         $options = $request->input('options');
+        $tamOptions = count($options);
+        //dd($options);
         
         foreach ($options as &$option) {
-            $option = intval(str_replace('-', '', $option));
+            $option = str_replace('-', '', $option);
             // $option = str_replace('-', '', $option);
         }
-        $dato1 = $options[0];
-        $dato2 = $options[1];
-        
-        $idPeriodo1 = $dato1%10;
-        $idPeriodo2 = $dato2%10;
+       //dd($options);
+        if(!empty($options)){
+            if($tamOptions == 1){
+                $idFecha = intval(substr($options[0], 0, 1));
+                $periodoId = intval(substr($options[0], 1, 1));
+                $ambienteId = intval(substr($options[0], 2, 1));
+                
+                //dd($fechaId,$periodoId,$ambienteId);
+                
+               //dd($idFecha);
+                $reserva = new Reservas();
+                $reserva->fecha=$idFecha;
+                $reserva->save();
+                
+                $reservaAmbiente = new ReservasAmbiente();
+                $reservaAmbiente->ambientes_id = $ambienteId;
+                $reservaAmbiente->save();
 
-        $idFecha = intval($dato1 / 10);   //para recoger el id de la fecha en entero
+                $periodos = new PeriodosSeleccionado();
+                $periodos -> reservas_id = $reserva->id;
+                $periodos -> periodos_id = $periodoId;
+                $periodos->save();
+                 //dd("entre aqui");
 
-        if ($idPeriodo1+1 == $idPeriodo2) {
+            }else{
+                $dato1 = $options[0];
+                $dato2 = $options[1];
+                //dato1 su fecha su periodo y su ambiente
+                $idFecha = intval(substr($dato1, 0, 1));
+                $periodoId1 = intval(substr($dato1, 1, 1));
+                $ambienteId1 = intval(substr($dato1, 2, 1));
+                
+                //dd($fechaId1,$periodoId1,$ambienteId1);
+                
+                //$fechaId2 = intval(substr($dato2, 0, 1));
+                $periodoId2 = intval(substr($dato2, 1, 1));
+                //$ambienteId2 = intval(substr($dato2, 2, 1));
+                //dd($fechaId2,$periodoId2,$ambienteId2);
+                
+                
+            if ($periodoId1+1 == $periodoId2) {
+                        
+                // guardar en la base datos
+                $reserva = new Reservas();
+                $reserva->fecha=$idFecha;
+                $reserva->save();
+
+                $reservaAmbiente = new ReservasAmbiente();
+                $reservaAmbiente->ambientes_id = $ambienteId1;
+                $reservaAmbiente->save();
+
+                //guardar relacion de periodos en base de datos
+                $periodos = new PeriodosSeleccionado();
+                $periodos -> reservas_id = $reserva->id;
+                $periodos -> periodos_id = $periodoId1;
+                $periodos->save();
+
             
-            // guardar en la base datos
-            $reserva = new Reservas();
-            $reserva->fecha=$idFecha;
-            $reserva->save();
+                $periodos2 = new PeriodosSeleccionado();
+                $periodos2 -> reservas_id = $reserva->id;
+                $periodos2 -> periodos_id = $periodoId2;
+                $periodos2->save();
+            
 
-
-            //guardar relacion de periodos en base de datos
-            $periodos = new PeriodosSeleccionado();
-            $periodos -> reservas_id = $reserva->id;
-            $periodos -> periodos_id = $idPeriodo1;
-            $periodos->save();
-
+                //return redirect()->route('reservas.materias')->with('dato', $idFecha);
+                
+            
+            }
         
-            $periodos2 = new PeriodosSeleccionado();
-            $periodos2 -> reservas_id = $reserva->id;
-            $periodos2 -> periodos_id = $idPeriodo2;
-            $periodos2->save();
-        // dd($idPeriodo1,$idPeriodo2);
-        // dd($options);
-        // dd($idFecha);
-            return redirect()->route('reservas.materias')->with('dato', $idFecha);
             
         }
+
+            return redirect()->route('reservas.materias')->with('dato', $idFecha);
+                
+        }
         
-        // dd($idPeriodo1,$idPeriodo2);
+       
         
         
     }
@@ -282,7 +326,8 @@ class ReservasController extends Controller
             $ultimoRegistro->docentes_id = $request->usuario; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->Estado = "pendiente"; // Por ejemplo, asignar un valor a motivo
             $ultimoRegistro->save();
-            
+        
+            //necesitamos crear un nuevo registro
             $ultimoRegistroRA = ReservasAmbiente::orderBy('id', 'desc')->first(); 
             $ultimoRegistroRA->reservas_id = $ultimoRegistro->id;
             $ultimoRegistroRA ->save();

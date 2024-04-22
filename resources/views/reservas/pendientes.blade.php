@@ -38,10 +38,15 @@ $tamReservas = Reservas::count();
              $nombre = $nombreBuscar->Nombre;
              //dd($nombre);
              $reserva = Reservas :: where('id',$idReserva)->first();
+             
              $estadoReserva = $reserva->Estado;
              $idFecha = $reserva->fecha;
              //dd($idFecha);
+             //dd($idFecha);
              $fechaBuscar = Fechas :: where('id',$idFecha)->first();
+            //  if($i==3){
+            //      dd($idFecha);
+            //  }
              $fechaDia = $fechaBuscar ->dia;
              $fechaMes= $fechaBuscar ->mes;
              $fechaAnio= $fechaBuscar ->anio;
@@ -49,13 +54,29 @@ $tamReservas = Reservas::count();
              $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
              //dd($fecha);
              $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+             //dd(count($periodosSeleccionados));
+             $tamPeriodosSeleccionado = count($periodosSeleccionados);
              
+             if($tamPeriodosSeleccionado == 1){
+                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                
+                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                $periodo = $periodoBuscar->HoraIntervalo;
+                $partes_P = explode('-', $periodo);
+                // if($i==3){dd($partes_P);}
+                
+                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                // if($i==3){dd($horaInicio,$horaFin);}
+
+             }else{
+                
              $periodoId = $periodosSeleccionados[0]->periodos_id;
              $periodoId2 = $periodosSeleccionados[1]->periodos_id;
 
-             $periodoBuscar = Periodos :: where('id',$periodoId)->first();
-             
+             $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
              $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
              $periodo = $periodoBuscar->HoraIntervalo;
              $periodo2 = $periodoBuscar2->HoraIntervalo;
              
@@ -67,6 +88,8 @@ $tamReservas = Reservas::count();
              $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
             //dd($horaInicio,$horaFin);
             //xd
+
+             }
  
         ?>
              
