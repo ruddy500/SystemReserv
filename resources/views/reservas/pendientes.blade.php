@@ -40,6 +40,7 @@ $tamReservas = Reservas::count();
              $nombre = $nombreBuscar->Nombre;
              //dd($nombre);
              $reserva = Reservas :: where('id',$idReserva)->first();
+             $estadoReserva = $reserva->Estado;
              $idFecha = $reserva->fecha;
              //dd($idFecha);
              $fechaBuscar = Fechas :: where('id',$idFecha)->first();
@@ -70,66 +71,71 @@ $tamReservas = Reservas::count();
             //xd
  
              ?>
-
-        <thead class="bg-custom-lista-fila-plomo">	
-            <tr>
-                <th class="text-center h4 text-black">{{ $nombre }}</th>
-                <th class="text-center h4 text-black">{{ $fecha }}</th>
-                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                <th class="text-center h4 text-black">
-					<div class="d-flex justify-content-center">
-                        <div class="circle2">
-							<a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
-								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-							</a>
-						</div>
-						<div class="circle3">
-							<a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
-								<i class="fas fa-edit" style="color: white;"></i>  
-							</a>
-							@include('reservas.editar')
-						</div>
-                        <div class="circle5">
-                            <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                            <i class="bi bi-trash3-fill" style="color: white;"></i>	
-							</a>						
-				    	</div>
-					</div>
-				</th>
-            </tr>
-        </thead>
-            
+             @if ($estadoReserva == "pendiente")
+             <thead class="bg-custom-lista-fila-plomo">	
+                <tr>
+                    <th class="text-center h4 text-black">{{ $nombre }}</th>
+                    <th class="text-center h4 text-black">{{ $fecha }}</th>
+                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                    <th class="text-center h4 text-black">
+                        <div class="d-flex justify-content-center">
+                            <div class="circle2">
+                                <a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
+                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                </a>
+                            </div>
+                            <div class="circle3">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                </a>
+                                @include('reservas.editar')
+                            </div>
+                            <div class="circle5">
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                </a>						
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+                
+             @endif
+        
         @else
             <!-- Fila blanca -->
-        <thead class="bg-custom-lista-fila-blanco">
-            <tr>
-                <th class="text-center h4 text-black">{{ $nombre }}</th>
-                <th class="text-center h4 text-black">{{ $fecha }}</th>
-                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                <th class="text-center h4 text-black">
-					<div class="d-flex justify-content-center">
-                        <div class="circle2">
-							<a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
-								<i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-							</a>
-						</div>
-						<div class="circle3">
-							<a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
-								<i class="fas fa-edit" style="color: white;"></i>  
-							</a>
-						</div>
-                        <div class="circle5">
-                            <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                            <i class="bi bi-trash3-fill" style="color: white;"></i>	
-							</a>						
-				    	</div>
-					</div>
-				</th>
-            </tr>	
-        </thead>
-
+            @if ($estadoReserva == "pendiente")
+            <thead class="bg-custom-lista-fila-blanco">
+                <tr>
+                    <th class="text-center h4 text-black">{{ $nombre }}</th>
+                    <th class="text-center h4 text-black">{{ $fecha }}</th>
+                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                    <th class="text-center h4 text-black">
+                        <div class="d-flex justify-content-center">
+                            <div class="circle2">
+                                <a href="{{ route('reservas.ver')}}" class="btn btn-fab" title="Ver"> 
+                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                </a>
+                            </div>
+                            <div class="circle3">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                </a>
+                            </div>
+                            <div class="circle5">
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                </a>						
+                            </div>
+                        </div>
+                    </th>
+                </tr>	
+            </thead>
+    
+            @endif
+      
         @endif
            
        @endfor
