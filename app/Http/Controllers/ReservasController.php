@@ -319,5 +319,21 @@ class ReservasController extends Controller
         // $materiasSeleccionado->whereNull('reservas_id')->delete();
         return redirect()->route('reservas.principal');
     }
+
+    public function eliminarPendiente($idReserva) {
+        
+        $reserva = Reservas::find($idReserva);// Busca la reserva por su ID
+
+        if ($reserva) {  // Verifica si se encontró la reserva
+            
+            $reserva->delete(); // Elimina la reserva
+
+            return redirect()->route('reservas.pendientesDocente')->with('success', 'Solicitud de reserva eliminada exitosamente');
+
+        } else {
+
+            return redirect()->route('reservas.pendientesDocente')->with('error' , 'Solicitud de reserva No eliminada');
+        }
+    }
 }
 

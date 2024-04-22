@@ -93,8 +93,9 @@ $tamReservas = Reservas::count();
                                 @include('reservas.editar')
                             </div>
                             <div class="circle5">
-                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar1"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                <input type="hidden" id="idReserva" value="{{ $idReserva }}">
                                 </a>						
                             </div>
                         </div>
@@ -126,8 +127,9 @@ $tamReservas = Reservas::count();
                                 </a>
                             </div>
                             <div class="circle5">
-                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar2"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                <input type="hidden" id="idReserva" value="{{ $idReserva }}">
                                 </a>						
                             </div>
                         </div>
@@ -141,10 +143,36 @@ $tamReservas = Reservas::count();
            
        @endfor
     </table>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
 </div>
 <script>
+    function obtenerIdReserva() {
+    // Obtener el valor del campo de entrada oculto
+    var idReserva = document.getElementById('idReserva').value;
+    return idReserva;
+}
+</script>
+<script>
     // Agrega un evento de clic al botón de eliminar
-    document.getElementById('eliminar').addEventListener('click', function(event) {
+    document.getElementById('eliminar1').addEventListener('click', function(event) {
         event.preventDefault(); // Previene la acción por defecto del botón
 
         Swal.fire({
@@ -159,12 +187,40 @@ $tamReservas = Reservas::count();
             cancelButtonColor: 'red' // Color del botón "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    text: 'Solicitud de reserva eliminada exitosamente',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                    // El color del botón "Aceptar" es el color por defecto
-                });
+                // Obtener el valor de idReserva desde algún lugar de tu página
+                var idReserva = obtenerIdReserva(); // Implementa esta función para obtener el idReserva que deseas enviar
+
+                // Redirigir a la URL con el idReserva como parte de la ruta
+                window.location.href = '/reservas/pendientesDocente/'+ idReserva;
+                
+            }
+        });
+    });
+</script>
+
+<script>
+    // Agrega un evento de clic al botón de eliminar
+    document.getElementById('eliminar2').addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la acción por defecto del botón
+
+        Swal.fire({
+            title: '¿Estás seguro de eliminar la solicitud de reserva?',
+            text: 'No podrás revertir este cambio',
+            icon: 'warning',
+            iconColor: 'red', // Color del icono
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: 'green', // Color del botón "Aceptar"
+            cancelButtonColor: 'red' // Color del botón "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Obtener el valor de idReserva desde algún lugar de tu página
+                var idReserva = obtenerIdReserva(); // Implementa esta función para obtener el idReserva que deseas enviar
+
+                // Redirigir a la URL con el idReserva como parte de la ruta
+                window.location.href = '/reservas/pendientesDocente/'+ idReserva;
+                
             }
         });
     });

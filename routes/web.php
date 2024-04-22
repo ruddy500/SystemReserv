@@ -70,6 +70,8 @@ Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name
 
 Route::get('/reservas/ver/{idReserva}',[ReservasController::class,'verReserva'])->name('reservas.ver');// materias seleccionadas por id de reserva
 
+Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
+
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
