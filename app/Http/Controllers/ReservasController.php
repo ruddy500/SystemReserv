@@ -34,6 +34,8 @@ class ReservasController extends Controller
 
     public function pendientes()
     {  
+
+        // $reservas = Reservas::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.pendientes', compact('menu'));
     }
@@ -323,6 +325,29 @@ class ReservasController extends Controller
     }
 
     
+// **************************************************************************************************************
+public function actualizarReserva(Request $request, $idReserva='') {
+    // Validación de datos
+    dd($request->all());
+    //$reservaa = Reservas::all();
+  //  dd($reservaa);
+    $request->validate([
+        'cantidad' => 'required|numeric|min:30|max:200',
+        'motivo' => 'required|string|min:5|max:100',
+    ]);
+
+    // Encontrar la reserva por su ID
+    $reserva = Reservas::findOrFail($idReserva);
+
+    // Actualizar los campos cantidad y motivo
+    $reserva->cantidad_estudiantes = $request->cantidad;
+    $reserva->motivo = $request->motivo;
+
+    // Guardar los cambios en la base de datos
+    $reserva->save();
+
+    // Redireccionar o responder según sea necesario
+}
 
 
 

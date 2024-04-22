@@ -1,9 +1,11 @@
 <div class="modal fade" id="formularioEditReserva" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content edith-reserva">
-            <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+            {{-- <form class="row g-3 needs-validation" action="#" method="POST" novalidate> --}}
+<form class="row g-3 needs-validation" action="{{ route('reservas.actualizar',$idReserva) }}" method="POST" novalidate>
+    @method('PUT') 
 
-                {{-- <form action="{{ route('actualizar.horario') }}" method="POST">
+                {{-- <form action="{{ route('actualizar.reserva') }}" method="POST"    {{ route('ambientes.actualizar', $ambiente->id) }}>
                     @csrf
                     @method('PUT') --}}
 
@@ -69,6 +71,7 @@
                     event.preventDefault(); // Agrega esta línea
                     Swal.fire({
                         text: 'Solicitud de reserva registrada Exitosamente',
+
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
                         backdrop: true,
