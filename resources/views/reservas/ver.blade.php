@@ -46,24 +46,44 @@ $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
 
 // ahora veremos los peridos seleccionados 
 $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+$tamPeriodosSeleccionado = count($periodosSeleccionados);
              
-$periodoId = $periodosSeleccionados[0]->periodos_id;
-$periodoId2 = $periodosSeleccionados[1]->periodos_id;
+             if($tamPeriodosSeleccionado == 1){
+                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                
+                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                $periodo = $periodoBuscar->HoraIntervalo;
+                $partes_P = explode('-', $periodo);
+                // if($i==3){dd($partes_P);}
+                
+                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                // if($i==3){dd($horaInicio,$horaFin);}
+                $unido = $horaInicio.' - '.$horaFin;
 
-$periodoBuscar = Periodos :: where('id',$periodoId)->first();
+             }else{
+                
+             $periodoId = $periodosSeleccionados[0]->periodos_id;
+             $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+
+             $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+             $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+             $periodo = $periodoBuscar->HoraIntervalo;
+             $periodo2 = $periodoBuscar2->HoraIntervalo;
              
-$periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
-$periodo = $periodoBuscar->HoraIntervalo;
-$periodo2 = $periodoBuscar2->HoraIntervalo;
-             
-$partes_P = explode('-', $periodo);
-$partes_P2 = explode('-', $periodo2);
-//dd($partes_P,$partes_P2);
+             $partes_P = explode('-', $periodo);
+             $partes_P2 = explode('-', $periodo2);
+             //dd($partes_P,$partes_P2);
 
-$horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-$horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+             $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+             $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+            //dd($horaInicio,$horaFin);
+            //xd
+             $unido = $horaInicio.' - '.$horaFin;
 
-$unido = $horaInicio.' - '.$horaFin;
+             }
+ 
 // dd($unido)
 ?>
 <div class="container mt-3">
