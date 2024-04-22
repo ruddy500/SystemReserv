@@ -118,7 +118,7 @@ class HorariosController extends Controller
 
 
     public function añadirHorario(Request $request){ 
-      
+      //solucionar bug
         try {
 
             //obtener fecha de la vista en formato "d-m-y"
@@ -131,11 +131,16 @@ class HorariosController extends Controller
             $mes_fecha = date("m", $fechaEntera);
             //obtener anio la fecha seleccionada
             $anio_fecha = date("y", $fechaEntera);
+
             //dd($mes_fecha);
 
             //$registroAmbientes = Ambientes::all();
             //dd($registroAmbientes);
             
+
+           // dd($request->ambiente);
+           // dd($dia_fecha,$mes_fecha,$anio_fecha);
+
                     // Verificar si ya existe un horario para la misma fecha y período
         $horariosExistente = Horarios::where('fechas_id', function($query) use ($dia_fecha, $mes_fecha, $anio_fecha) {
             $query->select('id')

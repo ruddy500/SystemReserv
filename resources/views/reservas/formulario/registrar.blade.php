@@ -3,6 +3,7 @@
 
 @section('contenido-registrar')
 {{-- {{ dd(get_defined_vars()) }} --}}
+
 <div class="card-body bg-content">
     <div class="mb-3">
         <div class="row">
@@ -32,7 +33,10 @@
                 </div>
             </form>
         </div>
-
+       
+        <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST">
+            
+            @csrf
         {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
 <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
     <table class="table table-striped table-hover table-bordered">
@@ -55,21 +59,40 @@
             @php
                 // Dividir el período en hora de inicio y hora de fin
                 $horas = explode('-', $horario->nombre_periodo);
+
                 $estado = ($horario->Estado) ? "Libre" : "Ocupado";
+
             @endphp
+
             <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
             <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
             <td>{{ $estado}}</td>
 
             {{-- CHECKBOX SELECCIONABLE --}}
+
+            <td>{{ $horario->Estado }}</td>
+            
+            @if ($horario->Estado)
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}" aria-label="..." data-estado={{ $horario->Estado  }} >
                     </div>
                 </div>
             </td>
             {{-- ************************************* --}}
+    
+            @else
+                
+            <td class="text-center h4 text-black">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
+                    </div>
+                </div>
+            </td>
+
+            @endif
 
         </tr>
     @endforeach
@@ -77,16 +100,52 @@
 
         </tbody>
     </table>
-    <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>
+    {{-- <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a> --}}
+    
+
 </div> 
 
         {{-- @include('reservas.formulario.horariosDisponibles') --}}
     </div>
 </div>
+<button type="submit">Siguiente</button>
+{{-- <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a> --}}
+
+</form>
+                
+
 @endsection
 
 <script>
-    document.getElementById('fechaInput').addEventListener('change', function() {
-        document.getElementById('consultaPeriodosForm').submit();
+document.addEventListener("DOMContentLoaded", function() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedCount = 0;
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Si se ha seleccionado este checkbox
+            if (this.checked) {
+                checkedCount++;
+
+                if (checkedCount === 2) {
+                    checkboxes.forEach(function(cb) {
+                        if (!cb.checked && cb.getAttribute('data-estado') === '1') {
+                            cb.disabled = true;
+                        }
+                    });
+                }
+            } else {
+                checkedCount--;
+
+                // Habilita los checkboxes con estado 1
+                checkboxes.forEach(function(cb) {
+                    if (cb.getAttribute('data-estado') === '1') {
+                        cb.disabled = false;
+                    }
+                });
+            }
+        });
     });
-</script>
+});
+ </script>
+        

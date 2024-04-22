@@ -16,7 +16,7 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->integer('CantEstudiante')->nullable();
-            $table->string('Motivo',10)->nullable();
+            $table->string('Motivo',50)->nullable();
             $table->string('Estado',10)->nullable();
             $table->integer('fecha')->nullable();
 
