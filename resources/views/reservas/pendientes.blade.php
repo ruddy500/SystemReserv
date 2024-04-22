@@ -30,10 +30,8 @@ $tamReservas = Reservas::count();
 			</tr>
 		</thead>
        @for ( $i = 0 ; $i  < $tamReservas ; $i++)
-        @if ($i % 2 == 0)
-             <!-- Fila Ploma -->
-             
-             <?php
+
+       <?php
              $idAmbiente = $reservasAmbiente[$i]->ambientes_id;
              $idReserva = $reservasAmbiente[$i]->reservas_id;
 
@@ -44,10 +42,15 @@ $tamReservas = Reservas::count();
              $nombre = $nombreBuscar->Nombre;
              //dd($nombre);
              $reserva = Reservas :: where('id',$idReserva)->first();
+             
              $estadoReserva = $reserva->Estado;
              $idFecha = $reserva->fecha;
              //dd($idFecha);
+             //dd($idFecha);
              $fechaBuscar = Fechas :: where('id',$idFecha)->first();
+            //  if($i==3){
+            //      dd($idFecha);
+            //  }
              $fechaDia = $fechaBuscar ->dia;
              $fechaMes= $fechaBuscar ->mes;
              $fechaAnio= $fechaBuscar ->anio;
@@ -55,13 +58,29 @@ $tamReservas = Reservas::count();
              $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
              //dd($fecha);
              $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+             //dd(count($periodosSeleccionados));
+             $tamPeriodosSeleccionado = count($periodosSeleccionados);
              
+             if($tamPeriodosSeleccionado == 1){
+                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                
+                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                $periodo = $periodoBuscar->HoraIntervalo;
+                $partes_P = explode('-', $periodo);
+                // if($i==3){dd($partes_P);}
+                
+                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                // if($i==3){dd($horaInicio,$horaFin);}
+
+             }else{
+                
              $periodoId = $periodosSeleccionados[0]->periodos_id;
              $periodoId2 = $periodosSeleccionados[1]->periodos_id;
 
-             $periodoBuscar = Periodos :: where('id',$periodoId)->first();
-             
+             $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
              $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
              $periodo = $periodoBuscar->HoraIntervalo;
              $periodo2 = $periodoBuscar2->HoraIntervalo;
              
@@ -73,8 +92,13 @@ $tamReservas = Reservas::count();
              $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
             //dd($horaInicio,$horaFin);
             //xd
+
+             }
  
-             ?>
+        ?>
+             
+        @if ($i % 2 == 0)
+             <!-- Fila Ploma -->
              @if ($estadoReserva == "pendiente")
              <thead class="bg-custom-lista-fila-plomo">	
                 <tr>
@@ -91,12 +115,21 @@ $tamReservas = Reservas::count();
                             </div>
 
                             {{-- ICONO DE EDITAR RESERVA --}}
+
                             <div class="circle3">
-                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
                                     <i class="fas fa-edit" style="color: white;"></i>  
                                 </a>
                                 @include('reservas.editar')
                             </div>
+                            
+                            {{-- <div class="circle3">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                 
+                                </a>
+                                @include('reservas.editar')
+                            </div> --}}
 
                             {{-- <div class="circle4">
                                 <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioHorario" data-fecha-id="{{ $fechaId }}" data-periodo-id="{{ $periodoId }}" data-ambiente-id="{{ $ambiente->id }}">
@@ -106,8 +139,9 @@ $tamReservas = Reservas::count();
                             </div> --}}
 
                             <div class="circle5">
-                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar1"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                <input type="hidden" id="idReserva" value="{{ $idReserva }}">
                                 </a>						
                             </div>
                         </div>
@@ -134,13 +168,22 @@ $tamReservas = Reservas::count();
                                 </a>
                             </div>
                             <div class="circle3">
-                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
                                     <i class="fas fa-edit" style="color: white;"></i>  
                                 </a>
                             </div>
+
+                            {{-- <div class="circle3">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
+                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                </a>
+                                @include('reservas.editar')
+                            </div> --}}
+
                             <div class="circle5">
-                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar"> 
-                                <i class="bi bi-trash3-fill" style="color: white;"></i>	
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar2"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                <input type="hidden" id="idReserva" value="{{ $idReserva }}">
                                 </a>						
                             </div>
                         </div>
@@ -154,10 +197,36 @@ $tamReservas = Reservas::count();
            
        @endfor
     </table>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
 </div>
 <script>
+    function obtenerIdReserva() {
+    // Obtener el valor del campo de entrada oculto
+    var idReserva = document.getElementById('idReserva').value;
+    return idReserva;
+}
+</script>
+<script>
     // Agrega un evento de clic al botón de eliminar
-    document.getElementById('eliminar').addEventListener('click', function(event) {
+    document.getElementById('eliminar1').addEventListener('click', function(event) {
         event.preventDefault(); // Previene la acción por defecto del botón
 
         Swal.fire({
@@ -172,12 +241,40 @@ $tamReservas = Reservas::count();
             cancelButtonColor: 'red' // Color del botón "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    text: 'Solicitud de reserva eliminada exitosamente',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                    // El color del botón "Aceptar" es el color por defecto
-                });
+                // Obtener el valor de idReserva desde algún lugar de tu página
+                var idReserva = obtenerIdReserva(); // Implementa esta función para obtener el idReserva que deseas enviar
+
+                // Redirigir a la URL con el idReserva como parte de la ruta
+                window.location.href = '/reservas/pendientesDocente/'+ idReserva;
+                
+            }
+        });
+    });
+</script>
+
+<script>
+    // Agrega un evento de clic al botón de eliminar
+    document.getElementById('eliminar2').addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la acción por defecto del botón
+
+        Swal.fire({
+            title: '¿Estás seguro de eliminar la solicitud de reserva?',
+            text: 'No podrás revertir este cambio',
+            icon: 'warning',
+            iconColor: 'red', // Color del icono
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: 'green', // Color del botón "Aceptar"
+            cancelButtonColor: 'red' // Color del botón "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Obtener el valor de idReserva desde algún lugar de tu página
+                var idReserva = obtenerIdReserva(); // Implementa esta función para obtener el idReserva que deseas enviar
+
+                // Redirigir a la URL con el idReserva como parte de la ruta
+                window.location.href = '/reservas/pendientesDocente/'+ idReserva;
+                
             }
         });
     });

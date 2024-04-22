@@ -52,6 +52,7 @@ class HorariosController extends Controller
             //  ->where('fechas_id', $idFecha)
               ->where('periodos_id', $idPeriodo)
               ->first();
+              
             if ($horarioEsp) {
             
                 // Cambia y guarda el estado

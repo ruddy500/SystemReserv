@@ -33,6 +33,7 @@
                 </div>
             </form>
         </div>
+{{-- {{ dd(get_defined_vars()) }} --}}
        
         <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST">
             
@@ -77,7 +78,7 @@
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}" aria-label="..." data-estado={{ $horario->Estado  }} >
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}-{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} >
                     </div>
                 </div>
             </td>
@@ -88,7 +89,7 @@
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}--{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
                     </div>
                 </div>
             </td>
