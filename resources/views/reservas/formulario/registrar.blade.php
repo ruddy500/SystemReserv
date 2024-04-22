@@ -11,7 +11,7 @@
                 @csrf
                 <div class="col">
                     <!-- Seleccionable de ambiente -->
-                    <label for="ambiente-name" class="col-form-label h4">Ambienteee:</label>
+                    <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                     <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                         <option value="" disabled selected >Seleccione aula</option> 
                         <!-- me captura todo los ambientes -->
@@ -70,7 +70,7 @@
 
             {{-- CHECKBOX SELECCIONABLE --}}
 
-            <td>{{ $horario->Estado }}</td>
+            {{-- <td>{{ $horario->Estado }}</td> --}}
             
             @if ($horario->Estado)
             <td class="text-center h4 text-black">

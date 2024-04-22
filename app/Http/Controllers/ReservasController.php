@@ -102,9 +102,9 @@ class ReservasController extends Controller
          $ambienteId = $request->input('ambiente');
          
          $ambiente = Ambientes::where('nombre_ambientes_id', $ambienteId)->first();
-         $reservasAmbiente = new ReservasAmbiente();
-         $reservasAmbiente -> ambientes_id = $ambiente->id;
-         $reservasAmbiente ->save();
+        //  $reservasAmbiente = new ReservasAmbiente();
+        //  $reservasAmbiente -> ambientes_id = $ambiente->id;
+        //  $reservasAmbiente ->save();
          
          $fechita = $request->fecha;
          //dd($fechita);
@@ -128,10 +128,13 @@ class ReservasController extends Controller
 
                     //dd($ambiente->id);
         
-        if ($fecha) {
+        if ($fecha && $ambiente) {
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
+                                $reservasAmbiente = new ReservasAmbiente();
+                                $reservasAmbiente -> ambientes_id = $ambiente->id;
+                                $reservasAmbiente ->save();
         }else{
             return redirect()->back()->with('message', 'No hay registros.'); 
         }
