@@ -26,10 +26,8 @@ $tamReservas = Reservas::count();
 			</tr>
 		</thead>
        @for ( $i = 0 ; $i  < $tamReservas ; $i++)
-        @if ($i % 2 == 0)
-             <!-- Fila Ploma -->
-             
-             <?php
+
+       <?php
              $idAmbiente = $reservasAmbiente[$i]->ambientes_id;
              $idReserva = $reservasAmbiente[$i]->reservas_id;
 
@@ -70,7 +68,10 @@ $tamReservas = Reservas::count();
             //dd($horaInicio,$horaFin);
             //xd
  
-             ?>
+        ?>
+             
+        @if ($i % 2 == 0)
+             <!-- Fila Ploma -->
              @if ($estadoReserva == "pendiente")
              <thead class="bg-custom-lista-fila-plomo">	
                 <tr>
