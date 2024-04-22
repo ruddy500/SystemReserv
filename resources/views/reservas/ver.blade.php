@@ -52,7 +52,7 @@
                                         </tr>
                                     </thead>
                                     @for ($i = 0; $i < $tam; $i++)
-                                        @if($seleccionado[$i]->reservas_id == 2)
+                                        @if($seleccionado[$i]->reservas_id == $idReserva)
                         
                                         <thead class="text-center">
                                             <tbody class="text-center">
