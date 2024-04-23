@@ -77,23 +77,23 @@ $tamReservas = Reservas::count();
 
                     }else{
                         
-                    $periodoId = $periodosSeleccionados[0]->periodos_id;
-                    $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+                        $periodoId = $periodosSeleccionados[0]->periodos_id;
+                        $periodoId2 = $periodosSeleccionados[1]->periodos_id;
 
-                    $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
-                    $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+                        $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                        $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
 
-                    $periodo = $periodoBuscar->HoraIntervalo;
-                    $periodo2 = $periodoBuscar2->HoraIntervalo;
-                    
-                    $partes_P = explode('-', $periodo);
-                    $partes_P2 = explode('-', $periodo2);
-                    //dd($partes_P,$partes_P2);
+                        $periodo = $periodoBuscar->HoraIntervalo;
+                        $periodo2 = $periodoBuscar2->HoraIntervalo;
+                        
+                        $partes_P = explode('-', $periodo);
+                        $partes_P2 = explode('-', $periodo2);
+                        //dd($partes_P,$partes_P2);
 
-                    $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                    $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
-                    //dd($horaInicio,$horaFin);
-                    //xd
+                        $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                        $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                        //dd($horaInicio,$horaFin);
+                        //xd
 
                     }
         
