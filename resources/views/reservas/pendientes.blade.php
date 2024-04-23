@@ -1,6 +1,8 @@
 @extends('reservas/principal')
 
 @section('contenido-pendientes')
+
+{{-- {{ dd(get_defined_vars()) }} --}}
 <?php
 use App\Models\Reservas;
 use App\Models\ReservasAmbiente;
@@ -26,148 +28,151 @@ $tamReservas = Reservas::count();
 			</tr>
 		</thead>
        @for ( $i = 0 ; $i  < $tamReservas ; $i++)
-
-       <?php
-             $idAmbiente = $reservasAmbiente[$i]->ambientes_id;
-             $idReserva = $reservasAmbiente[$i]->reservas_id;
-
-             //dd("ambiente",$idAmbiente,"reservas",$idReserva);
-             $ambiente = Ambientes :: where('id',$idAmbiente)->first();
-             $nombreId = $ambiente ->nombre_ambientes_id;
-             $nombreBuscar = NombreAmbientes::where('id',$nombreId)->first();
-             $nombre = $nombreBuscar->Nombre;
-             //dd($nombre);
-             $reserva = Reservas :: where('id',$idReserva)->first();
-             
-             $estadoReserva = $reserva->Estado;
-             $idFecha = $reserva->fecha;
-             //dd($idFecha);
-             //dd($idFecha);
-             $fechaBuscar = Fechas :: where('id',$idFecha)->first();
-            //  if($i==3){
-            //      dd($idFecha);
-            //  }
-             $fechaDia = $fechaBuscar ->dia;
-             $fechaMes= $fechaBuscar ->mes;
-             $fechaAnio= $fechaBuscar ->anio;
-             
-             $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
-             //dd($fecha);
-             $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
-             //dd(count($periodosSeleccionados));
-             $tamPeriodosSeleccionado = count($periodosSeleccionados);
-             
-             if($tamPeriodosSeleccionado == 1){
-                $periodoId = $periodosSeleccionados[0]->periodos_id;
+            
+            @if (auth()->user()->id == $reservas[$i]->docentes_id )
                 
-                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
-                $periodo = $periodoBuscar->HoraIntervalo;
-                $partes_P = explode('-', $periodo);
-                // if($i==3){dd($partes_P);}
+          
                 
-                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
-                // if($i==3){dd($horaInicio,$horaFin);}
+                <?php
+                    $idAmbiente = $reservasAmbiente[$i]->ambientes_id;
+                    $idReserva = $reservasAmbiente[$i]->reservas_id;
 
-             }else{
-                
-             $periodoId = $periodosSeleccionados[0]->periodos_id;
-             $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+                    //dd("ambiente",$idAmbiente,"reservas",$idReserva);
+                    $ambiente = Ambientes :: where('id',$idAmbiente)->first();
+                    $nombreId = $ambiente ->nombre_ambientes_id;
+                    $nombreBuscar = NombreAmbientes::where('id',$nombreId)->first();
+                    $nombre = $nombreBuscar->Nombre;
+                    //dd($nombre);
+                    $reserva = Reservas :: where('id',$idReserva)->first();
+                    
+                    $estadoReserva = $reserva->Estado;
+                    $idFecha = $reserva->fecha;
+                    //dd($idFecha);
+                    //dd($idFecha);
+                    $fechaBuscar = Fechas :: where('id',$idFecha)->first();
+                    //  if($i==3){
+                    //      dd($idFecha);
+                    //  }
+                    $fechaDia = $fechaBuscar ->dia;
+                    $fechaMes= $fechaBuscar ->mes;
+                    $fechaAnio= $fechaBuscar ->anio;
+                    
+                    $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
+                    //dd($fecha);
+                    $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+                    //dd(count($periodosSeleccionados));
+                    $tamPeriodosSeleccionado = count($periodosSeleccionados);
+                    
+                    if($tamPeriodosSeleccionado == 1){
+                        $periodoId = $periodosSeleccionados[0]->periodos_id;
+                        
+                        $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                        $periodo = $periodoBuscar->HoraIntervalo;
+                        $partes_P = explode('-', $periodo);
+                        // if($i==3){dd($partes_P);}
+                        
+                        $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                        $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                        // if($i==3){dd($horaInicio,$horaFin);}
 
-             $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
-             $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+                    }else{
+                        
+                    $periodoId = $periodosSeleccionados[0]->periodos_id;
+                    $periodoId2 = $periodosSeleccionados[1]->periodos_id;
 
-             $periodo = $periodoBuscar->HoraIntervalo;
-             $periodo2 = $periodoBuscar2->HoraIntervalo;
-             
-             $partes_P = explode('-', $periodo);
-             $partes_P2 = explode('-', $periodo2);
-             //dd($partes_P,$partes_P2);
+                    $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                    $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
 
-             $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-             $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
-            //dd($horaInicio,$horaFin);
-            //xd
+                    $periodo = $periodoBuscar->HoraIntervalo;
+                    $periodo2 = $periodoBuscar2->HoraIntervalo;
+                    
+                    $partes_P = explode('-', $periodo);
+                    $partes_P2 = explode('-', $periodo2);
+                    //dd($partes_P,$partes_P2);
 
-             }
- 
-        ?>
-             
-        @if ($i % 2 == 0)
-             <!-- Fila Ploma -->
-             @if ($estadoReserva == "pendiente")
-             <thead class="bg-custom-lista-fila-plomo">	
-                <tr>
-                    <th class="text-center h4 text-black">{{ $nombre }}</th>
-                    <th class="text-center h4 text-black">{{ $fecha }}</th>
-                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                    <th class="text-center h4 text-black">
-                        <div class="d-flex justify-content-center">
-                            <div class="circle2">
-                                <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                </a>
-                            </div>
-                            <div class="circle3">
-                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
-                                    <i class="fas fa-edit" style="color: white;"></i>  
-                                </a>
-                                @include('reservas.editar')
-                            </div>
-                            
-                            <div class="circle5">
-                                <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
-                                    <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                    <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
-                                </a>						
-                            </div>
-  
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-                
-             @endif
+                    $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                    $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                    //dd($horaInicio,$horaFin);
+                    //xd
+
+                    }
         
-        @else
-            <!-- Fila blanca -->
-            @if ($estadoReserva == "pendiente")
-            <thead class="bg-custom-lista-fila-blanco">
-                <tr>
-                    <th class="text-center h4 text-black">{{ $nombre }}</th>
-                    <th class="text-center h4 text-black">{{ $fecha }}</th>
-                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                    <th class="text-center h4 text-black">
-                        <div class="d-flex justify-content-center">
-                            <div class="circle2">
-                                <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                </a>
-                            </div>
-                            <div class="circle3">
-                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
-                                    <i class="fas fa-edit" style="color: white;"></i>  
-                                </a>
-                            </div>
-  
-                            <div class="circle5">
-                                <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
-                                    <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                    <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
-                                </a>						
-                            </div>
+                ?>
 
-                        </div>
-                    </th>
-                </tr>	
-            </thead>
-    
-            @endif
-      
-        @endif
-           
+                @if ($i % 2 == 0)
+                    <!-- Fila Ploma -->
+                    @if ($estadoReserva == "pendiente")
+                    <thead class="bg-custom-lista-fila-plomo">	
+                        <tr>
+                            <th class="text-center h4 text-black">{{ $nombre }}</th>
+                            <th class="text-center h4 text-black">{{ $fecha }}</th>
+                            <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                            <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                            <th class="text-center h4 text-black">
+                                <div class="d-flex justify-content-center">
+                                    <div class="circle2">
+                                        <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                        </a>
+                                    </div>
+                                    <div class="circle3">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                            <i class="fas fa-edit" style="color: white;"></i>  
+                                        </a>
+                                        @include('reservas.editar')
+                                    </div>
+                                    
+                                    <div class="circle5">
+                                        <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
+                                            <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                            <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
+                                        </a>						
+                                    </div>
+        
+                                </div>
+                            </th>
+                        </tr>
+                    </thead> 
+                    @endif
+            
+                @else
+                    <!-- Fila blanca -->
+                    @if ($estadoReserva == "pendiente")
+                    <thead class="bg-custom-lista-fila-blanco">
+                        <tr>
+                            <th class="text-center h4 text-black">{{ $nombre }}</th>
+                            <th class="text-center h4 text-black">{{ $fecha }}</th>
+                            <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                            <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                            <th class="text-center h4 text-black">
+                                <div class="d-flex justify-content-center">
+                                    <div class="circle2">
+                                        <a href="{{ route('reservas.ver',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                        </a>
+                                    </div>
+                                    <div class="circle3">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                            <i class="fas fa-edit" style="color: white;"></i>  
+                                        </a>
+                                    </div>
+        
+                                    <div class="circle5">
+                                        <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
+                                            <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                            <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
+                                        </a>						
+                                    </div>
+
+                                </div>
+                            </th>
+                        </tr>	
+                    </thead>       
+                    @endif
+        
+                @endif
+                
+            @endif 
        @endfor
     </table>
         @if (session('success'))

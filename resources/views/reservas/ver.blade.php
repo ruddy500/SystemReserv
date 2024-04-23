@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('reservas/ver')
+{{-- {{ dd(get_defined_vars()) }}  --}}
 <?php
 use App\Models\Reservas;
 use App\Models\ReservasAmbiente;
