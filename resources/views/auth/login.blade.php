@@ -45,6 +45,8 @@
                </div>
             </div>
 
+            <div id="error-message" class="error-message"></div>
+
             <div class="login__check">
 				 <!--=============== Check para recordar contraseña ===============-->
                <div class="login__check-group">

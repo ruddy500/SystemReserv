@@ -3,7 +3,7 @@
 @section('contenido-registrar')
 <div class="card-body bg-content">
     <div class="mb-3">
-        <form  action="{{ route('reservas.guardarReserva') }}" method="post">
+        <form class="row g-3 needs-validation" action="{{ route('reservas.guardarReserva') }}" method="post" novalidate>
             @csrf
             {{-- <form class="row g-3 needs-validation" novalidate> --}}
             <div class="mb-3">

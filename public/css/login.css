@@ -188,6 +188,17 @@ img {
   font-size: var(--small-font-size);
 }
 
+.error-message {
+  display: flex;
+  justify-content: center;
+  color: white;
+  display: none; /* Ocultar por defecto */
+  padding-left: 27%;
+  background-color: red;
+  border-radius: 0.2rem;
+}
+
+
 /*=============== mediaQuerys para responsive ===============*/
 @media screen and (min-width: 576px) {
   .login {
