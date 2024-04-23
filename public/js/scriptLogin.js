@@ -7,11 +7,11 @@ togglePassword.addEventListener('click', function() {
   
   // Cambiar el icono dependiendo del tipo de contraseña
   if (type === 'password') {
-    togglePassword.classList.remove('bi-eye-slash-fill');
-    togglePassword.classList.add('bi-eye-fill');
-  } else {
     togglePassword.classList.remove('bi-eye-fill');
     togglePassword.classList.add('bi-eye-slash-fill');
+  } else {
+    togglePassword.classList.remove('bi-eye-slash-fill');
+    togglePassword.classList.add('bi-eye-fill');
   }
 });
 /*

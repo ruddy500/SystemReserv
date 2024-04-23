@@ -40,22 +40,22 @@
                      {{-- id="login-pass" --}}
 					  <!--===============  ETIQUETA ===============-->
                      <label for="login-pass" class="login__label">Contraseña</label>
-                     <i class="bi bi-eye-fill login__eye" id="login-eye"></i>
+                     <i class="bi bi-eye-slash-fill login__eye" id="login-eye"></i>
                   </div>
                </div>
             </div>
 
             <div id="error-message" class="error-message"></div>
 
-            <div class="login__check">
+            <!-- <div class="login__check"> -->
 				 <!--=============== Check para recordar contraseña ===============-->
-               <div class="login__check-group">
-                  <input type="checkbox" class="login__check-input" id="login-check">
-                  <label for="login-check" class="login__check-label">Recordar Contraseña</label>
-               </div>
+               <!-- <div class="login__check-group"> -->
+                  <!-- <input type="checkbox" class="login__check-input" id="login-check"> -->
+                  <!-- <label for="login-check" class="login__check-label">Recordar Contraseña</label> -->
+               <!-- </div> -->
 				 <!--=============== refencia para recuperar contraseña ===============-->
-               <a href="#" class="login__forgot">Olvidaste tu contraseña?</a>
-            </div>
+               <!-- <a href="#" class="login__forgot">Olvidaste tu contraseña?</a> -->
+            <!-- </div> -->
 			 <!--=============== boton de iniciar sesion ===============-->
             <button type="submit" class="login__button">Iniciar Sesion</button>
          </form>
