@@ -34,7 +34,62 @@
     </div>
 </div>
 
-<script>
+<script> 
+    (function () {
+        'use strict';
+
+        var forms = document.querySelectorAll('.needs-validation');
+
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    // Si el formulario es válido, enviar el formulario
+                    form.submit();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+        // Agrega un evento de clic al botón "Cancelar"
+        document.getElementById('cancelar').addEventListener('click', function() {
+            Swal.fire({
+                text: 'Cancelado',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar',
+                backdrop: true,
+                allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+            }).then((result) => {
+                // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route("reservas.cancelarReserva") }}'; //  ruta a la que quieres redirigir al usuario
+                }
+            });
+        });
+
+        //mostrar modal y
+        @if(session('success'))
+        Swal.fire({
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            backdrop: true,
+            allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+        }).then((result) => {
+            // Si el usuario hace clic en "Aceptar", redirige al usuario a la ruta '/reservas'
+            if (result.isConfirmed) {
+                window.location.href = '/reservas';
+            }
+        });
+        @endif
+    })();
+
+</script>
+
+{{-- <script>
     (function () {
         'use strict';
 
@@ -82,5 +137,5 @@
                     });;
         });
     })();
-</script>
+</> --}}
 @endsection

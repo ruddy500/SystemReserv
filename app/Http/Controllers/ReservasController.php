@@ -178,10 +178,11 @@ class ReservasController extends Controller
         
         if(!empty($options)){
             $tamOptions = count($options);
-            
+            //dd($tamOptions);  
             foreach ($options as &$option) {
                 $option = explode("-", $option);                
             }
+            //dd($options);
             //dd("entre a la parte no vacia");
             if($tamOptions == 1){
                 $idFecha = intval($options[0][0]);
@@ -203,7 +204,7 @@ class ReservasController extends Controller
                 $periodos -> reservas_id = $reserva->id;
                 $periodos -> periodos_id = $periodoId;
                 $periodos->save();
-                 //dd("entre aqui");
+                //dd("reserva",$reserva,"reseraAmbiente",$reservaAmbiente,"periodos",$periodos);
 
             }else{
                 $dato1 = $options[0];
@@ -265,7 +266,7 @@ class ReservasController extends Controller
 
     //funcion para asignar a la tabla 
     public function guardar(Request $request)
-    {  
+    {  //dd($request->all());
         // $menu = view('componentes/menu'); // Crear la vista del menú
         // return view('reservas.ver', compact('menu'));
         $options = $request->input('options');
@@ -289,14 +290,16 @@ class ReservasController extends Controller
             
 
             //$ultimoRegistroRA = ReservasAmbiente::orderBy('id', 'desc')->first(); 
-            $ultimaReserva = new Reservas();
-            $ultimoRegistro = $ultimaReserva->orderBy('id', 'desc')->first();
+            //$ultimaReserva = new Reservas();
+            $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+            //dd($ultimoRegistro);
             $ultimoId = $ultimoRegistro->id;
+
             //$ultimoRegistroRA->reservas_id = $ultimoId;
             //$ultimoRegistroRA ->save();
             // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
             MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
-
+            //dd("revisa");
 
         } else {
             // Manejo de error: $options no es un array
@@ -309,9 +312,10 @@ class ReservasController extends Controller
     }
 
     public function guardarReserva(Request $request){
+        //dd($request->all());
         $cantidadest=$request->cantidad;
-        print_r($request->cantidad);
-
+        //print_r($request->cantidad);
+        //dd($request->all());
         // Instanciar la clase Reserva
         //$reserva = new Reservas();
 
@@ -347,7 +351,7 @@ class ReservasController extends Controller
         // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
         // MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $reserva->id]);
 
-        return redirect()->route('reservas.principal');
+        return redirect()->back()->with('success', 'Se ha registrado con exito.');
     }
 
     public function cancelarReserva(){
