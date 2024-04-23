@@ -175,16 +175,14 @@ class ReservasController extends Controller
     public function store(Request $request)
     {   //dd($request->all());
         $options = $request->input('options');
-        $tamOptions = count($options);
         
-        
-        foreach ($options as &$option) {
-            
-            $option = explode("-", $option);
-            // $option = str_replace('-', '', $option);
-        }
-       //dd($options);
         if(!empty($options)){
+            $tamOptions = count($options);
+            
+            foreach ($options as &$option) {
+                $option = explode("-", $option);                
+            }
+            //dd("entre a la parte no vacia");
             if($tamOptions == 1){
                 $idFecha = intval($options[0][0]);
                 $periodoId = intval($options[0][1]);
@@ -224,43 +222,43 @@ class ReservasController extends Controller
                 //dd("fecha",$idFecha,"periodo1",$periodoId1,"periodo2",$periodoId2,"ambiente",$ambienteId);
                 
                 
-            if ($periodoId1+1 == $periodoId2) {
-                        
-                // guardar en la base datos
-                $reserva = new Reservas();
-                $reserva->fecha=$idFecha;
-                $reserva->save();
+                if ($periodoId1+1 == $periodoId2) {
+                            
+                    // guardar en la base datos
+                    $reserva = new Reservas();
+                    $reserva->fecha=$idFecha;
+                    $reserva->save();
 
-                $reservaAmbiente = new ReservasAmbiente();
-                $reservaAmbiente->ambientes_id = $ambienteId;
-                $reservaAmbiente->save();
+                    $reservaAmbiente = new ReservasAmbiente();
+                    $reservaAmbiente->ambientes_id = $ambienteId;
+                    $reservaAmbiente->save();
 
-                //guardar relacion de periodos en base de datos
-                $periodos = new PeriodosSeleccionado();
-                $periodos -> reservas_id = $reserva->id;
-                $periodos -> periodos_id = $periodoId1;
-                $periodos->save();
+                    //guardar relacion de periodos en base de datos
+                    $periodos = new PeriodosSeleccionado();
+                    $periodos -> reservas_id = $reserva->id;
+                    $periodos -> periodos_id = $periodoId1;
+                    $periodos->save();
 
-            
-                $periodos2 = new PeriodosSeleccionado();
-                $periodos2 -> reservas_id = $reserva->id;
-                $periodos2 -> periodos_id = $periodoId2;
-                $periodos2->save();
-            
-
-                //return redirect()->route('reservas.materias')->with('dato', $idFecha);
                 
+                    $periodos2 = new PeriodosSeleccionado();
+                    $periodos2 -> reservas_id = $reserva->id;
+                    $periodos2 -> periodos_id = $periodoId2;
+                    $periodos2->save();
+                    
+                
+                }else{
+                    //'Escoja periodos contiguos'
+                }
+            
             
             }
-        
-            
-        }
 
             return redirect()->route('reservas.materias')->with('dato', $idFecha);
                 
+        }else{
+            
+                //escoja periodos
         }
-        
-       
         
         
     }
