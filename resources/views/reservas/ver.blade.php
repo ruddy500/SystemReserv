@@ -1,6 +1,91 @@
 @extends('index')
 
 @section('reservas/ver')
+<?php
+use App\Models\Reservas;
+use App\Models\ReservasAmbiente;
+use App\Models\NombreAmbientes;
+use App\Models\Ambientes;
+use App\Models\Fechas;
+use App\Models\PeriodosSeleccionado;
+use App\Models\Periodos;
+
+$reservas = Reservas::all();
+// $reservasAmbiente = ReservasAmbiente::all();
+// $ambiente = Ambientes::all();
+
+// Aquí colocas el idReserva que quieres buscar un registro
+$reservaAmbiente = ReservasAmbiente::where('reservas_id', $idReserva)->first();
+$idAmbiente = $reservaAmbiente->ambientes_id;
+
+$ambiente = Ambientes::where('id', $idAmbiente)->first();
+$idNombreAmbiente = $ambiente->nombre_ambientes_id;
+
+// aqui se busca el nombre del ambiente
+$nombreAmbiente = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+// dd($nombreAmbiente->Nombre);
+
+
+// aqui se busca la reserva
+$reserva = Reservas::where('id', $idReserva)->first();
+$motivoReserva = $reserva->Motivo;
+// dd($motivoReserva)
+
+
+// aqui se buscara la fecha
+$idFecha = $reserva->fecha;
+// dd($idFecha);
+
+$fechaBuscar = Fechas :: where('id',$idFecha)->first();
+$fechaDia = $fechaBuscar ->dia;
+$fechaMes= $fechaBuscar ->mes;
+$fechaAnio= $fechaBuscar ->anio;
+$fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
+// dd($fecha);
+
+
+// ahora veremos los peridos seleccionados 
+$periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+$tamPeriodosSeleccionado = count($periodosSeleccionados);
+             
+             if($tamPeriodosSeleccionado == 1){
+                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                
+                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                $periodo = $periodoBuscar->HoraIntervalo;
+                $partes_P = explode('-', $periodo);
+                // if($i==3){dd($partes_P);}
+                
+                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                // if($i==3){dd($horaInicio,$horaFin);}
+                $unido = $horaInicio.' - '.$horaFin;
+
+             }else{
+                
+             $periodoId = $periodosSeleccionados[0]->periodos_id;
+             $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+
+             $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+             $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+             $periodo = $periodoBuscar->HoraIntervalo;
+             $periodo2 = $periodoBuscar2->HoraIntervalo;
+             
+             $partes_P = explode('-', $periodo);
+             $partes_P2 = explode('-', $periodo2);
+             //dd($partes_P,$partes_P2);
+
+             $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+             $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+            //dd($horaInicio,$horaFin);
+            //xd
+             $unido = $horaInicio.' - '.$horaFin;
+
+             }
+ 
+// dd($unido)
+?>
 <div class="container mt-3">
 		<div class="card vercard">
 			<h3 class="card-header">Reservas</h3>
@@ -16,27 +101,27 @@
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Nombre docente</td>
-                                        <td style="width: 50%;">Leticia Blanco</td>
+                                        <td style="width: 50%;">{{auth()->user()->name}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Nombre ambiente</td>
-                                        <td style="width: 50%;">690 A</td>
+                                        <td style="width: 50%;">{{$nombreAmbiente->Nombre}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Motivo de reserva</td>
-                                        <td style="width: 50%;">Examen primer parcial</td>
+                                        <td style="width: 50%;">{{$motivoReserva}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Cantidad de estudiantes</td>
-                                        <td style="width: 50%;">200</td>
+                                        <td style="width: 50%;">{{$reserva->CantEstudiante}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Fecha</td>
-                                        <td style="width: 50%;">24-04-2024</td>
+                                        <td style="width: 50%;">{{$fecha}}</td>
                                     </tr>
                                     <tr>
                                         <td style="width: 50%;">Periodo</td>
-                                        <td style="width: 50%;">9:45-12:45</td>
+                                        <td style="width: 50%;">{{$unido}}</td>
                                     </tr>
                                 </tbody>                        
                             </table>
@@ -52,7 +137,7 @@
                                         </tr>
                                     </thead>
                                     @for ($i = 0; $i < $tam; $i++)
-                                        @if($seleccionado[$i]->reservas_id == 2)
+                                        @if($seleccionado[$i]->reservas_id == $idReserva)
                         
                                         <thead class="text-center">
                                             <tbody class="text-center">

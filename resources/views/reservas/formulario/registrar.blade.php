@@ -11,7 +11,7 @@
                 @csrf
                 <div class="col">
                     <!-- Seleccionable de ambiente -->
-                    <label for="ambiente-name" class="col-form-label h4">Ambienteee:</label>
+                    <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                     <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                         <option value="" disabled selected >Seleccione aula</option> 
                         <!-- me captura todo los ambientes -->
@@ -33,6 +33,7 @@
                 </div>
             </form>
         </div>
+{{-- {{ dd(get_defined_vars()) }} --}}
        
         <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST">
             
@@ -59,29 +60,35 @@
             @php
                 // Dividir el período en hora de inicio y hora de fin
                 $horas = explode('-', $horario->nombre_periodo);
-           
+
+                $estado = ($horario->Estado) ? "Libre" : "Ocupado";
+
             @endphp
 
             <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
             <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
-            <td>{{ $horario->Estado }}</td>
+            <td>{{ $estado}}</td>
+
+            {{-- CHECKBOX SELECCIONABLE --}}
+
+            {{-- <td>{{ $horario->Estado }}</td> --}}
             
             @if ($horario->Estado)
-            
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}" aria-label="..." data-estado={{ $horario->Estado  }} >
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}-{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} >
                     </div>
                 </div>
             </td>
+            {{-- ************************************* --}}
     
             @else
                 
             <td class="text-center h4 text-black">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
+                        <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}--{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
                     </div>
                 </div>
             </td>
