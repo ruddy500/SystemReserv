@@ -44,6 +44,15 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="login__check"> -->
+				 <!--=============== Check para recordar contraseña ===============-->
+               <!-- <div class="login__check-group"> -->
+                  <!-- <input type="checkbox" class="login__check-input" id="login-check"> -->
+                  <!-- <label for="login-check" class="login__check-label">Recordar Contraseña</label> -->
+               <!-- </div> -->
+				 <!--=============== refencia para recuperar contraseña ===============-->
+               <!-- <a href="#" class="login__forgot">Olvidaste tu contraseña?</a> -->
+            <!-- </div> -->
 
             <button type="submit" class="login__button">Iniciar Sesion</button>
         </form>
