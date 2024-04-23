@@ -22,9 +22,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
   /*===== LINK ACTIVE =====*/
   window.onload = function() {
     var botones = document.getElementsByClassName("nav_link");
+    var botonActivo = null;
     for (var i = 0; i < botones.length; i++) {
-        if (botones[i].href === window.location.href) {
-            botones[i].classList.add("active");
+        if (window.location.href.indexOf(botones[i].href) >= 0) {
+            // Si este botón corresponde a una ruta más específica que el botón activo actual,
+            // entonces este botón se convierte en el nuevo botón activo
+            if (botonActivo == null || botones[i].href.length > botonActivo.href.length) {
+                if (botonActivo != null) {
+                    botonActivo.classList.remove("active");
+                }
+                botonActivo = botones[i];
+                botonActivo.classList.add("active");
+            }
         } else {
             botones[i].classList.remove("active");
         }
