@@ -53,10 +53,10 @@ img {
 .login .LogoFcyt img{
     display: flex; 
     justify-content: center; 
-    max-width: 40%;
+    max-width: 50%;
     height: auto; 
-    margin-left: 30%;
-    margin-bottom: 5%;
+    margin-left: 25%;
+    margin-bottom: 20%;
 
 }
 
@@ -188,14 +188,12 @@ img {
   font-size: var(--small-font-size);
 }
 
-.error-message {
-  display: flex;
-  justify-content: center;
-  color: white;
-  display: none; /* Ocultar por defecto */
-  padding-left: 27%;
-  background-color: red;
-  border-radius: 0.2rem;
+.alert-danger {
+  text-align: center;
+  color: #ffffff; /* Cambia este valor al color que desees */
+  background-color: #be0010; /* Cambia este valor al color que desees */
+  border-color: #000000; /* Cambia este valor al color que desees */
+  margin-bottom: 5%;
 }
 
 
