@@ -176,20 +176,21 @@ class ReservasController extends Controller
     {   //dd($request->all());
         $options = $request->input('options');
         $tamOptions = count($options);
-        //dd($options);
+        
         
         foreach ($options as &$option) {
-            $option = str_replace('-', '', $option);
+            
+            $option = explode("-", $option);
             // $option = str_replace('-', '', $option);
         }
        //dd($options);
         if(!empty($options)){
             if($tamOptions == 1){
-                $idFecha = intval(substr($options[0], 0, 1));
-                $periodoId = intval(substr($options[0], 1, 1));
-                $ambienteId = intval(substr($options[0], 2, 1));
+                $idFecha = intval($options[0][0]);
+                $periodoId = intval($options[0][1]);
+                $ambienteId = intval($options[0][2]);
                 
-                //dd($fechaId,$periodoId,$ambienteId);
+                //dd($idFecha,$periodoId,$ambienteId);
                 
                //dd($idFecha);
                 $reserva = new Reservas();
@@ -209,17 +210,18 @@ class ReservasController extends Controller
             }else{
                 $dato1 = $options[0];
                 $dato2 = $options[1];
+                //dd($dato1,$dato2);
                 //dato1 su fecha su periodo y su ambiente
-                $idFecha = intval(substr($dato1, 0, 1));
-                $periodoId1 = intval(substr($dato1, 1, 1));
-                $ambienteId1 = intval(substr($dato1, 2, 1));
-                
+                $idFecha = intval($dato1[0]);
+                $periodoId1 = intval($dato1[1]);
+                $ambienteId = intval($dato1[2]);
+                //dd("fecha",$idFecha,"periodo",$periodoId1,"ambiente",$ambienteId);
                 //dd($fechaId1,$periodoId1,$ambienteId1);
                 
                 //$fechaId2 = intval(substr($dato2, 0, 1));
-                $periodoId2 = intval(substr($dato2, 1, 1));
+                $periodoId2 = intval($dato2[1]);
                 //$ambienteId2 = intval(substr($dato2, 2, 1));
-                //dd($fechaId2,$periodoId2,$ambienteId2);
+                //dd("fecha",$idFecha,"periodo1",$periodoId1,"periodo2",$periodoId2,"ambiente",$ambienteId);
                 
                 
             if ($periodoId1+1 == $periodoId2) {
@@ -230,7 +232,7 @@ class ReservasController extends Controller
                 $reserva->save();
 
                 $reservaAmbiente = new ReservasAmbiente();
-                $reservaAmbiente->ambientes_id = $ambienteId1;
+                $reservaAmbiente->ambientes_id = $ambienteId;
                 $reservaAmbiente->save();
 
                 //guardar relacion de periodos en base de datos
