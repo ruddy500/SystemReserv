@@ -13,7 +13,7 @@
 			</tr>
 		</thead>
         <!-- Fila Ploma -->
-        <thead class="bg-custom-lista-fila-plomo">	
+        <!-- <thead class="bg-custom-lista-fila-plomo">	
             <tr>
                 <th class="text-center h4 text-black">691 A</th>
                 <th class="text-center h4 text-black">28-04-2024</th>
@@ -29,9 +29,9 @@
 					</div>
                 </th>
             </tr>
-        </thead>
+        </thead> -->
         <!-- Fila blanca -->
-        <thead class="bg-custom-lista-fila-blanco">
+        <!-- <thead class="bg-custom-lista-fila-blanco">
             <tr>
                 <th class="text-center h4 text-black">692 B</th>
                 <th class="text-center h4 text-black">30-04-2024</th>
@@ -47,7 +47,7 @@
 					</div>
                 </th>
             </tr>	
-        </thead>
+        </thead> -->
 	</table>
 </div>
 @endsection
