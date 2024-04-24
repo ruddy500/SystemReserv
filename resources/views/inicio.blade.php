@@ -1,3 +1,4 @@
+@if(auth()->check())
 @extends('index')
 
 @section('inicio')
@@ -7,3 +8,10 @@
         </div>
     </div>
 @endsection
+    
+@else
+@php
+header("Location: " . route('login.index'));
+exit();
+@endphp
+@endif

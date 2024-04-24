@@ -15,6 +15,15 @@ use App\Models\Periodos;
 $reservas = Reservas::all();
 $reservasAmbiente = ReservasAmbiente::all();
 $tamReservas = Reservas::count();
+
+Reservas::whereNull('cantEstudiante')
+    ->orWhereNull('Motivo')
+    ->orWhereNull('Estado')
+    ->orWhereNull('docentes_id')
+    ->delete();
+
+//para eliminar todo lo que tenga null
+ReservasAmbiente::whereNull('reservas_id')->delete();
 ?>
 <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
 	<table class="table table-striped table-hover table-bordered">
