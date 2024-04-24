@@ -1,6 +1,5 @@
+@if(auth()->check())
 @extends('index')
-
-
 @section('menu')
 <body id="body-pd">
     <header class="header" id="header">
@@ -54,3 +53,13 @@
     </div>
 </body>
 @endsection
+@else
+    @php
+    header("Location: " . route('login.index'));
+    exit();
+    @endphp
+@endif
+
+
+
+
