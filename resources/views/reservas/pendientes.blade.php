@@ -117,12 +117,12 @@ $tamReservas = Reservas::count();
                             {{-- ICONO DE EDITAR RESERVA --}}
 
                             <div class="circle3">
-                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
+                                <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}" data-bs-whatever="@mdo">
                                     <i class="fas fa-edit" style="color: white;"></i>  
                                 </a>
                                 @include('reservas.editar')
                             </div>
-                            
+                            {{-- {{ dd(get_defined_vars()) }} --}}
                             {{-- <div class="circle3">
                                 <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
                                     <i class="fas fa-edit" style="color: white;"></i>  
@@ -144,6 +144,14 @@ $tamReservas = Reservas::count();
                                 <input type="hidden" id="idReserva" value="{{ $idReserva }}">
                                 </a>						
                             </div>
+
+                            {{-- <div class="circle5">
+                                <a href="#" class="btn btn-fab" title="Eliminar" id="eliminar2"> 
+                                <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                <input type="hidden" id="idReserva" value="{{ $idReserva }}">
+                                </a>						
+                            </div> --}}
+
                         </div>
                     </th>
                 </tr>
@@ -171,6 +179,8 @@ $tamReservas = Reservas::count();
                                 <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
                                     <i class="fas fa-edit" style="color: white;"></i>  
                                 </a>
+                                @include('reservas.editar')
+                            </div>
                             </div>
 
                             {{-- <div class="circle3">

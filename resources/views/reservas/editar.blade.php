@@ -1,4 +1,4 @@
-{{-- {{ dd(get_defined_vars()) }} --}}
+
 <div class="modal fade" id="formularioEditReserva" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content edith-reserva">
@@ -16,17 +16,24 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 text-start">
-                        {{-- <label for="ambiente-name" class="form-label h4">Ambiente:</label>
-                        <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required disabled>
+                        <label for="ambiente-name" class="form-label h4">Ambiente:</label>
+                        {{-- <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required disabled>
                             <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
                            
                         </select> --}}
 
-                        <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
+                        <select name="ambiente" class="form-select" aria-label="Small select example" required>
+                            {{-- <option value="" disabled selected>Seleccione un ambiente</option> --}}
+                            @foreach ($reserva->ambientes as $ambiente)
+                                <option value="{{ $ambiente->id }}">{{ $ambiente->nombre }}</option>
+                            @endforeach
+                        </select>
+
+                        {{-- <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                         <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required disabled>
                             <!-- Aquí recoge el dato de nombre de ambiente -->
                             <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
-                        </select>
+                        </select> --}}
 
 
                         <div class="invalid-feedback">

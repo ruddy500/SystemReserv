@@ -389,7 +389,7 @@ public function actualizarReserva(Request $request, $idReserva='') {
 
     // Guardar los cambios en la base de datos
     $reserva->save();
-
+    return redirect()->route('reservas.pendientesDocente')->with('success', 'Solicitud de reserva actualizada exitosamente');
     // Redireccionar o responder según sea necesario
 }
 

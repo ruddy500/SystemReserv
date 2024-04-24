@@ -127,11 +127,25 @@ class HorariosController extends Controller
             //obtener anio la fecha seleccionada
             $anio_fecha = date("y", $fechaEntera);
 
-            //dd($mes_fecha);
+             // Verificar si la fecha ya existe en la tabla
+            $fechaExistente = Fechas::where('dia', $dia_fecha)
+            ->where('mes', $mes_fecha)
+            ->where('anio', $anio_fecha)
+            ->first();
 
-            //$registroAmbientes = Ambientes::all();
-            //dd($registroAmbientes);
-            
+            if (!$fechaExistente) {
+            $nuevaFecha = new Fechas();
+            $nuevaFecha->dia = $dia_fecha;
+            $nuevaFecha->mes =   $mes_fecha;
+            $nuevaFecha->anio =   $anio_fecha;
+
+           //guardamos en la tabla fecha el registro de la fecha q seleccionamos
+            $nuevaFecha->save();
+            $fechaId = $nuevaFecha->id;
+            }else {
+                // Si la fecha existe, obtener su ID del registro de la tabla fechas
+                $fechaId = $fechaExistente->id;
+            }
 
            // dd($request->ambiente);
            // dd($dia_fecha,$mes_fecha,$anio_fecha);
@@ -146,23 +160,12 @@ class HorariosController extends Controller
         })->whereIn('periodos_id', $request->periodos)
         ->where('ambientes_id', $request->ambiente) // Agregar la condición del ambiente
         ->exists();
-        // dd($request->periodos);
-        // dd($request->ambiente);
         
         if ($horariosExistente) {
             // return response()->json(['message' => 'Al menos uno de los periodos ya está asignado para esta fecha'], 400);
             return redirect()->back()->with('message', 'El horario ya existe.');
         }
-
-
-            $nuevaFecha = new Fechas();
-            $nuevaFecha->dia = $dia_fecha;
-            $nuevaFecha->mes =   $mes_fecha;
-            $nuevaFecha->anio =   $anio_fecha;
-           //guardamos en la tabla fecha el registro de la fecha q seleccionamos
-            $nuevaFecha->save();
-            //obtenemos el id de la nuevaFecha
-           // $id_nuevaFecha = $nuevaFecha->id;
+        //obtenemos el id del ambiente
             $ambienteId = $request->ambiente;
         //    dd($ambienteId);
              //aqui captura los ids de los periodos que seleccionamos en la vista
@@ -170,7 +173,7 @@ class HorariosController extends Controller
 
                 foreach ($periodosId as $periodoId) {
                     $nuevoHorario = new Horarios();
-                    $nuevoHorario->fechas_id = $nuevaFecha->id;
+                    $nuevoHorario->fechas_id = $fechaId;
                     $nuevoHorario->ambientes_id = $ambienteId;
                     $nuevoHorario->periodos_id = $periodoId;
                     $nuevoHorario->save();
