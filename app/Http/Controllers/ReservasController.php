@@ -87,8 +87,9 @@ class ReservasController extends Controller
         $ambientes_registrados = Ambientes::all();
 
         $fecha = $request->input('fecha');
+
          $ambienteId = $request->input('ambiente');
-        //  dd($ambienteId);
+         //dd($ambienteId);
          
          $ambiente = Ambientes::where('nombre_ambientes_id', $ambienteId)->first();
         // dd($ambiente->id);
@@ -123,8 +124,10 @@ class ReservasController extends Controller
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
-                            }     
-                             
+            } else{
+                return redirect()->back()->with('message', 'No hay registros.'); 
+            }    
+
        foreach ($horarios as $horario) {
         $periodo = Periodos::find($horario->periodos_id);
         $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';

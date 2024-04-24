@@ -17,11 +17,9 @@ use App\Models\NombreAmbientes;
                     <!-- Seleccionable de ambiente -->
                     <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                     <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                        
                         <option value="" disabled selected >Seleccione aula</option> 
-                        <!-- me captura todo los ambientes -->
-                        {{-- @foreach($nombreambientes as $nombreambiente)
-                        <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
-                        @endforeach    --}}         
+                        <!-- me captura todo los ambientes -->       
                         @if(isset($ambientes_registrados))
                         @foreach($ambientes_registrados as $ambienteReg)  
                         @php
@@ -33,14 +31,16 @@ use App\Models\NombreAmbientes;
                         @endforeach   
                         @endif
                     </select>
+                    
+                  
+                    
                 </div>
 
                 <div class="col">
                     <!-- Seleccionable de fecha -->
                     <label for="fecha-name" class="col-form-label h4">Fecha:</label>
                     <div id="datepicker-reserva" class="input-group date" data-date-format="dd-mm-yyyy">
-                        <input name="fecha" id="fechaInput" class="form-control" type="text" readonly />
-                        {{-- <input id="fechaInput" name="fecha" class="form-control" type="date" required> --}}
+                        <input name="fecha" id="fechaInput" class="form-control" type="text" readonly />               
                         <span class="input-group-addon"></span>
                         <button type="submit" class="btn btn-primary" style="">Consultar</button>
                     </div>
@@ -53,7 +53,7 @@ use App\Models\NombreAmbientes;
             
             @csrf
         {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
-        @if(isset($horarios))
+@if(isset($horarios))
 <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
     <table class="table table-striped table-hover table-bordered">
         <thead class="bg-custom-lista">
@@ -126,11 +126,8 @@ use App\Models\NombreAmbientes;
 </div>
 <button type="submit">Siguiente</button>
 {{-- <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a> --}}
-
-</form>
-                
+</form>              
 <div id="mensaje-container"></div>
-
 @endsection
 
 <script>
