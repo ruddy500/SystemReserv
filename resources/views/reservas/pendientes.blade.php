@@ -196,7 +196,7 @@ $tamReservas = Reservas::count();
         @endif
 </div>
 <script>
-    // Agrega un evento de clic a todos los botones con la clase 'eliminar-reserva'
+    // Agrega un evento de clic a todos los botones con la clase 'eliminar-reservaa'
     document.querySelectorAll('.eliminar-reserva').forEach(function(boton) {
         boton.addEventListener('click', function(event) {
             event.preventDefault(); // Previene la acción por defecto del botón
