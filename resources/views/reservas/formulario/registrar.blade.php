@@ -112,7 +112,6 @@ use App\Models\NombreAmbientes;
 
         </tr>
     @endforeach
-@endif
 
         </tbody>
     </table>
@@ -125,6 +124,7 @@ use App\Models\NombreAmbientes;
     </div>
 </div>
 <button type="submit">Siguiente</button>
+@endif
 {{-- <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a> --}}
 </form>              
 <div id="mensaje-container"></div>
