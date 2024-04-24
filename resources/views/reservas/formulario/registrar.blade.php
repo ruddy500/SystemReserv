@@ -42,7 +42,7 @@ use App\Models\NombreAmbientes;
                     <div id="datepicker-reserva" class="input-group date" data-date-format="dd-mm-yyyy">
                         <input name="fecha" id="fechaInput" class="form-control" type="text" readonly />               
                         <span class="input-group-addon"></span>
-                        <button type="submit" class="btn btn-primary custom-btn" style="">Consultar</button>
+                        <button id="btn-consultar" type="submit" class="btn btn-primary custom-btn" style="">Consultar</button>
                     </div>
                 </div>
             </form>
@@ -124,13 +124,12 @@ use App\Models\NombreAmbientes;
                 </div> 
 
                 {{-- @include('reservas.formulario.horariosDisponibles') --}}
-            @endif
-            
+            @endif            
             {{-- <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a> --}}
         </form>              
         <div id="mensaje-container"></div>
     </div>
-</div>
+</div> 
 @endsection
 
 <script>
@@ -165,3 +164,35 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
  </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener el botón de consulta
+        var btnConsultar = document.querySelector('button[type="submit"]');
+
+        // Agregar un evento click al botón de consulta
+        btnConsultar.addEventListener('click', function() {
+            // Obtener los valores seleccionados
+            var fechaSeleccionada = document.getElementById('fechaInput').value;
+            var ambienteSeleccionado = document.querySelector('select[name="ambiente"]').value;
+
+            // Almacenar los valores seleccionados en el almacenamiento local (localStorage)
+            localStorage.setItem('fechaSeleccionada', fechaSeleccionada);
+            localStorage.setItem('ambienteSeleccionado', ambienteSeleccionado);
+        });
+
+        // Restaurar los valores seleccionados al cargar la página
+        var fechaGuardada = localStorage.getItem('fechaSeleccionada');
+        var ambienteGuardado = localStorage.getItem('ambienteSeleccionado');
+
+        if (fechaGuardada) {
+            document.getElementById('fechaInput').value = fechaGuardada;
+        }
+
+        if (ambienteGuardado) {
+            document.querySelector('select[name="ambiente"]').value = ambienteGuardado;
+        }
+    });
+</script>
+
+
