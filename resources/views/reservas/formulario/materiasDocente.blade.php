@@ -75,10 +75,34 @@
                     event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
                     
                     // Envía el formulario manualmente
-                    document.getElementById('reservasForm').submit(); 
+                    //document.getElementById('reservasForm').submit(); 
                     
                     // Redirigir al usuario a la ruta especificada por 'reservas.formFinal'
                     // window.location.href = "{{ route('reservas.formFinal') }}";
+                });
+            </script>
+            <script>
+                document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+                    event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
+
+                    // Obtén todos los checkboxes
+                    var checkboxes = document.querySelectorAll('input[type=checkbox]');
+                    
+                    // Verifica si al menos uno está seleccionado
+                    var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+                    
+                    if (checkedOne) {
+                        // Si al menos uno está seleccionado, envía el formulario
+                        document.getElementById('reservasForm').submit();
+                    } else {
+                        // Si ninguno está seleccionado, muestra una alerta
+                        Swal.fire({
+                            confirmButtonText: 'Aceptar',
+                            icon: 'warning',
+                            title: 'Error...',
+                            text: 'Por favor, selecciona al menos una materia',
+                        })
+                    }
                 });
             </script>
         </div>

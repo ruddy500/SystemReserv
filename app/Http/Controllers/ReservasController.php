@@ -234,6 +234,8 @@ class ReservasController extends Controller
                 
                 }else{
                     //'Escoja periodos contiguos'
+                    return back()->with('success', 'Escoja periodos contiguos.');
+
                 }
             
             

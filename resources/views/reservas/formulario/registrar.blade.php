@@ -11,7 +11,7 @@ use App\Models\NombreAmbientes;
 <div class="card-body bg-content">
     <div class="mb-3">
         <div class="row">
-            <form id="consultaPeriodosForm" action="{{ route('reservas.consultarPeriodos') }}" method="POST">
+            <form id="consultaPeriodosForm" action="{{ route('reservas.consultarPeriodos') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 <div class="col">
                     <!-- Seleccionable de ambiente -->
@@ -31,6 +31,9 @@ use App\Models\NombreAmbientes;
                         @endforeach   
                         @endif
                     </select>
+                    <div class="invalid-feedback">
+                        Selecciona un Ambiente.
+                    </div>
                     
                   
                     
@@ -40,7 +43,10 @@ use App\Models\NombreAmbientes;
                     <!-- Seleccionable de fecha -->
                     <label for="fecha-name" class="col-form-label h4">Fecha:</label>
                     <div id="datepicker-reserva" class="input-group date" data-date-format="dd-mm-yyyy">
-                        <input name="fecha" id="fechaInput" class="form-control" type="text" readonly />               
+                        <input name="fecha" id="fechaInput" class="form-control" type="text" readonly required/>  
+                        <div class="invalid-feedback">
+                            Por favor, elija una fecha validia
+                        </div>   
                         <span class="input-group-addon"></span>
                         <button id="btn-consultar" type="submit" class="btn btn-primary custom-btn" style="">Consultar</button>
                     </div>
@@ -49,13 +55,13 @@ use App\Models\NombreAmbientes;
         </div>
         {{-- {{ dd(get_defined_vars()) }} --}}
        
-        <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST">
+        <form id= "reservasForm" action="{{ route('checkbox.store') }}" method="POST" class="needs-validation" novalidate>
             
             @csrf
             {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
             @if(isset($horarios))
                 <div>
-                    <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
+                    <div id="tabla" class="table-responsive margin" style="max-height: 150px; overflow-y: auto; display: block;">
                         <table class="table table-striped table-hover table-bordered">
                             <thead class="bg-custom-lista">
                                 <tr>
@@ -67,9 +73,6 @@ use App\Models\NombreAmbientes;
                                 </tr>
                             </thead>
                             <tbody>
-                
-            
-
                                 {{-- @if(isset($horarios)) --}}
                                 @foreach($horarios as $horario)
                                     <tr>
@@ -193,6 +196,27 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector('select[name="ambiente"]').value = ambienteGuardado;
         }
     });
+</script>
+
+<script>
+(function () {
+  'use strict'
+
+  // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Bucle sobre ellos y evitar el envío
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
 </script>
 
 
