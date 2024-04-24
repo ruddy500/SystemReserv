@@ -355,25 +355,22 @@ class ReservasController extends Controller
     }
     
 // **************************************************************************************************************
-public function actualizarReserva(Request $request, $idReserva='') {
-    // Validación de datos
-    dd($request->all());
-    //$reservaa = Reservas::all();
-   dd($idReserva);
-    $request->validate([
-        'cantidad' => 'required|numeric|min:30|max:200',
-        'motivo' => 'required|string|min:5|max:100',
-    ]);
-
+public function actualizarReserva(Request $request) {
+    
+    $idReserva = intval($request->idReserva);
+    $cantidadNueva = intval($request->cantidad);
+    $motivoNuevo = $request->motivo;
+    //dd($idReserva,$cantidadNueva,$motivoNuevo);
+    
     // Encontrar la reserva por su ID
     $reserva = Reservas::findOrFail($idReserva);
 
     // Actualizar los campos cantidad y motivo
-    $reserva->cantidad_estudiantes = $request->cantidad;
-    $reserva->motivo = $request->motivo;
-
+     $reserva->CantEstudiante = $cantidadNueva;
+     $reserva->Motivo = $motivoNuevo;
+    
     // Guardar los cambios en la base de datos
-    $reserva->save();
+     $reserva->save();
     return redirect()->route('reservas.pendientesDocente')->with('success', 'Solicitud de reserva actualizada exitosamente');
     // Redireccionar o responder según sea necesario
 }

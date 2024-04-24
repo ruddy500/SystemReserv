@@ -1,11 +1,11 @@
-<!--{ { dd(get_defined_vars()) }} -->
+{{-- {{ dd(get_defined_vars()) }} --}}
 <?php 
 use App\Models\Fechas;
 use App\Models\Periodos; 
     $periodos = Periodos::all();
     $fechas = Fechas::all();
  ?>
-                
+             
 <div class="modal fade" id="formularioHorario" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">

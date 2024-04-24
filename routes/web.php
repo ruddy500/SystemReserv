@@ -75,8 +75,8 @@ Route::get('/reservas/ver/{idReserva}',[ReservasController::class,'verReserva'])
 
 Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
 
-
-Route::put('/reservas/pendientesDocente/{idReserva?}', [ReservasController::class,'actualizarReserva'])->name('reservas.actualizar');
+Route::put('/reservas/pendientesDocente', [ReservasController::class,'actualizarReserva'])->name('reservas.actualizar');
+//Route::put('/reservas/pendientesDocente/{idReserva}', [ReservasController::class,'actualizarReserva'])->name('reservas.actualizar');
 //Route::put('/reservas/pendientesDocente/horario',[ReservasController::class,'actualizarReserva'])->name('actualizar.reserva');
 // Route::put('/reservas/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');

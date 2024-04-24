@@ -125,7 +125,7 @@ ReservasAmbiente::whereNull('reservas_id')->delete();
                                         </a>
                                     </div>
                                     <div class="circle3">
-                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}">
                                             <i class="fas fa-edit" style="color: white;"></i>  
                                         </a>
                                         @include('reservas.editar')
@@ -161,7 +161,7 @@ ReservasAmbiente::whereNull('reservas_id')->delete();
                                         </a>
                                     </div>
                                     <div class="circle3">
-                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-bs-whatever="@mdo">
+                                        <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva" data-idreserva="{{ $idReserva }}" >
                                             <i class="fas fa-edit" style="color: white;"></i>  
                                         </a>
                                     </div>
