@@ -54,75 +54,78 @@ use App\Models\NombreAmbientes;
             @csrf
             {{-- TABLA QUE MUESTRA PERIODOS Y ESTADOS --}}
             @if(isset($horarios))
-                <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead class="bg-custom-lista">
-                            <tr>
-                                <th class="text-center h4 text-white">Hora inicio</th>
-                                {{-- <th class="text-center h4 text-white">Periodo</th> --}}
-                                <th class="text-center h4 text-white">Hora fin</th>
-                                <th class="text-center h4 text-white">Estado</th>
-                                <th class="text-center h4 text-white">Selección</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div>
+                    <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: block;">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="bg-custom-lista">
+                                <tr>
+                                    <th class="text-center h4 text-white">Hora inicio</th>
+                                    {{-- <th class="text-center h4 text-white">Periodo</th> --}}
+                                    <th class="text-center h4 text-white">Hora fin</th>
+                                    <th class="text-center h4 text-white">Estado</th>
+                                    <th class="text-center h4 text-white">Selección</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                
             
+
+                                {{-- @if(isset($horarios)) --}}
+                                @foreach($horarios as $horario)
+                                    <tr>
+                                        @php
+                                            // Dividir el período en hora de inicio y hora de fin
+                                            $horas = explode('-', $horario->nombre_periodo);
+
+                                            $estado = ($horario->Estado) ? "Libre" : "Ocupado";
+
+                                        @endphp
+
+                                        <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
+                                        <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
+                                        <td>{{ $estado}}</td>
+
+                                        {{-- CHECKBOX SELECCIONABLE --}}
+
+                                        {{-- <td>{{ $horario->Estado }}</td> --}}
+                                        
+                                        @if ($horario->Estado)
+                                        <td class="text-center h4 text-black">
+                                            <div class="d-flex justify-content-center">
+                                                <div>
+                                                    <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}-{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} >
+                                                </div>
+                                            </div>
+                                        </td>
+                                        {{-- ************************************* --}}
+                                
+                                        @else
+                                            
+                                        <td class="text-center h4 text-black">
+                                            <div class="d-flex justify-content-center">
+                                                <div>
+                                                    <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}--{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        @endif
+
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                        {{-- <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>  --}}
         
 
-                            {{-- @if(isset($horarios)) --}}
-                            @foreach($horarios as $horario)
-                                <tr>
-                                    @php
-                                        // Dividir el período en hora de inicio y hora de fin
-                                        $horas = explode('-', $horario->nombre_periodo);
-
-                                        $estado = ($horario->Estado) ? "Libre" : "Ocupado";
-
-                                    @endphp
-
-                                    <td>{{ $horas[0] }}</td> {{-- Hora de inicio --}}
-                                    <td>{{ $horas[1] }}</td> {{-- Hora de fin --}}
-                                    <td>{{ $estado}}</td>
-
-                                    {{-- CHECKBOX SELECCIONABLE --}}
-
-                                    {{-- <td>{{ $horario->Estado }}</td> --}}
-                                    
-                                    @if ($horario->Estado)
-                                    <td class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id }}-{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} >
-                                            </div>
-                                        </div>
-                                    </td>
-                                    {{-- ************************************* --}}
-                            
-                                    @else
-                                        
-                                    <td class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input" name="options[]" type="checkbox" id="checkboxNoLabel" value="{{ $horario->fechas_id }}-{{ $horario->periodos_id  }}--{{ $ambienteId }}" aria-label="..." data-estado={{ $horario->Estado  }} disabled>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    @endif
-
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                    {{-- <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>  --}}
-    
-
+                    </div>
+                    <button type="submit" class="btn btn-primary custom-btn">Siguiente</button>
                 </div> 
 
                 {{-- @include('reservas.formulario.horariosDisponibles') --}}
             @endif
-            <button type="submit" class="btn btn-primary custom-btn">Siguiente</button>
+            
             {{-- <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a> --}}
         </form>              
         <div id="mensaje-container"></div>
