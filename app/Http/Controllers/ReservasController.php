@@ -31,47 +31,34 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.asignadas', compact('menu'));
     }
+
     public function pendientes()
     {  
+
+        // $reservas = Reservas::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.pendientes', compact('menu'));
     }
+    
     public function registrar()
     {  
-         $nombreambientes = NombreAmbientes::all();
-    //      $ambienteId = $request->input('ambiente');
-    //      $ambiente = Ambientes::where('nombre_ambientes_id', $ambienteId)->first();
-    //      $fechita = $request->fecha;
-    //      //dd($fechita);
-    //     // dd($$request->fecha_id);
-    //      $fechaEntera = strtotime($fechita);
-    //      //obtener dia de la fecha seleccionada
-    //      $dia_fecha = date("d", $fechaEntera);
-    //      //obtener mes de la fecha seleccionada
-    //      $mes_fecha = date("m", $fechaEntera);
-    //      //obtener anio la fecha seleccionada
-    //      $anio_fecha = date("y", $fechaEntera);
-    //     // dd($request->ambiente);
-    //     //$fecha = $request->input('fecha');
-
-
-    //    // $fechita = $request->fecha;
-    //     $fecha = Fechas::where('dia', $dia_fecha)
-    //                 ->where('mes',$mes_fecha)
-    //                 ->where('anio', $anio_fecha)
-    //                 ->first();
-
-    //                 //dd($ambiente->id);
+        // $nomAm = NombreAmbientes::all();
+        // dd($nomAm);
+        $ambientes_registrados = Ambientes::all();
+        //  foreach ($ambientes_registrados as &$ambienteR) {
+        // //    // $ambienteR;   
+        //      $ambiente = Ambientes::find($ambienteR->id); 
+        //      $ambineteIds = $ambiente->nombre_ambientes_id;
+        //      $nombreambientes = NombreAmbientes::find($ambineteIds);            
+        // }
+       // $hola = $ambientes_registrados->id;
+     //  dd($nombreambientes);
         
-    //     if ($fecha) {
-    //         $horarios = Horarios::where('fechas_id', $fecha->id)
-    //                             ->where('ambientes_id', $ambiente->id)
-    //                             ->get();
-
-    //                             dd($horarios);
+        //  $periodo = Periodos::find($horario->periodos_id);
+        // dd($nombreambientes);
          
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.formulario.registrar', compact('nombreambientes','menu'));
+        return view('reservas.formulario.registrar', compact('ambientes_registrados','menu'));
 
     }
 
@@ -97,11 +84,16 @@ class ReservasController extends Controller
         $menu = view('componentes/menu');
 
         $nombreambientes = NombreAmbientes::all();
+        $ambientes_registrados = Ambientes::all();
 
         $fecha = $request->input('fecha');
+
          $ambienteId = $request->input('ambiente');
+         //dd($ambienteId);
          
          $ambiente = Ambientes::where('nombre_ambientes_id', $ambienteId)->first();
+        // dd($ambiente->id);
+         //dd($ambiente);
         //  $reservasAmbiente = new ReservasAmbiente();
         //  $reservasAmbiente -> ambientes_id = $ambiente->id;
         //  $reservasAmbiente ->save();
@@ -132,26 +124,19 @@ class ReservasController extends Controller
             $horarios = Horarios::where('fechas_id', $fecha->id)
                                 ->where('ambientes_id', $ambiente->id)
                                 ->get();
-                                // $reservasAmbiente = new ReservasAmbiente();
-                                // $reservasAmbiente -> ambientes_id = $ambiente->id;
-                                // $reservasAmbiente ->save();
-        }else{
-            return redirect()->back()->with('message', 'No hay registros.'); 
-        }
-            //dd($fecha->id, $ambiente->id);
-         //  dd($horarios);
-      //     return view('reservas.formulario.registrar');
-     
+            } else{
+                return redirect()->back()->with('message', 'No hay registros.'); 
+            }    
+
        foreach ($horarios as $horario) {
         $periodo = Periodos::find($horario->periodos_id);
         $horario->nombre_periodo = $periodo ? $periodo->HoraIntervalo : 'No definido';
         //dd($horario);
     }
        //dd($nombreambientes,$menu,$horarios);
-           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios','ambienteId'));
-    }
-        
-        
+           return view('reservas.formulario.registrar', compact('nombreambientes','menu','horarios','ambienteId','ambientes_registrados'));
+   
+}     
        
     //  foreach ($horarios as $horario) {
     //     $periodo = Periodos::find($horario->periodos_id);
@@ -368,11 +353,35 @@ class ReservasController extends Controller
         // $materiasSeleccionado->whereNull('reservas_id')->delete();
         return redirect()->route('reservas.principal');
     }
+    
+// **************************************************************************************************************
+public function actualizarReserva(Request $request, $idReserva='') {
+    // Validación de datos
+    dd($request->all());
+    //$reservaa = Reservas::all();
+   dd($idReserva);
+    $request->validate([
+        'cantidad' => 'required|numeric|min:30|max:200',
+        'motivo' => 'required|string|min:5|max:100',
+    ]);
+
+    // Encontrar la reserva por su ID
+    $reserva = Reservas::findOrFail($idReserva);
+
+    // Actualizar los campos cantidad y motivo
+    $reserva->cantidad_estudiantes = $request->cantidad;
+    $reserva->motivo = $request->motivo;
+
+    // Guardar los cambios en la base de datos
+    $reserva->save();
+    return redirect()->route('reservas.pendientesDocente')->with('success', 'Solicitud de reserva actualizada exitosamente');
+    // Redireccionar o responder según sea necesario
+}
 
     public function eliminarPendiente($idReserva) {
-        
+        // dd($idReserva);
         $reserva = Reservas::find($idReserva);// Busca la reserva por su ID
-
+        //dd($idReserva);
         if ($reserva) {  // Verifica si se encontró la reserva
             
             $reserva->delete(); // Elimina la reserva

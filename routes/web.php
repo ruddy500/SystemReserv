@@ -42,6 +42,7 @@ Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
 
 // Ruta para la vista del docente
+
 Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.principal');
 Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
 Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
@@ -49,7 +50,7 @@ Route::get('/reservas/registrar', [ReservasController::class,'registrar'])->name
 
 Route::post('/reservas/registrar',[ReservasController::class,'consultarPeriodos'])->name('reservas.consultarPeriodos');
 
-// Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
+//Route::get('/reservas/registrar', [ReservasController::class,'consultarPeriodos'])->name('reservas.registrar.periodo');
 
 Route::get('/reservas/materias', [ReservasController::class,'materias'])->name('reservas.materias');
 // aqui se enviara para guardar la solicitud
@@ -70,9 +71,14 @@ Route::get('/reservas/formFinal', [ReservasController::class,'formFinal'])->name
 
 Route::get('/reservas/ver/{idReserva}',[ReservasController::class,'verReserva'])->name('reservas.ver');// materias seleccionadas por id de reserva
 
+//Route::get('/reservas/pendientesDocente/{ambiente}', [ReservasController::class, 'verAmbiente'])->name('ambientes.editar');
+
 Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
 
 
+Route::put('/reservas/pendientesDocente/{idReserva?}', [ReservasController::class,'actualizarReserva'])->name('reservas.actualizar');
+//Route::put('/reservas/pendientesDocente/horario',[ReservasController::class,'actualizarReserva'])->name('actualizar.reserva');
+// Route::put('/reservas/actualizar/{idAmbiente}', [AmbientesController::class, 'actualizarAmbiente'])->name('ambientes.actualizar');
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
     return view('auth/login');

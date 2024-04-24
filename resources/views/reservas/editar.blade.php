@@ -1,7 +1,15 @@
+
 <div class="modal fade" id="formularioEditReserva" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content edith-reserva">
-            <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+            {{-- <form class="row g-3 needs-validation" action="#" method="POST" novalidate> --}}
+<form class="row g-3 needs-validation" action="{{ route('reservas.actualizar',$idReserva) }}" method="POST" novalidate>
+    @method('PUT') 
+    <input type="hidden" name="reserva_id" id="idReservaIdInput"> 
+                {{-- <form action="{{ route('actualizar.reserva') }}" method="POST"    {{ route('ambientes.actualizar', $ambiente->id) }}>
+                    @csrf
+                    @method('PUT') --}}
+
                 <div class="modal-header">
                     <h3 class="modal-title h3">Formulario edición de reserva</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -9,10 +17,25 @@
                 <div class="modal-body">
                     <div class="mb-3 text-start">
                         <label for="ambiente-name" class="form-label h4">Ambiente:</label>
-                        <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required>
-                            <option value="" disabled selected>Seleccione aula</option>
-                            <option value="aula1">Aula 1</option>
+                        {{-- <select name="ambiente" class="form-select" aria-label="Small select example" value="hola" required disabled>
+                            <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
+                           
+                        </select> --}}
+
+                        <select name="ambiente" class="form-select" aria-label="Small select example" required>
+                            {{-- <option value="" disabled selected>Seleccione un ambiente</option> --}}
+                            @foreach ($reserva->ambientes as $ambiente)
+                                <option value="{{ $ambiente->id }}">{{ $ambiente->nombre }}</option>
+                            @endforeach
                         </select>
+
+                        {{-- <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
+                        <select name="ambiente" class="form-control form-select-sm h4" aria-label="Small select example" required disabled>
+                            <!-- Aquí recoge el dato de nombre de ambiente -->
+                            <option value="" disabled selected>{{ $ambiente->nombreambiente()->first()->Nombre }}</option>
+                        </select> --}}
+
+
                         <div class="invalid-feedback">
                         </div>
                     </div>
@@ -32,7 +55,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-aceptar" id="aceptar">Aceptar</button>
+                    <button type="submit" class="btn btn-aceptar" id="aceptar">Aceptar</button>
                     <button type="button" class="btn btn-cancelar" id="cancelar">Cancelar</button>
                 </div>
             </form>
@@ -40,7 +63,65 @@
     </div>
 </div>
 
+<!--Captura los datos de una fila con darle click al boton editar.
+    Los datos que captura son diaId periodoId y ambienteId y lo envia al modal -->
+    <script>
+        $(document).ready(function() {
+          var modalOpened = false;
+        
+          $('#formularioEditReserva').on('show.bs.modal', function (event) {
+            if (!modalOpened) {
+              modalOpened = true;
+        
+              var button = $(event.relatedTarget); // Botón que activa el modal
+              
+              var idReserva = button.data('idreserva'); // Obtener dia ID desde el botón
+        
+            //   var fechaId = button.data('idreserva'); // Obtener fecha ID desde el botón
+        
+            //   var periodoId = button.data('periodo-id'); // Obtener periodo ID desde el botón
+            //   var ambienteId = button.data('ambiente-id'); // Obtener ID del ambiente desde el botón
+        
+              // Imprimir los valores una sola vez
+              console.log("Reserva ID:", idReserva);
+            //   console.log("Periodo ID:", periodoId);
+            //   console.log("Ambiente ID:", ambienteId);
+              //envia los datos al modal 
+              $('#idReservaIdInput').val(idReserva);
+            //   $('#periodoIdInput').val(periodoId);
+            //   $('#ambienteIdInput').val(ambienteId);
+           
+        
+            }
+          });
+        
+          $('#formularioEditReserva').on('hide.bs.modal', function (event) {
+            modalOpened = false;
+          });
+        });</script>
+
+
+@if(session('success'))
 <script>
+    Swal.fire({
+        icon: 'success',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+@endif
+
+@if(session('message'))
+<script>
+    Swal.fire({
+        icon: 'warning',
+        text: '{{ session('message') }}',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+@endif
+
+{{-- <script>
     (function () {
         'use strict';
 
@@ -56,6 +137,7 @@
                     event.preventDefault(); // Agrega esta línea
                     Swal.fire({
                         text: 'Solicitud de reserva registrada Exitosamente',
+
                         icon: 'success',
                         confirmButtonText: 'Aceptar',
                         backdrop: true,
@@ -88,4 +170,4 @@
                     });;
         });
     })();
-</script>
+</script> --}}
