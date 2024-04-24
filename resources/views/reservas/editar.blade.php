@@ -1,15 +1,13 @@
-
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="modal fade" id="formularioEditReserva" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content edith-reserva">
             {{-- <form class="row g-3 needs-validation" action="#" method="POST" novalidate> --}}
-<form class="row g-3 needs-validation" action="{{ route('reservas.actualizar',$idReserva) }}" method="POST" novalidate>
+<form class="row g-3 needs-validation" action="{{ route('reservas.actualizar') }}" method="POST" novalidate>
+    @csrf
     @method('PUT') 
-    <input type="hidden" name="reserva_id" id="idReservaIdInput"> 
-                {{-- <form action="{{ route('actualizar.reserva') }}" method="POST"    {{ route('ambientes.actualizar', $ambiente->id) }}>
-                    @csrf
-                    @method('PUT') --}}
-
+    <input type="hidden" name="idReserva" id="idReservaIdInput"> 
+             
                 <div class="modal-header">
                     <h3 class="modal-title h3">Formulario edición de reserva</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -63,9 +61,37 @@
     </div>
 </div>
 
+<script>
+$(document).ready(function() {
+  var modalOpened = false;
+
+  $('#formularioEditReserva').on('show.bs.modal', function (event) {
+    if (!modalOpened) {
+      modalOpened = true;
+
+      var button = $(event.relatedTarget); // Botón que activa el modal
+
+      var idReserva = button.data('idreserva'); // Obtener el ID de la reserva del botón
+
+      // Imprimir el valor para depurar (opcional)
+      console.log("ID de la reserva:", idReserva);
+
+      // Establecer el ID de la reserva en el campo de entrada oculto del modal
+      $('#idReservaIdInput').val(idReserva);
+
+    }
+  });
+
+  $('#formularioEditReserva').on('hide.bs.modal', function (event) {
+    modalOpened = false;
+  });
+});
+
+</script>
+
 <!--Captura los datos de una fila con darle click al boton editar.
     Los datos que captura son diaId periodoId y ambienteId y lo envia al modal -->
-    <script>
+    {{-- <script>
         $(document).ready(function() {
           var modalOpened = false;
         
@@ -98,7 +124,8 @@
           $('#formularioEditReserva').on('hide.bs.modal', function (event) {
             modalOpened = false;
           });
-        });</script>
+        });
+    </script> --}}
 
 
 @if(session('success'))

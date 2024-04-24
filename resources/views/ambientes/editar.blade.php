@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('ambientes/editar')
-<!--{ { dd(get_defined_vars()) }} -->
+{{-- {{ dd(get_defined_vars()) }} --}}
 <?php 
 use App\Models\Fechas;
 use App\Models\Periodos; // Assuming you need Periodos model
