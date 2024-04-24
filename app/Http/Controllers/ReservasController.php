@@ -179,21 +179,21 @@ class ReservasController extends Controller
     public function store(Request $request)
     {   //dd($request->all());
         $options = $request->input('options');
-        $tamOptions = count($options);
-        //dd($options);
         
-        foreach ($options as &$option) {
-            $option = str_replace('-', '', $option);
-            // $option = str_replace('-', '', $option);
-        }
-       //dd($options);
         if(!empty($options)){
+            $tamOptions = count($options);
+            //dd($tamOptions);  
+            foreach ($options as &$option) {
+                $option = explode("-", $option);                
+            }
+            //dd($options);
+            //dd("entre a la parte no vacia");
             if($tamOptions == 1){
-                $idFecha = intval(substr($options[0], 0, 1));
-                $periodoId = intval(substr($options[0], 1, 1));
-                $ambienteId = intval(substr($options[0], 2, 1));
+                $idFecha = intval($options[0][0]);
+                $periodoId = intval($options[0][1]);
+                $ambienteId = intval($options[0][2]);
                 
-                //dd($fechaId,$periodoId,$ambienteId);
+                //dd($idFecha,$periodoId,$ambienteId);
                 
                //dd($idFecha);
                 $reserva = new Reservas();
@@ -208,68 +208,69 @@ class ReservasController extends Controller
                 $periodos -> reservas_id = $reserva->id;
                 $periodos -> periodos_id = $periodoId;
                 $periodos->save();
-                 //dd("entre aqui");
+                //dd("reserva",$reserva,"reseraAmbiente",$reservaAmbiente,"periodos",$periodos);
 
             }else{
                 $dato1 = $options[0];
                 $dato2 = $options[1];
+                //dd($dato1,$dato2);
                 //dato1 su fecha su periodo y su ambiente
-                $idFecha = intval(substr($dato1, 0, 1));
-                $periodoId1 = intval(substr($dato1, 1, 1));
-                $ambienteId1 = intval(substr($dato1, 2, 1));
-                
+                $idFecha = intval($dato1[0]);
+                $periodoId1 = intval($dato1[1]);
+                $ambienteId = intval($dato1[2]);
+                //dd("fecha",$idFecha,"periodo",$periodoId1,"ambiente",$ambienteId);
                 //dd($fechaId1,$periodoId1,$ambienteId1);
                 
                 //$fechaId2 = intval(substr($dato2, 0, 1));
-                $periodoId2 = intval(substr($dato2, 1, 1));
+                $periodoId2 = intval($dato2[1]);
                 //$ambienteId2 = intval(substr($dato2, 2, 1));
-                //dd($fechaId2,$periodoId2,$ambienteId2);
+                //dd("fecha",$idFecha,"periodo1",$periodoId1,"periodo2",$periodoId2,"ambiente",$ambienteId);
                 
                 
-            if ($periodoId1+1 == $periodoId2) {
-                        
-                // guardar en la base datos
-                $reserva = new Reservas();
-                $reserva->fecha=$idFecha;
-                $reserva->save();
+                if ($periodoId1+1 == $periodoId2) {
+                            
+                    // guardar en la base datos
+                    $reserva = new Reservas();
+                    $reserva->fecha=$idFecha;
+                    $reserva->save();
 
-                $reservaAmbiente = new ReservasAmbiente();
-                $reservaAmbiente->ambientes_id = $ambienteId1;
-                $reservaAmbiente->save();
+                    $reservaAmbiente = new ReservasAmbiente();
+                    $reservaAmbiente->ambientes_id = $ambienteId;
+                    $reservaAmbiente->save();
 
-                //guardar relacion de periodos en base de datos
-                $periodos = new PeriodosSeleccionado();
-                $periodos -> reservas_id = $reserva->id;
-                $periodos -> periodos_id = $periodoId1;
-                $periodos->save();
+                    //guardar relacion de periodos en base de datos
+                    $periodos = new PeriodosSeleccionado();
+                    $periodos -> reservas_id = $reserva->id;
+                    $periodos -> periodos_id = $periodoId1;
+                    $periodos->save();
 
+                
+                    $periodos2 = new PeriodosSeleccionado();
+                    $periodos2 -> reservas_id = $reserva->id;
+                    $periodos2 -> periodos_id = $periodoId2;
+                    $periodos2->save();
+                    
+                
+                }else{
+                    //'Escoja periodos contiguos'
+                }
             
-                $periodos2 = new PeriodosSeleccionado();
-                $periodos2 -> reservas_id = $reserva->id;
-                $periodos2 -> periodos_id = $periodoId2;
-                $periodos2->save();
-            
-
-                //return redirect()->route('reservas.materias')->with('dato', $idFecha);
-                
             
             }
-        
-            
-        }
 
             return redirect()->route('reservas.materias')->with('dato', $idFecha);
                 
+        }else{
+            
+                //escoja periodos
         }
-        
-       
         
         
     }
 
     //funcion para asignar a la tabla 
     public function guardar(Request $request)
-    {  
+    {  //dd($request->all());
         // $menu = view('componentes/menu'); // Crear la vista del menú
         // return view('reservas.ver', compact('menu'));
         $options = $request->input('options');
@@ -293,14 +294,16 @@ class ReservasController extends Controller
             
 
             //$ultimoRegistroRA = ReservasAmbiente::orderBy('id', 'desc')->first(); 
-            $ultimaReserva = new Reservas();
-            $ultimoRegistro = $ultimaReserva->orderBy('id', 'desc')->first();
+            //$ultimaReserva = new Reservas();
+            $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+            //dd($ultimoRegistro);
             $ultimoId = $ultimoRegistro->id;
+
             //$ultimoRegistroRA->reservas_id = $ultimoId;
             //$ultimoRegistroRA ->save();
             // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
             MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
-
+            //dd("revisa");
 
         } else {
             // Manejo de error: $options no es un array
@@ -313,9 +316,10 @@ class ReservasController extends Controller
     }
 
     public function guardarReserva(Request $request){
+        //dd($request->all());
         $cantidadest=$request->cantidad;
-        print_r($request->cantidad);
-
+        //print_r($request->cantidad);
+        //dd($request->all());
         // Instanciar la clase Reserva
         //$reserva = new Reservas();
 
@@ -351,7 +355,7 @@ class ReservasController extends Controller
         // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
         // MateriasSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $reserva->id]);
 
-        return redirect()->route('reservas.principal');
+        return redirect()->back()->with('success', 'Se ha registrado con exito.');
     }
 
     public function cancelarReserva(){

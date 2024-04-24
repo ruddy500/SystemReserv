@@ -102,7 +102,7 @@
 
         </tbody>
     </table>
-    {{-- <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a> --}}
+    {{-- <a href="{{ route('reservas.materias') }}" class="btn btn-primary custom-btn" id="btn-siguiente">Siguiente</a>  --}}
     
 
 </div> 
@@ -115,6 +115,7 @@
 
 </form>
                 
+<div id="mensaje-container"></div>
 
 @endsection
 
@@ -150,4 +151,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
  </script>
-        

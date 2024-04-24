@@ -20,31 +20,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   /*===== LINK ACTIVE =====*/
-  function colorLink(event) {
-      // Remove the 'active' class from all links
-      linkColor.forEach(l => l.classList.remove('active'));
+  window.onload = function() {
+    var botones = document.getElementsByClassName("nav_link");
+    var botonActivo = null;
+    for (var i = 0; i < botones.length; i++) {
+        if (window.location.href.indexOf(botones[i].href) >= 0) {
+            // Si este botón corresponde a una ruta más específica que el botón activo actual,
+            // entonces este botón se convierte en el nuevo botón activo
+            if (botonActivo == null || botones[i].href.length > botonActivo.href.length) {
+                if (botonActivo != null) {
+                    botonActivo.classList.remove("active");
+                }
+                botonActivo = botones[i];
+                botonActivo.classList.add("active");
+            }
+        } else {
+            botones[i].classList.remove("active");
+        }
+    }
+}
 
-      // Add the 'active' class to the clicked link
-      this.classList.add('active');
-
-      // Save the current selection in session storage
-      sessionStorage.setItem('selectedLink', this.href);
-  }
-
-  // Load the saved selection from session storage
-  const selectedLink = sessionStorage.getItem('selectedLink');
-  if (selectedLink) {
-      // Remove the 'active' class from all links
-      linkColor.forEach(l => l.classList.remove('active'));
-
-      // Add the 'active' class to the saved link
-      const linkElement = document.querySelector(`.nav_link[href="${selectedLink}"]`);
-      if (linkElement) {
-          linkElement.classList.add('active');
-      }
-  }
-
-  linkColor.forEach(l => l.addEventListener('click', colorLink));
 
 // ---**************************************************************
 
@@ -113,3 +108,11 @@ document.getElementById('userAdminBtn').addEventListener('click', function() {
         salirLink.style.display = 'none';
     }
 });
+
+function activarBoton(elemento) {
+    var botones = document.getElementsByClassName("menuBtn");
+    for (var i = 0; i < botones.length; i++) {
+        botones[i].classList.remove("active");
+    }
+    elemento.classList.add("active");
+}

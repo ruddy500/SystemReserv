@@ -3,7 +3,7 @@
 @section('contenido-registrar')
 <div class="card-body bg-content">
     <div class="mb-3">
-        <form  action="{{ route('reservas.guardarReserva') }}" method="post">
+        <form class="row g-3 needs-validation" action="{{ route('reservas.guardarReserva') }}" method="post" novalidate>
             @csrf
             {{-- <form class="row g-3 needs-validation" novalidate> --}}
             <div class="mb-3">
@@ -17,10 +17,10 @@
             <div class="mb-3">
                 <label for="motivo-text" class="col-form-label h4">Motivo:</label>
 
-                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="30" maxlength="200"></textarea>
+                <textarea class="form-control" name="motivo" id="motivo-text" required minlength="5" maxlength="200"></textarea>
 
                 <div class="invalid-feedback">
-                    Inserte un motivo entre 30 a 2000 caracteres
+                    Inserte un motivo entre 5 a 50 caracteres
                 </div>
             </div>
 
@@ -34,7 +34,62 @@
     </div>
 </div>
 
-<script>
+<script> 
+    (function () {
+        'use strict';
+
+        var forms = document.querySelectorAll('.needs-validation');
+
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    // Si el formulario es válido, enviar el formulario
+                    form.submit();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+        // Agrega un evento de clic al botón "Cancelar"
+        document.getElementById('cancelar').addEventListener('click', function() {
+            Swal.fire({
+                text: 'Cancelado',
+                icon: 'warning',
+                confirmButtonText: 'Aceptar',
+                backdrop: true,
+                allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+            }).then((result) => {
+                // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route("reservas.cancelarReserva") }}'; //  ruta a la que quieres redirigir al usuario
+                }
+            });
+        });
+
+        //mostrar modal y
+        @if(session('success'))
+        Swal.fire({
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            backdrop: true,
+            allowOutsideClick: false // Asegura que el SweetAlert2 se muestre hasta que el usuario haga clic en "Aceptar"
+        }).then((result) => {
+            // Si el usuario hace clic en "Aceptar", redirige al usuario a la ruta '/reservas'
+            if (result.isConfirmed) {
+                window.location.href = '/reservas';
+            }
+        });
+        @endif
+    })();
+
+</script>
+
+{{-- <script>
     (function () {
         'use strict';
 
@@ -57,7 +112,7 @@
                     }).then((result) => {
                         // Si el usuario hace clic en "Aceptar", redirige al usuario a otra vista
                         if (result.isConfirmed) {
-                            // window.location.href = '/reservas'; // ruta a la que quieres redirigir al usuario
+                            window.location.href = '/reservas'; // ruta a la que quieres redirigir al usuario
                         }
                     });
                 }
@@ -82,5 +137,5 @@
                     });;
         });
     })();
-</script>
+</> --}}
 @endsection

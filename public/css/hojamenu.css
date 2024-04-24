@@ -96,10 +96,21 @@
     color: white;
     box-shadow: 0 0 0 #ffffff, 
     0 0 9px #467cb6, 
-    0 0 11px #ffffff, 
-    0 0 13px #ffffff,
-    0 0 15px #ffffff;
+    0 0 4px #ffffff, 
+    0 0 5px #ffffff,
+    0 0 1px #ffffff;
     background-color: #467cb6;
+  }
+
+  .active{
+    color: white;
+    box-shadow: 0 0 0 #ffffff, 
+    0 0 9px #467cb6, 
+    0 0 4px #ffffff, 
+    0 0 5px #ffffff,
+    0 0 1px #ffffff;
+    background-color: #467cb6;
+    transition: all .5s ease-in-out 1s;
   }
 
   .nav_logo,
@@ -151,7 +162,6 @@
   }
 
   #menu {
-    background-color: #2C3E50;
     color: white;
     padding: 10px;
     margin-left: 10px;
@@ -168,6 +178,7 @@
 
 #userAdminBtn i {
     margin-right: 5px; /* Espacio entre el icono y el texto */
+    font-size: 25px;
 }
   
   #salirLink {
@@ -192,8 +203,17 @@
       margin-left: 3.5rem !important;
     }
 
+    .nav_list a {
+      margin-right: 120px;
+      padding-left: 10px;
+    }
+
+    .nav_list span{
+      font-size: 0;
+    }
+
     .nav_list i {
-      font-size: 25px;
+      font-size: 18px;
     }
   }
 
