@@ -2,6 +2,10 @@
 @extends('reservas/principal')
 
 @section('contenido-registrar')
+
+<?php 
+use App\Models\NombreAmbientes;
+?>
 {{-- {{ dd(get_defined_vars()) }} --}}
 
 <div class="card-body bg-content">
@@ -15,9 +19,19 @@
                     <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                         <option value="" disabled selected >Seleccione aula</option> 
                         <!-- me captura todo los ambientes -->
-                        @foreach($nombreambientes as $nombreambiente)
+                        {{-- @foreach($nombreambientes as $nombreambiente)
                         <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
-                        @endforeach    
+                        @endforeach    --}}         
+                        @if(isset($ambientes_registrados))
+                        @foreach($ambientes_registrados as $ambienteReg)  
+                        @php
+                      $nombreAmb = NombreAmbientes::find($ambienteReg->nombre_ambientes_id);
+                     // dd($nombreAmb);
+                      @endphp
+                        <option value="{{ $nombreAmb->id }}"> {{ $nombreAmb->Nombre }} </option>
+                         
+                        @endforeach   
+                        @endif
                     </select>
                 </div>
 
