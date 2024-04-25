@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <!-- campo para mostrar la lista horarios en orden-->
+                    <!-- campo para mostrar la lista horarios en orden desde la base de datos-->
                     <label for="periodo-name" class="col-form-label h4">Periodo:</label>
                     <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
                         <table class="table table-striped table-hover table-bordered">
