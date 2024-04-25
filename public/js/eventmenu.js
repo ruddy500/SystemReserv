@@ -62,28 +62,6 @@ $(function () {
       autoclose: true,
       todayHighlight: true,
     }).datepicker('update', new Date());
-
-      // Inicializar el datepicker de reserva
-  $("#datepicker-reserva").datepicker({
-    language: 'es',
-    autoclose: true,
-    todayHighlight: true,
-    }).datepicker('', new Date());
-
-    // Evento que se dispara al cambiar la fecha
-    $("#datepicker-reserva").on('changeDate', function (e) {
-        // Obtener la fecha seleccionada
-        var fechaSeleccionada = e.format();
-
-        // Verificar si se ha seleccionado una fecha
-        if (fechaSeleccionada) {
-            // Mostrar la tabla si se ha seleccionado una fecha
-            $('#tabla').show();
-        } else {
-            // Ocultar la tabla si no se ha seleccionado ninguna fecha
-            $('#tabla').hide();
-        }
-    });
   });
 
 });

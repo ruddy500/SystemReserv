@@ -5,10 +5,10 @@
 	<table class="table table-striped table-hover table-bordered">
 		<thead class="bg-custom-lista">
 			<tr>
-			    <th class="text-center h4 text-white">Ambiente</th>
-				<th class="text-center h4 text-white">Fecha</th>
+                <th class="text-center h4 text-white">Fecha</th>
 				<th class="text-center h4 text-white">Hora inicio</th>
 				<th class="text-center h4 text-white">Hora fin</th>
+                <th class="text-center h4 text-white">Docente</th>
                 <th class="text-center h4 text-white">Opciones</th>
 			</tr>
 		</thead>
