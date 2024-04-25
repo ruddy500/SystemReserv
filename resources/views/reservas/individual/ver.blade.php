@@ -16,23 +16,23 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Nombre docente</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">Leticia Blanco Coca</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Cantidad de estudiantes</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">150</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Motivo de reserva</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">Examen primer parcial</td>
                                 </tr>  
                                 <tr>
                                     <td style="width: 50%;">Fecha</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">30-04-2024</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Periodo</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">06:45 - 09:45</td>
                                 </tr>
                             </tbody>
                         </table>

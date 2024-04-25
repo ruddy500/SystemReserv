@@ -16,27 +16,27 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Nombre docente</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">Leticia Blanco Coca</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Cantidad de estudiantes</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">230</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Motivo de reserva</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">Examen primer parcial</td>
                                 </tr>  
                                 <tr>
                                     <td style="width: 50%;">Fecha</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">01-05-2024</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Periodo</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">09:45 - 12:45</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Materia</td>
-                                    <td style="width: 50%;"></td>
+                                    <td style="width: 50%;">Introduccion a la programacion</td>
                                 </tr>
                             </tbody>
                         </table>
