@@ -1,7 +1,7 @@
 @extends('reservas/principal')
 
 @section('contenido-registrarGrupal')
-<div class="card-body bg-content">
+<div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
