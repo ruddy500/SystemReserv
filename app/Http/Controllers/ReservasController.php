@@ -39,5 +39,10 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.individual.formFinal', compact('menu'));
     }
+    public function formFinalGrupal()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.grupal.formFinal', compact('menu'));
+    }
 
 }
