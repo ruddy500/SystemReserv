@@ -101,7 +101,7 @@
                             icon: 'warning',
                             title: 'Error...',
                             text: 'Por favor, selecciona al menos una materia',
-                        })
+                        });
                     }
                 });
             </script>

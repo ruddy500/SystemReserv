@@ -232,10 +232,6 @@ class ReservasController extends Controller
                     $periodos2->save();
                     
                 
-                }else{
-                    //'Escoja periodos contiguos'
-                    return back()->with('success', 'Escoja periodos contiguos.');
-
                 }
             
             
@@ -244,8 +240,7 @@ class ReservasController extends Controller
             return redirect()->route('reservas.materias')->with('dato', $idFecha);
                 
         }else{
-            
-                //escoja periodos
+            return redirect()->route('reservas.materias');
         }
         
         
