@@ -62,6 +62,12 @@ $(function () {
       autoclose: true,
       todayHighlight: true,
     }).datepicker('update', new Date());
+
+    $("#datepicker-final").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
+      }).datepicker('update', new Date());
   });
 
 });
