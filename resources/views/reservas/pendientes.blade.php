@@ -21,13 +21,14 @@
                 <th class="text-center h4 text-black">Examen de mesa</th>
                 <th class="text-center h4 text-black">
                     <div class="d-flex justify-content-center">
+                        <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
                         <div class="circle2">
-                            <a href="#" class="btn btn-fab" title="Ver"> 
+                            <a href="{{ route('reservas.verIndividual')}}" class="btn btn-fab" title="Ver"> 
                                 <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                             </a>
                         </div>
                         <div class="circle3">
-                            <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva">
+                            <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
                                 <i class="fas fa-edit" style="color: white;"></i>  
                             </a>
                         </div>
@@ -52,13 +53,14 @@
                 <th class="text-center h4 text-black">Seminario</th>
                 <th class="text-center h4 text-black">
                     <div class="d-flex justify-content-center">
+                        <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
                         <div class="circle2">
-                            <a href="#" class="btn btn-fab" title="Ver"> 
+                            <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
                                 <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                             </a>
                         </div>
                         <div class="circle3">
-                            <a href="#" class="btn btn-fab" title="Editar" data-bs-toggle="modal" data-bs-target="#formularioEditReserva">
+                            <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
                                 <i class="fas fa-edit" style="color: white;"></i>  
                             </a>
                         </div>

@@ -50,7 +50,9 @@ Route::get('/reservas/registrarIndividual', [ReservasController::class,'registra
 Route::get('/reservas/registrarGrupal', [ReservasController::class,'registrarGrupal'])->name('reservas.registrarGrupal');
 Route::get('/reservas/formFinalIndividual', [ReservasController::class,'formFinalIndividual'])->name('reservas.formFinalIndividual');
 Route::get('/reservas/formFinalGrupal', [ReservasController::class,'formFinalGrupal'])->name('reservas.formFinalGrupal');
-
+Route::get('/reservas/verIndividual', [ReservasController::class,'verIndividual'])->name('reservas.verIndividual');
+Route::get('/reservas/verGrupal', [ReservasController::class,'verGrupal'])->name('reservas.verGrupal');
+Route::get('/reservas/editar', [ReservasController::class,'editar'])->name('reservas.editar');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

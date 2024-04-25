@@ -21,8 +21,9 @@
                 <th class="text-center h4 text-black">Leticia Blanco Coca</th>
                 <th class="text-center h4 text-black">
                     <div class="d-flex justify-content-center">
+                        <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
                         <div class="circle2">
-                            <a href="#" class="btn btn-fab" title="Ver"> 
+                            <a href="{{ route('reservas.verIndividual')}}" class="btn btn-fab" title="Ver"> 
                                 <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                             </a>
                         </div>
@@ -39,8 +40,9 @@
                 <th class="text-center h4 text-black">Vladimir costas Jauregui</th>
                 <th class="text-center h4 text-black">
                     <div class="d-flex justify-content-center">
+                        <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
                         <div class="circle2">
-                            <a href="#" class="btn btn-fab" title="Ver"> 
+                            <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
                                 <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                             </a>
                         </div>

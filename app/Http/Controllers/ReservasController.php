@@ -44,5 +44,19 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.grupal.formFinal', compact('menu'));
     }
-
+    public function verIndividual()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.individual.ver', compact('menu'));
+    }
+    public function verGrupal()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.grupal.ver', compact('menu'));
+    }
+    public function editar()
+    {  
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.editar', compact('menu'));
+    }
 }
