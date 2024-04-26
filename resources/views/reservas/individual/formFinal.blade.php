@@ -200,12 +200,12 @@
 
         var form = document.querySelector('.needs-validation');
         form.addEventListener('submit', function(event) {
+            event.preventDefault();
             var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidad = document.querySelector('input[name="cantidad"]');
             var motivo = document.querySelector('select[name="motivo"]');
 
             if (checkedCheckboxes.length === 0) {
-                event.preventDefault();
                 Swal.fire({
                     icon: 'warning',
                     title: 'Error..',
@@ -220,7 +220,6 @@
                 });
 
                 if (Math.abs(checkedIndexes[1] - checkedIndexes[0]) !== 1) {
-                    event.preventDefault();
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',
@@ -228,7 +227,6 @@
                         confirmButtonText: 'Aceptar',
                     });
                 } else if (cantidad.value === "" || motivo.value === "") {
-                    event.preventDefault();
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',
@@ -241,16 +239,15 @@
                         title: '¡Éxito!',
                         text: 'Reserva registrada exitosamente.',
                         confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Redirige a la otra página aquí
-                            window.location.href = "la ruta aqui";
+                            form.submit();
                         }
                     });
                 }
             } else if (checkedCheckboxes.length === 1) {
                 if (cantidad.value === "" || motivo.value === "") {
-                    event.preventDefault();
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',
@@ -263,15 +260,32 @@
                         title: '¡Éxito!',
                         text: 'Reserva registrada exitosamente.',
                         confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Redirige a la otra página aquí
-                            window.location.href = "/reservas";
+                            form.submit();
                         }
                     });
                 }
             }
         });
+
+        // Aquí es donde agregas el controlador de eventos al botón "Cancelar"
+        var cancelar = document.querySelector('#cancelar');
+        cancelar.addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'info',
+                title: 'Reserva cancelada',
+                text: 'Has cancelado la reserva.',
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige a la otra página aquí
+                    window.location.href = "/reservas";
+                }
+            });
+        });
     });
 </script>
-
