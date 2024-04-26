@@ -157,106 +157,121 @@
 </div>
 @endsection
 <script>
-    // esto es para validar los campos de capacidad de estudiantes, motivo y fecha
-(function () {
-  'use strict'
-  window.addEventListener('load', function () {
-    var forms = document.getElementsByClassName('needs-validation')
-    Array.prototype.filter.call(forms, function (form) {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-        form.classList.add('was-validated')
-      }, false)
-    })
-  }, false)
-})()
+    // Validación de los campos de capacidad de estudiantes, motivo y fecha
+    (function () {
+        'use strict'
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation')
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    })()
 </script>
 
 <script>
-    //aqui validamos todos lo que tiene que ver con los horarios
-document.addEventListener('DOMContentLoaded', function () {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    var maxCheckboxes = 2;
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var maxCheckboxes = 2;
 
-    // Event listener para los cambios en los checkboxes
-    checkboxes.forEach(function(checkbox, index) {
-        checkbox.addEventListener('change', function() {
-            // Obtener los checkboxes seleccionados
+        checkboxes.forEach(function(checkbox, index) {
+            checkbox.addEventListener('change', function() {
+                var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                
+                if (checkedCheckboxes.length >= maxCheckboxes) {
+                    checkboxes.forEach(function(cb) {
+                        if (!cb.checked) {
+                            cb.disabled = true;
+                        }
+                    });
+                } else {
+                    checkboxes.forEach(function(cb) {
+                        cb.disabled = false;
+                    });
+                }
+            });
+        });
+
+        var form = document.querySelector('.needs-validation');
+        form.addEventListener('submit', function(event) {
             var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            
-            // Si se seleccionan más de dos checkboxes, deshabilitar los restantes
-            if (checkedCheckboxes.length >= maxCheckboxes) {
-                checkboxes.forEach(function(cb) {
-                    if (!cb.checked) {
-                        cb.disabled = true;
-                    }
-                });
-            } else {
-                // Habilitar todos los checkboxes si no se ha alcanzado el límite
-                checkboxes.forEach(function(cb) {
-                    cb.disabled = false;
-                });
-            }
+            var cantidad = document.querySelector('input[name="cantidad"]');
+            var motivo = document.querySelector('select[name="motivo"]');
 
-            // Verificar si se han seleccionado exactamente 2 checkboxes
-            if (checkedCheckboxes.length === maxCheckboxes) {
-                // Obtener los índices de los checkboxes seleccionados
+            if (checkedCheckboxes.length === 0) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Error..',
+                    text: 'Seleccione al menos un horario',
+                    confirmButtonText: 'Aceptar',
+                });
+            } else if (checkedCheckboxes.length === maxCheckboxes) {
                 var checkedIndexes = Array.from(checkboxes).map(function(cb, i) {
                     return cb.checked ? i : -1;
                 }).filter(function(index) {
                     return index !== -1;
                 });
 
-                // Verificar si los índices seleccionados no son contiguos
                 if (Math.abs(checkedIndexes[1] - checkedIndexes[0]) !== 1) {
-                    // Mostrar SweetAlert si los horarios no son contiguos
+                    event.preventDefault();
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',
                         text: 'Por favor seleccione horarios contiguos.',
                         confirmButtonText: 'Aceptar',
                     });
+                } else if (cantidad.value === "" || motivo.value === "") {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Error...',
+                        text: 'Por favor completa todos los campos.',
+                        confirmButtonText: 'Aceptar',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: 'Reserva registrada exitosamente.',
+                        confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirige a la otra página aquí
+                            window.location.href = "la ruta aqui";
+                        }
+                    });
+                }
+            } else if (checkedCheckboxes.length === 1) {
+                if (cantidad.value === "" || motivo.value === "") {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Error...',
+                        text: 'Por favor completa todos los campos.',
+                        confirmButtonText: 'Aceptar',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: 'Reserva registrada exitosamente.',
+                        confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirige a la otra página aquí
+                            window.location.href = "/reservas";
+                        }
+                    });
                 }
             }
         });
     });
-//antes de enviar el formulario verificamos si esta vacio o no son contiguos
-    var form = document.querySelector('.needs-validation');
-    // Event listener para el envío del formulario
-    form.addEventListener('submit', function(event) {
-        var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        // Verificar si no se ha seleccionado ningún horario
-        if (checkedCheckboxes.length === 0) {
-            event.preventDefault();
-            // Mostrar SweetAlert si no se ha seleccionado ningún horario
-            Swal.fire({
-                icon: 'warning',
-                title: 'Error..',
-                text: 'Seleccione al menos un horario',
-                confirmButtonText: 'Aceptar',
-            });
-        } else if (checkedCheckboxes.length === maxCheckboxes) {
-            // Verificar si los horarios seleccionados son contiguos
-            var checkedIndexes = Array.from(checkboxes).map(function(cb, i) {
-                return cb.checked ? i : -1;
-            }).filter(function(index) {
-                return index !== -1;
-            });
-
-            if (Math.abs(checkedIndexes[1] - checkedIndexes[0]) !== 1) {
-                // Mostrar SweetAlert si los horarios no son contiguos
-                event.preventDefault();
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Error...',
-                    text: 'Por favor seleccione horarios contiguos.',
-                    confirmButtonText: 'Aceptar',
-                });
-            }
-        }
-    });
-});
 </script>
+
