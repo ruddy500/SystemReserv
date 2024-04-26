@@ -54,6 +54,36 @@
                                         </th>
                                     </tr>	
                                 </thead>
+                                <!-- Fila Ploma -->
+                                <thead class="bg-custom-lista-fila-plomo">	
+                                    <tr>
+                                        <th class="text-center h4 text-black">Elementos de programacion</th>
+                                        <th class="text-center h4 text-black">2</th>
+                                        <th class="text-center h4 text-black">110</th>
+                                        <th class="text-center h4 text-black">
+                                            <div class="d-flex justify-content-center">
+                                                <div>
+                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <!-- Fila blanca -->
+                                <thead class="bg-custom-lista-fila-blanco">
+                                    <tr>
+                                        <th class="text-center h4 text-black">Elementos de programacion</th>
+                                        <th class="text-center h4 text-black">3</th>
+                                        <th class="text-center h4 text-black">80</th>
+                                        <th class="text-center h4 text-black">
+                                            <div class="d-flex justify-content-center">
+                                                <div>
+                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>	
+                                </thead>
                             </form>
                         </table>
                         <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a>
