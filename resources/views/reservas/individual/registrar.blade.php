@@ -87,6 +87,7 @@
                             </form>
                         </table>
                         <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a>
+                        
                         <script>
                             document.getElementById('btn-siguiente').addEventListener('click', function(event) {
                                 event.preventDefault();
@@ -113,6 +114,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

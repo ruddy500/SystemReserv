@@ -16,11 +16,16 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->integer('CantEstudiante')->nullable();
-            $table->string('Motivo',50)->nullable();
+            $table->integer('TotalEstudiantes')->nullable();
             $table->string('Estado',10)->nullable();
             $table->integer('fecha')->nullable();
 
-            
+            $table->foreignId('motivos_id')
+                ->nullable()
+                ->constrained('motivos')
+                ->cascadeOnDelete() // Acción en eliminación
+                ->cascadeOnUpdate(); // Acción en actualización
+
             $table->foreignId('docentes_id')
                 ->nullable()
                 ->constrained('usuarios')
