@@ -2,7 +2,7 @@
 
 @section('contenido-registrarGrupal')
 
-<div class="card-body bg-content">
+<div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
@@ -25,7 +25,7 @@
                             </select>
                             <!-- BOTON PARA BUSCAR DIFERENTES GRUPOS DE OTROS DOCENTES -->
                             <div class="input-group-append">
-                                <button id="btn-buscar" type="button" class="btn btn-primary custom-btn">Buscar</button>
+                                <button id="btn-buscar" type="button" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
                             </div>
                         </div>
                     </div>
