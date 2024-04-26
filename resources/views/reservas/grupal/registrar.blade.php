@@ -88,8 +88,31 @@
                             //document.getElementById('reservasForm').submit(); 
                                 
                             // Redirigir al usuario a la ruta especificada por 'reservas.formFinal'
-                            window.location.href = "{{ route('reservas.formFinalGrupal') }}";
+                            //window.location.href = "{{ route('reservas.formFinalGrupal') }}";
                         });
+                    </script>
+                    <script>
+                            document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+                                event.preventDefault();
+
+                                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+                                if (!checkedOne) {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Error...',
+                                        text: 'Debes seleccionar al menos una materia!',
+                                        confirmButtonText: 'Aceptar',
+                                    });
+                                } else {
+                                    // Envía el formulario manualmente
+                                    //document.getElementById('reservasFormIndividual').submit(); 
+
+                                    // Redirigir al usuario a la ruta especificada por 'reservas.formFinalIndividual'
+                                    window.location.href = "{{ route('reservas.formFinalIndividual') }}";
+                                }
+                            });
                     </script>
                 </div>
             </div>
