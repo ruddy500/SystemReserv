@@ -86,7 +86,7 @@
                                 </thead>
                             </form>
                         </table>
-                        <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</a>
+                        <button type="button" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</button>
                         
                         <script>
                             document.getElementById('btn-siguiente').addEventListener('click', function(event) {

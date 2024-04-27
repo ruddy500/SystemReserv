@@ -79,7 +79,7 @@
                         </form>
                     </table>
                     <!-- BOTON SIGUIENTE DE LA TABLA -->
-                    <a href="#" id="btn-siguiente" class="btn btn-primary custom-btn" style="display: none;">Siguiente</a>
+                    <button id="btn-siguiente" class="btn btn-primary custom-btn" style="display: none;">Siguiente</button>
                     <script>
                         document.getElementById('btn-siguiente').addEventListener('click', function(event) {
                             event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
