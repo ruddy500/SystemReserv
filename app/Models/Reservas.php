@@ -26,5 +26,9 @@ class Reservas extends Model
     public function periodosSeleccionado(){
         return $this->hasMany(PeriodosSeleccionado::class, 'reservas_id');
     }
+
+    public function motivo() {
+        return $this->belongsTo(Motivos::class, 'motivos_id');
+    }
     
 }
