@@ -81,4 +81,34 @@
         </table>
     </div>
 </div>
+<!-- Agrega este bloque de script al final de tu archivo blade -->
+<script>
+    // Espera a que el documento esté completamente cargado
+    $(document).ready(function() {
+        // Maneja el clic en el botón de eliminar
+        $('.eliminar-reserva').click(function() {
+            // Muestra una alerta SweetAlert
+            Swal.fire({
+                title: '¿Está seguro que desea eliminar la solicitud de reserva??',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28AF06',
+                cancelButtonColor: '#D30C1F',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Muestra un modal con el mensaje de éxito al borrar
+                    Swal.fire({
+                        title: 'Borrado con éxito',
+                        text: 'La Reserva ha sido eliminado.',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar',
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection
