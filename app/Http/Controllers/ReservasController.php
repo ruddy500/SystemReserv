@@ -170,6 +170,47 @@ class ReservasController extends Controller
 
 
     public function guardarGrupal(Request $request){
+        $options=$request->input('options');
+        $fecha = $request->input('fecha');
+
+        // // String con la fecha
+        // $stringFecha = "28-04-2024";
+
+        // Dividir el string en partes utilizando el guion como delimitador
+        $partesFecha = explode("-", $fecha);
+
+        // Asignar cada parte a una variable
+        $dia = (int)$partesFecha[0];   // Convertir a entero utilizando (int)
+        $mes = (int)$partesFecha[1];   // Convertir a entero utilizando (int)
+        $anio = (int)$partesFecha[2]; 
+
+        $fecha_A_ingresar = new Fechas();
+        $fecha_A_ingresar->dia = $dia;
+        $fecha_A_ingresar->mes = $mes;
+        $fecha_A_ingresar->anio = $anio;
+        $fecha_A_ingresar->save();
+
+
+
+        // llenamos los periodos en el horario
+        for ($i=0; $i <count($options) ; $i++) { 
+            $id = $options[$i];
+            $periodoSeleccionado = new PeriodosSeleccionado();
+            
+            $periodoSeleccionado->periodos_id=$id;
+            // Guardar en la base de datos
+            $periodoSeleccionado->save();
+
+            
+        }
+
+
+
+
+
+
+
+
         $materias = json_decode($request->input('materias'), true);
 
         // dd($materias);
@@ -192,6 +233,7 @@ class ReservasController extends Controller
         $reserva->docentes_id=$request->usuario;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "grupal";
+        $reserva->fecha = $fecha_A_ingresar->id;
         $reserva->save();
         
         $totalEstudiantes=0;
@@ -214,6 +256,11 @@ class ReservasController extends Controller
         $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
         $ultimoRegistro->save();
 
+        // llenaremos los campos en Periodos seleccionados
+        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+        $ultimoId = $ultimoRegistro->id;
+        // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+        PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
         
 
         // redirigimos a la ruta 

@@ -67,7 +67,7 @@
                                     <th class="text-center h4 text-white">Selección</th>
                                 </tr>
                             </thead>
-                            <form id="reservasForm" action="" method="post">
+                            {{-- <form id="reservasForm" action="" method="post"> --}}
                                 @foreach ($periodosGrupal as $periodo)
                                 @php
                                     // Dividir la cadena de hora en hora de inicio y hora de fin
@@ -86,13 +86,14 @@
                                     <td class="text-center h4 text-black">
                                         <div class="d-flex justify-content-center">
                                             <div>
-                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="..." >
+                                                {{-- aqui se envia la opcion que se elije --}}
+                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{$periodo->id}}" aria-label="..." 
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
-                            </form>
+                            {{-- </form> --}}
                         </table>
                     </div>
                 </div>
