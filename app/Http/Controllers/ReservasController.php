@@ -9,7 +9,11 @@ use App\Models\Reservas;
 use App\Models\Periodos;
 
 use App\Models\DocentesMaterias;
+use App\Models\Fechas;
+use App\Models\Horarios;
 use App\Models\MateriasSeleccionado;
+use App\Models\PeriodosSeleccionado;
+
 
 
 
@@ -96,7 +100,41 @@ class ReservasController extends Controller
     }
     
     public function guardarIndividual(Request $request){
-        // dd($request->materias);
+        $options=$request->input('options');
+        $fecha = $request->input('fecha');
+
+        // // String con la fecha
+        // $stringFecha = "28-04-2024";
+
+        // Dividir el string en partes utilizando el guion como delimitador
+        $partesFecha = explode("-", $fecha);
+
+        // Asignar cada parte a una variable
+        $dia = (int)$partesFecha[0];   // Convertir a entero utilizando (int)
+        $mes = (int)$partesFecha[1];   // Convertir a entero utilizando (int)
+        $anio = (int)$partesFecha[2]; 
+
+        $fecha_A_ingresar = new Fechas();
+        $fecha_A_ingresar->dia = $dia;
+        $fecha_A_ingresar->mes = $mes;
+        $fecha_A_ingresar->anio = $anio;
+        $fecha_A_ingresar->save();
+
+
+
+        // llenamos los periodos en el horario
+        for ($i=0; $i <count($options) ; $i++) { 
+            $id = $options[$i];
+            $periodoSeleccionado = new PeriodosSeleccionado();
+            
+            $periodoSeleccionado->periodos_id=$id;
+            // Guardar en la base de datos
+            $periodoSeleccionado->save();
+
+            
+        }
+
+
         $cantidadIngresada = $request->cantidad;
         $motivoSeleccionado = $request->input('motivo');
         // dd($motivoSeleccionado);
@@ -116,8 +154,16 @@ class ReservasController extends Controller
         $reserva->docentes_id=$request->usuario;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "individual";
+        $reserva->fecha = $fecha_A_ingresar->id;
         $reserva->save();
         
+
+        // llenaremos los campos en Periodos seleccionados
+        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+        $ultimoId = $ultimoRegistro->id;
+        // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+        PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
+
         // redirigimos a la ruta 
         return redirect()->route('reservas.principal');
     }
