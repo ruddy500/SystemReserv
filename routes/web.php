@@ -46,7 +46,9 @@ Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.p
 Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');
 Route::get('/reservas/pendientesDocente', [ReservasController::class,'pendientes'])->name('reservas.pendientesDocente');
 
-Route::get('/reservas/registrarIndividual', [ReservasController::class,'registrar'])->name('reservas.registrarIndividual');
+Route::get('/reservas/registrarIndividual', [ReservasController::class,'registrar'])->name('reservas.registrarIndividual'); //parte de rudy
+
+
 Route::get('/reservas/registrarGrupal', [ReservasController::class,'registrarGrupal'])->name('reservas.registrarGrupal');
 Route::get('/reservas/formFinalIndividual', [ReservasController::class,'formFinalIndividual'])->name('reservas.formFinalIndividual');
 

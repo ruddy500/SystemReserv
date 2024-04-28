@@ -8,6 +8,7 @@ use App\Models\Motivos;
 use App\Models\Reservas;
 use App\Models\Periodos;
 
+use App\Models\DocentesMaterias;
 
 
 
@@ -32,8 +33,13 @@ class ReservasController extends Controller
     }
     public function registrar()
     {  
+        //parte de rudy
+        $materias_docentes= DocentesMaterias::all(); //guarda la tabla materias docentes
+        $materias= Materias::all(); //guarda la tabla materias
+        $tam = $materias_docentes->count(); //tamanio de la tabla docentes_materias
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.registrar', compact('menu'));
+        return view('reservas.individual.registrar', compact('menu','materias','materias_docentes','tam'));
     }
     public function registrarGrupal()
     {  
