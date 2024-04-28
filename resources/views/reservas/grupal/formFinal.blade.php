@@ -5,7 +5,12 @@
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
-            <form id="" method="POST">
+            <form id="" action="{{route('reservas.guardarGrupal')}}" method="POST">
+                @csrf
+                {{-- campo para enviar el usuario --}}
+                <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
+                {{-- campo para enviar materias --}}
+                <input type="hidden" name="materias" value="{{json_encode($materias)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
                     <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>

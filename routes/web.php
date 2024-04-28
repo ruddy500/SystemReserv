@@ -57,6 +57,10 @@ Route::post('/reservas/formFinalIndividual', [ReservasController::class,'guardar
 
 
 Route::get('/reservas/formFinalGrupal', [ReservasController::class,'formFinalGrupal'])->name('reservas.formFinalGrupal');
+
+//aqui se enviara lo de grupal
+Route::post('/reservas/formFinalGrupal', [ReservasController::class,'guardarGrupal'])->name('reservas.guardarGrupal');
+
 Route::get('/reservas/verIndividual', [ReservasController::class,'verIndividual'])->name('reservas.verIndividual');
 Route::get('/reservas/verGrupal', [ReservasController::class,'verGrupal'])->name('reservas.verGrupal');
 Route::get('/reservas/editar', [ReservasController::class,'editar'])->name('reservas.editar');
