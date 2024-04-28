@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Materias;
+use App\Models\Motivos;
+use App\Models\Reservas;
+
+
+
 
 class ReservasController extends Controller
 {
@@ -58,5 +63,30 @@ class ReservasController extends Controller
     {  
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.editar', compact('menu'));
+    }
+
+    public function guardarIndividual(Request $request){
+        $cantidadIngresada = $request->cantidad;
+        $motivoSeleccionado = $request->input('motivo');
+        // dd($motivoSeleccionado);
+
+        // vamos a buscar en  el Motivo lo que se ingreso
+        $motivo = Motivos::where('Nombre',$motivoSeleccionado)->first();
+        // aqui traemos el id del Motivo
+        $id_Motivo = $motivo->id;
+        // dd($id_Motivo);
+
+
+
+        // aqui vamos a interactuar con la base de datos
+        $reserva = new Reservas();
+        $reserva->CantEstudiante = $cantidadIngresada;
+        $reserva->motivos_id = $id_Motivo;
+        $reserva->docentes_id=$request->usuario;
+        $reserva->Estado = "pendiente";
+        $reserva->save();
+        
+        // redirigimos a la ruta 
+        return redirect()->route('reservas.principal');
     }
 }
