@@ -86,5 +86,7 @@ class ReservasController extends Controller
         $reserva->Estado = "pendiente";
         $reserva->save();
         
+        // redirigimos a la ruta 
+        return redirect()->route('reservas.principal');
     }
 }
