@@ -54,6 +54,10 @@ Route::get('/reservas/verIndividual', [ReservasController::class,'verIndividual'
 Route::get('/reservas/verGrupal', [ReservasController::class,'verGrupal'])->name('reservas.verGrupal');
 Route::get('/reservas/editar', [ReservasController::class,'editar'])->name('reservas.editar');
 
+Route::post('/reservas/registrarGrupal',[ReservasController::class,'consultarMaterias'])->name('reservas.grupal.consultarMaterias');
+
+Route::post('/reservas/registrarGrupal/tomarMaterias',[ReservasController::class,'enviarMaterias'])->name('reservas.grupal.tomarMaterias');
+
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
     return view('auth/login');

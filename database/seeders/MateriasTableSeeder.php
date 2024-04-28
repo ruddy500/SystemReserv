@@ -10,20 +10,41 @@ class MateriasTableSeeder extends Seeder
     
     public function run()
     {
+       
         Materias::create(['Nombre'=>"Elementos de programacion",
                           'Grupo' =>1,
+                          'Inscritos'=>60,
+                        ]);
+        Materias::create(['Nombre'=>"Elementos de programacion",
+                          'Grupo' =>2,
                           'Inscritos'=>90,
                         ]);
         
         Materias::create(['Nombre'=>"Elementos de programacion",
+                          'Grupo' =>3,
+                          'Inscritos'=>90,
+                        ]);
+
+        Materias::create(['Nombre'=>"Introduccion a la programacion",
                           'Grupo' =>2,
                           'Inscritos'=>80,
                         ]);
 
-        Materias::create(['Nombre'=>"Elementos de programacion",
+        Materias::create(['Nombre'=>"Arquitectura de computadoras",
                           'Grupo' =>3,
                           'Inscritos'=>70,
                         ]);
+        
+        Materias::create(['Nombre'=>"Taller de ingieneria de software",
+                          'Grupo' =>2,
+                          'Inscritos'=>80,
+                        ]);
+
+        Materias::create(['Nombre'=>"Algoritmos avanzados",
+                          'Grupo' =>1,
+                          'Inscritos'=>70,
+                        ]);
+
         Materias::create(['Nombre'=>"Ecuaciones Diferenciales",
                           'Grupo' =>10,
                           'Inscritos'=>90,
@@ -43,10 +64,6 @@ class MateriasTableSeeder extends Seeder
         Materias::create(['Nombre'=>"Aplicacion de Sistemas Operativos",
                           'Grupo' =>14,
                           'Inscritos'=>60,
-                        ]);
-        Materias::create(['Nombre'=>"Estadistica 2",
-                          'Grupo' =>7,
-                          'Inscritos'=>70,
                         ]);
         Materias::create(['Nombre'=>"Simulacion de Sistemas",
                           'Grupo' =>8,
