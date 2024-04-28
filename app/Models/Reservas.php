@@ -9,7 +9,7 @@ class Reservas extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    protected $table = 'reservas';
 
     public function docente(){
         return $this->belongsTo(Usuarios::class, 'docentes_id');

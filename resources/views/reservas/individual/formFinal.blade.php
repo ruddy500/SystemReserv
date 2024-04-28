@@ -5,7 +5,10 @@
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
-            <form id="" method="POST" class="needs-validation" novalidate>
+            <form id="" action="{{route('reservas.guardarIndividual')}}" method="POST" class="needs-validation" novalidate>
+                @csrf
+                {{-- campo para enviar el usuario --}}
+                <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
                     <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
