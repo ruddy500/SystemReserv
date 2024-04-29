@@ -49,12 +49,12 @@
                <?php 
                 //capturo las materias que me envia mi controlador consultar materias a esta vista
                 $reservasFiltradas = session()->get('reservasFiltradas');
-                dd($reservasFiltradas);
+                // dd($reservasFiltradas);
             ?>
           @endif
           {{-- falta la tabla que se muestr solo ccuando le doy a buscar --}}
         <!-- TABLA DE LA LISTA DE RESERVAS DE LOS DOCENTES -->
-        <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+        {{-- <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
             <table class="table table-striped table-hover table-bordered">
                 <thead class="bg-custom-lista">
                     <tr>
@@ -105,6 +105,7 @@
                 </thead> 	    
             </table>
         </div>
+     --}}
     </div>
 </div>
 
