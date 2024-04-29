@@ -48,6 +48,7 @@ class ReservasController extends Controller
     }
     public function formFinalGrupal()
     {  
+        // $periodosGrupal = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.grupal.formFinal', compact('menu'));
     }
@@ -79,11 +80,11 @@ class ReservasController extends Controller
     }
 
     public function enviarMaterias(Request $request){
-
+        $periodosGrupal = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
         $materias = array_map('intval', $request->options);//covierte el arreglo en enteros.
         // dd($materias);
-        return view('reservas.grupal.formFinal',compact('menu','materias'));
+        return view('reservas.grupal.formFinal',compact('menu','materias', 'periodosGrupal'));
     }
     
     public function guardarIndividual(Request $request){
