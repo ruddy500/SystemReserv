@@ -14,17 +14,22 @@ class DocentesMateriasTableSeeder extends Seeder
      */
     public function run()
     {
-        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>2]);
-        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>3]);
-        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>1]);  //leticia gupos 1,2,3
+        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>1]);//elementos rosemary
 
-        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>4]);   //catari
-        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>5]);
-        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>6]);
-        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>7]);
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>2]);// elementos leti
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>3]);// elementos       
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>4]);// intro
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>5]);// arqui
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>6]);// Tis
+        DocentesMaterias::create(['docentes_id'=>2,'materias_id' =>7]);// algoritmos
 
-        DocentesMaterias::create(['docentes_id'=>4,'materias_id' =>8]);  //cussi
+        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>8]);   //catari
+        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>9]);
+        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>10]);
+        DocentesMaterias::create(['docentes_id'=>3,'materias_id' =>11]);
 
-        DocentesMaterias::create(['docentes_id'=>5,'materias_id' =>10]);  //henry
+        DocentesMaterias::create(['docentes_id'=>4,'materias_id' =>12]);  //cussi
+
+        DocentesMaterias::create(['docentes_id'=>5,'materias_id' =>13]);  //henry
     }
 }

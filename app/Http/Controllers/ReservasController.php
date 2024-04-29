@@ -67,6 +67,25 @@ class ReservasController extends Controller
         return view('reservas.editar', compact('menu'));
     }
 
+    public function consultarMaterias(Request $request ){
+        
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        $materiaSelec = $request->materia;//nombre de materia
+        $materias = Materias::where('Nombre',$materiaSelec)->get();//recolecta las materias seleccionada
+        //dd($materias);
+
+        //return view('reservas.grupal.registrar', compact('menu','materias'));
+        return redirect()->route('reservas.registrarGrupal')->with('materias', $materias)->withInput();
+    }
+
+    public function enviarMaterias(Request $request){
+
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        $materias = array_map('intval', $request->options);//covierte el arreglo en enteros.
+        // dd($materias);
+        return view('reservas.grupal.formFinal',compact('menu','materias'));
+    }
+    
     public function guardarIndividual(Request $request){
         $cantidadIngresada = $request->cantidad;
         $motivoSeleccionado = $request->input('motivo');

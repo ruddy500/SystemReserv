@@ -2,14 +2,43 @@
 
 @section('contenido-registrarGrupal')
 
+<?php
+    use App\Models\DocentesMaterias;
+    use App\Models\Materias;
+    use App\Models\Usuarios;
+
+    $idDocente = auth()->user()->id;
+    $nombreDocente = auth()->user()->name ;                
+    $docenteMaterias = DocentesMaterias::where('docentes_id',$idDocente)->get();
+
+    $materiasSinRep = [];
+
+    // Filtrar los registros para obtener solo los materias_id con nombres diferentes
+    $i = 0;
+    foreach ($docenteMaterias as $docenteMateria) {
+        $materiaId = $docenteMateria->materias_id;
+        $nombreMateria = Materias::find($materiaId)->Nombre; // Suponiendo que tengas un modelo Materia con una columna 'nombre'
+
+        // Verificar si el nombre de la materia ya está en el array
+        if (!in_array($nombreMateria, $materiasSinRep)) {
+            // Si no está, agregarlo al array
+            $materiasSinRep[$i] = $nombreMateria;
+            $i++;
+        }
+    }
+
+    $tamMaterias = count($materiasSinRep);
+?>
+
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
-            <form id="formulario" method="POST">
+            <form id="formulario" action= "{{ route('reservas.grupal.consultarMaterias') }}" method="POST">
+                @csrf
                 <div class="col">
                     <!-- campo para poner el nombre del docente que está haciendo la reserva-->
-                    <label for="docente-name" class="col-form-label h4">Nombre docente: Leticia Blanco Coca</label>
+                    <label for="docente-name" class="col-form-label h4">Nombre docente: {{ $nombreDocente }}</label>
                 </div>
                 <div class="col">
                     <!-- seleccionable de materias de un docente en específico -->
@@ -18,25 +47,36 @@
                         <div class="input-group">
                             <select name="materia" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                                 <option value="" disabled selected>Seleccione materia</option>
-                                <option>Elementos de programación y estructuración de datos</option>
-                                <option>Introducción a la programación</option> 
-                                <option>Arquitectura de computadoras</option> 
-                                <option>Taller de ingeniería de software</option>      
+                                {{-- materias del docente --}}
+                                @for ($i = 0; $i < $tamMaterias; $i++)
+                                    <?php
+                                        $nombreMateria = $materiasSinRep[$i]; 
+                                    ?>  
+                                    <option value="{{ $nombreMateria }}" {{ $nombreMateria == old('materia') ? 'selected' : '' }}>{{ $nombreMateria }}</option>            
+                                @endfor
                             </select>
-                            <!-- BOTON PARA BUSCAR DIFERENTES GRUPOS DE OTROS DOCENTES -->
                             <div class="input-group-append">
-                                <button id="btn-buscar" type="button" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
+                                <button id="btn-buscar" type="submit" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </form>
         </div>
-        <!-- TABLA MATERIAS IMPARTIDAS POR OTROS DOCENTES -->
-        <form id="" action="" method="POST" class="needs-validation" novalidate>
+      
+<!-- TABLA MATERIAS IMPARTIDAS POR OTROS DOCENTES -->
+        <form id="tabla-form" action= "{{ route('reservas.grupal.tomarMaterias') }}" method="POST" class="needs-validation" novalidate>
+            @csrf
+
+            @if (session()->get('materias'))
+            <?php 
+                $materias = session()->get('materias');
+            ?>
+            
             <div class="col">
-                <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto; display: none;">
+                <div id="tabla" class="table-responsive margin" style="max-height: 550px; overflow-y: auto; display: block;">
                     <table class="table table-striped table-hover table-bordered">
+                       
                         <thead class="bg-custom-lista">
                             <tr>
                                 <th class="text-center h4 text-white">Nombre docente</th>
@@ -45,85 +85,101 @@
                                 <th class="text-center h4 text-white">Selección</th>
                             </tr>
                         </thead>
-                        <form id="reservasFormIndividual" action="" method="post">
-                            <!-- Fila Plomo -->
-                            <thead class="bg-custom-lista-fila-plomo">    
-                                <tr>
-                                    <th class="text-center h4 text-black">Leticia Blanco Coca</th>
-                                    <th class="text-center h4 text-black">2</th>
-                                    <th class="text-center h4 text-black">110</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <!-- Fila blanca -->
-                            <thead class="bg-custom-lista-fila-blanco">
-                                <tr>
-                                    <th class="text-center h4 text-black">Carla Zalasar Serrudo</th>
-                                    <th class="text-center h4 text-black">3</th>
-                                    <th class="text-center h4 text-black">80</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>    
-                            </thead>
-                        </form>
+                       {{-- cuerpo --}}
+                        <tbody>
+                            @foreach ($materias as $materia )
+                                    <?php
+                                        $docenteMateria = DocentesMaterias::where('materias_id',$materia->id)->first();
+                                        $idDocente = $docenteMateria->docentes_id;
+                                        //dd($idDocente);
+
+                                        $docenteEncontrado = Usuarios::where('id',$idDocente)->first();
+                                        $nombreDocente = $docenteEncontrado->name;
+
+                                        $materiaGrupo = $materia->Grupo;
+                                        $materiaInscritos = $materia->Inscritos;
+                                    ?>
+                                    <!-- Fila blanca -->
+                                    <thead class="bg-custom-lista-fila-blanco">
+                                        <tr>
+                                            
+                                            <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                            <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
+                                            <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
+                                            <th class="text-center h4 text-black">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materia->id }}" aria-label="...">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>    
+                                    </thead>
+                                    
+                            @endforeach
+                        </tbody>
                     </table>
-                    <!-- BOTON SIGUIENTE DE LA TABLA -->
-                    <button id="btn-siguiente" class="btn btn-primary custom-btn" style="display: none;">Siguiente</button>
-                    <script>
-                        document.getElementById('btn-siguiente').addEventListener('click', function(event) {
-                            event.preventDefault(); // Evitar que el enlace se comporte como un enlace normal
-                                
-                            // Envía el formulario manualmente
-                            //document.getElementById('reservasForm').submit(); 
-                                
-                            // Redirigir al usuario a la ruta especificada por 'reservas.formFinal'
-                            //window.location.href = "{{ route('reservas.formFinalGrupal') }}";
-                        });
-                    </script>
-                    <script>
-                            document.getElementById('btn-siguiente').addEventListener('click', function(event) {
-                                event.preventDefault();
-
-                                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                                var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
-
-                                if (!checkedOne) {
-                                    Swal.fire({
-                                        icon: 'warning',
-                                        title: 'Error...',
-                                        text: 'Debes seleccionar al menos una materia!',
-                                        confirmButtonText: 'Aceptar',
-                                    });
-                                } else {
-                                    // Envía el formulario manualmente
-                                    //document.getElementById('reservasFormIndividual').submit(); 
-
-                                    // Redirigir al usuario a la ruta especificada por 'reservas.formFinalIndividual'
-                                    window.location.href = "{{ route('reservas.formFinalIndividual') }}";
-                                }
-                            });
-                    </script>
+                    
                 </div>
+              <!-- BOTON SIGUIENTE DE LA TABLA -->
+              <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>
+                    
             </div>
+        
+            @endif
+            
         </form>
+       
     </div>
 </div>
 
 <script>
-    document.getElementById('btn-buscar').addEventListener('click', function() {
-        document.getElementById('tabla').style.display = 'block';
-        document.getElementById('btn-siguiente').style.display = 'block';
+   
+        // Agregar un event listener para el botón de búsqueda
+        document.getElementById('btn-buscar').addEventListener('click', function() {
+            // Mostrar la tabla y el botón de siguiente después de un breve retraso
+                document.getElementById('tabla').style.display = 'block';
+                //document.getElementById('btn-siguiente').style.display = 'block';
+           
+        });
+    
+</script>
+
+{{-- ayuda a buscar --}}
+{{-- <script> 
+    // Obtener el elemento select
+    var selectMateria = document.querySelector('select[name="materia"]');
+
+    // Agregar un event listener para detectar cambios en la selección
+    selectMateria.addEventListener('change', function() {
+        // Obtener el formulario
+        var formulario = document.getElementById('formulario');
+
+        // Enviar el formulario automáticamente al cambiar la selección
+        formulario.submit();
+    });
+</script> --}}
+
+<script>
+    document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+        if (!checkedOne) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Error...',
+                text: 'Debes seleccionar al menos una materia!',
+                confirmButtonText: 'Aceptar',
+                
+            });
+            event.preventDefault();
+        } else {
+            // Redirigir al usuario a la ruta especificada por 'reservas.formFinalIndividual'
+            window.location.href = "{{ route('reservas.formFinalGrupal') }}";
+        }
     });
 </script>
+
+
 @endsection
