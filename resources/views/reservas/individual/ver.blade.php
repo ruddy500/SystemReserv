@@ -30,10 +30,10 @@
                                 </tr>  
                                 <tr>
                                     <td style="width: 50%;">Fecha</td>
-                                    <td style="width: 50%;">//</tr>
+                                    <td style="width: 50%;">{{$reservas[$idReserva-1]->fecha}}</tr>
                                 <tr>
                                     <td style="width: 50%;">Periodo</td>
-                                    <td style="width: 50%;">06:45 - 09:45</td>
+                                    <td style="width: 50%;">06:45 - 09:45 me falta periodo</td>
                                 </tr>
                             </tbody>
                         </table>
