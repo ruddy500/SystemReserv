@@ -5,7 +5,12 @@
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
-            <form id="" method="POST">
+            <form id="" action="{{route('reservas.guardarGrupal')}}" method="POST">
+                @csrf
+                {{-- campo para enviar el usuario --}}
+                <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
+                {{-- campo para enviar materias --}}
+                <input type="hidden" name="materias" value="{{json_encode($materias)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
                     <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
@@ -62,7 +67,7 @@
                                     <th class="text-center h4 text-white">Selección</th>
                                 </tr>
                             </thead>
-                            <form id="reservasForm" action="" method="post">
+                            {{-- <form id="reservasForm" action="" method="post"> --}}
                                 @foreach ($periodosGrupal as $periodo)
                                 @php
                                     // Dividir la cadena de hora en hora de inicio y hora de fin
@@ -81,13 +86,14 @@
                                     <td class="text-center h4 text-black">
                                         <div class="d-flex justify-content-center">
                                             <div>
-                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="..." >
+                                                {{-- aqui se envia la opcion que se elije --}}
+                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{$periodo->id}}" aria-label="..." 
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
-                            </form>
+                            {{-- </form> --}}
                         </table>
                     </div>
                 </div>

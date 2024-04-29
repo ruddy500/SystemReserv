@@ -8,7 +8,7 @@
             <form id="" method="POST">
                 <div class="col">
                     <!-- campo para poner el nombre del docente -->
-                    <label for="docente-name" class="col-form-label h4">Nombre docente: Leticia Blanco Coca</label>
+                    <label for="docente-name" class="col-form-label h4">Nombre docente: {{auth()->user()->name}}</label>
                 </div>
                 <div class="col">
                     <!-- campo para mostrar la lista de materias del docente -->
@@ -24,66 +24,44 @@
                                 </tr>
                             </thead>
                             <form id="reservasFormIndividual" action="" method="post">
-                                <!-- Fila Ploma -->
-                                <thead class="bg-custom-lista-fila-plomo">	
-                                    <tr>
-                                        <th class="text-center h4 text-black">Elementos de programacion</th>
-                                        <th class="text-center h4 text-black">2</th>
-                                        <th class="text-center h4 text-black">110</th>
-                                        <th class="text-center h4 text-black">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                            @for ($i = 0; $i < $tam; $i++)
+                                @if($materias_docentes[$i]->docentes_id == auth()->user()->id)
+                                    @if ($i % 2 == 0)
+                                    <!-- Fila Ploma -->
+                                    <thead class="bg-custom-lista-fila-plomo">	
+                                        <tr>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Nombre}}</th>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Grupo}}</th></th>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Inscritos}}</th>
+                                            <th class="text-center h4 text-black">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!-- Fila blanca -->
-                                <thead class="bg-custom-lista-fila-blanco">
-                                    <tr>
-                                        <th class="text-center h4 text-black">Elementos de programacion</th>
-                                        <th class="text-center h4 text-black">3</th>
-                                        <th class="text-center h4 text-black">80</th>
-                                        <th class="text-center h4 text-black">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @else
+                                    <!-- Fila blanca -->
+                                    <thead class="bg-custom-lista-fila-blanco">
+                                        <tr>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Nombre}}</th>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Grupo}}</th>
+                                            <th class="text-center h4 text-black">{{$materias[$materias_docentes[$i]->materias_id-1]->Inscritos}}</th>
+                                            <th class="text-center h4 text-black">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </th>
-                                    </tr>	
-                                </thead>
-                                <!-- Fila Ploma -->
-                                <thead class="bg-custom-lista-fila-plomo">	
-                                    <tr>
-                                        <th class="text-center h4 text-black">Elementos de programacion</th>
-                                        <th class="text-center h4 text-black">2</th>
-                                        <th class="text-center h4 text-black">110</th>
-                                        <th class="text-center h4 text-black">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                                </div>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!-- Fila blanca -->
-                                <thead class="bg-custom-lista-fila-blanco">
-                                    <tr>
-                                        <th class="text-center h4 text-black">Elementos de programacion</th>
-                                        <th class="text-center h4 text-black">3</th>
-                                        <th class="text-center h4 text-black">80</th>
-                                        <th class="text-center h4 text-black">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                                </div>
-                                            </div>
-                                        </th>
-                                    </tr>	
-                                </thead>
+                                            </th>
+                                        </tr>	
+                                    </thead>
+                                    @endif
+                                @endif
+                            @endfor
+                                
                             </form>
                         </table>
                         <button type="button" id="btn-siguiente" class="btn btn-primary custom-btn">Siguiente</button>
