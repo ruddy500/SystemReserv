@@ -94,10 +94,11 @@ class ReservasController extends Controller
 
     public function enviarMaterias(Request $request){
         $periodosGrupal = Periodos::all();
+        $motivos = Motivos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
         $materias = array_map('intval', $request->options);//covierte el arreglo en enteros.
         // dd($materias);
-        return view('reservas.grupal.formFinal',compact('menu','materias', 'periodosGrupal'));
+        return view('reservas.grupal.formFinal',compact('menu','materias', 'periodosGrupal','motivos'));
     }
     
     public function guardarIndividual(Request $request){
@@ -135,18 +136,15 @@ class ReservasController extends Controller
             
         }
 
-
         $cantidadIngresada = $request->cantidad;
-        $motivoSeleccionado = $request->input('motivo');
+        $motivoSeleccionado = $request->motivo;
         // dd($motivoSeleccionado);
 
         // vamos a buscar en  el Motivo lo que se ingreso
-        $motivo = Motivos::where('Nombre',$motivoSeleccionado)->first();
+        $motivo = Motivos::find($motivoSeleccionado); 
+       // dd($motivo);
         // aqui traemos el id del Motivo
         $id_Motivo = $motivo->id;
-        // dd($id_Motivo);
-
-
 
         // aqui vamos a interactuar con la base de datos
         $reserva = new Reservas();
@@ -205,25 +203,19 @@ class ReservasController extends Controller
             
         }
 
-
-
-
-
-
-
-
         $materias = json_decode($request->input('materias'), true);
 
-        // dd($materias);
         $cantidadIngresada = $request->cantidad;
-        $motivoSeleccionado = $request->input('motivo');
+        $motivoSeleccionado = $request->motivo;
         // dd($motivoSeleccionado);
 
         // vamos a buscar en  el Motivo lo que se ingreso
-        $motivo = Motivos::where('Nombre',$motivoSeleccionado)->first();
+        $motivo = Motivos::find($motivoSeleccionado); 
+       // dd($motivo);
         // aqui traemos el id del Motivo
         $id_Motivo = $motivo->id;
-        // dd($id_Motivo);
+        //dd($id_Motivo);
+
 
 
 

@@ -28,14 +28,10 @@
                             <div class="mb-3">
                                 <label for="motivo-name" class="col-form-label h4">Motivo:</label>
                                 <select name="motivo" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
-                                    <option value="" disabled selected>Seleccione motivo</option>
-                                    <option>Examen primer parcial</option>
-                                    <option>Examen segundo parcial</option> 
-                                    <option>Examen final</option> 
-                                    <option>Examen segunda instancia</option> 
-                                    <option>Examen de mesa</option> 
-                                    <option>Taller</option> 
-                                    <option>Seminario</option>      
+                                    <!-- Captura el Motivo -->
+                                    @foreach ($motivos as $motivo)
+                                    <option value= "{{ $motivo->id }}"> {{ $motivo->Nombre }} </option>
+                                    @endforeach
                                 </select> 
                             </div>
                         </div>
