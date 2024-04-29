@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Materias;
 use App\Models\Motivos;
 use App\Models\Reservas;
+use App\Models\Periodos;
 
 
 
@@ -41,8 +42,9 @@ class ReservasController extends Controller
     }
     public function formFinalIndividual()
     {  
+        $periodos = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.formFinal', compact('menu'));
+        return view('reservas.individual.formFinal', compact('menu', 'periodos'));
     }
     public function formFinalGrupal()
     {  
