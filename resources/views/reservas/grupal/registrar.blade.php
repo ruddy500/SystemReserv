@@ -1,7 +1,7 @@
 @extends('reservas/principal')
 
 @section('contenido-registrarGrupal')
-
+{{-- {{ dd(get_defined_vars()) }}  --}}
 <?php
     use App\Models\DocentesMaterias;
     use App\Models\Materias;
@@ -70,7 +70,9 @@
 
             @if (session()->get('materias'))
             <?php 
+                //capturo las materias que me envia mi controlador consultar materias a esta vista
                 $materias = session()->get('materias');
+                $tamMateCap = count($materias);
             ?>
             
             <div class="col">
@@ -87,18 +89,21 @@
                         </thead>
                        {{-- cuerpo --}}
                         <tbody>
-                            @foreach ($materias as $materia )
-                                    <?php
-                                        $docenteMateria = DocentesMaterias::where('materias_id',$materia->id)->first();
-                                        $idDocente = $docenteMateria->docentes_id;
-                                        //dd($idDocente);
 
-                                        $docenteEncontrado = Usuarios::where('id',$idDocente)->first();
-                                        $nombreDocente = $docenteEncontrado->name;
+                            @for ( $i=0 ; $i < $tamMateCap; $i++)
+                                <?php
+                                    
+                                    $docenteMateria = DocentesMaterias::where('materias_id',$materias[$i]->id)->first();
+                                    $idDocente = $docenteMateria->docentes_id;
+                                    //dd($idDocente);
 
-                                        $materiaGrupo = $materia->Grupo;
-                                        $materiaInscritos = $materia->Inscritos;
-                                    ?>
+                                    $docenteEncontrado = Usuarios::where('id',$idDocente)->first();
+                                    $nombreDocente = $docenteEncontrado->name;
+
+                                    $materiaGrupo = $materias[$i]->Grupo;
+                                    $materiaInscritos = $materias[$i]->Inscritos;
+                                ?>
+                                @if ($i % 2 == 0)
                                     <!-- Fila blanca -->
                                     <thead class="bg-custom-lista-fila-blanco">
                                         <tr>
@@ -109,14 +114,36 @@
                                             <th class="text-center h4 text-black">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materia->id }}" aria-label="...">
+                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
                                                     </div>
                                                 </div>
                                             </th>
                                         </tr>    
                                     </thead>
-                                    
-                            @endforeach
+ 
+                                @else
+                                    <!-- Fila plomo -->
+                                    <thead class="bg-custom-lista-fila-plomo">
+                                        <tr>
+                                            
+                                            <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                            <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
+                                            <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
+                                            <th class="text-center h4 text-black">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>    
+                                    </thead>
+                                @endif
+                                                               
+                               
+                            @endfor
+                            
+                            
                         </tbody>
                     </table>
                     

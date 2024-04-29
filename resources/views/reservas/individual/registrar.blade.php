@@ -82,6 +82,7 @@
                                         text: 'Debes seleccionar al menos una materia!',
                                         confirmButtonText: 'Aceptar',
                                     });
+                                    event.preventDefault();
                                 } else {
                                     // Envía el formulario manualmente
                                     //document.getElementById('reservasFormIndividual').submit(); 
