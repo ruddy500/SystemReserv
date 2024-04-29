@@ -35,7 +35,6 @@ $tamReservas = Reservas::count();
                     <?php
                     // *************** La fecha se guardarar en string y no en id no sera necesario buscar en fechas**********************
                         $idReserva = $reservas[$i]->id;
-                        $idFecha = $reservas[$i]->fecha;
                         $idMotivo = $reservas[$i]->motivos_id;
                         $estadoReserva = $reservas[$i]->Estado;
                     //    dd("reserva",$idReserva,"fecha",$idFecha,"motivo",$idMotivo,"estado reserva",$estadoReserva);
@@ -46,13 +45,8 @@ $tamReservas = Reservas::count();
                         $motivoSeleccionado = Motivos::where('id',$idMotivo)->first();
                         $motivo = $motivoSeleccionado->Nombre;
                         //capturo el registro de la fecha
-                        $fechaBuscar = Fechas :: where('id',$idFecha)->first();
                         
-                        $fechaDia = $fechaBuscar ->dia;
-                        $fechaMes= $fechaBuscar ->mes;
-                        $fechaAnio= $fechaBuscar ->anio;
-                        
-                        $fecha = $fechaDia . '-' . $fechaMes . '-' . $fechaAnio;
+                        $fecha = $reservas[$i]->fecha;
                        
                         if($tamPeriodosSeleccionado == 1){
                             $periodoId = $periodosSeleccionados[0]->periodos_id;
