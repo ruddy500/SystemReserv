@@ -100,6 +100,17 @@ class ReservasController extends Controller
         // dd($materias);
         return view('reservas.grupal.formFinal',compact('menu','materias', 'periodosGrupal','motivos'));
     }
+
+    public function enviarMate(Request $request){
+
+        $materias = $request->input('options');
+        $lista = array_map('intval', $materias);
+        $periodos = Periodos::all();
+        $motivos = Motivos::all();
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        
+        return view('reservas.individual.formFinal',compact('menu','periodos','lista','motivos'));
+    }
     
     public function guardarIndividual(Request $request){
         $options=$request->input('options');
