@@ -105,7 +105,7 @@ $tamReservas = Reservas::count();
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @elseif($tipo=='grupal')
-                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @endif
@@ -150,7 +150,7 @@ $tamReservas = Reservas::count();
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @elseif($tipo=='grupal')
-                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @endif
