@@ -31,7 +31,7 @@ $tamReservas = Reservas::count();
             @for ( $i=0 ; $i < $tamReservas ; $i++)
 
                 @if (auth()->user()->id == $reservas[$i]->docentes_id)
-                
+
                     <?php
                         $idReserva = $reservas[$i]->id;
                         $idFecha = $reservas[$i]->fecha;
@@ -92,73 +92,81 @@ $tamReservas = Reservas::count();
                     ?>
                     
                     @if ($i % 2 == 0)
-                        <!-- Fila Ploma -->
-                        <thead class="bg-custom-lista-fila-plomo">	
-                            <tr>
-                                <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                                <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                                <th class="text-center h4 text-black">{{ $motivo }}</th>
-                                <th class="text-center h4 text-black">
-                                    <div class="d-flex justify-content-center">
-                                        <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
-                                        <div class="circle2">
-                                            <a href="{{ route('reservas.verIndividual')}}" class="btn btn-fab" title="Ver"> 
-                                                <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                            </a>
+
+                        @if ($estadoReserva == "pendiente")
+                            <!-- Fila Ploma -->
+                            <thead class="bg-custom-lista-fila-plomo">	
+                                <tr>
+                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                    <th class="text-center h4 text-black">{{ $motivo }}</th>
+                                    <th class="text-center h4 text-black">
+                                        <div class="d-flex justify-content-center">
+                                            <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
+                                            <div class="circle2">
+                                                <a href="{{ route('reservas.verIndividual')}}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                </a>
+                                            </div>
+                                            <div class="circle3">
+                                                <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
+                                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                                </a>
+                                            </div>
+                                                    
+                                            <div class="circle5">
+                                                <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
+                                                    <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                                    <input type="hidden" class="id-reserva" value="">
+                                                </a>						
+                                            </div>
+                            
                                         </div>
-                                        <div class="circle3">
-                                            <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
-                                                <i class="fas fa-edit" style="color: white;"></i>  
-                                            </a>
-                                        </div>
-                                                
-                                        <div class="circle5">
-                                            <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
-                                                <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                                <input type="hidden" class="id-reserva" value="">
-                                            </a>						
-                                        </div>
-                        
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead> 
+                                    </th>
+                                </tr>
+                            </thead> 
                     
+                        @endif
+                        
                         
                     @else
-                        <!-- Fila blanca -->
-                        <thead class="bg-custom-lista-fila-blanco">
-                            <tr>
-                                <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                                <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                                <th class="text-center h4 text-black">{{ $motivo }}</th>
-                                <th class="text-center h4 text-black">
-                                    <div class="d-flex justify-content-center">
-                                        <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
-                                        <div class="circle2">
-                                            <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
-                                                <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                            </a>
-                                        </div>
-                                        <div class="circle3">
-                                            <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
-                                                <i class="fas fa-edit" style="color: white;"></i>  
-                                            </a>
-                                        </div>
-                        
-                                        <div class="circle5">
-                                            <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
-                                                <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                                <input type="hidden" class="id-reserva" value="">
-                                            </a>						
-                                        </div>
 
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead> 
+                        @if ($estadoReserva == "pendiente")
+                            <!-- Fila blanca -->
+                            <thead class="bg-custom-lista-fila-blanco">
+                                <tr>
+                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                    <th class="text-center h4 text-black">{{ $motivo }}</th>
+                                    <th class="text-center h4 text-black">
+                                        <div class="d-flex justify-content-center">
+                                            <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
+                                            <div class="circle2">
+                                                <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                </a>
+                                            </div>
+                                            <div class="circle3">
+                                                <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
+                                                    <i class="fas fa-edit" style="color: white;"></i>  
+                                                </a>
+                                            </div>
+                            
+                                            <div class="circle5">
+                                                <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
+                                                    <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                                    <input type="hidden" class="id-reserva" value="">
+                                                </a>						
+                                            </div>
+
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead> 
+                    
+                        @endif
                     
                     @endif
                     
