@@ -29,6 +29,7 @@
                             <div class="mb-3">
                                 <label for="motivo-name" class="col-form-label h4">Motivo:</label>
                                 <select name="motivo" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                      <!-- Captura el Motivo -->
                                     <option value="" disabled selected>Seleccione motivo</option>
                                     <option>Examen primer parcial</option>
                                     <option>Examen segundo parcial</option> 

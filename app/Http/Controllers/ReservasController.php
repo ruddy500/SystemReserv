@@ -43,8 +43,9 @@ class ReservasController extends Controller
     public function formFinalIndividual()
     {  
         $periodos = Periodos::all();
+        $motivos = Motivos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.formFinal', compact('menu', 'periodos'));
+        return view('reservas.individual.formFinal', compact('menu', 'periodos','motivos'));
     }
     public function formFinalGrupal()
     {  
