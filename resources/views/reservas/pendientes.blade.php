@@ -33,6 +33,7 @@ $tamReservas = Reservas::count();
                 @if (auth()->user()->id == $reservas[$i]->docentes_id)
 
                     <?php
+                    // *************** La fecha se guardarar en string y no en id no sera necesario buscar en fechas**********************
                         $idReserva = $reservas[$i]->id;
                         $idFecha = $reservas[$i]->fecha;
                         $idMotivo = $reservas[$i]->motivos_id;

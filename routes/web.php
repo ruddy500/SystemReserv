@@ -41,6 +41,7 @@ Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name
 Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
 
+Route::post('/reservas/pendientes', [ReservasAdminController::class, 'buscarReservas'])->name('reservas.pendientes.buscar');
 // Ruta para la vista del docente
 Route::get('/reservas', [ReservasController::class,'mostrar'])->name('reservas.principal');
 Route::get('/reservas/asignadasDocente', [ReservasController::class,'asignadas'])->name('reservas.asignadasDocente');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reservas;
+use App\Models\Fechas;
 
 class ReservasAdminController extends Controller
 {
@@ -28,4 +30,50 @@ class ReservasAdminController extends Controller
         return view('reservas.admin.pendientes', compact('menu'));
     }
     
+    //********* En proceso ***********
+    public function buscarReservas(Request $request){
+
+        //dd($request->all());
+        $reservas = Reservas::all();
+        $tamReservas = Reservas::count();
+        // dd($tamReservas);
+
+        $estadoCheckbox = $request->checkbox_estado;
+        
+        $fechaInicial = $request ->fecha_inicial;
+        $fechaFinal = $request ->fecha_final;
+        
+        $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
+        $fechaIni = $fechaCIni->format('Y-m-d');
+
+        $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
+        $fechaFin = $fechaCFin->format('Y-m-d');
+        //  dd($fechaIni,$fechaFin);
+        
+        $reservasFiltradas = [];
+        
+       for ($i=0; $i <$tamReservas ; $i++) { 
+           //modificar
+           $idFecha = $reservas[$i]->fecha;
+           $fechaEncontrar = Fechas::where('id',$idFecha)->first();
+           //dd($fechaEncontrar);
+           $dia = $fechaEncontrar->dia;
+           $mes = $fechaEncontrar->mes;
+           $anio = $fechaEncontrar->anio;
+           
+           $fechaCompleta = new \DateTime("$anio-$mes-$dia");
+            //  dd($fechaCompleta);
+            // Formatear la fecha según tus necesidades
+           $fechaReserva = $fechaCompleta->format('Y-m-d');
+            //  dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
+           if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
+            
+              $reservasFiltradas[] = $reservas[$i];
+              
+        }
+        
+    }
+     // dd($reservasFiltradas);
+     return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas)->withInput();
+}
 }

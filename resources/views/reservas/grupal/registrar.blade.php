@@ -92,7 +92,7 @@
 
                             @for ( $i=0 ; $i < $tamMateCap; $i++)
                                 <?php
-                                    
+                                
                                     $docenteMateria = DocentesMaterias::where('materias_id',$materias[$i]->id)->first();
                                     $idDocente = $docenteMateria->docentes_id;
                                     //dd($idDocente);
