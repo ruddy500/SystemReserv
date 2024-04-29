@@ -9,6 +9,8 @@
                 @csrf
                 {{-- campo para enviar el usuario --}}
                 <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
+                {{-- campo para enviar materias --}}
+                <input type="hidden" name="lista" value="{{json_encode($lista)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
                     <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
