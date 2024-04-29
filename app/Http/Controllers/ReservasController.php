@@ -122,22 +122,7 @@ class ReservasController extends Controller
 
         $materias = json_decode($request->input('lista'), true);
 
-        // // String con la fecha
-        // $stringFecha = "28-04-2024";
-
-        // Dividir el string en partes utilizando el guion como delimitador
-        $partesFecha = explode("-", $fecha);
-
-        // Asignar cada parte a una variable
-        $dia = (int)$partesFecha[0];   // Convertir a entero utilizando (int)
-        $mes = (int)$partesFecha[1];   // Convertir a entero utilizando (int)
-        $anio = (int)$partesFecha[2];
-
-        $fecha_A_ingresar = new Fechas();
-        $fecha_A_ingresar->dia = $dia;
-        $fecha_A_ingresar->mes = $mes;
-        $fecha_A_ingresar->anio = $anio;
-        $fecha_A_ingresar->save();
+        
 
 
 
@@ -168,7 +153,7 @@ class ReservasController extends Controller
         $reserva->docentes_id = $request->usuario;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "individual";
-        $reserva->fecha = $fecha_A_ingresar->id;
+        $reserva->fecha = $fecha;
         $reserva->save();
 
         $totalEstudiantes = 0;
@@ -208,22 +193,7 @@ class ReservasController extends Controller
         $options = $request->input('options');
         $fecha = $request->input('fecha');
 
-        // // String con la fecha
-        // $stringFecha = "28-04-2024";
-
-        // Dividir el string en partes utilizando el guion como delimitador
-        $partesFecha = explode("-", $fecha);
-
-        // Asignar cada parte a una variable
-        $dia = (int)$partesFecha[0];   // Convertir a entero utilizando (int)
-        $mes = (int)$partesFecha[1];   // Convertir a entero utilizando (int)
-        $anio = (int)$partesFecha[2];
-
-        $fecha_A_ingresar = new Fechas();
-        $fecha_A_ingresar->dia = $dia;
-        $fecha_A_ingresar->mes = $mes;
-        $fecha_A_ingresar->anio = $anio;
-        $fecha_A_ingresar->save();
+       
 
 
 
@@ -260,7 +230,7 @@ class ReservasController extends Controller
         $reserva->docentes_id = $request->usuario;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "grupal";
-        $reserva->fecha = $fecha_A_ingresar->id;
+        $reserva->fecha = $fecha;
         $reserva->save();
 
         $totalEstudiantes = 0;
