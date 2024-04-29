@@ -45,7 +45,7 @@ $tamReservas = Reservas::count();
                         $motivoSeleccionado = Motivos::where('id',$idMotivo)->first();
                         $motivo = $motivoSeleccionado->Nombre;
                         //capturo el registro de la fecha
-                        
+                        $tipo = $reservas[$i]->Tipo;
                         $fecha = $reservas[$i]->fecha;
                        
                         if($tamPeriodosSeleccionado == 1){
@@ -100,9 +100,15 @@ $tamReservas = Reservas::count();
                                         <div class="d-flex justify-content-center">
                                             <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
                                             <div class="circle2">
-                                                <a href="{{ route('reservas.verIndividual')}}" class="btn btn-fab" title="Ver"> 
-                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                </a>
+                                                @if ($tipo=='individual')
+                                                    <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                    </a>
+                                                @elseif($tipo=='grupal')
+                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                    </a>
+                                                @endif
                                             </div>
                                             <div class="circle3">
                                                 <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">
@@ -139,9 +145,15 @@ $tamReservas = Reservas::count();
                                         <div class="d-flex justify-content-center">
                                             <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
                                             <div class="circle2">
-                                                <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
-                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                </a>
+                                                @if ($tipo=='individual')
+                                                    <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                    </a>
+                                                @elseif($tipo=='grupal')
+                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                    </a>
+                                                @endif
                                             </div>
                                             <div class="circle3">
                                                 <a href="{{ route('reservas.editar')}}" class="btn btn-fab" title="Editar">

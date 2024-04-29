@@ -65,10 +65,19 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.grupal.formFinal', compact('menu'));
     }
-    public function verIndividual()
-    {
+    public function verIndividual($idReserva)
+    {   //mi metodo
+        $reservas = Reservas::all(); 
+        $materias = Materias::all();
+        $seleccionadas= MateriasSeleccionado ::all();
+        $periodos=  PeriodosSeleccionado ::all();
+        $motivo = Motivos ::all();
+        $fecha = Fechas ::all();
+        $periodo=  Periodos ::all();
+        $tam = $seleccionadas->count();
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.ver', compact('menu'));
+        return view('reservas.individual.ver', compact('menu','reservas','materias','seleccionadas','periodos','motivo','fecha','tam','periodo','idReserva'));
     }
     public function verGrupal()
     {
