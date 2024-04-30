@@ -63,6 +63,7 @@ Route::get('/reservas/formFinalGrupal', [ReservasController::class,'formFinalGru
 Route::post('/reservas/formFinalGrupal', [ReservasController::class,'guardarGrupal'])->name('reservas.guardarGrupal');
 
 Route::get('/reservas/verIndividual/{idReserva}', [ReservasController::class,'verIndividual'])->name('reservas.verIndividual');   //parte de rudy
+
 Route::get('/reservas/verGrupal', [ReservasController::class,'verGrupal'])->name('reservas.verGrupal');
 Route::get('/reservas/editar/{idReserva}', [ReservasController::class,'editar'])->name('reservas.editar');
 Route::put('/reservas/actualizar/{idReserva}', [ReservasController::class, 'actualizarReserva'])->name('reserva.actualizar');
@@ -72,6 +73,9 @@ Route::post('/reservas/registrarGrupal',[ReservasController::class,'consultarMat
 Route::post('/reservas/registrarGrupal/tomarMaterias',[ReservasController::class,'enviarMaterias'])->name('reservas.grupal.tomarMaterias');
 
 Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMate'])->name('reservas.individual.tomarMaterias'); //materias individual
+
+Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
+
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

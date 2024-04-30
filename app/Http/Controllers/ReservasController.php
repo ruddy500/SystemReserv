@@ -75,14 +75,15 @@ class ReservasController extends Controller
         $fecha = Fechas ::all();
         $periodo=  Periodos ::all();
         $tam = $seleccionadas->count();
-
+        $tamP= $periodos->count();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.ver', compact('menu','reservas','materias','seleccionadas','periodos','motivo','fecha','tam','periodo','idReserva'));
+        return view('reservas.individual.ver', compact('menu','reservas','materias','seleccionadas','periodos','motivo','fecha','tam','periodo','tamP','idReserva'));
     }
-    public function verGrupal()
+    public function verGrupal($idReserva)
     {
+        // dd($idReserva);
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.grupal.ver', compact('menu'));
+        return view('reservas.grupal.ver', compact('menu','idReserva'));
     }
     public function editar($idReserva)
     {
@@ -273,6 +274,7 @@ class ReservasController extends Controller
         // redirigimos a la ruta 
         return redirect()->route('reservas.principal');
     }
+    
     public function actualizarReserva(Request $request, $idReserva){
         try{
 
@@ -314,4 +316,21 @@ class ReservasController extends Controller
             return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
         }
         }
+
+
+    public function eliminarPendiente($idReserva) {
+        // dd($idReserva);
+        $reserva = Reservas::find($idReserva);// Busca la reserva por su ID
+        //dd($idReserva);
+        if ($reserva) {  // Verifica si se encontró la reserva
+            
+            $reserva->delete(); // Elimina la reserva
+
+            return redirect()->route('reservas.pendientesDocente')->with('success', 'Solicitud de reserva eliminada exitosamente');
+
+        } else {
+
+            return redirect()->route('reservas.pendientesDocente')->with('error' , 'Solicitud de reserva No eliminada');
+        }
+    }
 }

@@ -54,18 +54,10 @@ class ReservasAdminController extends Controller
         
        for ($i=0; $i <$tamReservas ; $i++) { 
            //modificar
-           $idFecha = $reservas[$i]->fecha;
-           $fechaEncontrar = Fechas::where('id',$idFecha)->first();
-           //dd($fechaEncontrar);
-           $dia = $fechaEncontrar->dia;
-           $mes = $fechaEncontrar->mes;
-           $anio = $fechaEncontrar->anio;
-           
-           $fechaCompleta = new \DateTime("$anio-$mes-$dia");
-            //  dd($fechaCompleta);
-            // Formatear la fecha según tus necesidades
-           $fechaReserva = $fechaCompleta->format('Y-m-d');
-            //  dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
+           $fechaString = $reservas[$i]->fecha;
+           $fechaReserva = date('Y-m-d', strtotime($fechaString));
+           // dd($fechaReserva);
+           // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
            if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
             
               $reservasFiltradas[] = $reservas[$i];
@@ -73,7 +65,7 @@ class ReservasAdminController extends Controller
         }
         
     }
-     // dd($reservasFiltradas);
+    //  dd($reservasFiltradas);
      return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas)->withInput();
 }
 }

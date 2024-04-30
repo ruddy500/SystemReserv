@@ -105,7 +105,7 @@ $tamReservas = Reservas::count();
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @elseif($tipo=='grupal')
-                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @endif
@@ -119,7 +119,7 @@ $tamReservas = Reservas::count();
                                             <div class="circle5">
                                                 <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
                                                     <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                                    <input type="hidden" class="id-reserva" value="">
+                                                    <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
                                                 </a>						
                                             </div>
                             
@@ -150,7 +150,7 @@ $tamReservas = Reservas::count();
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @elseif($tipo=='grupal')
-                                                    <a href="{{ route('reservas.verGrupal')}}" class="btn btn-fab" title="Ver"> 
+                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
                                                         <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
                                                     </a>
                                                 @endif
@@ -164,7 +164,7 @@ $tamReservas = Reservas::count();
                                             <div class="circle5">
                                                 <a href="#" class="btn btn-fab eliminar-reserva" title="Eliminar"> 
                                                     <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                                    <input type="hidden" class="id-reserva" value="">
+                                                    <input type="hidden" class="id-reserva" value="{{ $idReserva }}">
                                                 </a>						
                                             </div>
 
@@ -187,32 +187,52 @@ $tamReservas = Reservas::count();
             
         </table>
     </div>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
+
 </div>
 <!-- Agrega este bloque de script al final de tu archivo blade -->
+
 <script>
-    // Espera a que el documento esté completamente cargado
-    $(document).ready(function() {
-        // Maneja el clic en el botón de eliminar
-        $('.eliminar-reserva').click(function() {
-            // Muestra una alerta SweetAlert
+    // Agrega un evento de clic a todos los botones con la clase 'eliminar-reservaa'
+    document.querySelectorAll('.eliminar-reserva').forEach(function(boton) {
+        boton.addEventListener('click', function(event) {
+            event.preventDefault(); // Previene la acción por defecto del botón
+
             Swal.fire({
-                title: '¿Está seguro que desea eliminar la solicitud de reserva??',
-                text: "¡No podrás revertir esto!",
+                title: '¿Estás seguro que desea eliminar la solicitud de reserva?',
+                text: 'No podrás revertir esto',
                 icon: 'warning',
+                iconColor: 'red', // Color del icono
                 showCancelButton: true,
-                confirmButtonColor: '#28AF06',
-                cancelButtonColor: '#D30C1F',
                 confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar',
+                confirmButtonColor: 'green', // Color del botón "Aceptar"
+                cancelButtonColor: 'red' // Color del botón "Cancelar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Muestra un modal con el mensaje de éxito al borrar
-                    Swal.fire({
-                        title: 'Borrado con éxito',
-                        text: 'La Reserva ha sido eliminado.',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar',
-                    });
+                    // Obtener el valor de idReserva desde el elemento hermano
+                    var idReserva = this.querySelector('.id-reserva').value;
+
+                    // Redirigir a la URL con el idReserva como parte de la ruta
+                    window.location.href = '/reservas/pendientesDocente/' + idReserva;
                 }
             });
         });
