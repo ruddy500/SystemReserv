@@ -6,11 +6,6 @@
     use App\Models\Usuarios;
     use App\Models\PeriodosSeleccionado;
     use App\Models\Periodos;
-    use App\Models\Reservas;
-
-    $reservas = Reservas::all();
-    $tamReservas = Reservas::count();
-    // dd($reservas,$tamReservas);
 ?>
 
 <div class="card-body bg-content" style="border-radius: 5px;">
@@ -55,7 +50,14 @@
             </div>
         </form>
         {{-- ********************   tabla ***********************--}}
-         
+          @if (session()->get('reservasFiltradas'))
+
+               <?php 
+                    //capturo las materias que me envia mi controlador consultar materias a esta vista
+                    $reservasFiltradas = session()->get('reservasFiltradas');
+                    $tamReservasFil = count($reservasFiltradas);
+                    //  dd($reservasFiltradas,$tamReservasFil);
+               ?>
             <!-- TABLA DE LA LISTA DE RESERVAS DE LOS DOCENTES -->
             <div class="col"> 
                 
@@ -76,16 +78,16 @@
 
                             <tbody> 
 
-                                @for ( $i = 0 ; $i <  $tamReservas; $i++)
+                                @for ( $i = 0 ; $i <  $tamReservasFil; $i++)
 
                                     <?php
                                        
-                                        $idReserva = $reservas[$i]->id;
-                                        $tipo = $reservas[$i]->Tipo;
-                                        $estadoReserva = $reservas[$i]->Estado;
-                                        $fecha = $reservas[$i]->fecha;
+                                        $idReserva = $reservasFiltradas[$i]->id;
+                                        $tipo = $reservasFiltradas[$i]->Tipo;
+                                        $estadoReserva = $reservasFiltradas[$i]->Estado;
+                                        $fecha = $reservasFiltradas[$i]->fecha;
                                         
-                                        $docenteId = $reservas[$i]->docentes_id;
+                                        $docenteId = $reservasFiltradas[$i]->docentes_id;
                                         $buscarDocente = Usuarios::where('id',$docenteId)->first();
                                         $nombreDocente = $buscarDocente->name;
                                         
@@ -206,7 +208,7 @@
                 
             </div> 
 
-        
+          @endif
        
     
     </div>
