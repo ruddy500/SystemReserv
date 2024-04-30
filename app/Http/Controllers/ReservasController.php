@@ -76,8 +76,10 @@ class ReservasController extends Controller
         $periodo=  Periodos ::all();
         $tam = $seleccionadas->count();
         $tamP= $periodos->count();
+        $reserva = Reservas::find($idReserva);
+        $motivoReserva = $reserva->motivo->Nombre;
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.ver', compact('menu','reservas','materias','seleccionadas','periodos','motivo','fecha','tam','periodo','tamP','idReserva'));
+        return view('reservas.individual.ver', compact('menu','materias','seleccionadas','periodos','tam','periodo','tamP','idReserva','motivoReserva','reserva'));
     }
     public function verGrupal($idReserva)
     {
