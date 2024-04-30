@@ -34,75 +34,33 @@
                                 </tr>
                             </thead>
                             <!-- Fila Ploma -->
-                            <thead class="bg-custom-lista-fila-plomo">	
-                                <tr>
-                                    <th class="text-center h4 text-black">06:45</th>
-                                    <th class="text-center h4 text-black">08:15</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input horario" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
+
+                            @foreach ($periodos as $periodo)
+                            @php
+                                // Dividir la cadena de hora en hora de inicio y hora de fin
+                                $horas = explode('-', $periodo->HoraIntervalo);
+                                $horaIni = trim($horas[0]); // Hora de inicio
+                                $horaFin = trim($horas[1]); // Hora de fin
+                            @endphp
+
+                            @if ($periodo->id % 2 != 0)
+                                <tr class="bg-custom-lista-fila-plomo">
+                            @else
+                                <tr class="bg-custom-lista-fila-blanco">
+                            @endif
+                                <td class="text-center h4 text-black">{{ $horaIni }}</td>
+                                <td class="text-center h4 text-black">{{ $horaFin }}</td>
+                                <td class="text-center h4 text-black">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            {{-- aqui se envia la opcion que se elije --}}
+                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{$periodo->id}}" aria-label="..." >
+                                           
                                         </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <!-- Fila blanca -->
-                            <thead class="bg-custom-lista-fila-blanco">
-                                <tr>
-                                    <th class="text-center h4 text-black">08:15</th>
-                                    <th class="text-center h4 text-black">09:45</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input horario" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>	
-                            </thead>
-                            <!-- Fila Ploma -->
-                            <thead class="bg-custom-lista-fila-plomo">	
-                                <tr>
-                                    <th class="text-center h4 text-black">09:45</th>
-                                    <th class="text-center h4 text-black">11:15</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input horario" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <!-- Fila blanca -->
-                            <thead class="bg-custom-lista-fila-blanco">
-                                <tr>
-                                    <th class="text-center h4 text-black">08:15</th>
-                                    <th class="text-center h4 text-black">09:45</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input horario" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>	
-                            </thead>
-                            <!-- Fila Ploma -->
-                            <thead class="bg-custom-lista-fila-plomo">	
-                                <tr>
-                                    <th class="text-center h4 text-black">09:45</th>
-                                    <th class="text-center h4 text-black">11:15</th>
-                                    <th class="text-center h4 text-black">
-                                        <div class="d-flex justify-content-center">
-                                            <div>
-                                                <input class="form-check-input horario" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                         </table>
                     </div>
                     <!-- BOTONES ACEPTAR Y CANCELAR -->

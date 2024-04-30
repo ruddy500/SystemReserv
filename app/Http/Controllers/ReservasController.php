@@ -86,8 +86,9 @@ class ReservasController extends Controller
     }
     public function editar()
     {
+        $periodos = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.editar', compact('menu'));
+        return view('reservas.editar', compact('menu','periodos'));
     }
 
     public function consultarMaterias(Request $request)
