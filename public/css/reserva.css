@@ -14,7 +14,7 @@
     margin-right: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 750px) {
     .custom-btn-group {
         flex-direction: column;
     }
