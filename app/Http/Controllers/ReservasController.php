@@ -13,7 +13,7 @@ use App\Models\Fechas;
 use App\Models\Horarios;
 use App\Models\MateriasSeleccionado;
 use App\Models\PeriodosSeleccionado;
-
+use Illuminate\Validation\ValidationException;
 
 
 
@@ -85,10 +85,11 @@ class ReservasController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.grupal.ver', compact('menu','idReserva'));
     }
-    public function editar()
+    public function editar($idReserva)
     {
+        $periodos = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.editar', compact('menu'));
+        return view('reservas.editar', compact('menu','periodos','idReserva'));
     }
 
     public function consultarMaterias(Request $request)
@@ -273,6 +274,49 @@ class ReservasController extends Controller
         // redirigimos a la ruta 
         return redirect()->route('reservas.principal');
     }
+    
+    public function actualizarReserva(Request $request, $idReserva){
+        try{
+
+            $reservaEditado = Reservas::find($idReserva);
+       
+            $reservaEditado->fecha = $request->fecha;
+            //dd($reservaEditado);
+          //  $reservaEditado->Ubicacion = $request->descripcion;
+            $reservaEditado->save();
+
+               // Utiliza el método `where` para encontrar los registros con la clave foránea deseada
+        $periodoReserva = PeriodosSeleccionado::where('reservas_id', $idReserva)->get();
+
+        // Utiliza el método `delete` en cada registro encontrado
+        foreach ($periodoReserva as $registro) {
+            $registro->delete();
+        }
+            $options = $request->input('options');
+
+        // llenamos los periodos en el horario
+        for ($i = 0; $i < count($options); $i++) {
+            $id = $options[$i];
+            $periodoSeleccionado = new PeriodosSeleccionado();
+
+            $periodoSeleccionado->reservas_id = $idReserva;
+            $periodoSeleccionado->periodos_id = $id;
+            // Guardar en la base de datos
+            $periodoSeleccionado->save();
+        }
+
+       
+            return redirect('ambientes')->with('success', 'Reserva Actualizado exitosamente.');
+       
+        } catch (ValidationException $e) {
+            // Manejar errores de validación
+            return redirect('ambientes')->withErrors($e->validator->errors());
+        } catch (\Exception $e) {
+            // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
+            return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
+        }
+        }
+
 
     public function eliminarPendiente($idReserva) {
         // dd($idReserva);
