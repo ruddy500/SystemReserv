@@ -8,7 +8,7 @@
         <div class="card-body bg-content">
             
             <div class ="card details-card">
-                <h3 class="card-header details-header">Reserva {{$reservas[$idReserva-1]->Tipo}}</h3>                                    
+                <h3 class="card-header details-header">Reserva individual</h3>                                    
                 <div class="card-body bg-content">
                     <div>
                         <table class="table table-bordered">
@@ -22,15 +22,15 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Cantidad de estudiantes</td>
-                                    <td style="width: 50%;">{{$reservas[$idReserva-1]->CantEstudiante}}</td>
+                                    <td style="width: 50%;">{{$reserva->CantEstudiante}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Motivo de reserva</td>
-                                    <td style="width: 50%;">{{$motivo[$reservas[$idReserva-1]->motivos_id-1]->Nombre}}</td>
+                                    <td style="width: 50%;">{{$motivoReserva}}</td>
                                 </tr>  
                                 <tr>
                                     <td style="width: 50%;">Fecha</td>
-                                    <td style="width: 50%;">{{$reservas[$idReserva-1]->fecha}}</td>
+                                    <td style="width: 50%;">{{$reserva->fecha}}</td>
                                 </tr> 
                                 <tr>
                                     <td style="width: 50%;">Periodo</td>
