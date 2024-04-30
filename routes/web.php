@@ -73,6 +73,9 @@ Route::post('/reservas/registrarGrupal/tomarMaterias',[ReservasController::class
 
 Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMate'])->name('reservas.individual.tomarMaterias'); //materias individual
 
+Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
+
+
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
     return view('auth/login');
