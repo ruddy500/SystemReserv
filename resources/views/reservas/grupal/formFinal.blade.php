@@ -5,7 +5,7 @@
     <div class="mb-3">
         <div class="row">
             <!-- FORMULARIO -->
-            <form id="" action="{{route('reservas.guardarGrupal')}}" method="POST">
+            <form id="" action="{{route('reservas.guardarGrupal')}}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 {{-- campo para enviar el usuario --}}
                 <input type="hidden" name="usuario" value="{{auth()->user()->id}}">
