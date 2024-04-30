@@ -105,7 +105,7 @@
                 </div>
                 <!-- BOTONES ACEPTAR Y CANCELAR -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btn-aceptar" type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button id="cancelar" type="button" class="btn btn-cancelar">Cancelar</button>
                 </div>
             </form>
@@ -243,6 +243,29 @@
                     window.location.href = "/reservas";
                 }
             });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.needs-validation');
+        var btnAceptar = document.getElementById('btn-aceptar');
+        var cantidadInput = document.querySelector('input[name="cantidad"]');
+
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+
+        cantidadInput.addEventListener('input', function() {
+            if (cantidadInput.checkValidity()) {
+                btnAceptar.disabled = false;
+            } else {
+                btnAceptar.disabled = true;
+            }
         });
     });
 </script>
