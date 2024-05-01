@@ -41,9 +41,9 @@ $totalEstudiantes = 0;
                         <div class="col">
                             <div class="mb-3">
                                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
-                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="300" required>
+                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="{{$totalEstudiantes}}" required>
                                 <div class="invalid-feedback">
-                                    La cantidad de estudiantes debe estar entre 10 y 300.
+                                    La cantidad de estudiantes debe estar entre 10 y {{$totalEstudiantes}}.
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ $totalEstudiantes = 0;
                 <div class="col">
                     <!-- campo para mostrar la lista horarios en orden  desde la base de datos-->
                     <label for="periodo-name" class="col-form-label h4">Periodo:</label>
-                    <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+                    <div id="tabla" class="table-responsive margin" style="max-height: 250px; overflow-y: auto;">
                         <table class="table table-striped table-hover table-bordered">
                             <thead class="bg-custom-lista">
                                 <tr>
