@@ -146,10 +146,9 @@
                             
                         </tbody>
                     </table>
-                    
-                </div>
-              <!-- BOTON SIGUIENTE DE LA TABLA -->
-              <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>    
+                    <!-- BOTON SIGUIENTE DE LA TABLA -->
+                    <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>      
+                </div> 
             </div>
             @endif
         </form>
