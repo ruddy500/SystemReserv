@@ -1,5 +1,25 @@
 @extends('reservas/principal')
 
+<?php 
+use App\Models\Materias;
+
+$totalEstudiantes = 0;
+        // aqui se va añadir materias seleccionado a la base de datos
+        for ($i = 0; $i < count($materias); $i++) {
+            $valor = $materias[$i];
+            $materia = Materias::where('id', $valor)->first();
+            $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+
+        }
+// dd($totalEstudiantes);
+
+
+?>
+
+{{-- @foreach($materias as $materia)
+    {{ dd($materia) }}
+@endforeach --}}
+
 @section('contenido-registrarGrupal')
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
@@ -13,7 +33,7 @@
                 <input type="hidden" name="materias" value="{{json_encode($materias)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
-                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
+                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: {{$totalEstudiantes}}</label>
                 </div>
                 <div class="col">
                     <!-- Campo de cantidad de estudiantes y motivo en la misma fila -->
@@ -21,9 +41,9 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
-                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="300" required>
+                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="{{$totalEstudiantes}}" required>
                                 <div class="invalid-feedback">
-                                    La cantidad de estudiantes debe estar entre 10 y 300.
+                                    La cantidad de estudiantes debe estar entre 10 y {{$totalEstudiantes}}.
                                 </div>
                             </div>
                         </div>
@@ -57,7 +77,7 @@
                 <div class="col">
                     <!-- campo para mostrar la lista horarios en orden  desde la base de datos-->
                     <label for="periodo-name" class="col-form-label h4">Periodo:</label>
-                    <div id="tabla" class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+                    <div id="tabla" class="table-responsive margin" style="max-height: 250px; overflow-y: auto;">
                         <table class="table table-striped table-hover table-bordered">
                             <thead class="bg-custom-lista">
                                 <tr>
