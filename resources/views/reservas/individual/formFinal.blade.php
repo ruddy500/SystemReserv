@@ -1,5 +1,21 @@
 @extends('reservas/principal')
 
+<?php 
+use App\Models\Materias;
+
+$totalEstudiantes = 0;
+        // aqui se va añadir materias seleccionado a la base de datos
+        for ($i = 0; $i < count($lista); $i++) {
+            $valor = $lista[$i];
+            $materia = Materias::where('id', $valor)->first();
+            $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+
+        }
+// dd($totalEstudiantes);
+
+
+?>
+
 @section('contenido-registrarIndividual')
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
@@ -13,7 +29,7 @@
                 <input type="hidden" name="lista" value="{{json_encode($lista)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
-                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
+                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: {{$totalEstudiantes}}</label>
                 </div>
                 <div class="col">
                     <!-- Campo de cantidad de estudiantes y motivo en la misma fila -->
