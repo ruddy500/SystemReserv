@@ -73,6 +73,14 @@ class ReservasAdminController extends Controller
            
             return redirect()->route('reservas.pendientes');
         }
+    }
+
+    public function verificar()
+    {
+        // Lógica para mostrar las reservas pendientes
+        $menu = view('componentes/menu');
+        return view('reservas.admin.verificar', compact('menu'));
+    }
+    
         
-}
 }

@@ -40,6 +40,9 @@ Route::put('/ambientes/actualizar/{idAmbiente}', [AmbientesController::class, 'a
 Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name('reservas.admin.principal');
 Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
+//RUTA PARA VERIFICAR UNA RESERVA
+Route::get('/reservas/verificar', [ReservasAdminController::class,'verificar'])->name('reservas.verificar');
+
 
 Route::post('/reservas/pendientes', [ReservasAdminController::class, 'buscarReservas'])->name('reservas.pendientes.buscar');
 // Ruta para la vista del docente
@@ -75,6 +78,9 @@ Route::post('/reservas/registrarGrupal/tomarMaterias',[ReservasController::class
 Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMate'])->name('reservas.individual.tomarMaterias'); //materias individual
 
 Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
+
+
+
 
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
