@@ -72,133 +72,211 @@
                               
                             </thead>
                             
-                            {{-- Cuerpo --}}
 
-                            <tbody> 
+                            @if (session()->get('reservasFiltradas'))
+                           
+                                <?php 
+                                    //capturo las materias que me envia mi controlador consultar materias a esta vista
+                                    $reservasFiltradas = session()->get('reservasFiltradas');
+                                    $tamReservasFil = count($reservasFiltradas);
+                                    //  dd($reservasFiltradas,$tamReservasFil);
+                                ?>
 
-                                @for ( $i = 0 ; $i <  $tamReservas; $i++)
-
-                                    <?php
-                                       
-                                        $idReserva = $reservas[$i]->id;
-                                        $tipo = $reservas[$i]->Tipo;
-                                        $estadoReserva = $reservas[$i]->Estado;
-                                        $fecha = $reservas[$i]->fecha;
-                                        
-                                        $docenteId = $reservas[$i]->docentes_id;
-                                        $buscarDocente = Usuarios::where('id',$docenteId)->first();
-                                        $nombreDocente = $buscarDocente->name;
-                                        
-                                        $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
-                                        $tamPeriodosSeleccionado = count($periodosSeleccionados);
-                                        // dd($tamPeriodoSelec);
-
-                                        if($tamPeriodosSeleccionado == 1){
-                                            $periodoId = $periodosSeleccionados[0]->periodos_id;
-                                            
-                                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();
-                                            $periodo = $periodoBuscar->HoraIntervalo;
-                                            $partes_P = explode('-', $periodo);
-                                            // if($i==2){dd($partes_P);}
-                                            
-                                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                                            $horaFin = trim(str_replace(' ', '', $partes_P[1]));
-                                        
-                                            // if($i==2){ dd($horaInicio,$horaFin);}
-                                            // dd($horaInicio,$horaFin);
-                                        }else{
-                        
-                                            $periodoId = $periodosSeleccionados[0]->periodos_id;
-                                            $periodoId2 = $periodosSeleccionados[1]->periodos_id;
-
-                                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
-                                            $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
-
-                                            $periodo = $periodoBuscar->HoraIntervalo;
-                                            $periodo2 = $periodoBuscar2->HoraIntervalo;
-                                            
-                                            $partes_P = explode('-', $periodo);
-                                            $partes_P2 = explode('-', $periodo2);
-                                            //dd($partes_P,$partes_P2);
-
-                                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                                            $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
-                                            
-                                            // if($i==1){dd($horaInicio,$horaFin);}
-                                        
-                                        }
-
-                                    ?>
+                                {{-- Cuerpo --}}
+                                <tbody> 
                                     
-                                    @if ($i % 2 == 0)
-                                        @if ($estadoReserva == "pendiente")
-                                            
-                                            <!-- Fila Ploma -->
-                                            <thead class="bg-custom-lista-fila-plomo">	
-                                                <tr>
-                                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                                                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                                                    <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
-                                                    <th class="text-center h4 text-black">
-                                                        <div class="d-flex justify-content-center">
-                                                            <!-- SI ES RESERVA INDIVIDUAL SE MUESTRA ESTA HOJA DE VER -->
-                                                            <div class="circle2">
-                                                                
-                                                                @if ($tipo=='individual')
-                                                                    <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                                    </a>
-                                                                @elseif($tipo=='grupal')
-                                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                                    </a>
-                                                                @endif
-
-                                                            </div>
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead> 
-                                            
-                                        @endif
-                                    @else
-                                        @if ($estadoReserva == "pendiente")
-                   
-                                            <!-- Fila blanca -->
-                                            <thead class="bg-custom-lista-fila-blanco">
-                                                <tr>
-                                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                                    <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                                                    <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                                                    <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
-                                                    <th class="text-center h4 text-black">
-                                                        <div class="d-flex justify-content-center">
-                                                            <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
-                                                            <div class="circle2">
-
-                                                                @if ($tipo=='individual')
-                                                                    <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                                    </a>
-                                                                @elseif($tipo=='grupal')
-                                                                    <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                                        <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                                                    </a>
-                                                                @endif
-
-                                                            </div>
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead> 	   
+                                    @for ( $i = 0 ; $i <  $tamReservasFil; $i++)
                                         
-                                        @endif
-                                    @endif
+                                        <?php
+                                        
+                                            $idReserva = $reservasFiltradas[$i]->id;
+                                            $tipo = $reservasFiltradas[$i]->Tipo;
+                                            $estadoReserva = $reservasFiltradas[$i]->Estado;
+                                            $fecha = $reservasFiltradas[$i]->fecha;
+                                            
+                                            $docenteId = $reservasFiltradas[$i]->docentes_id;
+                                            $buscarDocente = Usuarios::where('id',$docenteId)->first();
+                                            $nombreDocente = $buscarDocente->name;
+                                            
+                                            $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+                                            $tamPeriodosSeleccionado = count($periodosSeleccionados);
+                                            // dd($tamPeriodoSelec);
 
-                                @endfor
+                                            if($tamPeriodosSeleccionado == 1){
+                                                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                                
+                                                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                                                $periodo = $periodoBuscar->HoraIntervalo;
+                                                $partes_P = explode('-', $periodo);
+                                                // if($i==2){dd($partes_P);}
+                                                
+                                                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                                            
+                                                // if($i==2){ dd($horaInicio,$horaFin);}
+                                                // dd($horaInicio,$horaFin);
+                                            }else{
+                            
+                                                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                                $periodoId2 = $periodosSeleccionados[1]->periodos_id;
 
-                            </tbody>
+                                                $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                                                $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+                                                $periodo = $periodoBuscar->HoraIntervalo;
+                                                $periodo2 = $periodoBuscar2->HoraIntervalo;
+                                                
+                                                $partes_P = explode('-', $periodo);
+                                                $partes_P2 = explode('-', $periodo2);
+                                                //dd($partes_P,$partes_P2);
+
+                                                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                                $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                                                
+                                                // if($i==1){dd($horaInicio,$horaFin);}
+                                            
+                                            }
+
+                                        ?>
+                                        
+                                            @if ($estadoReserva == "pendiente")
+                    
+                                                <!-- Fila blanca -->
+                                                <thead class="bg-custom-lista-fila-blanco">
+                                                    <tr>
+                                                        <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                                        <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                                                        <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                                        <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                                        <th class="text-center h4 text-black">
+                                                            <div class="d-flex justify-content-center">
+                                                                <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
+                                                                <div class="circle2">
+
+                                                                    @if ($tipo=='individual')
+                                                                        <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                                        </a>
+                                                                    @elseif($tipo=='grupal')
+                                                                        <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                                        </a>
+                                                                    @endif
+
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead> 	   
+                                            
+                                            @endif
+                                        
+
+                                    @endfor
+
+                                </tbody>
+
+                            @else
+                               
+                                {{-- Cuerpo --}}
+                                <tbody> 
+
+                                    @for ( $i = 0 ; $i <  $tamReservas; $i++)
+
+                                        <?php
+                                        
+                                            $idReserva = $reservas[$i]->id;
+                                            $tipo = $reservas[$i]->Tipo;
+                                            $estadoReserva = $reservas[$i]->Estado;
+                                            $fecha = $reservas[$i]->fecha;
+                                            
+                                            $docenteId = $reservas[$i]->docentes_id;
+                                            $buscarDocente = Usuarios::where('id',$docenteId)->first();
+                                            $nombreDocente = $buscarDocente->name;
+                                            
+                                            $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+                                            $tamPeriodosSeleccionado = count($periodosSeleccionados);
+                                            // dd($tamPeriodoSelec);
+
+                                            if($tamPeriodosSeleccionado == 1){
+                                                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                                
+                                                $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                                                $periodo = $periodoBuscar->HoraIntervalo;
+                                                $partes_P = explode('-', $periodo);
+                                                // if($i==2){dd($partes_P);}
+                                                
+                                                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                                $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                                            
+                                                // if($i==2){ dd($horaInicio,$horaFin);}
+                                                // dd($horaInicio,$horaFin);
+                                            }else{
+                            
+                                                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                                $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+
+                                                $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                                                $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+                                                $periodo = $periodoBuscar->HoraIntervalo;
+                                                $periodo2 = $periodoBuscar2->HoraIntervalo;
+                                                
+                                                $partes_P = explode('-', $periodo);
+                                                $partes_P2 = explode('-', $periodo2);
+                                                //dd($partes_P,$partes_P2);
+
+                                                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                                $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                                                
+                                                // if($i==1){dd($horaInicio,$horaFin);}
+                                            
+                                            }
+
+                                        ?>
+                                        
+                                    
+                                            @if ($estadoReserva == "pendiente")
+                    
+                                                <!-- Fila blanca -->
+                                                <thead class="bg-custom-lista-fila-blanco">
+                                                    <tr>
+                                                        <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                                        <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                                                        <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                                        <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                                        <th class="text-center h4 text-black">
+                                                            <div class="d-flex justify-content-center">
+                                                                <!-- SI ES RESERVA GRUPAL SE MUESTRA ESTA HOJA DE VER -->
+                                                                <div class="circle2">
+
+                                                                    @if ($tipo=='individual')
+                                                                        <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                                        </a>
+                                                                    @elseif($tipo=='grupal')
+                                                                        <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                                            <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                                        </a>
+                                                                    @endif
+
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead> 	   
+                                            
+                                            @endif
+                                    
+
+                                    @endfor
+
+                                </tbody>
+
+                            @endif
+
+
+                           
                            
                             
                         </table>
