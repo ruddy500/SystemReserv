@@ -41,7 +41,7 @@ Route::get('/reservas/admin', [ReservasAdminController::class, 'mostrar'])->name
 Route::get('/reservas/asignadas', [ReservasAdminController::class, 'asignadas'])->name('reservas.asignadas');
 Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'])->name('reservas.pendientes');
 //RUTA PARA VERIFICAR UNA RESERVA
-Route::get('/reservas/verificar', [ReservasAdminController::class,'verificar'])->name('reservas.verificar');
+Route::get('/reservas/verificar/{idReserva}', [ReservasAdminController::class,'verificar'])->name('reservas.verificar');   // rudy aqui eso de ver
 
 
 Route::post('/reservas/pendientes', [ReservasAdminController::class, 'buscarReservas'])->name('reservas.pendientes.buscar');

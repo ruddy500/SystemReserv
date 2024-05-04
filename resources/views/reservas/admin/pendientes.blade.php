@@ -165,7 +165,7 @@
 
                                                                 </div>
                                                                 <div class="circle3">
-                                                                    <a href="{{route('reservas.verificar')}}" class="btn btn-fab" title="Verificar">
+                                                                    <a href="{{route('reservas.verificar',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Verificar">
                                                                         <i class="bi bi-check2-circle" style="color: white;"></i>
                                                                     </a>
                                                                 </div>
@@ -267,7 +267,7 @@
 
                                                                 </div>
                                                                 <div class="circle3">
-                                                                    <a href="{{route('reservas.verificar')}}" class="btn btn-fab" title="Verificar">
+                                                                    <a href="{{route('reservas.verificar',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Verificar">
                                                                         <i class="bi bi-check2-circle" style="color: white;"></i>
                                                                     </a>
                                                                 </div>

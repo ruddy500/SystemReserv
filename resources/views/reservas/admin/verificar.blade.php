@@ -11,15 +11,50 @@
                     <tbody>
                         <tr>
                             <td style="width: 50%;">Cantidad de estudiantes</td>
-                            <td style="width: 50%;">150</td>
+                            <td style="width: 50%;">{{$reserva->CantEstudiante}}</td>
                         </tr>  
                         <tr>
                             <td style="width: 50%;">Fecha</td>
-                            <td style="width: 50%;">06-05-2024</td>
+                            <td style="width: 50%;">{{$reserva->fecha}}</td>
                         </tr>
                         <tr>
                             <td style="width: 50%;">Periodo</td>
-                            <td style="width: 50%;">06:45 - 09:45</td>
+                            @php
+                                        $incremento = 0;
+                                    @endphp
+
+                                    @for($i = 0; $i < $tamP; $i++)
+                                        @if($incremento == 0)
+                                            @if($periodos[$i]->reservas_id == $idReserva)
+                                                @php
+                                                    $incremento = $incremento + 1;
+                                                @endphp
+                                                <td id='borrar' style="width: 50%;">{{$periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo}}</td>
+                                            @endif
+                                        @else
+                                            @if($periodos[$i]->reservas_id == $idReserva)
+                                                @php
+                                                    $incremento = $incremento + 1;
+                                                    $periodo1 = $periodo[$periodos[$i - 1]->periodos_id - 1]->HoraIntervalo;
+                                                    $periodo2 = $periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo;
+                                                    
+                                                    $partes_P1 = explode('-', $periodo1);
+                                                    $partes_P2 = explode('-', $periodo2);
+                                        
+                                                    $inicio = trim(str_replace(' ', '', $partes_P1[0]));
+                                                    $fin = trim(str_replace(' ', '', $partes_P2[1]));
+                                                @endphp
+                                                <td style="width: 50%;">{{$inicio}} - {{$fin}}</td>
+                                                @if($incremento > 0)
+                                                    <script>
+                                                        // Eliminar el elemento con id 'borrar' después de que $incremento sea mayor que cero
+                                                        var elementoABorrar = document.getElementById('borrar');
+                                                        elementoABorrar.parentNode.removeChild(elementoABorrar);
+                                                    </script>
+                                                @endif
+                                            @endif
+                                        @endif
+                                    @endfor
                         </tr>
                     </tbody>
                 </table>
