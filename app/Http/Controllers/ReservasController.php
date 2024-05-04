@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
 use App\Models\Materias;
 use App\Models\Motivos;
@@ -70,7 +71,7 @@ class ReservasController extends Controller
         $reservas = Reservas::all(); 
         $materias = Materias::all();
         $seleccionadas= MateriasSeleccionado ::all();
-        $periodos=  PeriodosSeleccionado ::all();
+        $periodos=  PeriodosSeleccionado ::all(); 
         $motivo = Motivos ::all();
         $fecha = Fechas ::all();
         $periodo=  Periodos ::all();
@@ -78,6 +79,7 @@ class ReservasController extends Controller
         $tamP= $periodos->count();
         $reserva = Reservas::find($idReserva);
         $motivoReserva = $reserva->motivo->Nombre;
+
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.individual.ver', compact('menu','materias','seleccionadas','periodos','tam','periodo','tamP','idReserva','motivoReserva','reserva'));
     }

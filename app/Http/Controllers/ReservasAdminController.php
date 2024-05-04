@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservas;
 use App\Models\Fechas;
-
+use App\Models\Periodos;
+use App\Models\PeriodosSeleccionado;
 class ReservasAdminController extends Controller
 {
  
@@ -75,11 +76,14 @@ class ReservasAdminController extends Controller
         }
     }
 
-    public function verificar()
-    {
-        // Lógica para mostrar las reservas pendientes
+    public function verificar($idReserva)
+    {   // Lógica para mostrar las reservas pendientes
+        $reserva = Reservas::find($idReserva);
+        $periodos=  PeriodosSeleccionado ::all();
+        $periodo=  Periodos ::all();
+        $tamP= $periodos->count();
         $menu = view('componentes/menu');
-        return view('reservas.admin.verificar', compact('menu'));
+        return view('reservas.admin.verificar', compact('menu','idReserva','reserva','tamP','periodo','periodos'));
     }
     
         
