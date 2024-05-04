@@ -306,14 +306,14 @@ class ReservasController extends Controller
         }
 
        
-            return redirect('ambientes')->with('success', 'Reserva Actualizado exitosamente.');
+            return redirect('reservas')->with('success', 'Reserva Actualizado exitosamente.');
        
         } catch (ValidationException $e) {
             // Manejar errores de validación
-            return redirect('ambientes')->withErrors($e->validator->errors());
+            return redirect('reservas')->withErrors($e->validator->errors());
         } catch (\Exception $e) {
             // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
-            return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
+            return redirect('reservas')->with('error', 'Ha ocurrido un error interno');
         }
         }
 
