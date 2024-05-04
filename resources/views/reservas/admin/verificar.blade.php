@@ -67,7 +67,7 @@
                 <div id= "tabla" class="table-responsive" style="max-height: 300px; overflow-y: auto; padding-top: 15px; display: none;">
                     <table id="horario-tabla" class="table caption-top table-bordered ">
                         <thead class="table_encabezado_color text-center">
-                            <td colspan="5">Detalle de materia</td>
+                            <td colspan="5">Ambientes Disponibles</td>
                             <thead class="text-center">
                                 <tr>
                                     <th class="col" style="width: 20;">Nombre ambiente</th>
