@@ -320,6 +320,8 @@ class ReservasController extends Controller
         }
 
 
+
+
     public function eliminarPendiente($idReserva) {
         // dd($idReserva);
         $reserva = Reservas::find($idReserva);// Busca la reserva por su ID
