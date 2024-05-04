@@ -10,10 +10,19 @@
     text-align: left;
 }
 
+.custom-btn-group .btn {
+    margin-right: 2px;
+}
 
-/* Estilos para dispositivos móviles */
-@media (max-width: 767px) {
-    .btn-reserva {
-        width: 100%; 
+@media (max-width: 750px) {
+    .custom-btn-group {
+        flex-direction: column;
+    }
+    .borde{
+        border-radius:5px;     
+    }
+
+    .custom-btn-group .btn {
+        margin-bottom: 1px;
     }
 }

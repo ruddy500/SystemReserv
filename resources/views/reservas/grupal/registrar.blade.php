@@ -58,13 +58,13 @@
                             <div class="input-group-append">
                                 <button id="btn-buscar" type="submit" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
                             </div>
-                        
+                        </div> 
                     </div>
                 </div>
             </form>
         </div>
       
-<!-- TABLA MATERIAS IMPARTIDAS POR OTROS DOCENTES -->
+        <!-- TABLA MATERIAS IMPARTIDAS POR OTROS DOCENTES -->
         <form id="tabla-form" action= "{{ route('reservas.grupal.tomarMaterias') }}" method="POST" class="needs-validation" novalidate>
             @csrf
 
@@ -146,17 +146,12 @@
                             
                         </tbody>
                     </table>
-                    
-                </div>
-              <!-- BOTON SIGUIENTE DE LA TABLA -->
-              <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>
-                    
+                    <!-- BOTON SIGUIENTE DE LA TABLA -->
+                    <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>      
+                </div> 
             </div>
-        
             @endif
-            
         </form>
-       
     </div>
 </div>
 

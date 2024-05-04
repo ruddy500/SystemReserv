@@ -9,18 +9,16 @@
 		        <div class="panel-body">
 					<div class="row">
 						<div class="col-md-4 col-md-offset-8 text-center">
-							<div class="btn-group btn-group-raised">
-							  	<a href="{{ route('reservas.asignadasDocente') }}" class="btn btn-primary custom-btn">Asignadas</a>
-							  	<span class="divider"></span> <!-- Línea blanca --> 
-							  	<a href="{{ route('reservas.pendientesDocente') }}" class="btn btn-primary custom-btn">Pendientes</a>
-                              	<span class="divider"></span> <!-- Línea blanca --> 
-							  	<div class="btn-group" role="group">
+							<div class="btn-group btn-group-raised custom-btn-group">
+								<a href="{{ route('reservas.asignadasDocente') }}" class="btn btn-primary custom-btn borde">Asignadas</a>
+								<a href="{{ route('reservas.pendientesDocente') }}" class="btn btn-primary custom-btn borde">Pendientes</a>
+								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-primary dropdown-toggle custom-btn" data-bs-toggle="dropdown" aria-expanded="false">
-									Registrar reserva
+										Registrar reserva
 									</button>
 									<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="{{ route('reservas.registrarIndividual') }}">Individual</a></li>
-									<li><a class="dropdown-item" href="{{ route('reservas.registrarGrupal') }}">Grupal</a></li>
+										<li><a class="dropdown-item" href="{{ route('reservas.registrarIndividual') }}">Individual</a></li>
+										<li><a class="dropdown-item" href="{{ route('reservas.registrarGrupal') }}">Grupal</a></li>
 									</ul>
 								</div>
 							</div>

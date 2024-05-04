@@ -32,7 +32,7 @@ class ReservasAdminController extends Controller
     
     //********* En proceso ***********
     public function buscarReservas(Request $request){
-
+   
         //dd($request->all());
         $reservas = Reservas::all();
         $tamReservas = Reservas::count();
@@ -40,32 +40,47 @@ class ReservasAdminController extends Controller
 
         $estadoCheckbox = $request->checkbox_estado;
         
-        $fechaInicial = $request ->fecha_inicial;
-        $fechaFinal = $request ->fecha_final;
+        if( $estadoCheckbox){
+           
+            $fechaInicial = $request ->fecha_inicial;
+            $fechaFinal = $request ->fecha_final;
         
-        $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
-        $fechaIni = $fechaCIni->format('Y-m-d');
+            $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
+            $fechaIni = $fechaCIni->format('Y-m-d');
 
-        $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
-        $fechaFin = $fechaCFin->format('Y-m-d');
-        //  dd($fechaIni,$fechaFin);
-        
-        $reservasFiltradas = [];
-        
-       for ($i=0; $i <$tamReservas ; $i++) { 
-           //modificar
-           $fechaString = $reservas[$i]->fecha;
-           $fechaReserva = date('Y-m-d', strtotime($fechaString));
-           // dd($fechaReserva);
-           // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
-           if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
+            $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
+            $fechaFin = $fechaCFin->format('Y-m-d');
+            //  dd($fechaIni,$fechaFin);
             
-              $reservasFiltradas[] = $reservas[$i];
-              
-        }
+            $reservasFiltradas = [];
+                
+            for ($i=0; $i <$tamReservas ; $i++) { 
+                //modificar
+                $fechaString = $reservas[$i]->fecha;
+                $fechaReserva = date('Y-m-d', strtotime($fechaString));
+                // dd($fechaReserva);
+                // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
+                if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
+                    
+                    $reservasFiltradas[] = $reservas[$i];
+                    
+            }
         
+            }
+            // dd($reservasFiltradas);
+            return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas);
+        }else{
+           
+            return redirect()->route('reservas.pendientes');
+        }
     }
-    //  dd($reservasFiltradas);
-     return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas)->withInput();
-}
+
+    public function verificar()
+    {
+        // Lógica para mostrar las reservas pendientes
+        $menu = view('componentes/menu');
+        return view('reservas.admin.verificar', compact('menu'));
+    }
+    
+        
 }

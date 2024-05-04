@@ -1,5 +1,21 @@
 @extends('reservas/principal')
 
+<?php 
+use App\Models\Materias;
+
+$totalEstudiantes = 0;
+        // aqui se va añadir materias seleccionado a la base de datos
+        for ($i = 0; $i < count($lista); $i++) {
+            $valor = $lista[$i];
+            $materia = Materias::where('id', $valor)->first();
+            $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+
+        }
+// dd($totalEstudiantes);
+
+
+?>
+
 @section('contenido-registrarIndividual')
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
@@ -13,7 +29,7 @@
                 <input type="hidden" name="lista" value="{{json_encode($lista)}}">
                 <!-- Campo para poner la cantidad de estudiantes totales -->
                 <div class="col">
-                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: 190</label>
+                    <label for="totalEstudiantes-name" class="col-form-label h4">Total estudiantes: {{$totalEstudiantes}}</label>
                 </div>
                 <div class="col">
                     <!-- Campo de cantidad de estudiantes y motivo en la misma fila -->
@@ -105,7 +121,7 @@
                 </div>
                 <!-- BOTONES ACEPTAR Y CANCELAR -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-aceptar">Aceptar</button>
+                    <button id="btn-aceptar" type="submit" class="btn btn-aceptar">Aceptar</button>
                     <button id="cancelar" type="button" class="btn btn-cancelar">Cancelar</button>
                 </div>
             </form>
@@ -243,6 +259,29 @@
                     window.location.href = "/reservas";
                 }
             });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.needs-validation');
+        var btnAceptar = document.getElementById('btn-aceptar');
+        var cantidadInput = document.querySelector('input[name="cantidad"]');
+
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+
+        cantidadInput.addEventListener('input', function() {
+            if (cantidadInput.checkValidity()) {
+                btnAceptar.disabled = false;
+            } else {
+                btnAceptar.disabled = true;
+            }
         });
     });
 </script>
