@@ -278,6 +278,7 @@ class ReservasController extends Controller
     }
     
     public function actualizarReserva(Request $request, $idReserva){
+        //dd($idReserva);
         try{
 
             $reservaEditado = Reservas::find($idReserva);
