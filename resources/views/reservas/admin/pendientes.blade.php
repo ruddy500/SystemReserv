@@ -36,7 +36,7 @@
                         <!-- Seleccionable de fecha inicial -->
                         <label for="fecha-name" class="col-form-label h4">Fecha inicial:</label>
                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                            <input name="fecha_inicial" id="fechaInputInicial" class="form-control" type="text" value="" readonly />               
+                            <input name="fecha_inicial" id="fechaInputInicial" class="form-control" type="text" value="" readonly disabled/>               
                             <span class="input-group-addon"></span>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <!-- Seleccionable de fecha final -->
                         <label for="fecha-name" class="col-form-label h4">Fecha final:</label>
                         <div id="datepicker-final" class="input-group date" data-date-format="dd-mm-yyyy">
-                            <input name="fecha_final" id="fechaInputFinal" class="form-control" type="text" value="" readonly />               
+                            <input name="fecha_final" id="fechaInputFinal" class="form-control" type="text" value="" readonly disabled/>               
                             <span class="input-group-addon"></span>
                         </div>
                     </div>
@@ -306,17 +306,37 @@
         // Obtener el checkbox y el campo oculto
         var checkbox = document.getElementById("flexCheckDefault");
         var checkboxHidden = document.getElementById("checkboxEstadoHidden");
+        var fechaInicial = document.getElementById("fechaInputInicial");
+        var fechaFinal = document.getElementById("fechaInputFinal");
+
+        // Función para habilitar las fechas
+        function habilitarFechas() {
+            fechaInicial.disabled = false;
+            fechaFinal.disabled = false;
+        }
+
+        // Función para deshabilitar las fechas
+        function deshabilitarFechas() {
+            fechaInicial.disabled = true;
+            fechaFinal.disabled = true;
+        }
 
         // Escuchar cambios en el checkbox
         checkbox.addEventListener("change", function() {
-            // Si el checkbox está marcado, establecer el valor del campo oculto en "1", de lo contrario en "0"
+            // Si el checkbox está marcado, habilitar las fechas, de lo contrario deshabilitarlas
             if (this.checked) {
                 checkboxHidden.value = "1";
+                habilitarFechas();
             } else {
                 checkboxHidden.value = "0";
+                deshabilitarFechas();
             }
         });
+
+        // Inicialmente, deshabilitar las fechas si el checkbox no está marcado
+        deshabilitarFechas();
     });
 </script>
+
 
 @endsection
