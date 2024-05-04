@@ -76,8 +76,10 @@ class ReservasController extends Controller
         $periodo=  Periodos ::all();
         $tam = $seleccionadas->count();
         $tamP= $periodos->count();
+        $reserva = Reservas::find($idReserva);
+        $motivoReserva = $reserva->motivo->Nombre;
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.ver', compact('menu','reservas','materias','seleccionadas','periodos','motivo','fecha','tam','periodo','tamP','idReserva'));
+        return view('reservas.individual.ver', compact('menu','materias','seleccionadas','periodos','tam','periodo','tamP','idReserva','motivoReserva','reserva'));
     }
     public function verGrupal($idReserva)
     {
@@ -306,16 +308,18 @@ class ReservasController extends Controller
         }
 
        
-            return redirect('reservas')->with('success', 'Reserva Actualizado exitosamente.');
+            return redirect('ambientes')->with('success', 'Reserva Actualizado exitosamente.');
        
         } catch (ValidationException $e) {
             // Manejar errores de validación
-            return redirect('reservas')->withErrors($e->validator->errors());
+            return redirect('ambientes')->withErrors($e->validator->errors());
         } catch (\Exception $e) {
             // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
-            return redirect('reservas')->with('error', 'Ha ocurrido un error interno');
+            return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
         }
         }
+
+
 
 
     public function eliminarPendiente($idReserva) {
