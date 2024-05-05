@@ -12,7 +12,7 @@
     $tamReservas = Reservas::count();
     // dd($reservas,$tamReservas);
 ?>
-
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <form action= "{{ route('reservas.pendientes.buscar') }}" method="POST">
@@ -79,7 +79,7 @@
                                     //capturo las materias que me envia mi controlador consultar materias a esta vista
                                     $reservasFiltradas = session()->get('reservasFiltradas');
                                     $tamReservasFil = count($reservasFiltradas);
-                                    //  dd($reservasFiltradas,$tamReservasFil);
+                                      dd($reservasFiltradas,$tamReservasFil);
                                 ?>
 
                                 {{-- Cuerpo --}}

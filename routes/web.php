@@ -43,6 +43,7 @@ Route::get('/reservas/pendientes', [ReservasAdminController::class, 'pendientes'
 //RUTA PARA VERIFICAR UNA RESERVA
 Route::get('/reservas/verificar/{idReserva}', [ReservasAdminController::class,'verificar'])->name('reservas.verificar');   // rudy aqui eso de ver
 
+Route::post('/reservas/verificar', [ReservasAdminController::class, 'buscarAmbientesDisponibles'])->name('reservas.ambientes.buscar');
 
 Route::post('/reservas/pendientes', [ReservasAdminController::class, 'buscarReservas'])->name('reservas.pendientes.buscar');
 // Ruta para la vista del docente
