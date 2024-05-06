@@ -7,7 +7,8 @@
         <div class="card-body bg-content">
             <!-- TABLA DE DETALLE DE RESERVA -->
             {{-- <form action= "{{ route('reservas.ambientes.buscar') }}" method="POST"> --}}
-            <form action="{{ route('reservas.ambientes.buscar') }}" method="POST">
+            <form action="{{ route('reservas.ambientes.buscar',['idReserva'=>$idReserva]) }}" method="POST">
+        
                 @csrf
             <div class = "datos-reserva">
 

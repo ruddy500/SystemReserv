@@ -8,6 +8,7 @@ use App\Models\Fechas;
 use App\Models\Periodos;
 use App\Models\PeriodosSeleccionado;
 use App\Models\Horarios;
+use App\Models\Ambientes;
 class ReservasAdminController extends Controller
 {
  
@@ -88,8 +89,13 @@ class ReservasAdminController extends Controller
     }
 
 
-    public function buscarAmbientesDisponibles(Request $request){
-        // dd($fechass);
+    public function buscarAmbientesDisponibles(Request $request,$idReserva){
+        // dd($idReserva);
+        $registroReserva = Reservas::find($idReserva);
+        $cantEst = $registroReserva->CantEstudiante;
+        $totalEst = $registroReserva->TotalEstudiantes;
+        // dd($cantEst, $totalEst);
+        // dd($registroReserva);
              //obtener fecha de la vista en formato "d-m-y"
              $fechaReserva = $request->fecha_reserva;
            // dd($fechaReserva);
@@ -104,6 +110,7 @@ class ReservasAdminController extends Controller
              //dd($mes_fecha);
              $ambientesEncontrados = collect(); // Inicializamos una colección para almacenar los resultados
              $ambientesEncontrados2 = collect(); // Inicializamos una colección para almacenar los resultados
+             $ambientesEncontradosComplet = collect();
         $fechass = Fechas::all();
         //dd($fechass);
       //capturamos el periodo
@@ -129,8 +136,19 @@ class ReservasAdminController extends Controller
                                                                             ->get());
             }   
         } 
-        
-      //  dd($ambientesEncontrados);
+        foreach($ambientesEncontrados as $amb){
+           $ambienteID = $amb->ambientes_id;
+           $ambient = Ambientes::find($ambienteID);
+           $cap = $ambient->Capacidad;
+           if($cap > $cantEst && $cap < $totalEst){
+            $ambientesEncontradosComplet = $ambientesEncontradosComplet->merge(Horarios::where('fechas_id', $fechaRegistro->id)
+            ->where('periodos_id', $idPeri)
+            ->where('ambientes_id', $ambient->id)
+            ->get());
+           }
+        }
+       // dd($ambient);
+        dd($ambientesEncontradosComplet);
         // Aquí tienes la colección de ambientes encontrados que coinciden con la fecha y el período
         return view('reservas.admin.verificar', compact('ambientesEncontrados'));
         // return view('reservas.admin.verificar', ['ambientesEncontrados' => $ambientesEncontrados]);
