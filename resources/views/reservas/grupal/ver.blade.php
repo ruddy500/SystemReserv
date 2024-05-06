@@ -104,7 +104,13 @@ $tamPeriodosSeleccionado = count($periodosSeleccionados);
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Nombre docente</td>
-                                    <td style="width: 50%;">{{auth()->user()->name}}</td>
+                                    <?php 
+                                        $idDocente = $reserva->docentes_id;
+                                        $DocenteAux = Usuarios::find($idDocente);
+
+                                        // dd($DocenteAux->name);
+                                    ?>
+                                    <td style="width: 50%;">{{$DocenteAux->name}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Cantidad de estudiantes</td>
