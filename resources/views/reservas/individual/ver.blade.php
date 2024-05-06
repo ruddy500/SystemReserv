@@ -18,7 +18,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Nombre docente</td>
-                                    <td style="width: 50%;">{{auth()->user()->name}}</td>
+                                    <td style="width: 50%;">{{$docente}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Cantidad de estudiantes</td>
