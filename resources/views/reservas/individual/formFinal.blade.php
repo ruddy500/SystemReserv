@@ -39,7 +39,7 @@ $totalEstudiantes = 0;
                                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
                                 <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="300" required>
                                 <div class="invalid-feedback">
-                                    Por favor ingresa la cantidad de estudiantes.
+                                    La cantidad de estudiantes debe estar entre 10 y {{$totalEstudiantes}}.
                                 </div>
                             </div>
                         </div>

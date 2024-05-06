@@ -104,6 +104,7 @@ form.addEventListener('submit', function(event) {
     var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
     if (checkedCheckboxes.length === 0) {
+        //console.log("No se ha seleccionado ningún horario.");
         Swal.fire({
             icon: 'warning',
             title: 'Error',
@@ -113,18 +114,23 @@ form.addEventListener('submit', function(event) {
     } else if (checkedCheckboxes.length === 1 || checkedCheckboxes.length === 2) {
         var checkedIds = Array.from(checkedCheckboxes).map(function(checkbox) {
             return parseInt(checkbox.value);
-        }).sort();
+        }).sort(function(a, b) {
+            return a - b; // Comparación numérica ascendente
+        });
+        //console.log("IDs de checkboxes seleccionados: ", checkedIds);
 
         // Verificar si los IDs de los checkboxes seleccionados son contiguos
         var contiguos = true;
         for (var i = 0; i < checkedIds.length - 1; i++) {
             if (checkedIds[i] + 1 !== checkedIds[i + 1]) {
                 contiguos = false;
+                //console.log("Los horarios no son contiguos.");
                 break;
             }
         }
 
         if (contiguos) {
+            //console.log("Los horarios son contiguos.");
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
@@ -138,6 +144,7 @@ form.addEventListener('submit', function(event) {
                 }
             });
         } else {
+            //console.log("Por favor seleccione horarios contiguos.");
             Swal.fire({
                 icon: 'warning',
                 title: 'Error',
