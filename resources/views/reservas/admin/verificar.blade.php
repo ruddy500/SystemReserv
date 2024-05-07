@@ -1,3 +1,11 @@
+<?php 
+use App\Models\Ambientes;
+use App\Models\NombreAmbientes
+// use App\Models\Periodos; // Assuming you need Periodos model
+
+// $horario = $ambiente->horarios()->get();
+?>
+
 @extends('index')
 {{-- {{ dd(get_defined_vars()) }} --}}
 @section('reservas/verificar')
@@ -8,9 +16,10 @@
             <!-- TABLA DE DETALLE DE RESERVA -->
             {{-- <form action= "{{ route('reservas.ambientes.buscar') }}" method="POST"> --}}
             <form action="{{ route('reservas.ambientes.buscar',['idReserva'=>$idReserva]) }}" method="POST">
-        
+                {{-- {{ dd(get_defined_vars()) }}  --}}
                 @csrf
-            <div class = "datos-reserva">
+            
+                <div class = "datos-reserva">
 
                 <table class="table table-bordered">
                     <tbody>
@@ -31,14 +40,17 @@
                                     @endphp
 
                                     @for($i = 0; $i < $tamP; $i++)
+                                   
                                         @if($incremento == 0)
                                             @if($periodos[$i]->reservas_id == $idReserva)
                                                 @php
                                                     $incremento = $incremento + 1;
+                                                   
                                                   //  dd($periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo);
                                                 @endphp
-                                                <td id='borrar' style="width: 50%;">{{$periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo}}</td>
-                                                <input type="hidden" id="periodo-reserva" name="periodo_reserva_uno" value="{{$periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo}}">
+                                                 <td id='borrar' style="width: 50%;">{{$periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo}}</td>
+                                                 <input type="hidden" id="periodo-reserva" name="periodo_reserva_uno" value="{{$periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo}}">
+                                                
                                             @endif
                                         @else
                                             @if($periodos[$i]->reservas_id == $idReserva)
@@ -53,14 +65,14 @@
                                                     $inicio = trim(str_replace(' ', '', $partes_P1[0]));
                                                     $fin = trim(str_replace(' ', '', $partes_P2[1]));
                                                 @endphp
-                                                <td style="width: 50%;">{{$inicio}} - {{$fin}}</td>
-                                                <input type="hidden" id="periodo-reserva" name="periodo_reserva" value="{{$periodo1}} / {{$periodo2}}">
+                                                <td style="width: 50%;">{{$inicio}} / {{$fin}}</td>
+                                                 <input type="hidden" id="periodo-reserva-dos" name="periodo_reserva" value="{{$inicio}} / {{$fin}}">
                                                 @if($incremento > 0)
-                                                    <script>
+                                                    {{-- <script>
                                                         // Eliminar el elemento con id 'borrar' después de que $incremento sea mayor que cero
                                                         var elementoABorrar = document.getElementById('borrar');
                                                         elementoABorrar.parentNode.removeChild(elementoABorrar);
-                                                    </script>
+                                                    </script> --}}
                                                 @endif
                                             @endif
                                         @endif
@@ -75,83 +87,146 @@
                 </div>
             </div>
         </form>
+
+
         {{-- {{ dd(get_defined_vars()) }} --}}
             <!-- TABLA DE AMBIENTES DISPONIBLES QUE CUMPLEN CON LOS REQUISITOS-->
             {{-- <form id="tabla-ambientesdisponibles" action= ""  method="POST"> --}}
-                <div id= "tabla" class="table-responsive" style="max-height: 300px; overflow-y: auto; padding-top: 15px; display: none;">
-                    <table id="horario-tabla" class="table caption-top table-bordered ">
-                        <thead class="table_encabezado_color text-center">
-                            <td colspan="5">Ambientes Disponibles</td>
-                            <thead class="text-center">
-                                <tr>
-                                    <th class="col" style="width: 20;">Nombre ambiente</th>
-                                    <th scope="col" style="width: 20%;">Capacidad</th>
-                                    <th scope="col" style="width: 20%;">Fecha</th>
-                                    <th scope="col" style="width: 20%;">Periodo</th>
-                                    <th scope="col" style="width: 20%;">Opciones</th>
-                                </tr>
-                            </thead>
-                        </thead>
-                        <thead class="text-center">
-                            <tbody class="text-center">
-                              
-                                {{-- {{ dd(get_defined_vars()) }} --}}
-                           
-
-                                {{-- @if(isset($ambientesEncontrados)) --}}
-                                {{-- {{ dd(get_defined_vars()) }} --}}
-                                {{-- @foreach($ambientesEncontrados as $ambi) --}}
-                                <td>691 A</td>
-                                {{-- <td>{{$ambi->ambientes_id}}</td> --}}
-                                <td>250</td>
-                                {{-- <td>{{$ambi->fechas_id}}</td> --}}
-                                <td>06-05-2024</td>
-                                <td>06:45 - 09:45</td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary btn-sm">Asignar</button>
-                                </td>
-                                {{-- @endforeach --}}
-                                {{-- @endif --}}
-                            </tbody>
-                        </thead>
-                    </table>
-                </div>   
+                @if (session()->get('ambientesEncontradosComplet'))
+                {{-- {{ dd(get_defined_vars()) }} --}}
+                
+                <?php 
+                 //capturo las materias que me envia mi controlador consultar materias a esta vista
+                 $ambientesEncontradosComplet = session()->get('ambientesEncontradosComplet');
+                //  $ambientesDosPeriodosComplet = session()->get('ambientesDosPeriodosComplet');
+               //  dd($ambientesEncontradosComplet);
+                ?>
             
+
+                <div class="col"> 
+                
+                    <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="bg-custom-lista text-center h4">
+                                    <td colspan="5" class="text-center h4 text-white">Ambientes Disponibles</td>
+                                    <tr>
+                                        <th class="text-center h4 text-white">Nombre ambiente</th>
+                                        <th class="text-center h4 text-white">Capacidad </th>
+                                        <th class="text-center h4 text-white">Fecha</th>
+                                        <th class="text-center h4 text-white">Periodo</th>
+                                        <th class="text-center h4 text-white">Opciones</th>
+                                    </tr>
+                                </thead>
+                                @foreach($ambientesEncontradosComplet as $ambi)
+
+                                <script>
+                                    // Obtener el valor del campo oculto y almacenarlo en una variable de JavaScript
+                                    var periodoReservaUno = document.getElementById('periodo-reserva').value;
+                                    
+                                </script>
+                                @php
+                                $aa = $ambi->ambientes_id;
+                                $registroAmbiente = Ambientes::find($aa);
+                                $idNombAmb = $registroAmbiente->nombre_ambientes_id;
+                                $nombreAmbiente = NombreAmbientes::find($idNombAmb)->Nombre;
+
+                                $capacidad = $registroAmbiente->Capacidad;
+
+                                
+                                // dd($periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo);
+
+                                @endphp
+            
+            
+                            
+                                <tbody>  
+                                    <!-- Fila blanca -->
+                                    <thead class="bg-custom-lista-fila-blanco">
+                                        <tr>
+                                            <th class="text-center h4 text-black">{{$nombreAmbiente}}</th>
+                                            <th class="text-center h4 text-black">{{$capacidad}}</th>
+                                            <th class="text-center h4 text-black">{{$reserva->fecha}}</th>
+                                            {{-- $inicio = trim(str_replace(' ', '', $partes_P1[0]));
+                                                    $fin = trim(str_replace(' ', '', $partes_P2[1])); --}}
+                                            <th class="text-center h4 text-black"><script>document.write(periodoReservaUno);</script></th>
+                                            {{-- <th class="text-center h4 text-black"><script>document.write(periodoReservaUno);</script></th> --}}
+                                            <th class="text-center h4 text-black"> <button type="button" class="btn btn-secondary btn-sm">Asignar</button>
+                                            </th>
+                                        </tr>
+                                    </thead> 	   
+
+                                </tbody>
+                                @endforeach
+                            </table> 
+                    </div>
+                </div>
+            {{-- @else --}}
+            @elseif (session()->get('ambientesDosPeriodosComplet'))
+            <?php 
+                 //capturo las materias que me envia mi controlador consultar materias a esta vista
+                //  $ambientesEncontradosComplet = session()->get('ambientesEncontradosComplet');
+                $ambientesDosPeriodosComplet = session()->get('ambientesDosPeriodosComplet');
+                //  dd($ambientesDosPeriodosComplet);
+                ?>
+                
+    {{-- Código relacionado con ambientesEncontradosComplet --}}
+
+    <div class="col"> 
+                
+        <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="bg-custom-lista text-center h4">
+                        <td colspan="5" class="text-center h4 text-white">Ambientes Disponibles</td>
+                        <tr>
+                            <th class="text-center h4 text-white">Nombre ambiente</th>
+                            <th class="text-center h4 text-white">Capacidad </th>
+                            <th class="text-center h4 text-white">Fecha</th>
+                            <th class="text-center h4 text-white">Periodo</th>
+                            <th class="text-center h4 text-white">Opciones</th>
+                        </tr>
+                    </thead>
+
+                    @php
+                      $lastNombreAmbiente = null; // Variable para almacenar el último nombre de ambiente
+                    @endphp
+
+                    @foreach($ambientesDosPeriodosComplet as $ambi)
+                    <script>
+                        // Obtener el valor del campo oculto y almacenarlo en una variable de JavaScript
+                        var periodoReservaDos = document.getElementById('periodo-reserva-dos').value;
+                        
+                    </script>
+                        @php
+                        $ambienteID = $ambi->ambientes_id;
+                        $registroAmbiente = Ambientes::find($ambienteID);
+                        $idNombAmb = $registroAmbiente->nombre_ambientes_id;
+                        $nombreAmbiente = NombreAmbientes::find($idNombAmb)->Nombre;
+
+                        $capacidad = $registroAmbiente->Capacidad;
+
+                        // Verificar si el nombre de ambiente actual es diferente al anterior
+                        $printRow = $nombreAmbiente !== $lastNombreAmbiente;
+                        $lastNombreAmbiente = $nombreAmbiente; // Actualizar el último nombre de ambiente
+                        @endphp
+
+                        @if ($printRow)
+                            <tbody>  
+                                <thead class="bg-custom-lista-fila-blanco">
+                                    <tr>
+                                        <th class="text-center h4 text-black">{{$nombreAmbiente}}</th>
+                                        <th class="text-center h4 text-black">{{$capacidad}}</th>
+                                        <th class="text-center h4 text-black">{{$reserva->fecha}}</th>
+                                        <th class="text-center h4 text-black"><script>document.write(periodoReservaDos);</script></th>
+                                        <th class="text-center h4 text-black"> <button type="button" class="btn btn-secondary btn-sm">Asignar</button>
+                                        </th>
+                                    </tr>
+                                </thead> 
+                            </tbody>
+                        @endif
+                    @endforeach
+                </table> 
         </div>
     </div>
-</div>
-<!-- Agregar un event listener para el botón de búsqueda -->
-<script>
-    document.getElementById('btn-buscarAmbiente').addEventListener('click', function() {
-    // Mostrar la tabla al hacer clic en el botón de búsqueda
-    document.getElementById('tabla').style.display = 'block';
-});
-    </script>
-{{-- 
-<script>
-    $(document).ready(function() {
-        $('#btn-buscarAmbiente').click(function(e) {
-            e.preventDefault(); // Evita el comportamiento predeterminado del botón de enviar
-
-            // Obtén el formulario
-            var form = $(this).closest('form');
-
-            // Realiza la solicitud AJAX
-            $.ajax({
-                url: form.attr('reservas.verificar'), // URL a la que se enviará el formulario
-                type: form.attr('POST'), // Método del formulario (POST en este caso)
-                data: form.serialize(), // Datos del formulario
-                success: function(response) {
-                    // Actualiza la tabla de ambientes disponibles con la respuesta del servidor
-                    $('#tabla').html(response);
-                },
-                error: function(xhr, status, error) {
-                    // Maneja los errores si es necesario
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+@else
+            @endif
 @endsection

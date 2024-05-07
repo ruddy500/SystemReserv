@@ -79,7 +79,7 @@
                                     //capturo las materias que me envia mi controlador consultar materias a esta vista
                                     $reservasFiltradas = session()->get('reservasFiltradas');
                                     $tamReservasFil = count($reservasFiltradas);
-                                      dd($reservasFiltradas,$tamReservasFil);
+                                    //   dd($reservasFiltradas,$tamReservasFil);
                                 ?>
 
                                 {{-- Cuerpo --}}

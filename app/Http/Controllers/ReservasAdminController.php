@@ -111,12 +111,18 @@ class ReservasAdminController extends Controller
              $ambientesEncontrados = collect(); // Inicializamos una colección para almacenar los resultados
              $ambientesEncontrados2 = collect(); // Inicializamos una colección para almacenar los resultados
              $ambientesEncontradosComplet = collect();
+             $ambientesDosPeriodos_uno = collect();
+             $ambientesDosPeriodos_dos = collect();
+             $ambientesDosPeriodosComplet = collect();
         $fechass = Fechas::all();
         //dd($fechass);
       //capturamos el periodo
       $periodoss = Periodos::all();
+    //   $aaa = periodo_reserva_uno;
         $periodoReserva = $request->periodo_reserva_uno;
+        //dd($periodoReserva);
         $periodoReserva2 = $request->periodo_reserva;
+        // dd($periodoReserva2);
         if($periodoReserva2 === null){
             foreach ($periodoss as $periodo) {
                 if($periodo->HoraIntervalo == $periodoReserva){
@@ -148,15 +154,12 @@ class ReservasAdminController extends Controller
            }
         }
        // dd($ambient);
-        dd($ambientesEncontradosComplet);
+        // dd($ambientesEncontradosComplet);
         // Aquí tienes la colección de ambientes encontrados que coinciden con la fecha y el período
-        return view('reservas.admin.verificar', compact('ambientesEncontrados'));
-        // return view('reservas.admin.verificar', ['ambientesEncontrados' => $ambientesEncontrados]);
-      //return redirect()->back()->with('ambientesEncontrados',$ambientesEncontrados);
-      //return redirect()->route('reservas.verificar', ['idReserva' => $idReserva])->with('ambientesEncontrados', $ambientesEncontrados);
-      //return view('reservas.verificar', ['ambientesEncontrados' => $ambientesEncontrados]);
-       //return redirect()->route('reservas.verificar',['idReserva' => $idReserva])->with('ambientesEncontrados',$ambientesEncontrados);
-        //return redirect('reservas.admin.verificar')->with('ambientesEncontrados',$ambientesEncontrados);
+       //return redirect()->route('reservas.verificar',['idReserva' => $idReserva])->with('ambientesEncontradosComplet',$ambientesEncontradosComplet);
+       return redirect()->route('reservas.verificar',['idReserva'=>$idReserva])->with('ambientesEncontradosComplet',$ambientesEncontradosComplet);
+    
+       //return redirect('reservas.admin.verificar')->with('ambientesEncontrados',$ambientesEncontrados);
        // dd($ambientesEncontrados);
         }else{
             foreach ($periodoss as $periodo) {
@@ -177,7 +180,20 @@ class ReservasAdminController extends Controller
                                                                             ->where('periodos_id', $idPeri)
                                                                             ->get());
             }   
-        } 
+        }
+        //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        foreach($ambientesEncontrados as $amb){
+            $ambienteID = $amb->ambientes_id;
+            $ambient = Ambientes::find($ambienteID);
+            $cap = $ambient->Capacidad;
+            // dd($cap);
+            if($cap > $cantEst && $cap < $totalEst){
+             $ambientesDosPeriodos_uno =  $ambientesDosPeriodos_uno->merge(Horarios::where('fechas_id', $fechaRegistro->id)
+             ->where('periodos_id', $idPeri)
+             ->where('ambientes_id', $ambient->id)
+             ->get());
+            }
+         }
         
         foreach ($fechass as $fecha) {
             if($fecha->dia == $dia_fecha && $fecha->mes == $mes_fecha && $fecha->anio == $anio_fecha){
@@ -186,10 +202,42 @@ class ReservasAdminController extends Controller
                                                                             ->where('periodos_id', $idPeri2)
                                                                             ->get());
             }   
-        } 
-        if($ambientesEncontrados != null && $ambientesEncontrados2 != null){
-            dd($ambientesEncontrados,$ambientesEncontrados2);
         }
+        
+        foreach($ambientesEncontrados2 as $amb){
+            $ambienteID = $amb->ambientes_id;
+            $ambient = Ambientes::find($ambienteID);
+            $cap = $ambient->Capacidad;
+            // dd($cap);
+            if($cap > $cantEst && $cap < $totalEst){
+             $ambientesDosPeriodos_dos =  $ambientesDosPeriodos_dos->merge(Horarios::where('fechas_id', $fechaRegistro->id)
+             ->where('periodos_id', $idPeri2)
+             ->where('ambientes_id', $ambient->id)
+             ->get());
+            }
+         }
+        //  dd($ambientesDosPeriodos_uno,$ambientesDosPeriodos_dos);
+        // if($ambientesDosPeriodos_uno != null && $ambientesDosPeriodos_dos != null){
+        //     dd($ambientesDosPeriodos_uno,$ambientesDosPeriodos_dos);
+        // }
+
+
+            // Obtener el tamaño máximo entre ambas colecciones
+            $maxSize = max($ambientesDosPeriodos_uno->count(), $ambientesDosPeriodos_dos->count());
+
+            // Interceptar ambas colecciones
+            for ($i = 0; $i < $maxSize; $i++) {
+                // Agregar elementos de la primera colección si existen
+                if ($i < $ambientesDosPeriodos_uno->count()) {
+                    $ambientesDosPeriodosComplet->push($ambientesDosPeriodos_uno[$i]);
+                }
+                // Agregar elementos de la segunda colección si existen
+                if ($i < $ambientesDosPeriodos_dos->count()) {
+                    $ambientesDosPeriodosComplet->push($ambientesDosPeriodos_dos[$i]);
+                }
+            }
+            // dd($ambientesDosPeriodosComplet);
+        return redirect()->route('reservas.verificar',['idReserva'=>$idReserva])->with('ambientesDosPeriodosComplet',$ambientesDosPeriodosComplet);
         // Aquí tienes la colección de ambientes encontrados que coinciden con la fecha y el período
        // dd($ambientesEncontrados);
         }
