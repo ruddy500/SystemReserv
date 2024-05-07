@@ -121,8 +121,8 @@ class ReservasAdminController extends Controller
     //   $aaa = periodo_reserva_uno;
         $periodoReserva = $request->periodo_reserva_uno;
         //dd($periodoReserva);
-        $periodoReserva2 = $request->periodo_reserva;
-        // dd($periodoReserva2);
+        $periodoReserva2 = $request->periodo_reserva_dos;
+        //  dd($periodoReserva);
         if($periodoReserva2 === null){
             foreach ($periodoss as $periodo) {
                 if($periodo->HoraIntervalo == $periodoReserva){

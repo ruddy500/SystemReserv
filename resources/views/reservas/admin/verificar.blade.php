@@ -1,20 +1,14 @@
+@extends('index')
+@section('reservas/verificar')
 <?php 
 use App\Models\Ambientes;
-use App\Models\NombreAmbientes
-// use App\Models\Periodos; // Assuming you need Periodos model
-
-// $horario = $ambiente->horarios()->get();
+use App\Models\NombreAmbientes;
 ?>
-
-@extends('index')
-{{-- {{ dd(get_defined_vars()) }} --}}
-@section('reservas/verificar')
 <div class="container mt-3">
 	<div class="card vercard">
 		<h3 class="card-header">Verificación de reserva</h3>
         <div class="card-body bg-content">
             <!-- TABLA DE DETALLE DE RESERVA -->
-            {{-- <form action= "{{ route('reservas.ambientes.buscar') }}" method="POST"> --}}
             <form action="{{ route('reservas.ambientes.buscar',['idReserva'=>$idReserva]) }}" method="POST">
                 {{-- {{ dd(get_defined_vars()) }}  --}}
                 @csrf
@@ -65,14 +59,14 @@ use App\Models\NombreAmbientes
                                                     $inicio = trim(str_replace(' ', '', $partes_P1[0]));
                                                     $fin = trim(str_replace(' ', '', $partes_P2[1]));
                                                 @endphp
-                                                <td style="width: 50%;">{{$inicio}} / {{$fin}}</td>
-                                                 <input type="hidden" id="periodo-reserva-dos" name="periodo_reserva" value="{{$inicio}} / {{$fin}}">
+                                                <td style="width: 50%;">{{$inicio}} - {{$fin}}</td>
+                                                 <input type="hidden" id="periodo-reserva-dos" name="periodo_reserva_dos" value="{{$inicio}} - {{$fin}}">
                                                 @if($incremento > 0)
-                                                    {{-- <script>
+                                                    <script>
                                                         // Eliminar el elemento con id 'borrar' después de que $incremento sea mayor que cero
                                                         var elementoABorrar = document.getElementById('borrar');
                                                         elementoABorrar.parentNode.removeChild(elementoABorrar);
-                                                    </script> --}}
+                                                    </script>
                                                 @endif
                                             @endif
                                         @endif
