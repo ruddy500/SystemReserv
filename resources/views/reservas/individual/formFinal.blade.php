@@ -37,7 +37,7 @@ $totalEstudiantes = 0;
                         <div class="col">
                             <div class="mb-3">
                                 <label for="cantidad-name" class="col-form-label h4">Cantidad de estudiantes:</label>
-                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="300" required>
+                                <input type="number" name="cantidad" class="form-control" id="cantidad-name" minlength="3" maxlength="100" min="10" max="{{$totalEstudiantes}}" required>
                                 <div class="invalid-feedback">
                                     La cantidad de estudiantes debe estar entre 10 y {{$totalEstudiantes}}.
                                 </div>
