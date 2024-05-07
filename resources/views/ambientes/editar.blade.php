@@ -30,9 +30,9 @@ $horario = $ambiente->horarios()->get();
                     <div class="col">
                         <div class="mb-3">
                             <label for="capacidad-name" class="col-form-label h4">Capacidad:</label>      
-                            <input type="number" name="capacidad" class="form-control" id="capacidad-name" required value="{{ $ambiente->Capacidad }}" minlength="3" maxlength="100" min="30" max="200">
+                            <input type="number" name="capacidad" class="form-control" id="capacidad-name" required value="{{ $ambiente->Capacidad }}" minlength="3" maxlength="100" min="10" max="300">
                             <div class="valid-feedback">Capacidad válida</div>
-                            <div class="invalid-feedback">Inserte un rango entre 30 a 200 de capacidad</div>
+                            <div class="invalid-feedback">Inserte un rango entre 10 a 300 de capacidad</div>
                         </div>
                     </div>
                 </div>
