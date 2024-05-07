@@ -31,5 +31,11 @@ class DocentesMateriasTableSeeder extends Seeder
         DocentesMaterias::create(['docentes_id'=>5,'materias_id' =>12]);  //cussi
 
         DocentesMaterias::create(['docentes_id'=>6,'materias_id' =>13]);  //henry
+
+        DocentesMaterias::create(['docentes_id'=>7,'materias_id' =>14]);  //Corina
+        DocentesMaterias::create(['docentes_id'=>7,'materias_id' =>15]);  //Corina
+        DocentesMaterias::create(['docentes_id'=>7,'materias_id' =>16]);  //Corina
+        DocentesMaterias::create(['docentes_id'=>7,'materias_id' =>17]);  //corina
+        DocentesMaterias::create(['docentes_id'=>7,'materias_id' =>18]);  //Corina
     }
 }

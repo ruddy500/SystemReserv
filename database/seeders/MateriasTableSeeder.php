@@ -69,5 +69,25 @@ class MateriasTableSeeder extends Seeder
                           'Grupo' =>8,
                           'Inscritos'=>80,
                         ]);
+        Materias::create(['Nombre'=>"Metodos y tecnicas de programacion",
+                        'Grupo' =>1,
+                        'Inscritos'=>70,
+                      ]);
+        Materias::create(['Nombre'=>"Taller de ingenieria de sistemas",
+                          'Grupo' =>1,
+                          'Inscritos'=>80,
+                        ]);
+        Materias::create(['Nombre'=>"Metodologia de la investigacion",
+                          'Grupo' =>2,
+                          'Inscritos'=>80,
+                        ]);
+        Materias::create(['Nombre'=>"Interaccion humano computador",
+                          'Grupo' =>1,
+                          'Inscritos'=>60,
+                        ]);
+        Materias::create(['Nombre'=>"Introduccion a la programacion",
+                          'Grupo' =>3,
+                          'Inscritos'=>80,
+                        ]);
 }
 }

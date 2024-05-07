@@ -31,33 +31,40 @@ class UsuariosTableSeeder extends Seeder
         $user1->role = 'docente';
         $user1->save();
 
-        $user1 = new Usuarios;
-        $user1->name = 'Rosemary Torrico Bascope';
-        $user1->email = 'rosemary@gmail.com';
-        $user1->password ='1234';
-        $user1->role = 'docente';
-        $user1->save();
-
         $user2 = new Usuarios;
-        $user2->name = 'Catari';
-        $user2->email = 'catari@gmail.com';
+        $user2->name = 'Rosemary Torrico Bascope';
+        $user2->email = 'rosemary@gmail.com';
         $user2->password ='1234';
         $user2->role = 'docente';
         $user2->save();
 
         $user3 = new Usuarios;
-        $user3->name = 'Cussi';
-        $user3->email = 'cussi@gmail.com';
+        $user3->name = 'Catari';
+        $user3->email = 'catari@gmail.com';
         $user3->password ='1234';
         $user3->role = 'docente';
         $user3->save();
-        
+
         $user4 = new Usuarios;
-        $user4->name = 'Henry';
-        $user4->email = 'henry@gmail.com';
+        $user4->name = 'Cussi';
+        $user4->email = 'cussi@gmail.com';
         $user4->password ='1234';
         $user4->role = 'docente';
         $user4->save();
+        
+        $user5 = new Usuarios;
+        $user5->name = 'Henry';
+        $user5->email = 'henry@gmail.com';
+        $user5->password ='1234';
+        $user5->role = 'docente';
+        $user5->save();
+
+        $user6 = new Usuarios;
+        $user6->name = 'Corina Flores';
+        $user6->email = 'corina@gmail.com';
+        $user6->password ='1234';
+        $user6->role = 'docente';
+        $user6->save();
        
     }
 
