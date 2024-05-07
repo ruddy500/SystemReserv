@@ -146,7 +146,7 @@ class ReservasAdminController extends Controller
            $ambienteID = $amb->ambientes_id;
            $ambient = Ambientes::find($ambienteID);
            $cap = $ambient->Capacidad;
-           if($cap > $cantEst && $cap < $totalEst){
+           if($cap >= $cantEst && $cap <= $totalEst){
             $ambientesEncontradosComplet = $ambientesEncontradosComplet->merge(Horarios::where('fechas_id', $fechaRegistro->id)
             ->where('periodos_id', $idPeri)
             ->where('ambientes_id', $ambient->id)
@@ -187,7 +187,7 @@ class ReservasAdminController extends Controller
             $ambient = Ambientes::find($ambienteID);
             $cap = $ambient->Capacidad;
             // dd($cap);
-            if($cap > $cantEst && $cap < $totalEst){
+            if($cap >= $cantEst && $cap <= $totalEst){
              $ambientesDosPeriodos_uno =  $ambientesDosPeriodos_uno->merge(Horarios::where('fechas_id', $fechaRegistro->id)
              ->where('periodos_id', $idPeri)
              ->where('ambientes_id', $ambient->id)
@@ -209,7 +209,7 @@ class ReservasAdminController extends Controller
             $ambient = Ambientes::find($ambienteID);
             $cap = $ambient->Capacidad;
             // dd($cap);
-            if($cap > $cantEst && $cap < $totalEst){
+            if($cap >= $cantEst && $cap <= $totalEst){
              $ambientesDosPeriodos_dos =  $ambientesDosPeriodos_dos->merge(Horarios::where('fechas_id', $fechaRegistro->id)
              ->where('periodos_id', $idPeri2)
              ->where('ambientes_id', $ambient->id)
