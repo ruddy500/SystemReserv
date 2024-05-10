@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                         <div class="mb-3">
-                        <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
+                            <label for="ambiente-name" class="col-form-label h4">Ambiente:</label>
                             <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                                 <option value="" disabled selected >Seleccione aula</option>
                                <!-- me captura todo los ambientes -->
@@ -24,6 +24,17 @@
                             <input type="number" name= "capacidad" class="form-control" id="capacidad-name" required minlength="3" maxlength="100" min="10" max="300">
                             <div class="valid-feedback">Capacidad válida</div>
                             <div class="invalid-feedback">Inserte un rango entre 10 a 300 de capacidad</div>
+                        </div>
+                        
+                        <!-- CAMPO TIPO DE AMBIENTE AÑADIDO -->
+                        <div class="mb-3">
+                            <label for="tipo-ambiente-name" class="col-form-label h4">Tipo de ambiente:</label>
+                            <select name="tipo-ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                <option value="" disabled selected >Seleccione tipo de ambiente</option>
+                               <option value="">Auditorio</option>
+                               <option value="">Laboratorio</option>
+                               <option value="">Aula común</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">

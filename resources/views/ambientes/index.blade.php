@@ -9,9 +9,23 @@
 			<div class="card">
 				<h3 class="card-header">Ambientes</h3>
 				<div class="card-body bg-custom">
-					<button type="button" class="btn btn-custom margin" data-bs-toggle="modal" data-bs-target="#formularioAmbiente" data-bs-whatever="@mdo"><i class="bi bi-plus-circle-fill"></i>  Registrar ambiente</button>
+					<!-- BOTON DE REGISTRAR AMBIENTE -->
+					<div class = "boton-registrar-ambiente">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-primary dropdown-toggle custom-btn" data-bs-toggle="dropdown" aria-expanded="false">
+							Registrar ambiente
+							</button>
+							<ul class="dropdown-menu">
+							<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formularioAmbiente" data-bs-whatever="@mdo">Individual</button></li>
+							<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#registroAmbiente-masivo" data-bs-whatever="@mdo">Masivo</button></li>
+							</ul>
+						</div>
+					</div>
+					<!-- INCLUYE EL MODAL DE REGISTRO DE AMBIENTE INDIVIDUAL -->
 					@include('ambientes.ambiente.registrar')
 					@include('componentes.validacion')
+					<!-- INCLUYE EL MODAL DE REGISTRO DE AMBIENTE MASIVO -->
+					@include('ambientes.ambiente.masivo')
 					<div class="card-body bg-content" style="border-radius: 5px;">
 						<div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
 							<table class="table table-striped table-hover table-bordered">
@@ -161,6 +175,15 @@
         $(document).ready(function() {
             // Función para recargar la página después de cerrar el modal
             $('#formularioAmbiente').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        });
+    </script>
+
+	<script>
+        $(document).ready(function() {
+            // Función para recargar la página después de cerrar el modal
+            $('#registroAmbiente-masivo').on('hidden.bs.modal', function () {
                 location.reload();
             });
         });
