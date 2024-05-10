@@ -20,6 +20,7 @@ $totalEstudiantes = 0;
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
+            <p class="h3" style="text-align: center;">Formulario de reserva individual - Parte 2</p>
             <!-- FORMULARIO -->
             <form id="" action="{{route('reservas.guardarIndividual')}}" method="POST" class="needs-validation" novalidate>
                 @csrf

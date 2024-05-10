@@ -55,9 +55,7 @@
                                     <option value="{{ $nombreMateria }}" {{ $nombreMateria == old('materia') ? 'selected' : '' }}>{{ $nombreMateria }}</option>            
                                 @endfor
                             </select>
-                            <div class="input-group-append">
-                                <button id="btn-buscar" type="submit" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
-                            </div>
+                            <button id="btn-buscar" type="submit" class="btn btn-primary custom-btn">Buscar</button>
                         </div> 
                     </div>
                 </div>
