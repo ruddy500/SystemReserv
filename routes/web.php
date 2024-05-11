@@ -72,11 +72,11 @@ Route::get('/reservas/verGrupal/{idReserva}', [ReservasController::class,'verGru
 Route::get('/reservas/editar/{idReserva}', [ReservasController::class,'editar'])->name('reservas.editar');
 Route::put('/reservas/actualizar/{idReserva}', [ReservasController::class, 'actualizarReserva'])->name('reserva.actualizar');
 
-Route::post('/reservas/registrarGrupal',[ReservasController::class,'consultarMaterias'])->name('reservas.grupal.consultarMaterias');
-
+Route::post('/reservas/registrarGrupal',[ReservasController::class,'consultarMaterias'])->name('reservas.grupal.consultarMaterias');//materias grupal
 Route::post('/reservas/registrarGrupal/tomarMaterias',[ReservasController::class,'enviarMaterias'])->name('reservas.grupal.tomarMaterias');
 
-Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMate'])->name('reservas.individual.tomarMaterias'); //materias individual
+Route::post('/reservas/registrarIndividual',[ReservasController::class,'consultarMaterias'])->name('reservas.individual.consultarMaterias'); //materias individual
+Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMaterias'])->name('reservas.individual.tomarMaterias');
 
 Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
 

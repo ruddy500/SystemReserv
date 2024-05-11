@@ -17,6 +17,7 @@ $totalEstudiantes = 0;
 ?>
 
 @section('contenido-registrarIndividual')
+{{-- {{ dd(get_defined_vars()) }}  --}}
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">

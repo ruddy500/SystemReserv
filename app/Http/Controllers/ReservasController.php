@@ -41,12 +41,8 @@ class ReservasController extends Controller
     public function registrar()
     {
         //parte de rudy
-        $materias_docentes = DocentesMaterias::all(); //guarda la tabla materias docentes
-        $materias = Materias::all(); //guarda la tabla materias
-        $tam = $materias_docentes->count(); //tamanio de la tabla docentes_materias
-
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.registrar', compact('menu', 'materias', 'materias_docentes', 'tam'));
+        return view('reservas.individual.registrar', compact('menu'));
     }
     public function registrarGrupal()
     {
@@ -99,38 +95,62 @@ class ReservasController extends Controller
     }
 
     public function consultarMaterias(Request $request)
-    {
-
-        $menu = view('componentes/menu'); // Crear la vista del menú
+    {   
+        $idDocente = $request->idUsuario;
+        $tipoFormulario = $request->tipoFormulario;
         $materiaSelec = $request->materia; //nombre de materia
-        $materias = Materias::where('Nombre', $materiaSelec)->get(); //recolecta las materias seleccionada
+      //recolecta las materias seleccionada
         //dd($materias);
+        if($tipoFormulario == "individual"){
+        // dd($materias,"individual");
+           $docenteMateriasFiltrado = DocentesMaterias::where('docentes_id',$idDocente)->get();
+           $materias = [];
+           
+           foreach ($docenteMateriasFiltrado as $docenteMateria) {
+            
+                $idMateria = $docenteMateria->materias_id;
+                $materia = Materias::where('id',$idMateria)->first();
+                $nombreMateria = $materia->Nombre;
 
-        //return view('reservas.grupal.registrar', compact('menu','materias'));
-        return redirect()->route('reservas.registrarGrupal')->with('materias', $materias)->withInput();
+                if($nombreMateria == $materiaSelec){
+                    $materias[] = $materia;
+                }
+                
+            } 
+            
+            return redirect()->route('reservas.registrarIndividual')->with('materias', $materias)->withInput();
+        }else{
+            //tipo de formulario grupal 
+            //return view('reservas.grupal.registrar', compact('menu','materias'));
+            $materias = Materias::where('Nombre', $materiaSelec)->get(); 
+            return redirect()->route('reservas.registrarGrupal')->with('materias', $materias)->withInput();
+        }
+
+        
     }
 
     public function enviarMaterias(Request $request)
     {
-        $periodosGrupal = Periodos::all();
+        $tipoFormulario = $request->tipoFormulario;
+       
         $motivos = Motivos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        $materias = array_map('intval', $request->options); //covierte el arreglo en enteros.
+
         // dd($materias);
-        return view('reservas.grupal.formFinal', compact('menu', 'materias', 'periodosGrupal', 'motivos'));
-    }
-
-    public function enviarMate(Request $request)
-    {
-
-        $materias = $request->input('options');
-        $lista = array_map('intval', $materias);
-        $periodos = Periodos::all();
-        $motivos = Motivos::all();
-        $menu = view('componentes/menu'); // Crear la vista del menú
-
-        return view('reservas.individual.formFinal', compact('menu', 'periodos', 'lista', 'motivos'));
-    }
+        if($tipoFormulario == "individual"){
+            // dd("entra a individual");
+            $lista = array_map('intval', $request->options);
+            $periodos = Periodos::all();
+          
+            return view('reservas.individual.formFinal', compact('menu', 'periodos', 'lista', 'motivos'));
+        }else{
+            // dd("entra a grupal");
+            $periodosGrupal = Periodos::all();
+            $materias = array_map('intval', $request->options); //covierte el arreglo en enteros.
+            return view('reservas.grupal.formFinal', compact('menu', 'materias', 'periodosGrupal', 'motivos'));
+  
+        }
+      }
 
     public function guardarIndividual(Request $request)
     {

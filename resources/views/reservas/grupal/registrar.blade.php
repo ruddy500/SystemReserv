@@ -36,6 +36,7 @@
             <!-- FORMULARIO -->
             <form id="formulario" action= "{{ route('reservas.grupal.consultarMaterias') }}" method="POST">
                 @csrf
+                <input type="hidden" name="tipoFormulario" value="grupal">
                 <div class="col">
                     <!-- campo para poner el nombre del docente que está haciendo la reserva-->
                     <label for="docente-name" class="col-form-label h4">Nombre docente: {{ $nombreDocente }}</label>
@@ -65,89 +66,89 @@
         <!-- TABLA MATERIAS IMPARTIDAS POR OTROS DOCENTES -->
         <form id="tabla-form" action= "{{ route('reservas.grupal.tomarMaterias') }}" method="POST" class="needs-validation" novalidate>
             @csrf
-
+            <input type="hidden" name="tipoFormulario" value="grupal">
             @if (session()->get('materias'))
-            <?php 
-                //capturo las materias que me envia mi controlador consultar materias a esta vista
-                $materias = session()->get('materias');
-                $tamMateCap = count($materias);
-            ?>
+                <?php 
+                    //capturo las materias que me envia mi controlador consultar materias a esta vista
+                    $materias = session()->get('materias');
+                    $tamMateCap = count($materias);
+                ?>
             
-            <div class="col">
-                <div id="tabla" class="table-responsive margin" style="max-height: 550px; overflow-y: auto; display: block;">
-                    <table class="table table-striped table-hover table-bordered">
-                       
-                        <thead class="bg-custom-lista">
-                            <tr>
-                                <th class="text-center h4 text-white">Nombre docente</th>
-                                <th class="text-center h4 text-white">Grupo</th>
-                                <th class="text-center h4 text-white">Inscritos</th>
-                                <th class="text-center h4 text-white">Selección</th>
-                            </tr>
-                        </thead>
-                       {{-- cuerpo --}}
-                        <tbody>
+                <div class="col">
+                    <div id="tabla" class="table-responsive margin" style="max-height: 550px; overflow-y: auto; display: block;">
+                        <table class="table table-striped table-hover table-bordered">
+                        
+                            <thead class="bg-custom-lista">
+                                <tr>
+                                    <th class="text-center h4 text-white">Nombre docente</th>
+                                    <th class="text-center h4 text-white">Grupo</th>
+                                    <th class="text-center h4 text-white">Inscritos</th>
+                                    <th class="text-center h4 text-white">Selección</th>
+                                </tr>
+                            </thead>
+                        {{-- cuerpo --}}
+                            <tbody>
 
-                            @for ( $i=0 ; $i < $tamMateCap; $i++)
-                                <?php
+                                @for ( $i=0 ; $i < $tamMateCap; $i++)
+                                    <?php
+                                    
+                                        $docenteMateria = DocentesMaterias::where('materias_id',$materias[$i]->id)->first();
+                                        $idDocente = $docenteMateria->docentes_id;
+                                        //dd($idDocente);
+
+                                        $docenteEncontrado = Usuarios::where('id',$idDocente)->first();
+                                        $nombreDocente = $docenteEncontrado->name;
+
+                                        $materiaGrupo = $materias[$i]->Grupo;
+                                        $materiaInscritos = $materias[$i]->Inscritos;
+                                    ?>
+                                    @if ($i % 2 == 0)
+                                        <!-- Fila blanca -->
+                                        <thead class="bg-custom-lista-fila-blanco">
+                                            <tr>
+                                                
+                                                <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                                <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
+                                                <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
+                                                <th class="text-center h4 text-black">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>    
+                                        </thead>
+    
+                                    @else
+                                        <!-- Fila plomo -->
+                                        <thead class="bg-custom-lista-fila-plomo">
+                                            <tr>
+                                                
+                                                <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                                <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
+                                                <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
+                                                <th class="text-center h4 text-black">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                            </tr>    
+                                        </thead>
+                                    @endif
+                                                                
                                 
-                                    $docenteMateria = DocentesMaterias::where('materias_id',$materias[$i]->id)->first();
-                                    $idDocente = $docenteMateria->docentes_id;
-                                    //dd($idDocente);
-
-                                    $docenteEncontrado = Usuarios::where('id',$idDocente)->first();
-                                    $nombreDocente = $docenteEncontrado->name;
-
-                                    $materiaGrupo = $materias[$i]->Grupo;
-                                    $materiaInscritos = $materias[$i]->Inscritos;
-                                ?>
-                                @if ($i % 2 == 0)
-                                    <!-- Fila blanca -->
-                                    <thead class="bg-custom-lista-fila-blanco">
-                                        <tr>
-                                            
-                                            <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
-                                            <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
-                                            <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
-                                            <th class="text-center h4 text-black">
-                                                <div class="d-flex justify-content-center">
-                                                    <div>
-                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>    
-                                    </thead>
- 
-                                @else
-                                    <!-- Fila plomo -->
-                                    <thead class="bg-custom-lista-fila-plomo">
-                                        <tr>
-                                            
-                                            <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
-                                            <th class="text-center h4 text-black">{{ $materiaGrupo }}</th>
-                                            <th class="text-center h4 text-black">{{ $materiaInscritos }}</th>
-                                            <th class="text-center h4 text-black">
-                                                <div class="d-flex justify-content-center">
-                                                    <div>
-                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="{{ $materias[$i]->id }}" aria-label="...">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>    
-                                    </thead>
-                                @endif
-                                                               
-                               
-                            @endfor
-                            
-                            
-                        </tbody>
-                    </table>
-                    <!-- BOTON SIGUIENTE DE LA TABLA -->
-                    <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>      
-                </div> 
-            </div>
+                                @endfor
+                                
+                                
+                            </tbody>
+                        </table>
+                        <!-- BOTON SIGUIENTE DE LA TABLA -->
+                        <button id="btn-siguiente"  type="submit" class="btn btn-primary custom-btn" >Siguiente</button>      
+                    </div> 
+                </div>
             @endif
         </form>
     </div>
