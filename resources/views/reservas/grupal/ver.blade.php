@@ -128,6 +128,11 @@ $tamPeriodosSeleccionado = count($periodosSeleccionados);
                                     <td style="width: 50%;">Periodo</td>
                                     <td style="width: 50%;">{{$unido}}</td>
                                 </tr>
+                                <!-- VISTA DETALLE TIPO DE AMBIENTE -->
+                                <tr>
+                                    <td style="width: 50%;">Tipo de ambiente</td>
+                                    <td style="width: 50%;">Auditorio</td>
+                                </tr>
                                 <tr>
                                     <td style="width: 50%;">Materia</td>
                                     <td style="width: 50%;">{{$materia->Nombre}}</td>

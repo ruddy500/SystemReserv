@@ -33,6 +33,7 @@
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
+            <p class="h3" style="text-align: center;">Formulario de reserva grupal - Parte 1</p>
             <!-- FORMULARIO -->
             <form id="formulario" action= "{{ route('reservas.grupal.consultarMaterias') }}" method="POST">
                 @csrf

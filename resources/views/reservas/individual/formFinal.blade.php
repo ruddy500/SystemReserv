@@ -75,6 +75,14 @@ $totalEstudiantes = 0;
                             </div>
                         </div>
                         <div class="col">
+                            <!-- CAMPO TIPO DE AMBIENTE AÑADIDO -->
+                            <div class="mb-3">
+                                <label for="tipo-ambiente-name" class="col-form-label h4">Tipo de ambiente:</label>
+                                <select name="tipoAmbiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                    <option value="" disabled selected >Seleccione tipo de ambiente</option>
+                                    <!-- me captura los tipos de ambientes -->
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ $totalEstudiantes = 0;
 <div class="card-body bg-content" style="border-radius: 5px;">
     <div class="mb-3">
         <div class="row">
+            <p class="h3" style="text-align: center;">Formulario de reserva grupal - Parte 2</p>
             <!-- FORMULARIO -->
             <form id="" action="{{route('reservas.guardarGrupal')}}" method="POST" class="needs-validation" novalidate>
                 @csrf
@@ -72,6 +73,14 @@ $totalEstudiantes = 0;
                             </div>
                         </div>
                         <div class="col">
+                            <!-- CAMPO TIPO DE AMBIENTE AÑADIDO -->
+                            <div class="mb-3">
+                                <label for="tipo-ambiente-name" class="col-form-label h4">Tipo de ambiente:</label>
+                                <select name="tipoAmbiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                                    <option value="" disabled selected >Seleccione tipo de ambiente</option>
+                                    <!-- me captura los tipos de ambientes -->
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

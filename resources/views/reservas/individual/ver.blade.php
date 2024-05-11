@@ -74,6 +74,16 @@
                                     
                                     <!-- <td style="width: 50%;">06:45 - 09:45 me falta periodo</td> -->
                                 </tr>
+                                <!-- VISTA DETALLE TIPO DE AMBIENTE -->
+                                <tr>
+                                    <td style="width: 50%;">Tipo de ambiente</td>
+                                    <td style="width: 50%;">Auditorio</td>
+                                </tr>
+                                <!-- VISTA DETALLE MATERIA -->
+                                <tr>
+                                    <td style="width: 50%;">Materia</td>
+                                    <td style="width: 50%;">Elementos de programacion</td>
+                                </tr>
                             </tbody>
                         </table>
                         <!-- TABLA DE DETALLE DE RESERVA -->
@@ -84,7 +94,6 @@
                                     <td colspan="3">Detalle de materia</td>
                                     <thead class="text-center">
                                         <tr>
-                                            <th class="col" style="width: 50%;">Materia</th>
                                             <th scope="col" style="width: 25%;">Grupo</th>
                                             <th scope="col" style="width: 25%;">Inscritos</th>
                                         </tr>
@@ -94,7 +103,6 @@
                                         <tbody class="text-center">
                                             @if($seleccionadas[$i]->reservas_id==$idReserva)
                                             <tr>
-                                                <td>{{$materias[$seleccionadas[$i]->materias_id-1]->Nombre}}</td>
                                                 <td>{{$materias[$seleccionadas[$i]->materias_id-1]->Grupo}}</td>
                                                 <td>{{$materias[$seleccionadas[$i]->materias_id-1]->Inscritos}}</td>
                                             </tr>
