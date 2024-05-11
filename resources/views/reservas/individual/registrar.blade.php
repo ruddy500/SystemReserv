@@ -159,5 +159,24 @@
     });
     
 </script>
+<script>
+    document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
 
+        if (!checkedOne) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Error...',
+                text: 'Debes seleccionar al menos un Grupo!',
+                confirmButtonText: 'Aceptar',
+                
+            });
+            event.preventDefault();
+        } else {
+            // Redirigir al usuario a la ruta especificada por 'reservas.formFinalIndividual'
+            window.location.href = "{{ route('reservas.formFinalIndividual') }}";
+        }
+    });
+</script>
 @endsection
