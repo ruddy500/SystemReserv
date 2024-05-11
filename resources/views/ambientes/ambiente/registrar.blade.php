@@ -14,9 +14,11 @@
                             <select name="ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                                 <option value="" disabled selected >Seleccione aula</option>
                                <!-- me captura todo los ambientes -->
-                                @foreach($nombreambientes as $nombreambiente)
-                                <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
-                                @endforeach 
+                                
+                               @foreach($nombreambientes as $nombreambiente)
+                                    <option value="{{ $nombreambiente->id }}"> {{ $nombreambiente->Nombre }} </option>
+                                @endforeach
+
                             </select>
                         </div> 
                         <div class="mb-3">
@@ -29,11 +31,14 @@
                         <!-- CAMPO TIPO DE AMBIENTE AÑADIDO -->
                         <div class="mb-3">
                             <label for="tipo-ambiente-name" class="col-form-label h4">Tipo de ambiente:</label>
-                            <select name="tipo-ambiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
+                            <select name="tipoAmbiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                                 <option value="" disabled selected >Seleccione tipo de ambiente</option>
-                               <option value="">Auditorio</option>
-                               <option value="">Laboratorio</option>
-                               <option value="">Aula común</option>
+                                  <!-- me captura los tipos de ambientes -->
+                                  
+                                  @foreach($tipoambientes as $tipoambiente)
+                                    <option value="{{ $tipoambiente->id }}"> {{ $tipoambiente->Nombre }} </option>
+                                  @endforeach 
+
                             </select>
                         </div>
 

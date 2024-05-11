@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             MateriasTableSeeder::class,
             DocentesMateriasTableSeeder::class,
             MotivosTableSeeder::class,
+            TipoAmbientesTableSeeder::class,
             // Agrega aquí cualquier otra clase seeder que hayas creado
         ]);
     }

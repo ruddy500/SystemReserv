@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Models\Ambientes;
 use App\Models\NombreAmbientes;
-//use App\Models\Dias;
+use App\Models\TipoAmbientes;
 use App\Models\Fechas;
 use App\Models\Periodos;
 use Illuminate\Http\Request;
@@ -31,8 +31,12 @@ class AmbientesController extends Controller
     public function guardar(Request $request)
     {      
         //me da el id del  ambiente seleccionado
+       
         $ambienteID = $request->ambiente;
         $nombreAmbiente = NombreAmbientes::find($ambienteID); 
+    
+        $tipoAmbienteID = $request->tipoAmbiente;
+
 
         try {
             /* Genera errores de validacion
@@ -49,6 +53,7 @@ class AmbientesController extends Controller
             
                 $ambiente = new Ambientes;
                 $ambiente->nombre_ambientes_id = $ambienteID;
+                $ambiente->tipo_ambientes_id = $tipoAmbienteID;
 
                 $ambiente->Capacidad = $request->capacidad;
                 $ambiente->Ubicacion = $request->descripcion;
@@ -56,6 +61,7 @@ class AmbientesController extends Controller
                 
                 $nombreAmbiente->Usado = true;
                 $nombreAmbiente->save();
+
     
                 return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente.');
                  

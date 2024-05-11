@@ -24,6 +24,11 @@ class CreateAmbientesTable extends Migration
                 ->constrained('nombre_ambientes')
                 ->cascadeOnDelete();
             
+            $table->foreignId('tipo_ambientes_id')
+                ->nullable()
+                ->constrained('tipo_ambientes')
+                ->cascadeOnDelete();
+            
           
         });
     }
