@@ -35,7 +35,7 @@ $horario = $ambiente->horarios()->get();
                                     <!-- MOSTRAR CAMPO TIPO DE AMBIENTE -->
                                     <tr>
                                         <td style="width: 50%;">Tipo de ambiente</td>
-                                        <td style="width: 50%;">Auditorio</td>
+                                        <td style="width: 50%;">{{$tipoAmbiente}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">Descripción:

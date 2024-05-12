@@ -82,6 +82,9 @@ class AmbientesController extends Controller
     public function verAmbiente($idAmbiente)
     {       $nombreRuta = Route::currentRouteName();
             $ambiente= Ambientes::find($idAmbiente); //captura un ambiente especifico
+            $tipoID = $ambiente->tipo_ambientes_id;
+            $tipoAmbiente = TipoAmbientes::find($tipoID)->Nombre;
+           // dd($tipoAmbiente);
             $menu = view('componentes/menu'); // Crear la vista del menú
             
         try {
@@ -95,7 +98,7 @@ class AmbientesController extends Controller
                 return view('ambientes.horario', compact('ambiente','fechas','periodos', 'menu'));
             }else{
                 if($nombreRuta=='ambientes.ver'){
-                    return view('ambientes.ver', compact('ambiente', 'menu'));
+                    return view('ambientes.ver', compact('ambiente', 'menu','tipoAmbiente'));
     
                 }else{  
                     return view('ambientes.editar', compact('ambiente', 'menu'));}
