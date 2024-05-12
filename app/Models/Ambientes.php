@@ -10,6 +10,15 @@ class Ambientes extends Model
     use HasFactory;
     public $timestamps = false;
     
+    protected $fillable = [
+        'Ubicacion',
+        'Capacidad',
+        // 'Habilitado',
+        'nombre_ambientes_id',
+        'tipo_ambientes_id',
+        // Agrega aquí los demás atributos que desees permitir para asignación masiva
+    ];
+
     public function horarios(){        
         return $this->hasMany(Horarios::class,'ambientes_id');
 

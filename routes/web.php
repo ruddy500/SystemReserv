@@ -25,6 +25,9 @@ Route::post('/ambientes', [AmbientesController::class, 'guardar'])->name('guarda
 Route::get('/ambientes/horario/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.horario');
 Route::post('/ambientes/horario',[HorariosController::class,'añadirHorario'])->name('ambientes.horario.añadir');
 
+// aqui se importara el excel de lo importado
+Route::post('/ambientes/importar', [AmbientesController::class, 'importExcel'])->name('import.excel');
+
 // Route::post('/reservas/registrar',[ReservasController::class,'registrar'])->name('reservas.consultarPeriodos');
 
 Route::get('/ambientes/ver/{ambiente}', [AmbientesController::class, 'verAmbiente'])->name('ambientes.ver');

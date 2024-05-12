@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\AmbientesImport;
 use Illuminate\Support\Facades\Route;
 use App\Models\Ambientes;
 use App\Models\NombreAmbientes;
@@ -11,9 +12,11 @@ use App\Models\Periodos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AmbientesController extends Controller
 {
+
 
     public function cambiarEstado(Request $request, $id)
     {   
@@ -134,6 +137,15 @@ class AmbientesController extends Controller
             // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
             return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
         }
+        }
+
+
+        public function importExcel(Request $request){
+            
+            $file = $request->file('file');
+            Excel::import(new AmbientesImport,$file);
+            return back();
+    
         }
 
 }

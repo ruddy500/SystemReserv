@@ -29,7 +29,7 @@ class CreateAmbientesTable extends Migration
                 ->constrained('tipo_ambientes')
                 ->cascadeOnDelete();
             
-          
+        
         });
     }
 
