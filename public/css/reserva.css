@@ -14,6 +14,35 @@
     margin-right: 2px;
 }
 
+/* Estilos para el campo de búsqueda */
+.js-search{
+    letter-spacing: 2px; /* Espaciado entre caracteres */
+    border: none; /* Elimina el borde del campo de texto */
+    outline: none; /* Elimina el contorno del campo de texto cuando está enfocado */
+    border-bottom: 1px solid #ccc; /* Agrega una línea delgada debajo del campo de texto */
+    width: calc(100% - 45px); /* Ocupa todo el ancho disponible menos el ancho del botón */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    display: inline-block; /* Hace que el campo de entrada sea en línea */
+}
+
+/* Estilos para el botón de búsqueda */
+.search-button {
+    background-color: #2B4C6F; /* Color de fondo del botón */
+    border: none; /* Elimina el borde del botón */
+    width: 35px; /* Ancho del botón */
+    height: 35px; /* Altura del botón */
+    border-radius: 50%; /* Hace que el botón sea circular */
+    cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+    display: inline-block; /* Hace que el botón de búsqueda sea en línea */
+    vertical-align: middle; /* Alinea verticalmente el botón con el campo de entrada */
+}
+
+/* Estilos para el icono dentro del botón */
+.search-button i {
+    color: #ffffff; /* Color del icono */
+}
+
+  
 @media (max-width: 750px) {
     .custom-btn-group {
         flex-direction: column;
