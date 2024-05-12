@@ -21,7 +21,7 @@
             <div class ="filtrado">
                 <!-- CAMPO BUSCADOR -->
                 <div class="container">
-                    <input placeholder='Buscar por motivo' class='js-search' type="text">
+                    <input name="buscadorContenido" placeholder='Buscar por motivo' class='js-search' type="text">
                     <button type="submit" id="searchButton" class="search-button"><i class="fa fa-search"></i></button>
                 </div>
 
@@ -76,7 +76,7 @@
                             </thead>
                             
 
-                            @if (session()->get('reservasFiltradas'))
+                            @if (session()->has('reservasFiltradas'))
                            
                                 <?php 
                                     //capturo las materias que me envia mi controlador consultar materias a esta vista
@@ -185,7 +185,7 @@
                                 </tbody>
 
                             @else
-                               
+                              
                                 {{-- Cuerpo --}}
                                 <tbody> 
 

@@ -9,6 +9,8 @@ use App\Models\Periodos;
 use App\Models\PeriodosSeleccionado;
 use App\Models\Horarios;
 use App\Models\Ambientes;
+use App\Models\Motivos;
+
 class ReservasAdminController extends Controller
 {
  
@@ -33,49 +35,102 @@ class ReservasAdminController extends Controller
         return view('reservas.admin.pendientes', compact('menu'));
     }
     
-    //********* En proceso ***********
+    
     public function buscarReservas(Request $request){
    
-        //dd($request->all());
+        // dd($request->all());
         $reservas = Reservas::all();
         $tamReservas = Reservas::count();
         // dd($tamReservas);
 
         $estadoCheckbox = $request->checkbox_estado;
+        $buscadorContenido = $request->buscadorContenido;
         
-        if( $estadoCheckbox){
-           
-            $fechaInicial = $request ->fecha_inicial;
-            $fechaFinal = $request ->fecha_final;
-        
-            $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
-            $fechaIni = $fechaCIni->format('Y-m-d');
-
-            $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
-            $fechaFin = $fechaCFin->format('Y-m-d');
-            //  dd($fechaIni,$fechaFin);
+        if(!empty($buscadorContenido)){
+            if( $estadoCheckbox){
             
-            $reservasFiltradas = [];
+                $fechaInicial = $request ->fecha_inicial;
+                $fechaFinal = $request ->fecha_final;
+            
+                $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
+                $fechaIni = $fechaCIni->format('Y-m-d');
+
+                $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
+                $fechaFin = $fechaCFin->format('Y-m-d');
+                //  dd($fechaIni,$fechaFin);
                 
-            for ($i=0; $i <$tamReservas ; $i++) { 
-                //modificar
-                $fechaString = $reservas[$i]->fecha;
-                $fechaReserva = date('Y-m-d', strtotime($fechaString));
-                // dd($fechaReserva);
-                // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
-                if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
+                $reservasFiltradas = [];
                     
-                    $reservasFiltradas[] = $reservas[$i];
+                for ($i=0; $i <$tamReservas ; $i++) { 
                     
+                    $fechaString = $reservas[$i]->fecha;
+                    $fechaReserva = date('Y-m-d', strtotime($fechaString));
+                    // dd($fechaReserva);
+                    // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
+                    $motivoId = $reservas[$i]->motivos_id;
+                    $motivoRegistro = Motivos::where('id',$motivoId)->first();
+                    $motivo = $motivoRegistro->Nombre;
+
+                    if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva) && $buscadorContenido == $motivo) {
+                        
+                        $reservasFiltradas[] = $reservas[$i];
+                        
+                    }
+            
+                }
+                // dd($reservasFiltradas);
+                return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas);
+            }else{
+                
+                $reservasFiltradas = [];
+                for ($i=0; $i < $tamReservas ; $i++) { 
+                    $motivoId = $reservas[$i]->motivos_id;
+                    $motivoRegistro = Motivos::where('id',$motivoId)->first();
+                    $motivo = $motivoRegistro->Nombre;
+
+                    if($buscadorContenido == $motivo){
+                      $reservasFiltradas[] = $reservas[$i];
+                    }
+                }
+                //  dd($reservasFiltradas);
+                return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas);
             }
-        
-            }
-           // dd($reservasFiltradas);
-            return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas);
         }else{
-           
+            if( $estadoCheckbox){
+            
+                $fechaInicial = $request ->fecha_inicial;
+                $fechaFinal = $request ->fecha_final;
+            
+                $fechaCIni = \DateTime::createFromFormat('d-m-Y', $fechaInicial); 
+                $fechaIni = $fechaCIni->format('Y-m-d');
+
+                $fechaCFin = \DateTime::createFromFormat('d-m-Y', $fechaFinal);
+                $fechaFin = $fechaCFin->format('Y-m-d');
+                //  dd($fechaIni,$fechaFin);
+                
+                $reservasFiltradas = [];
+                    
+                for ($i=0; $i <$tamReservas ; $i++) { 
+                    
+                    $fechaString = $reservas[$i]->fecha;
+                    $fechaReserva = date('Y-m-d', strtotime($fechaString));
+                    // dd($fechaReserva);
+                    // dd("Fechafin",$fechaFin,"Reserva",$fechaReserva,$fechaFin >= $fechaReserva);
+                    
+                    if (($fechaIni <= $fechaReserva) && ($fechaFin >= $fechaReserva)) {
+                        
+                        $reservasFiltradas[] = $reservas[$i];
+                        
+                    }
+            
+                }
+                // dd($reservasFiltradas);
+                return redirect()->route('reservas.pendientes')->with('reservasFiltradas',$reservasFiltradas);
+            }
             return redirect()->route('reservas.pendientes');
         }
+
+            
     }
 
     public function verificar($idReserva)
