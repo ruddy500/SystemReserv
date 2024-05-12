@@ -87,7 +87,7 @@ $totalEstudiantes = 0;
                                 <select name="tipoAmbiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
                                     <option value="" disabled selected >Seleccione tipo de ambiente</option>
                                     @for($i=0;$i<$tam;$i++) 
-                                    <option value="{{$tipo[$i]->id}}" >{{ $tipo[$i]->Nombre }}</option>
+                                    <option name="tipoAmbiente[]" value="{{$tipo[$i]->id}}" >{{ $tipo[$i]->Nombre }}</option>
                                     @endfor
                                 </select>
                             </div>

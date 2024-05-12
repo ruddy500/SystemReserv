@@ -20,6 +20,7 @@ class CreateReservasTable extends Migration
             $table->enum('Tipo', ['individual', 'grupal'])->nullable();
             $table->enum('Estado', ['asignado', 'pendiente'])->nullable();
             $table->string('fecha',10)->nullable();
+            $table->string('TipoAmbiente',15)->nullable();
 
             $table->foreignId('motivos_id')
                 ->nullable()

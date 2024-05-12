@@ -156,6 +156,13 @@ class ReservasController extends Controller
 
     public function guardarIndividual(Request $request)
     {
+        // obtenemos el id del tipoAmbiente
+        $inttipoAmbiente = $request->input('tipoAmbiente');
+        // dd($tipoAmbiente);
+        // buscamos el tipo Ambiente por su id
+        $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+        // dd($tipoambiente);
+
         $options = $request->input('options');
         $fecha = $request->input('fecha');
 
@@ -193,6 +200,7 @@ class ReservasController extends Controller
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "individual";
         $reserva->fecha = $fecha;
+        $reserva->TipoAmbiente = $tipoambiente->Nombre;
         $reserva->save();
 
         $totalEstudiantes = 0;
@@ -229,6 +237,15 @@ class ReservasController extends Controller
 
     public function guardarGrupal(Request $request)
     {
+
+        // obtenemos el id del tipoAmbiente
+        $inttipoAmbiente = $request->input('tipoAmbiente');
+        // dd($tipoAmbiente);
+        // buscamos el tipo Ambiente por su id
+        $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+        // dd($tipoambiente);
+
+
         $options = $request->input('options');
         $fecha = $request->input('fecha');
 
@@ -270,6 +287,7 @@ class ReservasController extends Controller
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "grupal";
         $reserva->fecha = $fecha;
+        $reserva->TipoAmbiente = $tipoambiente->Nombre;
         $reserva->save();
 
         $totalEstudiantes = 0;

@@ -86,7 +86,7 @@ $totalEstudiantes = 0;
                                    
                                 <option value="" disabled selected >Seleccione tipo de ambiente</option>
                                     @for($i=0;$i<$tam;$i++) 
-                                    <option value="{{$tipo[$i]->id}}" >{{ $tipo[$i]->Nombre }}</option>
+                                    <option name="tipoAmbiente[]" value="{{$tipo[$i]->id}}" >{{ $tipo[$i]->Nombre }}</option>
                                     @endfor
                                 </select>
                                 
