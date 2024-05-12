@@ -58,16 +58,16 @@ Route::get('/reservas/registrarIndividual', [ReservasController::class,'registra
 
 
 Route::get('/reservas/registrarGrupal', [ReservasController::class,'registrarGrupal'])->name('reservas.registrarGrupal');
-Route::get('/reservas/formFinalIndividual', [ReservasController::class,'formFinalIndividual'])->name('reservas.formFinalIndividual');
+Route::get('/reservas/formFinalIndividual', [ReservasController::class,'formFinalIndividual'])->name('reservas.formFinalIndividual');  //form final individual
 
 // aqui se enviara los datos recepcionados en el formularios
-Route::post('/reservas/formFinalIndividual', [ReservasController::class,'guardarIndividual'])->name('reservas.guardarIndividual');
+Route::post('/reservas/formFinalIndividual', [ReservasController::class,'guardarIndividual'])->name('reservas.guardarIndividual');  
 
 
-Route::get('/reservas/formFinalGrupal', [ReservasController::class,'formFinalGrupal'])->name('reservas.formFinalGrupal');
+Route::get('/reservas/formFinalGrupal', [ReservasController::class,'formFinalGrupal'])->name('reservas.formFinalGrupal');  //form final grupal
 
 //aqui se enviara lo de grupal
-Route::post('/reservas/formFinalGrupal', [ReservasController::class,'guardarGrupal'])->name('reservas.guardarGrupal');
+Route::post('/reservas/formFinalGrupal', [ReservasController::class,'guardarGrupal'])->name('reservas.guardarGrupal');  
 
 Route::get('/reservas/verIndividual/{idReserva}', [ReservasController::class,'verIndividual'])->name('reservas.verIndividual');   //parte de rudy
 

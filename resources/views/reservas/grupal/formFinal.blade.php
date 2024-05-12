@@ -15,7 +15,7 @@ $totalEstudiantes = 0;
 
 
 ?>
-
+ 
 {{-- @foreach($materias as $materia)
     {{ dd($materia) }}
 @endforeach --}}
@@ -76,10 +76,20 @@ $totalEstudiantes = 0;
                             <!-- CAMPO TIPO DE AMBIENTE AÑADIDO -->
                             <div class="mb-3">
                                 <label for="tipo-ambiente-name" class="col-form-label h4">Tipo de ambiente:</label>
+                               
+                                <?php
+                                use App\Models\TipoAmbientes;
+                                 $tipo = TipoAmbientes ::all();
+                                 $tam = $tipo->count();
+                                ?>
                                 <select name="tipoAmbiente" class="selectpicker custom-select form-control btn-lg" aria-label="Small select example" required>
-                                    <option value="" disabled selected >Seleccione tipo de ambiente</option>
-                                    <!-- me captura los tipos de ambientes -->
+                                   
+                                <option value="" disabled selected >Seleccione tipo de ambiente</option>
+                                    @for($i=0;$i<$tam;$i++) 
+                                    <option value="{{$tipo[$i]->id}}" >{{ $tipo[$i]->Nombre }}</option>
+                                    @endfor
                                 </select>
+                                
                             </div>
                         </div>
                     </div>

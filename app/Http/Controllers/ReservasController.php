@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TipoAmbientes;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
 use App\Models\Materias;
@@ -59,6 +60,7 @@ class ReservasController extends Controller
     public function formFinalGrupal()
     {
         // $periodosGrupal = Periodos::all();
+       
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.grupal.formFinal', compact('menu'));
     }
