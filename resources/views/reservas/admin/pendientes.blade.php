@@ -19,6 +19,12 @@
             @csrf
             <!-- FILTRADO -->
             <div class ="filtrado">
+                <!-- CAMPO BUSCADOR -->
+                <div class="container">
+                    <input placeholder='Buscar por motivo' class='js-search' type="text">
+                    <button type="submit" id="searchButton" class="search-button"><i class="fa fa-search"></i></button>
+                </div>
+
                 <!-- CHECKBOX PARA FILTRAR LA LISTA DE RESERVAS -->
                 <div class="form-check">
                     <input name="checkbox_estado" id="flexCheckDefault" class="form-check-input" type="checkbox" value="">
@@ -48,9 +54,6 @@
                             <span class="input-group-addon"></span>
                         </div>
                     </div>
-                </div>
-                <div class="buscar" style="text-align: right; padding-top: 20px; padding-right: 25px;">
-                    <button type="submit" class="btn btn-primary custom-btn"><i class="bi bi-search"></i> Buscar</button>
                 </div>
             </div>
         </form>
