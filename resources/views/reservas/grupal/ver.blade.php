@@ -131,7 +131,7 @@ $tamPeriodosSeleccionado = count($periodosSeleccionados);
                                 <!-- VISTA DETALLE TIPO DE AMBIENTE -->
                                 <tr>
                                     <td style="width: 50%;">Tipo de ambiente</td>
-                                    <td style="width: 50%;">Auditorio</td>
+                                    <td style="width: 50%;">{{$reserva->TipoAmbiente}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">Materia</td>
