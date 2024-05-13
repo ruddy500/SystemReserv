@@ -195,6 +195,7 @@ $totalEstudiantes = 0;
             var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             var cantidad = document.querySelector('input[name="cantidad"]');
             var motivo = document.querySelector('select[name="motivo"]');
+            var tipoAmbiente = document.querySelector('select[name="tipoAmbiente"]');
 
             if (checkedCheckboxes.length === 0) {
                 Swal.fire({
@@ -217,7 +218,7 @@ $totalEstudiantes = 0;
                         text: 'Por favor seleccione horarios contiguos.',
                         confirmButtonText: 'Aceptar',
                     });
-                } else if (cantidad.value === "" || motivo.value === "") {
+                } else if (cantidad.value === "" || motivo.value === "" || tipoAmbiente.value === "") {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',
