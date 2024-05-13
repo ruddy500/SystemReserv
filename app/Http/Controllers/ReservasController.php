@@ -80,8 +80,20 @@ class ReservasController extends Controller
         $idDocente = $reserva->docentes_id;
         $nombre = Usuarios::find($idDocente);
         $docente =$nombre->name;
+        
+        $reservaMateria = Reservas::with('materiasSeleccionado')->find($idReserva);
+
+        if ($reservaMateria) {
+            $numeros = $reservaMateria->materiasSeleccionado->pluck('materias_id')->toArray();
+        }
+        $materia = Materias::find($numeros[0]);
+
+
+
+
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.individual.ver', compact('menu','materias','seleccionadas','periodos','tam','periodo','tamP','idReserva','motivoReserva','docente','reserva'));
+        return view('reservas.individual.ver', compact('menu','materias','seleccionadas','periodos','tam','periodo','tamP','idReserva','motivoReserva','docente','reserva','materia'));
     }
     public function verGrupal($idReserva)
     {
