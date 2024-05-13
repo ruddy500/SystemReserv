@@ -77,12 +77,13 @@
                                 <!-- VISTA DETALLE TIPO DE AMBIENTE -->
                                 <tr>
                                     <td style="width: 50%;">Tipo de ambiente</td>
-                                    <td style="width: 50%;">{{$reserva->TipoAmbiente}}</td>
+                                    <td style="width: 50%;">{{$reserva->TipoAmbiente}}</td>  
                                 </tr>
                                 <!-- VISTA DETALLE MATERIA -->
                                 <tr>
                                     <td style="width: 50%;">Materia</td>
-                                    <td style="width: 50%;">Elementos de programacion</td>
+                                    
+                                    <td style="width: 50%;">{{$materia->Nombre}}</td>
                                 </tr>
                             </tbody>
                         </table>
