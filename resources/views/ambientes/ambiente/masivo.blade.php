@@ -8,11 +8,11 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    {{-- <form class="needs-validation" novalidate> --}}
-                        {{-- @csrf --}}
-                        {{-- @include('componentes.validacion') --}}
-                        {{-- <div class="mb-3"> --}}
-                            {{-- <label for="banner" class="form-label">Archivo CSV:</label>
+                    <form action="{{route('import.excel')}}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        @csrf
+                        @include('componentes.validacion')
+                        <div class="mb-3"> 
+                            <label for="banner" class="form-label">Archivo CSV:</label>
                             <input type="file" class="form-control" id="archivo-ambientes" name="file" >
                             <div class="valid-feedback">Archivo seleccionado</div>
                             <div class="invalid-feedback">Seleccione Archivo</div>
@@ -21,18 +21,10 @@
                     
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-aceptar">Aceptar</button>
-                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button> --}}
+                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
 
-                            <form action="{{route('import.excel')}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                            {{-- @if(Session::has('message'))
-                                <p>{{Session::get('message')}}</p>
-                            @endif --}}
-                        
-                            <input type="file" name="file">
-                            <button type="submit">Importar Ambientes</button>
                             
-                            {{-- </form> --}}
+                    </form>
                         </div>
                     </form>
                 </div>
