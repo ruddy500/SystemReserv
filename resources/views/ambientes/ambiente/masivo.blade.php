@@ -12,8 +12,8 @@
                         @csrf
                         @include('componentes.validacion')
                         <div class="mb-3"> 
-                            <label for="banner" class="form-label">Archivo CSV:</label>
-                            <input type="file" class="form-control" id="archivo-ambientes" name="file" >
+                            <label for="banner" class="form-label">Archivo Excel:</label>
+                            <input type="file" class="form-control" id="archivo-ambientes" name="file" accept=".xlsx, .xls" required>
                             <div class="valid-feedback">Archivo seleccionado</div>
                             <div class="invalid-feedback">Seleccione Archivo</div>
                             <br>
@@ -22,10 +22,7 @@
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-aceptar">Aceptar</button>
                             <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-
-                            
-                    </form>
-                        </div>
+                        </div>    
                     </form>
                 </div>
             </div>
