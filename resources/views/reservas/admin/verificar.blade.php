@@ -3,6 +3,7 @@
 <?php
 use App\Models\Ambientes;
 use App\Models\NombreAmbientes;
+use App\Models\TipoAmbientes;
 ?>
 <div class="container mt-3">
 	<div class="card vercard">
@@ -15,7 +16,8 @@ use App\Models\NombreAmbientes;
 
                 <div class = "datos-reserva">
                 <div class="container">
-                    <input placeholder='Buscar por Ubicación o Tipo de ambiente' class='js-search' type="text">
+                <!-- CAMPO BUSCADOR -->
+                    <input name="buscarTipoUbi" placeholder='Buscar por Ubicación o Tipo de ambiente' class='js-search' type="text">
                     <button type="submit" id="btn-buscarAmbiente" class="search-button"><i class="fa fa-search"></i></button>
                 </div>
 
@@ -85,12 +87,12 @@ use App\Models\NombreAmbientes;
         {{-- {{ dd(get_defined_vars()) }} --}}
             <!-- TABLA DE AMBIENTES DISPONIBLES QUE CUMPLEN CON LOS REQUISITOS-->
             {{-- <form id="tabla-ambientesdisponibles" action= ""  method="POST"> --}}
-                @if (session()->get('ambientesEncontradosComplet'))
+                @if (session()->get('ambientesTIPO_UBICACION'))
                 {{-- {{ dd(get_defined_vars()) }} --}}
 
                 <?php
                  //capturo las materias que me envia mi controlador consultar materias a esta vista
-                 $ambientesEncontradosComplet = session()->get('ambientesEncontradosComplet');
+                 $ambientesTIPO_UBICACION = session()->get('ambientesTIPO_UBICACION');
                 //  $ambientesDosPeriodosComplet = session()->get('ambientesDosPeriodosComplet');
                //  dd($ambientesEncontradosComplet);
                 ?>
@@ -110,24 +112,23 @@ use App\Models\NombreAmbientes;
                                         <th class="text-center h4 text-white">Opciones</th>
                                     </tr>
                                 </thead>
-                                @foreach($ambientesEncontradosComplet as $ambi)
+                                @foreach($ambientesTIPO_UBICACION as $ambi)
 
-                                <script>
+                                {{-- <script>
                                     // Obtener el valor del campo oculto y almacenarlo en una variable de JavaScript
                                     var periodoReservaUno = document.getElementById('periodo-reserva').value;
 
-                                </script>
-                                @php
-                                $aa = $ambi->ambientes_id;
-                                $registroAmbiente = Ambientes::find($aa);
-                                $idNombAmb = $registroAmbiente->nombre_ambientes_id;
+                                </script> --}}
+                                @php                           
+                                /////////////////////////////////////
+                                
+                                $idNombAmb = $ambi->nombre_ambientes_id;     
                                 $nombreAmbiente = NombreAmbientes::find($idNombAmb)->Nombre;
-
-                                $capacidad = $registroAmbiente->Capacidad;
-
-
-                                // dd($periodo[$periodos[$i]->periodos_id - 1]->HoraIntervalo);
-
+                                $idTipo =  $ambi->tipo_ambientes_id;
+                                $tipoAmbiente = TipoAmbientes::find($idTipo)->Nombre;
+                                $capacidad = $ambi->Capacidad;
+                                $ubicacion = $ambi->Ubicacion;
+                                
                                 @endphp
 
 
@@ -139,9 +140,9 @@ use App\Models\NombreAmbientes;
                                             <th class="text-center h4 text-black">{{$nombreAmbiente}}</th>
                                             <th class="text-center h4 text-black">{{$capacidad}}</th>
                                             <!-- MOSTRAR UBICACION -->
-                                            <th class="text-center h4 text-black">Sector fisica</th>
+                                            <th class="text-center h4 text-black"> {{$ubicacion}}</th>
                                             <!-- MOSTRAR TIPO DE AMBIENTE -->
-                                            <th class="text-center h4 text-black">Auditorio</th>
+                                            <th class="text-center h4 text-black">{{ $tipoAmbiente}}</th>
                                             {{-- <th class="text-center h4 text-black"><script>document.write(periodoReservaUno);</script></th> --}}
                                             <th class="text-center h4 text-black"> <button type="button" class="btn btn-secondary btn-sm">Asignar</button>
                                             </th>
@@ -153,11 +154,11 @@ use App\Models\NombreAmbientes;
                     </div>
                 </div>
             {{-- @else --}}
-            @elseif (session()->get('ambientesDosPeriodosComplet'))
+            @elseif (session()->get('ambientesTIPO_UBICACION_Dos'))
             <?php
                  //capturo las materias que me envia mi controlador consultar materias a esta vista
                 //  $ambientesEncontradosComplet = session()->get('ambientesEncontradosComplet');
-                $ambientesDosPeriodosComplet = session()->get('ambientesDosPeriodosComplet');
+                $ambientesTIPO_UBICACION_Dos = session()->get('ambientesTIPO_UBICACION_Dos');
                 //  dd($ambientesDosPeriodosComplet);
                 ?>
 
@@ -182,20 +183,21 @@ use App\Models\NombreAmbientes;
                       $lastNombreAmbiente = null; // Variable para almacenar el último nombre de ambiente
                     @endphp
 
-                    @foreach($ambientesDosPeriodosComplet as $ambi)
-                    <script>
+                    @foreach($ambientesTIPO_UBICACION_Dos as $ambi)
+                    {{-- <script>
                         // Obtener el valor del campo oculto y almacenarlo en una variable de JavaScript
                         var periodoReservaDos = document.getElementById('periodo-reserva-dos').value;
 
-                    </script>
+                    </script> --}}
                         @php
-                        $ambienteID = $ambi->ambientes_id;
-                        $registroAmbiente = Ambientes::find($ambienteID);
-                        $idNombAmb = $registroAmbiente->nombre_ambientes_id;
-                        $nombreAmbiente = NombreAmbientes::find($idNombAmb)->Nombre;
 
-                        $capacidad = $registroAmbiente->Capacidad;
-
+                                $idNombAmb = $ambi->nombre_ambientes_id;     
+                                $nombreAmbiente = NombreAmbientes::find($idNombAmb)->Nombre;
+                                $idTipo =  $ambi->tipo_ambientes_id;
+                                $tipoAmbiente = TipoAmbientes::find($idTipo)->Nombre;
+                                $capacidad = $ambi->Capacidad;
+                                $ubicacion = $ambi->Ubicacion;
+////////////////////////////////////////////////////////////////////////////
                         // Verificar si el nombre de ambiente actual es diferente al anterior
                         $printRow = $nombreAmbiente !== $lastNombreAmbiente;
                         $lastNombreAmbiente = $nombreAmbiente; // Actualizar el último nombre de ambiente
@@ -208,9 +210,9 @@ use App\Models\NombreAmbientes;
                                         <th class="text-center h4 text-black">{{$nombreAmbiente}}</th>
                                         <th class="text-center h4 text-black">{{$capacidad}}</th>
                                         <!-- MOSTRAR UBICACION -->
-                                        <th class="text-center h4 text-black">Sector fisica</th>
+                                        <th class="text-center h4 text-black">{{$ubicacion}}</th>
                                         <!-- MOSTRAR TIPO DE AMBIENTE -->
-                                        <th class="text-center h4 text-black">Auditorio</th>
+                                        <th class="text-center h4 text-black">{{$tipoAmbiente}}</th>
                                         <th class="text-center h4 text-black"> <button type="button" class="btn btn-secondary btn-sm">Asignar</button>
                                         </th>
                                     </tr>
