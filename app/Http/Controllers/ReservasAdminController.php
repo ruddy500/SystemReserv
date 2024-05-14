@@ -228,14 +228,8 @@ class ReservasAdminController extends Controller
        foreach ($ambientesEncontradosComplet as $amb) {
         $ambienteID = $amb->ambientes_id;
         $ambient = Ambientes::find($ambienteID);
-        $ubi = $ambient->Ubicacion;
-    
-        // Realizar la búsqueda por ubicación y tipo de ambiente por separado
-        $ambientesPorUbicacion = Ambientes::where('Ubicacion', 'like', '%'.$ubi.'%')->get();
-       // $ambientesPorTipo = TipoAmbientes::where('tipo_ambientes_id', $type)->get();
-    
-        // Fusionar los resultados en la colección $ambientesTIPO
-        $ambientesTIPO = $ambientesTIPO->merge($ambientesPorUbicacion);
+
+        $ambientesTIPO->push($ambient);
     }
     $existe_ubi = false;
     foreach ($ambientesTIPO as $amb) {
@@ -247,8 +241,8 @@ class ReservasAdminController extends Controller
         //NADA
     }
 }
-// dd($ambientesTIPO_UBICACION);
-    if($IDtipo === 0 && $existe_ubi === false){ //No encontro tipo_ambiente
+ //dd($ambientesTIPO);
+    if($IDtipo === 0 && $existe_ubi === false){ //No encontro tipo_ambiente y tampoco ubicacion
         foreach ($ambientesTIPO as $amb) {
             $ambientesTIPO_UBICACION->push($amb);
         }
@@ -268,7 +262,7 @@ class ReservasAdminController extends Controller
 }
 }
 
-    //dd($ambientesTIPO_UBICACION);
+   // dd($ambientesTIPO_UBICACION);
         // Aquí tienes la colección de ambientes encontrados que coinciden con la fecha y el período
        //return redirect()->route('reservas.verificar',['idReserva' => $idReserva])->with('ambientesEncontradosComplet',$ambientesEncontradosComplet);
        return redirect()->route('reservas.verificar',['idReserva'=>$idReserva])->with('ambientesTIPO_UBICACION',$ambientesTIPO_UBICACION);
@@ -343,18 +337,11 @@ class ReservasAdminController extends Controller
                 }
             }
 
-
             foreach ($ambientesDosPeriodosComplet as $amb) {
                 $ambienteID = $amb->ambientes_id;
                 $ambient = Ambientes::find($ambienteID);
-                $ubi = $ambient->Ubicacion;
-            
-                // Realizar la búsqueda por ubicación y tipo de ambiente por separado
-                $ambientesPorUbicacion = Ambientes::where('Ubicacion', 'like', '%'.$ubi.'%')->get();
-               // $ambientesPorTipo = TipoAmbientes::where('tipo_ambientes_id', $type)->get();
-            
-                // Fusionar los resultados en la colección $ambientesTIPO
-                $ambientesTIPO = $ambientesTIPO->merge($ambientesPorUbicacion);
+        
+                $ambientesTIPO->push($ambient);
             }
 
             $existe_ubi = false;
