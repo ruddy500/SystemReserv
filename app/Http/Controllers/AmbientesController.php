@@ -19,7 +19,7 @@ class AmbientesController extends Controller
 
 
     public function cambiarEstado(Request $request, $id)
-    {   
+    {
         // Encuentra el ambiente por su ID
         $ambiente = Ambientes::findOrFail($id);
 
@@ -30,14 +30,14 @@ class AmbientesController extends Controller
         // Responde con un mensaje de éxito (puedes personalizar según tu necesidad)
         return response()->json(['success' => true, 'message' => 'Estado actualizado correctamente']);
     }
-    
+
     public function guardar(Request $request)
-    {      
+    {
         //me da el id del  ambiente seleccionado
-       
+
         $ambienteID = $request->ambiente;
-        $nombreAmbiente = NombreAmbientes::find($ambienteID); 
-    
+        $nombreAmbiente = NombreAmbientes::find($ambienteID);
+
         $tipoAmbienteID = $request->tipoAmbiente;
 
 
@@ -51,27 +51,25 @@ class AmbientesController extends Controller
             
                throw new \Exception("Este es un error interno generado de forma intencional.");
             */
-            
-            if(!$nombreAmbiente->Usado){
-            
+
+            if (!$nombreAmbiente->Usado) {
+
                 $ambiente = new Ambientes;
                 $ambiente->nombre_ambientes_id = $ambienteID;
                 $ambiente->tipo_ambientes_id = $tipoAmbienteID;
 
                 $ambiente->Capacidad = $request->capacidad;
                 $ambiente->Ubicacion = $request->descripcion;
-                $ambiente->save();                
-                
+                $ambiente->save();
+
                 $nombreAmbiente->Usado = true;
                 $nombreAmbiente->save();
 
-    
+
                 return redirect('ambientes')->with('success', 'Ambiente registrado exitosamente.');
-                 
-            }else{
-                return redirect('ambientes')->with('message' , 'El ambiente ya se encuentra registrado');
+            } else {
+                return redirect('ambientes')->with('message', 'El ambiente ya se encuentra registrado');
             }
-                   
         } catch (ValidationException $e) {
             // Manejar errores de validación
             return redirect('ambientes')->withErrors($e->validator->errors());
@@ -79,57 +77,55 @@ class AmbientesController extends Controller
             // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
             return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
         }
-
     }
 
     public function verAmbiente($idAmbiente)
-    {       $nombreRuta = Route::currentRouteName();
-            $ambiente= Ambientes::find($idAmbiente); //captura un ambiente especifico
-            $tipoID = $ambiente->tipo_ambientes_id;
-            $tipoAmbiente = TipoAmbientes::find($tipoID)->Nombre;
-           // dd($tipoAmbiente);
-            $menu = view('componentes/menu'); // Crear la vista del menú
-            
+    {
+        $nombreRuta = Route::currentRouteName();
+        $ambiente = Ambientes::find($idAmbiente); //captura un ambiente especifico
+        $tipoID = $ambiente->tipo_ambientes_id;
+        $tipoAmbiente = TipoAmbientes::find($tipoID)->Nombre;
+        // dd($tipoAmbiente);
+        $menu = view('componentes/menu'); // Crear la vista del menú
+
         try {
-            
-            if($nombreRuta== 'ambientes.horario'){
-                
-               // $dias = Dias::all();
+
+            if ($nombreRuta == 'ambientes.horario') {
+
+                // $dias = Dias::all();
                 $fechas = Fechas::all();
                 $periodos = Periodos::all();
-               // dd($fechas);
-                return view('ambientes.horario', compact('ambiente','fechas','periodos', 'menu'));
-            }else{
-                if($nombreRuta=='ambientes.ver'){
-                    return view('ambientes.ver', compact('ambiente', 'menu','tipoAmbiente'));
-    
-                }else{  
-                    return view('ambientes.editar', compact('ambiente', 'menu'));}
-                
+                // dd($fechas);
+                return view('ambientes.horario', compact('ambiente', 'fechas', 'periodos', 'menu'));
+            } else {
+                if ($nombreRuta == 'ambientes.ver') {
+                    return view('ambientes.ver', compact('ambiente', 'menu', 'tipoAmbiente'));
+                } else {
+                    return view('ambientes.editar', compact('ambiente', 'menu'));
+                }
             }
-
-           } catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Manejar la excepción
             return redirect()->back()->with('error', 'Ha ocurrido un error al mostrar el ambiente.');
         }
     }
 
 
-    public function actualizarAmbiente(Request $request, $idAmbiente){
-        try{
+    public function actualizarAmbiente(Request $request, $idAmbiente)
+    {
+        try {
 
 
-           
+
 
 
             $ambienteEditado = Ambientes::find($idAmbiente);
-       
+
             $ambienteEditado->Capacidad = $request->capacidad;
             $ambienteEditado->Ubicacion = $request->descripcion;
             $ambienteEditado->save();
-       
+
             return redirect('ambientes')->with('success', 'Ambiente Actualizado exitosamente.');
-       
         } catch (ValidationException $e) {
             // Manejar errores de validación
             return redirect('ambientes')->withErrors($e->validator->errors());
@@ -137,15 +133,24 @@ class AmbientesController extends Controller
             // Manejar otros tipos de excepciones, como la excepción de tipo \Exception
             return redirect('ambientes')->with('error', 'Ha ocurrido un error interno');
         }
-        }
+    }
 
 
-        public function importExcel(Request $request){
-            
+    public function importExcel(Request $request)
+    {
+        try{
             $file = $request->file('file');
-            Excel::import(new AmbientesImport,$file);
+            Excel::import(new AmbientesImport, $file);
             return back();
-    
         }
+        catch (\Exception $e) {
+            dd("excecpcion");
+            return back();
+        }
+    }
 
+    public function eliminarDuplicados(){
+    //    dd("hola aqui se eliminaran los duplicados");
+    return "hola";
+    }
 }
