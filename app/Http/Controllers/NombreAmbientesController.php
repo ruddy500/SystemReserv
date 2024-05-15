@@ -11,10 +11,24 @@ use Illuminate\Http\Request;
 
 class NombreAmbientesController extends Controller
 {
- 
+
     public function mostrar()
-    {  
-        $ambientes= Ambientes::all();
+    {
+        // seccion para eliminar duplicados de masivo
+        // Paso 1: Obtener los registros únicos por nombre_id
+        $uniqueIds = Ambientes::selectRaw('MIN(id) as id')
+        ->groupBy('nombre_ambientes_id')
+        ->pluck('id')
+        ->toArray();
+        // dd($uniqueIds);
+
+        // Paso 2 : eliminar todos los registros duplicados
+        Ambientes::whereNotIn('id', $uniqueIds)->delete();
+
+
+
+
+        $ambientes = Ambientes::all();
         //dd($ambientes);
         //Obtener el tamaño de la colección de ambientes
         $tamAmbientes = $ambientes->count();
@@ -22,7 +36,7 @@ class NombreAmbientesController extends Controller
         $tipoambientes = TipoAmbientes::all();
 
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('ambientes.index', compact('nombreambientes','ambientes','tamAmbientes','tipoambientes' ,'menu'));
+
+        return view('ambientes.index', compact('nombreambientes', 'ambientes', 'tamAmbientes', 'tipoambientes', 'menu'));
     }
-    
-    }
+}

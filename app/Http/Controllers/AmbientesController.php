@@ -138,19 +138,17 @@ class AmbientesController extends Controller
 
     public function importExcel(Request $request)
     {
+
         try{
             $file = $request->file('file');
-            Excel::import(new AmbientesImport, $file);
+            Excel::import(new AmbientesImport,$file);
             return back();
+
         }
         catch (\Exception $e) {
-            dd("excecpcion");
             return back();
         }
     }
 
-    public function eliminarDuplicados(){
-    //    dd("hola aqui se eliminaran los duplicados");
-    return "hola";
-    }
+    
 }
