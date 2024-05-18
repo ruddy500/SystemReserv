@@ -195,4 +195,34 @@ use App\Models\TipoAmbientes;
         </div>
     </div>
 </div>
+<script>
+document.getElementById('btn-siguiente').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevenir el submit del formulario por defecto
+
+    Swal.fire({
+        icon: "info",
+        title: "Que Accion desea Realizar?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Asignar",
+        denyButtonText: `Sugerir`,
+        cancelButtonText: 'Rechazar',
+        confirmButtonColor: "#3C9526",
+        cancelButtonColor: "#E61212",
+        denyButtonColor: "#5273EA",
+    }).then((result) => {
+        if (result.isConfirmed) {//Aumentar las redirecciones para cada Boton del modal
+            // Acción para el botón Asignar
+            Swal.fire('Asignado!', '', 'success');
+            
+        } else if (result.isDenied) {
+            // Acción para el botón Sugerir
+            Swal.fire('Sugerido!', '', 'info');
+        } else if (result.isDismissed) {
+            // Acción para el botón Rechazar
+            Swal.fire('Rechazado', '', 'error');
+        }
+    });
+});
+</script>
 @endsection
