@@ -238,7 +238,7 @@ $totalEstudiantes = 0;
                     });
                 }
             } else if (checkedCheckboxes.length === 1) {
-                if (cantidad.value === "" || motivo.value === "") {
+                if (cantidad.value === "" || motivo.value === "" || tipoAmbiente.value === "") {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Error...',

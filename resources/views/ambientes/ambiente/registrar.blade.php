@@ -117,7 +117,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     // Obtener el textarea
     const descripcionTextarea = document.getElementById('descripcion-ubicacion-text');
     const validFeedback = document.getElementById('valid-feedback');
@@ -145,4 +145,4 @@
             validFeedback.style.display = 'none'; // Ocultar el mensaje de validación
         }
     });
-</script>
+</script> -->

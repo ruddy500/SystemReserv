@@ -33,36 +33,58 @@
 
 <!-- Script para enviar el formulario y mostrar la alerta de éxito -->
 <script>
-    function enviarFormulario() {
-    // Previene el comportamiento predeterminado del formulario
-    event.preventDefault();
+    var archivo = document.getElementById('archivo-ambientes');
 
-    // Muestra la alerta de éxito
-    Swal.fire({
-        icon: 'success',
-        title: '¡Éxito!',
-        text: 'Ambientes registrados exitosamente',
-        allowOutsideClick: false, // Evita que la alerta se cierre al hacer clic fuera de ella
-        showCancelButton: false, // Oculta el botón de cancelar
-        confirmButtonText: 'Aceptar' // Texto del botón de confirmación
-    }).then((result) => {
-        // Envía el formulario de manera asíncrona y redirige al usuario a la misma vista una vez que hagan clic en "OK"
-        if (result.isConfirmed) {
-            var form = document.getElementById('formulario-ambientes');
-            var formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = '/ambientes'; // Reemplaza 'tu_url_aqui' con la URL de tu vista
-                } else {
-                    // Maneja el error
-                    console.error('Error:', response);
-                }
-            }).catch(error => console.error('Error:', error));
+    // Agrega un evento de cambio al campo del archivo
+    archivo.addEventListener('change', function() {
+        if (archivo.value === '') {
+            archivo.classList.add('is-invalid');
+            archivo.classList.remove('is-valid');
+        } else {
+            archivo.classList.remove('is-invalid');
+            archivo.classList.add('is-valid');
         }
     });
-}
 
+    function enviarFormulario() {
+        // Previene el comportamiento predeterminado del formulario
+        event.preventDefault();
+
+        var form = document.getElementById('formulario-ambientes');
+
+        // Verifica si el campo del archivo está vacío
+        if (archivo.value === '') {
+            // Muestra un mensaje de error
+            archivo.classList.add('is-invalid');
+        } else {
+            // Muestra la alerta de éxito
+            archivo.classList.remove('is-invalid');
+            archivo.classList.add('is-valid');
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'Ambientes registrados exitosamente',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                // Envía el formulario de manera asíncrona y redirige al usuario a la misma vista una vez que hagan clic en "OK"
+                if (result.isConfirmed) {
+                    var formData = new FormData(form);
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            window.location.href = '/ambientes';
+                        } else {
+                            // Maneja el error
+                            console.error('Error:', response);
+                        }
+                    }).catch(error => console.error('Error:', error));
+                }
+            });
+        }
+    }
 </script>
