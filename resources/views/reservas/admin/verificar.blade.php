@@ -188,6 +188,7 @@ use App\Models\TipoAmbientes;
                                 @endif
                             @endforeach
                         </table>
+                        <button id="btn-siguiente" type="submit" class="btn btn-primary custom-btn">Siguiente</button>
                     </div>
                 </div>
             @else
