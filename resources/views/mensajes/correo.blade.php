@@ -4,7 +4,7 @@
 
 <?php
 // dd($idReserva);
-dd("id de reserva",$idReserva,"id de ambientes",$checkboxValue);
+// dd("id de reserva",$idReserva,"id de ambientes",$checkboxValue);
 ?>
 
 

@@ -222,19 +222,19 @@ document.getElementById('btn-siguiente').addEventListener('click', function(even
             // });
             var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
 
-// Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
-var checkboxValues = [];
+            // Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
+            var checkboxValues = [];
 
-// Recorrer todos los checkboxes seleccionados y obtener sus valores
-checkboxes.forEach(function(checkbox) {
-    checkboxValues.push(checkbox.value);
+            // Recorrer todos los checkboxes seleccionados y obtener sus valores
+            checkboxes.forEach(function(checkbox) {
+            checkboxValues.push(checkbox.value);
 });
 
-// Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
-var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
-
-// Construir la URL de redirección con la cadena de consulta
-var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + queryString;
+            // Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
+            var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
+            var tipoSeleccionado = 'asignar';
+            // Construir la URL de redirección con la cadena de consulta
+            var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + "&" + queryString + "&tipoSeleccionado=" + tipoSeleccionado ;
 
 
             // Redirigir a la URL con el valor del checkbox
@@ -261,9 +261,10 @@ checkboxes.forEach(function(checkbox) {
 
 // Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
 var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
-
+var tipoSeleccionado = "sugerir";
 // Construir la URL de redirección con la cadena de consulta
-var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + queryString;
+var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + "&" + queryString + "&tipoSeleccionado=" + tipoSeleccionado ;
+
 
 
             // Redirigir a la URL con el valor del checkbox
@@ -272,8 +273,9 @@ var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva +
             // Acción para el botón Rechazar
             //Swal.fire('Rechazado', '', 'error');
             Swal.fire('Rechazado!', '', 'error').then(() => {
+                var tipoSeleccionado = "rechazar";
                 // window.location.href ="{{ route('mensajes.correo', ['idReserva' => $idReserva]) }}" ;
-                window.location.href = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva;
+                window.location.href = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva+"&tipoSeleccionado="+tipoSeleccionado;
             });
         }
     });
