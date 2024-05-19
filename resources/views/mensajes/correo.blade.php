@@ -2,6 +2,12 @@
 
 @section('mensajes/correo')
 
+<?php
+// dd($idReserva);
+dd($checkboxValue);
+?>
+
+
 <div class="container mt-3">
     <div class="card vercard">
         <h3 class="card-header">Enviar mensaje email</h3>

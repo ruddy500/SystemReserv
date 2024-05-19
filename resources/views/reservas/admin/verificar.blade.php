@@ -4,6 +4,7 @@
 use App\Models\Ambientes;
 use App\Models\NombreAmbientes;
 use App\Models\TipoAmbientes;
+// dd($idReserva);
 ?>
 <div class="container mt-3">
     <div class="card vercard">
@@ -118,7 +119,7 @@ use App\Models\TipoAmbientes;
                                             <th class="text-center h4 text-black">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                        <input class="form-check-input checkboxNoLabel"  type="checkbox"  name="options[]" value="{{$ambi->id}}" aria-label="...">
                                                     </div>
                                                 </div>
                                             </th>
@@ -178,7 +179,7 @@ use App\Models\TipoAmbientes;
                                                 <th class="text-center h4 text-black">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
-                                                            <input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="options[]" value="" aria-label="...">
+                                                            <input class="form-check-input checkboxNoLabel"  type="checkbox"  name="options[]" value="{{$ambi->id}}" aria-label="...">
                                                         </div>
                                                     </div>
                                                 </th>
@@ -197,6 +198,7 @@ use App\Models\TipoAmbientes;
     </div>
 </div>
 <script>
+var idReserva = {{ $idReserva }};
 document.getElementById('btn-siguiente').addEventListener('click', function(event) {
     event.preventDefault(); // Prevenir el submit del formulario por defecto
 
@@ -215,21 +217,63 @@ document.getElementById('btn-siguiente').addEventListener('click', function(even
         if (result.isConfirmed) {//Aumentar las redirecciones para cada Boton del modal
             // Acción para el botón Asignar
             //Swal.fire('Asignado!', '', 'success');
-            Swal.fire('Asignado!', '', 'success').then(() => {
-                window.location.href ="{{ route('mensajes.correo') }}" ;
-            });
+            // Swal.fire('Asignado!', '', 'success').then(() => {
+            //     window.location.href ="{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva ;
+            // });
+            var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
+
+// Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
+var checkboxValues = [];
+
+// Recorrer todos los checkboxes seleccionados y obtener sus valores
+checkboxes.forEach(function(checkbox) {
+    checkboxValues.push(checkbox.value);
+});
+
+// Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
+var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
+
+// Construir la URL de redirección con la cadena de consulta
+var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + queryString;
+
+
+            // Redirigir a la URL con el valor del checkbox
+            window.location.href = redirectURL;
             
         } else if (result.isDenied) {
             // Acción para el botón Sugerir
             //Swal.fire('Sugerido!', '', 'info');
-            Swal.fire('Sugerido!', '', 'info').then(() => {
-                window.location.href ="{{ route('mensajes.correo') }}" ;
-            });
+            // Swal.fire('Sugerido!', '', 'info').then(() => {
+            //     window.location.href ="{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva ;
+            // });
+            // Acción para el botón Sugerir
+            // Obtener el valor del checkbox
+          // Seleccionar todos los checkboxes marcados
+var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
+
+// Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
+var checkboxValues = [];
+
+// Recorrer todos los checkboxes seleccionados y obtener sus valores
+checkboxes.forEach(function(checkbox) {
+    checkboxValues.push(checkbox.value);
+});
+
+// Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
+var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
+
+// Construir la URL de redirección con la cadena de consulta
+var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + queryString;
+
+
+            // Redirigir a la URL con el valor del checkbox
+            window.location.href = redirectURL;
         } else if (result.isDismissed) {
             // Acción para el botón Rechazar
             //Swal.fire('Rechazado', '', 'error');
             Swal.fire('Rechazado!', '', 'error').then(() => {
-                window.location.href ="{{ route('mensajes.correo') }}" ;
+                // window.location.href ="{{ route('mensajes.correo', ['idReserva' => $idReserva]) }}" ;
+                window.location.href = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva;
             });
         }
     });

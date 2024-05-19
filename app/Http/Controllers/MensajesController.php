@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 class MensajesController extends Controller
 {
     // Métodos del controlador
-    public function enviarCorreo()
+    public function enviarCorreo(Request $request)
     {
+        dd($request->all());
+        $idReserva = $request->input('idReserva');
+        
+        $checkboxValue = $request->input('checkboxValue');
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('mensajes.correo', compact('menu'));
+        return view('mensajes.correo', compact('menu', 'idReserva',"checkboxValue"));
     }
 }
