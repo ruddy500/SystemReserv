@@ -202,7 +202,7 @@ document.getElementById('btn-siguiente').addEventListener('click', function(even
 
     Swal.fire({
         icon: "info",
-        title: "Que Accion desea Realizar?",
+        title: "Qué acción desea realizar?",
         showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: "Asignar",
@@ -214,14 +214,23 @@ document.getElementById('btn-siguiente').addEventListener('click', function(even
     }).then((result) => {
         if (result.isConfirmed) {//Aumentar las redirecciones para cada Boton del modal
             // Acción para el botón Asignar
-            Swal.fire('Asignado!', '', 'success');
+            //Swal.fire('Asignado!', '', 'success');
+            Swal.fire('Asignado!', '', 'success').then(() => {
+                window.location.href ="{{ route('mensajes.correo') }}" ;
+            });
             
         } else if (result.isDenied) {
             // Acción para el botón Sugerir
-            Swal.fire('Sugerido!', '', 'info');
+            //Swal.fire('Sugerido!', '', 'info');
+            Swal.fire('Sugerido!', '', 'info').then(() => {
+                window.location.href ="{{ route('mensajes.correo') }}" ;
+            });
         } else if (result.isDismissed) {
             // Acción para el botón Rechazar
-            Swal.fire('Rechazado', '', 'error');
+            //Swal.fire('Rechazado', '', 'error');
+            Swal.fire('Rechazado!', '', 'error').then(() => {
+                window.location.href ="{{ route('mensajes.correo') }}" ;
+            });
         }
     });
 });

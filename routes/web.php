@@ -14,6 +14,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\MensajesController;
+
 
 
 
@@ -82,6 +84,8 @@ Route::post('/reservas/registrarIndividual',[ReservasController::class,'consulta
 Route::post('/reservas/registrarIndividual/tomarMaterias',[ReservasController::class,'enviarMaterias'])->name('reservas.individual.tomarMaterias');
 
 Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,'eliminarPendiente']); //elimina la reserva pendiente (no dormi :V)
+//RUTA PARA REDIRIGIR A LA VISTA DEL MENSAJE DE CORREO
+Route::get('/mensajes/correo',[MensajesController::class,'enviarCorreo'])->name('mensajes.correo');
 
 
 

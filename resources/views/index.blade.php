@@ -43,6 +43,7 @@
       @yield('reservas/verGrupal')
       @yield('reservas/editar')
       @yield('reservas/verificar')
+      @yield('mensajes/correo')
 
 
 
