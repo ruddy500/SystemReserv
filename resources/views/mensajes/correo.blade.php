@@ -4,7 +4,7 @@
 
 <?php
 // dd($idReserva);
-// dd("id de reserva",$idReserva,"id de ambientes",$checkboxValue);
+// dd("id de reserva",$idReserva,"id de ambientes",$checkboxValues,"el tipo seleccionado es",$tipoSeleccionado);
 ?>
 
 
@@ -16,15 +16,15 @@
                 <form role="form">
                     <div class="form-group mb-3">
                         <label for="inputName">De:</label>
-                        <input type="email" class="form-control" id="inputName"/>
+                        <input type="email" value="{{$correoEmisor}}" class="form-control" id="inputName"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputEmail">Para:</label>
-                        <input type="email" class="form-control" id="inputEmail" />
+                        <input type="email" value="{{$correoDestino}}" class="form-control" id="inputEmail" />
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputAsunto">Asunto:</label>
-                        <input type="text" class="form-control" id="inputEmail" />
+                        <input type="text" value="{{$Asunto}}" class="form-control" id="inputEmail" />
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputMessage">Mensaje:</label>
