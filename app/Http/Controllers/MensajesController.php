@@ -53,6 +53,9 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Rechazo de solicitud de Reserva";
+            // eliminar la reserva de pendientes
+            $reserva->delete();
+
             return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto'));
         } else {
             // Si no se cumple ninguna de las condiciones, redirigir a la misma vista con un mensaje de error
