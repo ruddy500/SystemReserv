@@ -64,7 +64,21 @@
             <h1>{{ $details['title'] }}</h1>
         </div>
         <div class="email-body">
-            <p>{{ $details['body'] }}</p>
+            <h3>Estimado/a.</h3>
+
+            <h4>Esperamos que este mensaje le encuentre bien. Nos dirigimos a usted desde el "Sistema de Reservas fcyt".</h4>
+
+            <h3>Detalles de su reserva:</h3>
+
+            <h4>{{ $details['body'] }}</h4>
+
+            <h4>Agradecemos su atención y quedamos a su disposición para cualquier consulta.</h4>
+
+            <h4>Atte: {{ $details['emisor'] }}</h4>
+
+            <p>
+            Este mensaje ha sido generado automáticamente por el sistema de reservas. Si no esperaba este correo o tiene alguna duda, por favor contáctenos.
+            </p>
             <!-- <a href="#" class="button">Acción</a> Botón opcional -->
         </div>
         <div class="email-footer">

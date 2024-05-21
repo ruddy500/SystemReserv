@@ -15,10 +15,12 @@ class CorreoController extends Controller
         $asunto = $request->input('asunto');
         $mensaje = $request->input('mensaje');
         $correoDestino = $request->input('enviar');
+        $emisor = $request->input('emisor');
 
         // Detalles para el correo
         $details = [
             'title' => $asunto,
+            'emisor' => $emisor,
             'body' => $mensaje
         ];
 

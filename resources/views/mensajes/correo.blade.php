@@ -11,7 +11,7 @@
                     @csrf <!-- Agregar el token CSRF -->
                     <div class="form-group mb-3">
                         <label for="inputName">De:</label>
-                        <input type="email" value="{{$correoEmisor}}" class="form-control" id="inputName"/>
+                        <input type="text" value="{{$correoEmisor}}" name="emisor" class="form-control" id="emisor"/>
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputEmail">Para:</label>
