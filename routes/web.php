@@ -15,7 +15,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\MensajesController;
-
+use App\Http\Controllers\CorreoController;
 
 
 
@@ -87,8 +87,7 @@ Route::get('/reservas/pendientesDocente/{idReserva}',[ReservasController::class,
 //RUTA PARA REDIRIGIR A LA VISTA DEL MENSAJE DE CORREO
 Route::get('/mensajes/correo',[MensajesController::class,'enviarCorreo'])->name('mensajes.correo');
 
-
-
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviarCorreo'); //enviar correos (no dormi:v)
 
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
