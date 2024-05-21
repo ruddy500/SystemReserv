@@ -30,7 +30,7 @@ class MensajesController extends Controller
             $idDocente = $reserva->docentes_id;
             $DocenteAux = Usuarios::find($idDocente);
 
-            $correoEmisor = "Administrador@gmail.com";
+            $correoEmisor = "Administrador";
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Asignacion de solicitud de Reserva";
@@ -79,7 +79,7 @@ class MensajesController extends Controller
             $idDocente = $reserva->docentes_id;
             $DocenteAux = Usuarios::find($idDocente);
 
-            $correoEmisor = "Administrador@gmail.com";
+            $correoEmisor = "Administrador";
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
 
@@ -92,7 +92,7 @@ class MensajesController extends Controller
             $idDocente = $reserva->docentes_id;
             $DocenteAux = Usuarios::find($idDocente);
 
-            $correoEmisor = "Administrador@gmail.com";
+            $correoEmisor = "Administrador";
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Rechazo de solicitud de Reserva";
