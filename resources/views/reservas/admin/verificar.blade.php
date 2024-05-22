@@ -202,83 +202,101 @@ var idReserva = {{ $idReserva }};
 document.getElementById('btn-siguiente').addEventListener('click', function(event) {
     event.preventDefault(); // Prevenir el submit del formulario por defecto
 
-    Swal.fire({
-        icon: "info",
-        title: "Qué acción desea realizar?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Asignar",
-        denyButtonText: `Sugerir`,
-        cancelButtonText: 'Rechazar',
-        confirmButtonColor: "#3C9526",
-        cancelButtonColor: "#E61212",
-        denyButtonColor: "#5273EA",
-    }).then((result) => {
-        if (result.isConfirmed) {//Aumentar las redirecciones para cada Boton del modal
-            // Acción para el botón Asignar
-            //Swal.fire('Asignado!', '', 'success');
-            // Swal.fire('Asignado!', '', 'success').then(() => {
-            //     window.location.href ="{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva ;
-            // });
-            var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
+    // Obtener todos los checkboxes seleccionados
+    var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
 
-            // Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
-            var checkboxValues = [];
-
-            // Recorrer todos los checkboxes seleccionados y obtener sus valores
-            checkboxes.forEach(function(checkbox) {
-            checkboxValues.push(checkbox.value);
-});
-
-            // Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
-            var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
-            var tipoSeleccionado = 'asignar';
-            // Construir la URL de redirección con la cadena de consulta
-            var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + "&" + queryString + "&tipoSeleccionado=" + tipoSeleccionado ;
-
-
-            // Redirigir a la URL con el valor del checkbox
-            window.location.href = redirectURL;
-            
-        } else if (result.isDenied) {
-            // Acción para el botón Sugerir
-            //Swal.fire('Sugerido!', '', 'info');
-            // Swal.fire('Sugerido!', '', 'info').then(() => {
-            //     window.location.href ="{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva ;
-            // });
-            // Acción para el botón Sugerir
-            // Obtener el valor del checkbox
-          // Seleccionar todos los checkboxes marcados
-var checkboxes = document.querySelectorAll(".checkboxNoLabel:checked");
-
-// Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
-var checkboxValues = [];
-
-// Recorrer todos los checkboxes seleccionados y obtener sus valores
-checkboxes.forEach(function(checkbox) {
-    checkboxValues.push(checkbox.value);
-});
-
-// Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
-var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
-var tipoSeleccionado = "sugerir";
-// Construir la URL de redirección con la cadena de consulta
-var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + "&" + queryString + "&tipoSeleccionado=" + tipoSeleccionado ;
-
-
-
-            // Redirigir a la URL con el valor del checkbox
-            window.location.href = redirectURL;
-        } else if (result.isDismissed) {
-            // Acción para el botón Rechazar
-            //Swal.fire('Rechazado', '', 'error');
-            Swal.fire('Rechazado!', '', 'error').then(() => {
-                var tipoSeleccionado = "rechazar";
-                // window.location.href ="{{ route('mensajes.correo', ['idReserva' => $idReserva]) }}" ;
-                window.location.href = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva+"&tipoSeleccionado="+tipoSeleccionado;
-            });
-        }
+    // Inicializar una matriz para almacenar los valores de los checkboxes seleccionados
+    var checkboxValues = [];
+    checkboxes.forEach(function(checkbox) {
+        checkboxValues.push(checkbox.value);
     });
+
+    // Construir la cadena de consulta (query string) con los valores de los checkboxes seleccionados
+    var queryString = checkboxValues.length > 0 ? "&checkboxValues=" + checkboxValues.join(',') : '';
+    var redirectURL = "{{ route('mensajes.correo') }}" + "?idReserva=" + idReserva + "&" + queryString;
+
+    // Verificar la cantidad de checkboxes seleccionados
+    if (checkboxValues.length === 1) {
+        // Si solo hay un checkbox seleccionado, deshabilitar los botones "Sugerir" y "Rechazar"
+        Swal.fire({
+            icon: "info",
+            title: "Qué acción desea realizar?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Asignar",
+            denyButtonText: `Sugerir`,
+            cancelButtonText: 'Rechazar',
+            confirmButtonColor: "#3C9526",
+            cancelButtonColor: "#E61212",
+            denyButtonColor: "#5273EA",
+            didOpen: () => {
+                const denyButton = Swal.getDenyButton();
+                const cancelButton = Swal.getCancelButton();
+                denyButton.disabled = true;
+                cancelButton.disabled = true;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Acción para el botón Asignar
+                redirectURL += "&tipoSeleccionado=asignar";
+                window.location.href = redirectURL;
+            }
+        });
+    } else if (checkboxValues.length === 2) {
+        // Si hay dos checkboxes seleccionados, deshabilitar los botones "Asignar" y "Rechazar"
+        Swal.fire({
+            icon: "info",
+            title: "Qué acción desea realizar?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Asignar",
+            denyButtonText: `Sugerir`,
+            cancelButtonText: 'Rechazar',
+            confirmButtonColor: "#3C9526",
+            cancelButtonColor: "#E61212",
+            denyButtonColor: "#5273EA",
+            didOpen: () => {
+                const confirmButton = Swal.getConfirmButton();
+                const cancelButton = Swal.getCancelButton();
+                confirmButton.disabled = true;
+                cancelButton.disabled = true;
+            }
+        }).then((result) => {
+            if (result.isDenied) {
+                // Acción para el botón Sugerir
+                redirectURL += "&tipoSeleccionado=sugerir";
+                window.location.href = redirectURL;
+            }
+        });
+    } else {
+        // Si hay más de dos checkboxes seleccionados, mostrar el modal con todos los botones habilitados
+        Swal.fire({
+            icon: "info",
+            title: "Qué acción desea realizar?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Asignar",
+            denyButtonText: `Sugerir`,
+            cancelButtonText: 'Rechazar',
+            confirmButtonColor: "#3C9526",
+            cancelButtonColor: "#E61212",
+            denyButtonColor: "#5273EA",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Acción para el botón Asignar
+                redirectURL += "&tipoSeleccionado=asignar";
+                window.location.href = redirectURL;
+            } else if (result.isDenied) {
+                // Acción para el botón Sugerir
+                redirectURL += "&tipoSeleccionado=sugerir";
+                window.location.href = redirectURL;
+            } else if (result.isDismissed) {
+                // Acción para el botón Rechazar
+                redirectURL += "&tipoSeleccionado=rechazar";
+                window.location.href = redirectURL;
+            }
+        });
+    }
 });
 </script>
 @endsection
