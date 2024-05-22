@@ -6,6 +6,7 @@ use App\Models\Reservas;
 use App\Models\Horarios;
 use App\Models\Fechas;
 use App\Models\PeriodosSeleccionado;
+use App\Models\ReservasAmbiente;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
@@ -20,11 +21,11 @@ class MensajesController extends Controller
         $checkboxValues = $request->input('checkboxValues');
         $tipoSeleccionado = $request->input('tipoSeleccionado');
         
-
         $menu = view('componentes/menu'); // Crear la vista del menú
 
         // Verificar el valor de tipoSeleccionado y redirigir a diferentes vistas
         if ($tipoSeleccionado == 'asignar') {
+            
 
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
             $idDocente = $reserva->docentes_id;
@@ -46,7 +47,11 @@ class MensajesController extends Controller
             $fechaRegistro = Fechas::where('dia',$dia)->where('mes',$mes)->where('anio',$anio)->first();
             $idFechaReserva = $fechaRegistro->id;
             
-
+            $registroRAMB = new ReservasAmbiente();
+            $registroRAMB->ambientes_id = $idAmbiente;
+            $registroRAMB->reservas_id = (int) $idReserva;
+            $registroRAMB->save() ;
+            // dd($registroRAMB);
             if(count($periodosSelecReserva)== 1){
                 $idPeriodo = $periodosSelecReserva[0]->periodos_id;
                 $horariosAmbiente = Horarios::where('ambientes_id',$idAmbiente)->where('fechas_id',$idFechaReserva)->where('periodos_id',$idPeriodo)->first();
