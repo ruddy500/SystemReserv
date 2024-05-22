@@ -25,7 +25,7 @@ class MensajesController extends Controller
 
         // Verificar el valor de tipoSeleccionado y redirigir a diferentes vistas
         if ($tipoSeleccionado == 'asignar') {
-            // Falta controlar la fecha y am
+            
 
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
             $idDocente = $reserva->docentes_id;
