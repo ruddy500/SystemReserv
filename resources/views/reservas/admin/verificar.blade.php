@@ -292,8 +292,21 @@ document.getElementById('btn-siguiente').addEventListener('click', function(even
                 window.location.href = redirectURL;
             } else if (result.isDismissed) {
                 // Acción para el botón Rechazar
-                redirectURL += "&tipoSeleccionado=rechazar";
-                window.location.href = redirectURL;
+                Swal.fire({
+                    icon: "warning",
+                    title: "Esta seguro de Rechzar la Solicitud?",
+                    showCancelButton: true,
+                    confirmButtonText: "SI",
+                    cancelButtonText: 'NO',
+                    confirmButtonColor: "#3C9526",
+                    cancelButtonColor: "#E61212",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    // Acción para el botón SI
+                    redirectURL += "&tipoSeleccionado=rechazar";
+                    window.location.href = redirectURL;
+                    }
+                });
             }
         });
     }
