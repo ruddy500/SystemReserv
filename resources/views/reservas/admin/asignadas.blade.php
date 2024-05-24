@@ -24,6 +24,7 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead class="bg-custom-lista">
                     <tr>
+                        <th class="text-center h4 text-white">Ambiente</th>
                         <th class="text-center h4 text-white">Fecha</th>
                         <th class="text-center h4 text-white">Hora inicio</th>
                         <th class="text-center h4 text-white">Hora fin</th>
@@ -105,6 +106,9 @@
                                 <th class="text-center h4 text-black">{{ $fecha }}</th>
                                 <th class="text-center h4 text-black">{{ $horaInicio }}</th>
                                 <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                
+                                
                                 
                                 <th class="text-center h4 text-black">
 
