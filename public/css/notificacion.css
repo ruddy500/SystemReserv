@@ -1,0 +1,44 @@
+/* Estilos para el contenedor del icono de notificaciones */
+.notificaciones {
+    display: flex; 
+    align-items: center; 
+  }
+  
+  /* Estilos para el icono de notificaciones */
+  .notificaciones i {
+    font-size: 24px; 
+    color: #2B4C6F;
+    border: 2px solid #2B4C6F; 
+    border-radius: 50%; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    cursor: pointer; 
+    width: 35px; 
+    height: 35px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  /* Estilos para el enlace de notificaciones */
+  .notificaciones-link {
+    position: relative; /* Necesario para posicionar el pseudo-elemento relativo al enlace */
+  }
+  
+  /* Estilos para el pseudo-elemento del indicador de notificaciones */
+  .notificaciones-link::after {
+    content: attr(data-count); /* Usa el atributo data-count como contenido */
+    position: absolute; /* Posiciona el pseudo-elemento de forma absoluta */
+    top: -5px; /* Coloca el pseudo-elemento 5 píxeles por encima del enlace */
+    right: -5px; /* Coloca el pseudo-elemento 5 píxeles a la derecha del enlace */
+    background: #ff0000; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco */
+    width: 18px; /* Ancho del pseudo-elemento */
+    height: 18px; /* Altura del pseudo-elemento */
+    border-radius: 50%; /* Hace que el pseudo-elemento sea redondo */
+    display: flex; /* Usa flexbox para centrar el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    font-size: 9px; /* Tamaño de la fuente */
+    font-weight: bold; /* Fuente en negrita */
+    border: 1px solid white; /* Añade un borde blanco */
+  }

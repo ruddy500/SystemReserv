@@ -267,25 +267,3 @@
   display: flex; 
   align-items: center; 
 }
-
-/* Estilos para el contenedor del icono de notificaciones */
-.notificaciones {
-  display: flex; 
-  align-items: center; 
-}
-
-/* Estilos para el icono de notificaciones */
-.notificaciones i {
-  font-size: 24px; 
-  color: #2B4C6F;
-  border: 2px solid #2B4C6F; 
-  border-radius: 50%; 
-  padding: 10px; 
-  box-sizing: border-box; 
-  cursor: pointer; 
-  width: 35px; 
-  height: 35px; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-}

@@ -5,7 +5,7 @@
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
         <div class="notificaciones">
-            <a href="#" class="notificaciones-link">
+            <a href="#" class="notificaciones-link" data-count="10">
                 <i class="bi bi-bell-fill"></i>
             </a>
         </div>
