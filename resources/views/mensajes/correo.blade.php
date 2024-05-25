@@ -9,23 +9,28 @@
             <div class="cuerpo-correo">
                 <form method="POST" action="{{ url('/enviar-correo') }}">
                     @csrf <!-- Agregar el token CSRF -->
-                    <div class="form-group mb-3">
-                        <label for="inputName">De:</label>
+                    <div class="form-group row mb-3">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">De:</label>
+                        <div class="col-md-6 col-md-4">
                         <input type="text" value="{{$correoEmisor}}" name="emisor" class="form-control" id="emisor"/>
+                        </div>
                     </div>
+                    <div class="form-group row mb-3">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Para:</label>
+                        <div class="col-md-6 col-md-4">                        <input type="email" id="enviar" name="enviar" value="{{$correoDestino}}" class="form-control" id="inputEmail" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Asunto:</label>
+                        <div class="col-md-6 col-md-4">                        <input type="text" name="asunto" value="{{$Asunto}}" class="form-control" id="asunto" />
+                        </div>
+                    </div> 
                     <div class="form-group mb-3">
-                        <label for="inputEmail">Para:</label>
-                        <input type="email" id="enviar" name="enviar" value="{{$correoDestino}}" class="form-control" id="inputEmail" />
+            
+                        <div class="col-md-12">
+                            <textarea name="mensaje" class="form-control" id="mensaje" placeholder="Ingrese su mensaje" rows="5"></textarea>
+                        </div>                    
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="asunto">Asunto:</label>
-                        <input type="text" name="asunto" value="{{$Asunto}}" class="form-control" id="asunto" />
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="mensaje">Mensaje:</label>
-                        <textarea name="mensaje" class="form-control" id="mensaje" placeholder="Ingrese su mensaje"></textarea>
-                    </div>
-
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary submitBtn custom-btn"><i class="bi bi-send"></i> Enviar</button>
                     </div>
