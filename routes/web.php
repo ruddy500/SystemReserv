@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\MensajesController;
 use App\Http\Controllers\CorreoController;
+use App\Http\Controllers\NotificacionesController;
 
 
 
@@ -89,6 +90,8 @@ Route::get('/mensajes/correo',[MensajesController::class,'enviarCorreo'])->name(
 
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviarCorreo'); //enviar correos (no dormi:v)
 
+//RUTA PARA VER LA LISTA DE NOTIFICACIONES
+Route::get('/notificaciones/lista',[NotificacionesController::class,'mostrarLista'])->name('notificaciones.lista');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

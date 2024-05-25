@@ -42,3 +42,6 @@
     font-weight: bold; /* Fuente en negrita */
     border: 1px solid white; /* Añade un borde blanco */
   }
+   .notif{
+    font-size: 1.2rem; /* Tamaño de la fuente */
+   }
