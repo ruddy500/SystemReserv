@@ -92,6 +92,8 @@ Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('
 
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES DOCENTE
 Route::get('/notificaciones/lista',[NotificacionesController::class,'mostrarLista'])->name('notificaciones.lista');
+Route::get('/notificaciones/sugerencia',[NotificacionesController::class,'mostrarSugerencia'])->name('notificaciones.sugerencia');
+
 
 
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES ADMINISTRADOR
