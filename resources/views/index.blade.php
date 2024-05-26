@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ asset('css/hojamenu.css') }}">
         <link rel="stylesheet" href="{{ asset('css/ambiente.css') }}">
         <link rel="stylesheet" href="{{ asset('css/reserva.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/notificacion.css') }}">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -44,6 +45,13 @@
       @yield('reservas/editar')
       @yield('reservas/verificar')
       @yield('mensajes/correo')
+      @yield('notificaciones/lista')
+      @yield('notificaciones/sugerencia')
+      @yield('notificaciones/asignacion')
+      @yield('notificaciones/rechazo')
+      @yield('notificaciones/difusion')
+      @yield('notificaciones/admin/lista')
+      @yield('notificaciones/admin/sugerencia')
 
 
 
