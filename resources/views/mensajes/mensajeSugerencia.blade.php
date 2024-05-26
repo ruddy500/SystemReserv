@@ -165,6 +165,7 @@
             <section class="assigned-room">
                 <h2>Detalle de los ambiente Sugeridos:</h2>
                 <div class="column-container">
+                    <!-- PARA EL AMBIENTE 1 -->
                     <ul class="assigned-list">
                         <li><span>Ambiente:</span> 690 A</li>
                         <li><span>Capacidad:</span> 100</li>
@@ -174,6 +175,7 @@
                         <li><span>Fecha:</span> 05/06/2024</li>
                     </ul>
                     <ul class="assigned-list">
+                        <!-- PARA EL AMBIENTE 2 -->
                         <li><span>Ambiente:</span> 690 A</li>
                         <li><span>Capacidad:</span> 100</li>
                         <li><span>Ubicación:</span> Edificio Nuevo</li>
@@ -183,10 +185,11 @@
                     </ul>
                 </div>
             </section>
-				 <div class="text-center mt-4">
-                    <button type="button" class="btn btn-success">Aceptar</button>
-                    <button type="button" class="btn btn-danger">Rechazar</button>
-                </div>
+            <div class="text-center mt-4">
+                    <button type="button" class="btn btn-primary">Continuar con la Reserva</button>
+                    <p class="mt-2 mb-0">Link:</p>
+                    <a href="https://www.google.com" target="_blank">Ir a Google</a>
+            </div>
             <p class="center-text">Agradecemos tu atención y estamos aquí para cualquier consulta.<br>Atentamente, Administrador.</p>
             <div class="footer">
                 <p>Este mensaje ha sido generado automáticamente por el sistema de reservas. Si no esperabas este correo, o tienes alguna duda, por favor contáctanos.</p>
