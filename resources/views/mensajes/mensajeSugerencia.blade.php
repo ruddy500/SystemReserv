@@ -126,7 +126,7 @@
                 <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido Sugerida para su aprobacion o rechazo.</p>
             </div>
             <section class="reservation-details">
-                <h2>Detalle de reserva (Individual):</h2>
+                <h2>Detalle de reserva (PONER EL TIPO DE RESERVA):</h2>
                 <table>
                     <tr>
                         <td>Nombre docente:</td>
@@ -157,8 +157,10 @@
                         <td>Elementos de programación</td>
                     </tr>
                     <tr>
+                        <!-- SI ES GRUPAL AUMENTAR EL NOMBRE DEL DOCENTE A LADO DEL GRUPO -->
                         <td>Grupo(s):</td>
-                        <td>1, Leticia Coca Blanco<br>3, Vladimir Costas</td>
+                        <td>1, 2</td>
+                        <!-- <td>1, Leticia Coca Blanco<br>3, Vladimir Costas</td> ASI SE TENDRIA QUE VER -->
                     </tr>
                 </table>
             </section>
@@ -186,8 +188,10 @@
                 </div>
             </section>
             <div class="text-center mt-4">
+                <!-- AQUI VA EL LINK PARA CONTINUAR CON LA RESERVA EL LINK DEBE IR EN EL BOTON Y EL LINK COMO TAL -->
                     <button type="button" class="btn btn-primary" onclick="window.location.href='https://www.google.com'">Continuar con la Reserva</button>
                     <p class="mt-2 mb-0">Link:</p>
+                    <!-- AQUI VA EL LINK DEBERIA IR DEL DEPLOY  -->
                     <a href="https://www.google.com" target="_blank">Ir a Google</a>
             </div>
             <p class="center-text">Agradecemos tu atención y estamos aquí para cualquier consulta.<br>Atentamente, Administrador.</p>

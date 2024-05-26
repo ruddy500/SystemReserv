@@ -117,7 +117,7 @@
                 <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido aceptada.</p>
             </div>
             <section class="reservation-details">
-                <h2>Detalle de reserva (Individual):</h2>
+                <h2>Detalle de reserva (PONER EL TIPO DE RESERVA):</h2>
                 <table>
                     <tr>
                         <td>Nombre docente:</td>
@@ -148,8 +148,10 @@
                         <td>Elementos de programación</td>
                     </tr>
                     <tr>
+                        <!-- SI ES GRUPAL AUMENTAR EL NOMBRE DEL DOCENTE A LADO DEL GRUPO -->
                         <td>Grupo(s):</td>
                         <td>1, 2</td>
+                        <!-- <td>1, Leticia Coca Blanco<br>3, Vladimir Costas</td> ASI SE TENDRIA QUE VER -->
                     </tr>
                 </table>
             </section>
