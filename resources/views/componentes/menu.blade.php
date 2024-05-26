@@ -5,9 +5,17 @@
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
         <div class="notificaciones">
-            <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" data-count="10">
-                <i class="bi bi-bell-fill"></i>
-            </a>
+            @if (auth()->check())
+                @if (auth()->user()->role == 'admin')
+                    <a href="{{ route('notificaciones.admin.lista') }}" class="notificaciones-link" data-count="10">
+                        <i class="bi bi-bell-fill"></i>
+                    </a>
+                @else
+                    <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" data-count="10">
+                        <i class="bi bi-bell-fill"></i>
+                    </a>
+                @endif
+            @endif
         </div>
         <!-- <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div> -->
     </header>

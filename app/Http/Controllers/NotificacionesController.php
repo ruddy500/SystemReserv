@@ -9,4 +9,8 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.lista',compact('menu'));
     }
+    public function mostrarListaAdmin(){
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('notificaciones.admin.lista',compact('menu'));
+    }
 }

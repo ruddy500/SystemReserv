@@ -90,8 +90,12 @@ Route::get('/mensajes/correo',[MensajesController::class,'enviarCorreo'])->name(
 
 Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviarCorreo'); //enviar correos (no dormi:v)
 
-//RUTA PARA VER LA LISTA DE NOTIFICACIONES
+//RUTA PARA VER LA LISTA DE NOTIFICACIONES DOCENTE
 Route::get('/notificaciones/lista',[NotificacionesController::class,'mostrarLista'])->name('notificaciones.lista');
+
+
+//RUTA PARA VER LA LISTA DE NOTIFICACIONES ADMINISTRADOR
+Route::get('/notificaciones/admin/lista',[NotificacionesController::class,'mostrarListaAdmin'])->name('notificaciones.admin.lista');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

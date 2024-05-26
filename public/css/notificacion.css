@@ -42,6 +42,17 @@
     font-weight: bold; /* Fuente en negrita */
     border: 1px solid white; /* Añade un borde blanco */
   }
-   .notif{
+.notif{
     font-size: 1.2rem; /* Tamaño de la fuente */
-   }
+}
+   /* Estilo para el punto de notificación */
+.notification-dot {
+    position: absolute;
+    bottom: -5px;  /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;  /* Tamaño del punto */
+    height: 8px; /* Tamaño del punto */
+    background-color: #2B4C6F; /* Color del punto */
+    border-radius: 50%;
+}

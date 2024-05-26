@@ -46,6 +46,7 @@
       @yield('reservas/verificar')
       @yield('mensajes/correo')
       @yield('notificaciones/lista')
+      @yield('notificaciones/admin/lista')
 
 
 
