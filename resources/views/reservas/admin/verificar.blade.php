@@ -319,7 +319,7 @@ var idReserva = {{ $idReserva }};
                         // Acción para el botón Rechazar
                         Swal.fire({
                             icon: "warning",
-                            title: "Esta seguro de Rechzar la Solicitud?",
+                            title: "Esta seguro de Rechazar la Solicitud?",
                             showCancelButton: true,
                             confirmButtonText: "SI",
                             cancelButtonText: 'NO',

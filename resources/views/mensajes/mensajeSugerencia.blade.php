@@ -186,7 +186,7 @@
                 </div>
             </section>
             <div class="text-center mt-4">
-                    <button type="button" class="btn btn-primary">Continuar con la Reserva</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='https://www.google.com'">Continuar con la Reserva</button>
                     <p class="mt-2 mb-0">Link:</p>
                     <a href="https://www.google.com" target="_blank">Ir a Google</a>
             </div>
