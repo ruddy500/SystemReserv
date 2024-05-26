@@ -47,7 +47,11 @@
       @yield('mensajes/correo')
       @yield('notificaciones/lista')
       @yield('notificaciones/sugerencia')
+      @yield('notificaciones/asignacion')
+      @yield('notificaciones/rechazo')
+      @yield('notificaciones/difusion')
       @yield('notificaciones/admin/lista')
+      @yield('notificaciones/admin/sugerencia')
 
 
 

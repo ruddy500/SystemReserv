@@ -7,7 +7,7 @@
 		<div class="card-body">
             <div class="list-group">
                 <!-- NOTIFICACION DE ASIGNACION -->
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <a href="{{ route('notificaciones.asignacion') }}" class="list-group-item list-group-item-action" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Asignación de solicitud de reserva</h5>
                         <div class="position-relative">
@@ -18,7 +18,7 @@
                     <p class="mb-1">adaEnterprissoft@gmail.com</p>
                 </a>
                 <!-- NOTIFICACION DE RECHAZO -->
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('notificaciones.rechazo') }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Rechazo de solicitud de reserva</h5>
                         <div class="position-relative">
@@ -40,7 +40,7 @@
                     <p class="mb-1">adaEnterprissoft@gmail.com</p>
                 </a>
                 <!-- NOTIFICACION MENSAJE MASIVO -->
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('notificaciones.difusion') }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
                         <div class="position-relative">

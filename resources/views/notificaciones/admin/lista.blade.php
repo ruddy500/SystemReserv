@@ -7,7 +7,7 @@
 		<div class="card-body">
             <div class="list-group">
                 <!-- NOTIFICACION DE ACEPTACION DE SUGERENCIA -->
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <a href="{{ route('notificaciones.admin.sugerencia') }}" class="list-group-item list-group-item-action" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Sugerencia de solicitud de reserva aceptada</h5>
                         <div class="position-relative">
@@ -18,7 +18,7 @@
                     <p class="mb-1">leticia@gmail.com</p>
                 </a>
                 <!-- NOTIFICACION DE RECHAZO DE SUGERENCIA -->
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('notificaciones.admin.sugerencia') }}" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Sugerencia de solicitud de reserva rechazada</h5>
                         <div class="position-relative">
