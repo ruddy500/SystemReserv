@@ -24,6 +24,9 @@ class Usuarios extends Authenticatable
         return $this->hasMany(Reservas::class, 'docentes_id');
     }
     
+    public function notificaciones(){
+        return $this->belongsToMany(Notifiaciones::class,'usuarios_notificacion');
+    }
     /**
      * The attributes that are mass assignable.
 
