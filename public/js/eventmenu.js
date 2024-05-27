@@ -84,19 +84,35 @@ $(document).ready(function() {
     });
 });
 
-document.getElementById('userAdminBtn').addEventListener('click', function() {
-    var salirLink = document.getElementById('salirLink');
-    if (salirLink.style.display === 'none') {
-        salirLink.style.display = 'block';
+// document.getElementById('userAdminBtn').addEventListener('click', function() {
+//     var salirLink = document.getElementById('salirLink');
+//     if (salirLink.style.display === 'none') {
+//         salirLink.style.display = 'block';
+//     } else {
+//         salirLink.style.display = 'none';
+//     }
+// });
+
+// function activarBoton(elemento) {
+//     var botones = document.getElementsByClassName("menuBtn");
+//     for (var i = 0; i < botones.length; i++) {
+//         botones[i].classList.remove("active");
+//     }
+//     elemento.classList.add("active");
+// }
+document.getElementById('user-icon').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('dropdown-menu');
+    if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+        dropdownMenu.style.display = 'block';
     } else {
-        salirLink.style.display = 'none';
+        dropdownMenu.style.display = 'none';
     }
 });
 
-function activarBoton(elemento) {
-    var botones = document.getElementsByClassName("menuBtn");
-    for (var i = 0; i < botones.length; i++) {
-        botones[i].classList.remove("active");
+// Cierra el menú si se hace clic fuera de él
+document.addEventListener('click', function(event) {
+    var isClickInside = document.getElementById('user-icon').contains(event.target) || document.getElementById('dropdown-menu').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('dropdown-menu').style.display = 'none';
     }
-    elemento.classList.add("active");
-}
+});

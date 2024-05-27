@@ -4,6 +4,11 @@
     align-items: center; 
   }
   
+  .perfil-usuario{
+    display: flex; 
+    align-items: center; 
+  }
+
   /* Estilos para el icono de notificaciones */
   .notificaciones i {
     font-size: 24px; 
@@ -18,6 +23,20 @@
     display: flex; 
     justify-content: center; 
     align-items: center; 
+    margin-right: 10px; 
+  }
+
+  .perfil-usuario i {
+    font-size: 34px; 
+    color: #2B4C6F;
+    box-sizing: border-box; 
+    cursor: pointer; 
+    width: 35px; 
+    height: 35px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-right: 10px; 
   }
   /* Estilos para el enlace de notificaciones */
   .notificaciones-link {
@@ -41,6 +60,7 @@
     font-size: 9px; /* Tamaño de la fuente */
     font-weight: bold; /* Fuente en negrita */
     border: 1px solid white; /* Añade un borde blanco */
+    margin-right: 10px; 
   }
 .notif{
     font-size: 1.2rem; /* Tamaño de la fuente */
@@ -55,4 +75,40 @@
     height: 8px; /* Tamaño del punto */
     background-color: #2B4C6F; /* Color del punto */
     border-radius: 50%;
+}
+.header .bi-person {
+  font-size: 18px; /* Tamaño específico para la userperfil */
+  cursor: pointer;
+  color: #ffffff;
+}
+.header .bi-box-arrow-right {
+  font-size: 18px; /* Tamaño específico para la salir  */
+  cursor: pointer;
+  color: #ffffff;
+}
+.perfil-usuario .dropdpwn-menu{
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 80px;
+  left: 85%;
+  padding: 0;
+  box-shadow: 0 1px 30px rgb(0, 0, 0);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1000;
+}
+.perfil-usuario .dropdpwn-menu a{
+  display: flex;
+  color: #ffffff;  /* color de texto*/
+  text-decoration: none;
+  background-color: #003366;
+  align-items: center;
+}
+.perfil-usuario .dropdpwn-menu .perfil-link {
+  background-color: #929292; /* Color de fondo gris */
+}
+
+.perfil-usuario .dropdpwn-menu a:hover {
+  background-color: #5789bb;
 }

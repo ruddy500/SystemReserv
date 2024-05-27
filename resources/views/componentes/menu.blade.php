@@ -17,6 +17,13 @@
                 @endif
             @endif
         </div>
+        <div class="perfil-usuario">
+            <i class="bi bi-person-circle" id="user-icon"></i>
+            <div class="dropdpwn-menu" id="dropdown-menu">
+                <a href="#" class="perfil-link dropdown-item"><i class="bi bi-person"></i><span>Perfil</span></a>
+                <a href="{{route('login.destroy')}}" class="dropdown-item"><i class="bi bi-box-arrow-right"></i><span>Salir</span></a>
+            </div>
+        </div>
         <!-- <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div> -->
     </header>
     <div class="l-navbar show-menu" id="nav-bar">
@@ -42,7 +49,7 @@
                          @endif
                      @endif
                     
-                     <div id="menu">
+                     <!-- <div id="menu">
                         @if (auth()->user()->role == 'admin')
                             <button id="userAdminBtn">
                                 <i class="bi bi-person-circle"></i>User: Admin
@@ -60,7 +67,7 @@
                                 <i class="bi bi-box-arrow-right"></i> Salir
                             </a>
                         @endif
-                    </div>
+                    </div> -->
                 </div>
             </div> 
         </nav>
