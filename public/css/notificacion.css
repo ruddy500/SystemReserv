@@ -1,4 +1,4 @@
-/* Estilos para el contenedor del icono de notificaciones */
+/* 
 .notificaciones {
     display: flex; 
     align-items: center; 
@@ -9,7 +9,6 @@
     align-items: center; 
   }
 
-  /* Estilos para el icono de notificaciones */
   .notificaciones i {
     font-size: 24px; 
     color: #2B4C6F;
@@ -38,51 +37,48 @@
     align-items: center;
     margin-right: 10px; 
   }
-  /* Estilos para el enlace de notificaciones */
   .notificaciones-link {
-    position: relative; /* Necesario para posicionar el pseudo-elemento relativo al enlace */
+    position: relative; 
   }
   
-  /* Estilos para el pseudo-elemento del indicador de notificaciones */
   .notificaciones-link::after {
-    content: attr(data-count); /* Usa el atributo data-count como contenido */
-    position: absolute; /* Posiciona el pseudo-elemento de forma absoluta */
-    top: -5px; /* Coloca el pseudo-elemento 5 píxeles por encima del enlace */
-    right: -5px; /* Coloca el pseudo-elemento 5 píxeles a la derecha del enlace */
-    background: #ff0000; /* Color de fondo rojo */
-    color: white; /* Color del texto blanco */
-    width: 18px; /* Ancho del pseudo-elemento */
-    height: 18px; /* Altura del pseudo-elemento */
-    border-radius: 50%; /* Hace que el pseudo-elemento sea redondo */
-    display: flex; /* Usa flexbox para centrar el contenido */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    font-size: 9px; /* Tamaño de la fuente */
-    font-weight: bold; /* Fuente en negrita */
-    border: 1px solid white; /* Añade un borde blanco */
+    content: attr(data-count); 
+    position: absolute; 
+    top: -5px; 
+    right: -5px; 
+    background: #ff0000; 
+    color: white; 
+    width: 18px; 
+    height: 18px; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 9px; 
+    font-weight: bold; 
+    border: 1px solid white; 
     margin-right: 10px; 
   }
 .notif{
-    font-size: 1.2rem; /* Tamaño de la fuente */
+    font-size: 1.2rem; 
 }
-   /* Estilo para el punto de notificación */
+
 .notification-dot {
     position: absolute;
-    bottom: -5px;  /* Ajusta según sea necesario */
-    left: 50%;
+    bottom: -5px;  
     transform: translateX(-50%);
-    width: 8px;  /* Tamaño del punto */
-    height: 8px; /* Tamaño del punto */
-    background-color: #2B4C6F; /* Color del punto */
+    width: 8px;  
+    height: 8px; 
+    background-color: #2B4C6F; 
     border-radius: 50%;
 }
 .header .bi-person {
-  font-size: 18px; /* Tamaño específico para la userperfil */
+  font-size: 18px; 
   cursor: pointer;
   color: #ffffff;
 }
 .header .bi-box-arrow-right {
-  font-size: 18px; /* Tamaño específico para la salir  */
+  font-size: 18px; 
   cursor: pointer;
   color: #ffffff;
 }
@@ -100,15 +96,15 @@
 }
 .perfil-usuario .dropdpwn-menu a{
   display: flex;
-  color: #ffffff;  /* color de texto*/
+  color: #ffffff;  
   text-decoration: none;
   background-color: #003366;
   align-items: center;
 }
 .perfil-usuario .dropdpwn-menu .perfil-link {
-  background-color: #929292; /* Color de fondo gris */
+  background-color: #929292; 
 }
 
 .perfil-usuario .dropdpwn-menu a:hover {
   background-color: #5789bb;
-}
+} */

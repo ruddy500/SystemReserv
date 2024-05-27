@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
- /* Añade estilos personalizados aquí si es necesario */
- :root {
+/* Añade estilos personalizados aquí si es necesario */
+:root {
     --header-height: 3rem;
     --nav-width: 60px;
     --first-color: #2B4C6F;
@@ -9,13 +9,13 @@
     --body-font: 'Nunito', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100;
-  }
-  *,
-  ::before,
-  ::after {
+}
+*,
+::before,
+::after {
     box-sizing:border-box;
-  }
-  body {
+}
+body {
     position: relative;
     margin: var(--header-height) 0 0 0;
     padding: 0 1rem;
@@ -23,11 +23,11 @@
     font-size: var(--normal-font-size);
     transition: .5s;
     margin-left: 10rem !important;
-  }
-  a {
+}
+a {
     text-decoration: none;
-  }
-  .header {
+}
+.header {
     width: 100%;
     height: var(--header-height);
     position: fixed;
@@ -37,25 +37,24 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    
     z-index: var(--z-fixed);
     transition: .5s;
-  }
-  .header_toggle {
+}
+.header_toggle {
     display: none;
-  }
-  .header_img {
+}
+.header_img {
     width: 35px;
     height: 35px;
     display: flex;
     justify-content: center;
     border-radius: 50%;
     overflow: hidden;
-  }
-  .header_img img {
+}
+.header_img img {
     width: 40px;
-  }
-  .l-navbar {
+}
+.l-navbar {
     position: fixed;
     top: 0;
     left: -30%;
@@ -65,8 +64,8 @@
     padding: .5rem 1rem 0 0;
     transition: .5s;
     z-index: var(--z-fixed);
-  }
-  .l-navbar::after {
+}
+.l-navbar::after {
     content: "";
     position: absolute;
     top: 0;
@@ -74,25 +73,22 @@
     width: 3px; /* Grosor de la línea (ajusta según lo necesites) */
     height: 100%;
     background-color: #D30C1F; /* Color de la línea */
-  }
-
-  .nav {
+}
+.nav {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-  }
-  .nav_list {
+}
+.nav_list {
     margin-top: 50px; /* Ajusta el valor según tus necesidades */
-  }
-
-  .nav_list a{
+}
+.nav_list a {
     margin-right: 10px;
     margin-left: 10px;
-  }
-
-  .nav_list a:hover {
+}
+.nav_list a:hover {
     color: white;
     box-shadow: 0 0 0 #ffffff, 
     0 0 9px #467cb6, 
@@ -100,9 +96,8 @@
     0 0 5px #ffffff,
     0 0 1px #ffffff;
     background-color: #467cb6;
-  }
-
-  .active{
+}
+.active {
     color: white;
     box-shadow: 0 0 0 #ffffff, 
     0 0 9px #467cb6, 
@@ -111,159 +106,299 @@
     0 0 1px #ffffff;
     background-color: #467cb6;
     transition: all .5s ease-in-out 1s;
-  }
-
-  .nav_logo,
-  .nav_link {
+}
+.nav_logo,
+.nav_link {
     display: grid;
     grid-template-columns: max-content max-content;
     align-items: center;
     column-gap: 1rem;
     padding: .5rem 0 .5rem 1.5rem;
-  }
-  .nav_logo {
+}
+.nav_logo {
     margin-bottom: 2rem;
-  }
-  .nav_logo-icon {
+}
+.nav_logo-icon {
     font-size: 1.25rem;
     color: var(--white-color);
-  }
-  .nav_logo-name {
+}
+.nav_logo-name {
     color: var(--white-color);
     font-weight: 700;
-  }
-  .nav_link {
+}
+.nav_link {
     position: relative;
     color: var(--first-color-light);
     margin-bottom: 1.5rem;
     transition: .3s;
-  }
-  .nav_link:hover {
+}
+.nav_link:hover {
     color: var(--white-color);
-  }
-  .nav_icon {
+}
+.nav_icon {
     font-size: 1.25rem;
-  }
-
-  .body-pd {
+}
+.body-pd {
     padding-left: calc(var(--nav-width) + 1rem);
-  }
-  .active {
+}
+.active {
     color: var(--white-color);
-  }
-
-
-  .height-100 {
+}
+.height-100 {
     height: 100vh;
-  }
-
-  .nav_logo-name{
-      font-size: 0.8rem;
-  }
-
-  #menu {
+}
+.nav_logo-name {
+    font-size: 0.8rem;
+}
+#menu {
     color: white;
     padding: 10px;
     margin-left: 10px;
     margin-top: 80%;
-  }
-  
-  #userAdminBtn {
+}
+#userAdminBtn {
     background-color: transparent;
     border: none;
     color: white;
     display: flex;
     align-items: center; /* Alinear verticalmente */
 }
-
 #userAdminBtn i {
     margin-right: 5px; /* Espacio entre el icono y el texto */
     font-size: 25px;
 }
-  
-  #salirLink {
-     display: none; 
-     color: white; 
-     text-decoration:none; 
-  }
-
-  @media screen and (max-width: 767px) {
-/* Aquí colocas tus estilos específicos para pantallas pequeñas */
+#salirLink {
+    display: none;
+    color: white;
+    text-decoration:none;
+}
+@media screen and (max-width: 767px) {
+    /* Aquí colocas tus estilos específicos para pantallas pequeñas */
     .logo-fcyt {
-      max-width: 31%; /* Ancho máximo de la imagen */
-      height: auto; /* Altura automática para mantener la proporción */
-      margin: 12px; /* Centrar horizontalmente por defecto */
-      display: block; /* Para garantizar el centrado */
+        max-width: 31%; /* Ancho máximo de la imagen */
+        height: auto; /* Altura automática para mantener la proporción */
+        margin: 12px; /* Centrar horizontalmente por defecto */
+        display: block; /* Para garantizar el centrado */
     }
     .l-navbar {
-      left: 0;
-      --nav-width: 78px;
+        left: 0;
+        --nav-width: 78px;
     }
     body {
-      margin-left: 3.5rem !important;
+        margin-left: 3.5rem !important;
     }
-
     .nav_list a {
-      margin-right: 120px;
-      padding-left: 10px;
+        margin-right: 120px;
+        padding-left: 10px;
     }
-
-    .nav_list span{
-      font-size: 0;
+    .nav_list span {
+        font-size: 0;
     }
-
     .nav_list i {
-      font-size: 18px;
+        font-size: 18px;
     }
-  }
-
-
-  @media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 768px) {
     body {
-      margin: calc(var(--header-height) + 1rem) 0 0 0;
-      padding-left: calc(var(--nav-width) + 2rem);
+        margin: calc(var(--header-height) + 1rem) 0 0 0;
+        padding-left: calc(var(--nav-width) + 2rem);
     }
     .header {
-      height: calc(var(--header-height) + 1rem);
-      padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+        height: calc(var(--header-height) + 1rem);
+        padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
     }
     .header_img {
-      width: 40px;
-      height: 40px;
+        width: 40px;
+        height: 40px;
     }
     .header_img img {
-      width: 45px;
+        width: 45px;
     }
     .l-navbar {
-      left: 0;
-      padding: 2rem 2rem 0 0;
+        left: 0;
+        padding: 2rem 2rem 0 0;
     }
     .show-menu {
-      width: calc(var(--nav-width) + 156px);
+        width: calc(var(--nav-width) + 156px);
     }
     .body-pd {
-      padding-left: calc(var(--nav-width) + 188px);
+        padding-left: calc(var(--nav-width) + 188px);
     }
     .logo-fcyt {
-      max-width: 70%; /* Ancho máximo de la imagen */
-      height: auto; /* Altura automática para mantener la proporción */
-      margin: auto; /* Centrar horizontalmente por defecto */
-      display: block; /* Para garantizar el centrado */
+        max-width: 70%; /* Ancho máximo de la imagen */
+        height: auto; /* Altura automática para mantener la proporción */
+        margin: auto; /* Centrar horizontalmente por defecto */
+        display: block; /* Para garantizar el centrado */
     }
-    
-  }
+}
 
 /* Estilos para el encabezado */
 .header {
-  display: flex; 
-  justify-content: flex-end;
-  align-items: center;
-  padding: 20px 20px;
-  background-color: #f4f8fa; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #f4f8fa;
 }
 
 /* Estilos para el contenedor del icono del menú */
 .header_toggle {
-  display: flex; 
-  align-items: center; 
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para el contenedor del icono de notificaciones */
+.notificaciones {
+    display: flex;
+    align-items: center;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    position: relative; /* Necesario para el menú desplegable */
+}
+
+/* Estilos para el icono de notificaciones */
+.notificaciones i {
+    font-size: 24px;
+    color: #2B4C6F;
+    border: 2px solid #2B4C6F;
+    border-radius: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.perfil-usuario i {
+    font-size: 34px;
+    color: #2B4C6F;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el enlace de notificaciones */
+.notificaciones-link {
+    position: relative; /* Necesario para posicionar el pseudo-elemento relativo al enlace */
+}
+
+/* Estilos para el pseudo-elemento del indicador de notificaciones */
+.notificaciones-link::after {
+    content: attr(data-count); /* Usa el atributo data-count como contenido */
+    position: absolute; /* Posiciona el pseudo-elemento de forma absoluta */
+    top: -5px; /* Coloca el pseudo-elemento 5 píxeles arriba del enlace */
+    right: -5px; /* Coloca el pseudo-elemento 5 píxeles a la derecha del enlace */
+    background-color: red; /* Fondo rojo */
+    color: white; /* Texto blanco */
+    font-size: 10px; /* Tamaño de fuente */
+    padding: 2px 5px; /* Relleno alrededor del texto */
+    border-radius: 50%; /* Bordes redondeados para crear un círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+/* Ajuste de tamaño de fuente y espaciado para el encabezado */
+.header .bi-person {
+  font-size: 18px; /* Tamaño específico para la userperfil */
+  cursor: pointer;
+  color: #ffffff;
+}
+.header .bi-box-arrow-right {
+  font-size: 18px; /* Tamaño específico para la salir  */
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Ajuste de espaciado para el encabezado */
+.header span {
+    margin-right: 10px;
+}
+
+/* Estilos para el menú desplegable del perfil */
+.perfil-usuario .dropdpwn-menu {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 45px; /* Ajusta esta posición según sea necesario */
+    right: 0;
+    padding: 0;
+    box-shadow: 0 1px 30px rgb(0, 0, 0);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+    background-color: #003366; /* Asegúrate de que el fondo sea visible */
+}
+
+/* Muestra el menú desplegable al hacer hover */
+
+
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+    .perfil-usuario .dropdpwn-menu {
+        right: 10px; /* Ajusta la posición desde la derecha */
+        left: auto; /* Asegura que no se alinee desde la izquierda */
+        width: auto; /* Ajusta el ancho a su contenido */
+    }
+}
+
+/* Ajustes para pantallas medianas y grandes */
+@media screen and (min-width: 768px) {
+    .perfil-usuario .dropdpwn-menu {
+        right: 50px; /* Vuelve a la posición fija desde la derecha */
+        left: auto; /* Elimina la alineación desde la izquierda */
+        width: auto; /* Ajusta el ancho a su contenido */
+    }
+}
+
+/* Asegura que el menú esté completamente visible */
+
+
+/* Ajustes generales para la visibilidad del menú desplegable */
+.perfil-usuario .dropdpwn-menu a {
+    display: flex;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #003366;
+    align-items: center;
+    padding-right: 50px ;
+}
+
+.perfil-usuario .dropdpwn-menu .perfil-link {
+    background-color: #929292; /* Color de fondo gris */
+}
+
+.perfil-usuario .dropdpwn-menu a:hover {
+    background-color: #5789bb;
+}
+
+  /* Estilos para el enlace de notificaciones */
+  .notificaciones-link {
+    position: relative; /* Necesario para posicionar el pseudo-elemento relativo al enlace */
+  }
+  
+.notif{
+    font-size: 1.2rem; /* Tamaño de la fuente */
+}
+   /* Estilo para el punto de notificación */
+.notification-dot {
+    position: absolute;
+    bottom: -5px;  /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;  /* Tamaño del punto */
+    height: 8px; /* Tamaño del punto */
+    background-color: #2B4C6F; /* Color del punto */
+    border-radius: 50%;
 }
