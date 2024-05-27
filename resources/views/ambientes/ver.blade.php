@@ -91,7 +91,7 @@ $horario = $ambiente->horarios()->get();
                                     $estado = ($fila->Estado) ? "Libre" : "Ocupado";
                                 @endphp
                                 
-                                @if ($estado == "Libre")
+                                
                                     <tbody class="text-center">
                                         <tr>
                                         <td>{{ $fechaCompleta }}</td>
@@ -99,7 +99,7 @@ $horario = $ambiente->horarios()->get();
                                         <td>{{ $estado }}</td>
                                         </tr>
                                     </tbody>  
-                                @endif
+                                
                                     
                             @endforeach
                          

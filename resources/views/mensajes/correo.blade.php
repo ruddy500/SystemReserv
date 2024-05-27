@@ -17,18 +17,20 @@
                     </div>
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">Para:</label>
-                        <div class="col-md-6 col-md-4">                        <input type="email" id="enviar" name="enviar" value="{{$correoDestino}}" class="form-control" id="inputEmail" />
+                        <div class="col-md-6 col-md-4">                        
+                            <input type="email" id="enviar" name="enviar" value="{{$correoDestino}}" class="form-control" id="inputEmail" />
                         </div>
                     </div>
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">Asunto:</label>
-                        <div class="col-md-6 col-md-4">                        <input type="text" name="asunto" value="{{$Asunto}}" class="form-control" id="asunto" />
+                        <div class="col-md-6 col-md-4">                        
+                            <input type="text" name="asunto" value="{{$Asunto}}" class="form-control" id="asunto" />
                         </div>
                     </div> 
                     <div class="form-group mb-3">
             
                         <div class="col-md-12">
-                            <textarea name="mensaje" class="form-control" id="mensaje" placeholder="Ingrese su mensaje" rows="5"></textarea>
+                            <textarea name="mensaje" class="form-control" id="mensaje" placeholder="{{ $Contenido }}" rows="5"></textarea>
                         </div>                    
                     </div>
                     <div class="modal-footer">

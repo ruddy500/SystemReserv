@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReservasTable extends Migration
+class CreateUsuariosNotificacionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,27 +13,21 @@ class CreateReservasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservas', function (Blueprint $table) {
+        Schema::create('usuarios_notificacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('CantEstudiante')->nullable();
-            $table->integer('TotalEstudiantes')->nullable();
-            $table->enum('Tipo', ['individual', 'grupal'])->nullable();
-            $table->enum('Estado', ['asignado', 'pendiente','sugerido'])->nullable();
-            $table->string('fecha',10)->nullable();
-            $table->string('TipoAmbiente',15)->nullable();
 
-            $table->foreignId('motivos_id')
-                ->nullable()
-                ->constrained('motivos')
-                ->cascadeOnDelete() // Acción en eliminación
-                ->cascadeOnUpdate(); // Acción en actualización
-
-            $table->foreignId('docentes_id')
+            $table->foreignId('usuarios_id')
                 ->nullable()
                 ->constrained('usuarios')
                 ->cascadeOnDelete() // Acción en eliminación
                 ->cascadeOnUpdate(); // Acción en actualización
-
+            
+            $table->foreignId('notificaciones_id')
+                ->nullable()
+                ->constrained('notificaciones')
+                ->cascadeOnDelete() // Acción en eliminación
+                ->cascadeOnUpdate(); // Acción en actualización
+           
         });
     }
 
@@ -44,6 +38,6 @@ class CreateReservasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservas');
+        Schema::dropIfExists('usuarios_notificacion');
     }
 }

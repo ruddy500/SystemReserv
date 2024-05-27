@@ -35,6 +35,7 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Asignacion de solicitud de Reserva";
+            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nSe informa que su solicitud de reserva ha sido Aceptada.";
 
 
             $idAmbiente = intval($checkboxValues); 
@@ -78,7 +79,7 @@ class MensajesController extends Controller
 
             }
            
-            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto'));
+            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } elseif ($tipoSeleccionado == 'sugerir') {
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
             $idDocente = $reserva->docentes_id;
@@ -89,8 +90,9 @@ class MensajesController extends Controller
             $correoDestino = $DocenteAux->email;
 
             $Asunto = "Sugerencia de solicitud de Reserva";
+            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a que no encontramos un ambiente disponible para su solicitud de reserva, le sugerimos las siguientes alternativas:";
 
-            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto'));
+            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } elseif ($tipoSeleccionado == 'rechazar') {
             // dd();
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
@@ -101,10 +103,11 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Rechazo de solicitud de Reserva";
+            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido Rechazada";
             // eliminar la reserva de pendientes
             $reserva->delete();
 
-            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto'));
+            return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } else {
             // Si no se cumple ninguna de las condiciones, redirigir a la misma vista con un mensaje de error
             return back()->with('error', 'Tipo de acción no válido');
