@@ -11,12 +11,14 @@ class CorreoController extends Controller
 
     public function enviarCorreo(Request $request)
     {
+        // dd($request->all());
         // Recibir datos del formulario
         $asunto = $request->input('asunto');
         $mensaje = $request->input('mensaje');
         $correoDestino = $request->input('enviar');
         $emisor = $request->input('emisor');
-
+        $tipoSeleccionado = $request->input('tipo_seleccionado');
+        // dd($tipoSeleccionado);
         // Detalles para el correo
         $details = [
             'title' => $asunto,
@@ -25,7 +27,7 @@ class CorreoController extends Controller
         ];
 
         // Enviar correo
-        Mail::to($correoDestino)->send(new Correo($details, $asunto));
+        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado));
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.admin.principal', compact('menu'));
