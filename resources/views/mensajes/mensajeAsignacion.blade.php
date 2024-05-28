@@ -108,7 +108,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Asignación de solicitud de reserva</h1>
+            <h1>Asignación de solicitud de reserva {{$idReserva}}</h1>
             <p>Sábado, 18 de mayo (hace 17 horas)</p>
         </header>
         <main class="main-content">
