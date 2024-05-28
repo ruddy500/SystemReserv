@@ -3,7 +3,7 @@
 @section('menu')
 <body id="body-pd">
     <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <!-- <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div> -->
         <div class="notificaciones">
             @if (auth()->check())
                 @if (auth()->user()->role == 'admin')
