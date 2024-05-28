@@ -103,6 +103,20 @@
         }
     </style>
 </head>
+<?php 
+    use App\Models\Reservas;
+    use App\Models\Usuarios;
+    use App\Models\Motivos;
+    $reserva = Reservas::find($idReserva); //extraemos la reserva actual
+    $idDocente = $reserva->docentes_id;
+    $DocenteAux = Usuarios::find($idDocente);
+
+    $MotivoId = $reserva->motivos_id;
+    $motivo = Motivos::find($MotivoId); //encontramos el motivo de la reserva
+    // dd($motivo);
+    // dd($DocenteAux);
+    // dd($DocenteAux->name);
+?>
 
 <body>
     <div class="container">
@@ -116,23 +130,23 @@
                 <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido Rechazada.</p>
             </div>
             <section class="reservation-details">
-                <h2>Detalle de reserva (PONER EL TIPO DE RESERVA):</h2>
+                <h2>Detalle de reserva ({{$reserva->Tipo}}):</h2>
                 <table>
                     <tr>
                         <td>Nombre docente:</td>
-                        <td>Leticia Blanco Coca {{$idReserva}}</td>
+                        <td>{{$DocenteAux->name}}</td>
                     </tr>
                     <tr>
                         <td>Cantidad de estudiantes:</td>
-                        <td>95</td>
+                        <td>{{$reserva->CantEstudiante}}</td>
                     </tr>
                     <tr>
                         <td>Motivo reserva:</td>
-                        <td>Examen primer parcial</td>
+                        <td>{{$motivo->Nombre}}</td>
                     </tr>
                     <tr>
                         <td>Fecha:</td>
-                        <td>05/06/2024</td>
+                        <td>{{$reserva->fecha}}</td>
                     </tr>
                     <tr>
                         <td>Periodo:</td>
@@ -140,7 +154,7 @@
                     </tr>
                     <tr>
                         <td>Tipo de ambiente:</td>
-                        <td>Aula común</td>
+                        <td>{{$reserva->TipoAmbiente}}</td>
                     </tr>
                     <tr>
                         <td>Materia:</td>
