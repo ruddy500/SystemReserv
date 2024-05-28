@@ -18,6 +18,7 @@ class CorreoController extends Controller
         $correoDestino = $request->input('enviar');
         $emisor = $request->input('emisor');
         $tipoSeleccionado = $request->input('tipo_seleccionado');
+        $idReserva = $request->input('idReserva');
         // dd($tipoSeleccionado);
         // Detalles para el correo
         $details = [
@@ -27,7 +28,7 @@ class CorreoController extends Controller
         ];
 
         // Enviar correo
-        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado));
+        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva));
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.admin.principal', compact('menu'));

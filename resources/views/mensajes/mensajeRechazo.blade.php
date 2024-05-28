@@ -120,7 +120,7 @@
                 <table>
                     <tr>
                         <td>Nombre docente:</td>
-                        <td>Leticia Blanco Coca</td>
+                        <td>Leticia Blanco Coca {{$idReserva}}</td>
                     </tr>
                     <tr>
                         <td>Cantidad de estudiantes:</td>

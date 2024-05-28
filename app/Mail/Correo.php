@@ -14,12 +14,14 @@ class Correo extends Mailable
     public $details;
     public $subject; // Añadir una propiedad para el asunto
     public $tipoMensaje;
+    public $idReserva;
 
-    public function __construct($details, $subject,$tipoMensaje)
+    public function __construct($details, $subject,$tipoMensaje,$idReserva)
     {   
         $this->details = $details;
         $this->subject = $subject; // Asignar el asunto proporcionado
         $this->tipoMensaje = $tipoMensaje;
+        $this->idReserva = $idReserva;
     }
 
     public function build()
@@ -37,8 +39,18 @@ class Correo extends Mailable
                 break;
         }
         
-        return $this->subject($this->subject) // Usar el asunto proporcionado
-                ->view($view);
+        // version funcional
+        // return $this->subject($this->subject) // Usar el asunto proporcionado
+        //         ->view($view);
+
+        // pasando detalles
+        return $this->subject($this->subject)
+                    ->view($view)
+                    ->with([
+                        'details' => $this->details,
+                        'idReserva' => $this->idReserva
+                    ]);
+
         // return $this->subject($this->subject) // Usar el asunto proporcionado
         //             ->view('mensajes.mensaje');
     }

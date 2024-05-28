@@ -10,6 +10,8 @@
                 <form method="POST" action="{{ url('/enviar-correo') }}">
                     @csrf <!-- Agregar el token CSRF -->
                     <input type="hidden" name="tipo_seleccionado" value={{ $tipoSeleccionado }}>
+                    {{-- se esta enviando el id De la Reserva --}}
+                    <input type="hidden" name="idReserva" value={{ $idReserva }}>
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">De:</label>
                         <div class="col-md-6 col-md-4">
