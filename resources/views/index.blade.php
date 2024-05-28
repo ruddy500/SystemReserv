@@ -52,6 +52,8 @@
       @yield('notificaciones/difusion')
       @yield('notificaciones/admin/lista')
       @yield('notificaciones/admin/sugerencia')
+      @yield('avisos/aviso')
+      @yield('informes/informe')
 
 
 

@@ -17,6 +17,8 @@ use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\MensajesController;
 use App\Http\Controllers\CorreoController;
 use App\Http\Controllers\NotificacionesController;
+use App\Http\Controllers\AvisosController;
+use App\Http\Controllers\InformesController;
 
 
 
@@ -101,6 +103,10 @@ Route::get('/notificaciones/difusion',[NotificacionesController::class,'mostrarD
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES ADMINISTRADOR
 Route::get('/notificaciones/admin/lista',[NotificacionesController::class,'mostrarListaAdmin'])->name('notificaciones.admin.lista');
 Route::get('/notificaciones/admin/sugerencia',[NotificacionesController::class,'mostrarSugerenciaAdmin'])->name('notificaciones.admin.sugerencia');
+//RUTA PARA MOSTRAR AVISOS
+Route::get('/avisos/aviso',[AvisosController::class,'mostrar'])->name('avisos.aviso');
+//RUTA PARA MOSTRAR INFORMES
+Route::get('/informes/informe',[InformesController::class,'mostrar'])->name('informes.informe');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
