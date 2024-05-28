@@ -1,9 +1,12 @@
 @extends('index')
 
 @section('informes/informe')
-    <div class="container">
-        <div class="row">
-            <h1>VISTA DE INFORMES</h1>
+<div class="container mt-3">
+    <div class="card vercard">
+        <h3 class="card-header">Informe de uso de ambientes</h3>
+        <div class="card-body bg-content">
+
         </div>
     </div>
+</div>
 @endsection

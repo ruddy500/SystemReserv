@@ -18,7 +18,7 @@
             </div>
             <hr>
             <!-- MENSAJE FINAL -->
-            <div class="mensajeDespedida">
+            <div class="mensajeDespedida" style="max-width: 30rem; margin: auto;">
                 <p style="margin-bottom: 5px;">Agradecemos tu atención y estamos aqui para cualquier consulta.</p>
                 <p style="margin-bottom: 5px;">Atentamente, Administración.</p>
             </div>

@@ -40,7 +40,7 @@
                     <p class="mb-1">adaEnterprissoft@gmail.com</p>
                 </a>
                 <!-- NOTIFICACION MENSAJE MASIVO -->
-                <a href="{{ route('notificaciones.difusion') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('notificaciones.difusion') }}" class="list-group-item list-group-item-action list-group-item-info">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
                         <div class="position-relative">
