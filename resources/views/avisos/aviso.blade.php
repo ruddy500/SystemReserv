@@ -55,4 +55,23 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario por defecto 
+            Swal.fire({
+                icon: 'success',
+                title: '¡Mensaje enviado!',
+                text: 'Tu mensaje se ha enviado correctamente.',
+                showConfirmButton: false,
+                timer: 2000, // Cerrar automáticamente después de 2 segundos
+                didClose: () => {
+                    // Agregar aquí el código para enviar el formulario después de cerrar la alerta
+                    //form.submit(); Esto enviará el formulario
+                }
+            });
+        });
+    });
+</script>
 @endsection
