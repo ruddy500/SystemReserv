@@ -119,4 +119,27 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Botón Aceptar
+        document.querySelector('.btn-aceptar').addEventListener('click', function () {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Aceptado!',
+                text: 'Su sugerencia ha sido aceptada exitosamente',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+
+        // Botón Rechazar
+        document.querySelector('.btn-cancelar').addEventListener('click', function () {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Cancelado!',
+                text: 'Su sugerencia de ambientes ha sido cancelada',
+                confirmButtonText: 'Rechazar'
+            });
+        });
+    });
+</script>
 @endsection
