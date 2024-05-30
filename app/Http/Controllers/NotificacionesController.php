@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class NotificacionesController extends Controller
-{
+{ 
     //CONTROLADORES DOCENTE
     public function mostrarLista(){
         $menu = view('componentes/menu'); // Crear la vista del menú

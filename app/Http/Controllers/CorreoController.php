@@ -42,7 +42,8 @@ class CorreoController extends Controller
         $idDocente = $reserva->docentes_id;
 
         $fechaEnvio = Carbon::now('America/La_Paz');
-       
+        $fechaEnvio->addHours(4);
+        
         $notificacion = new Notificaciones();
         $notificacion->fecha_actual_sistema =  $fechaEnvio;
         $notificacion->Estado =  "no leido";
@@ -56,13 +57,14 @@ class CorreoController extends Controller
                 break;
                 
             default:
-            $notificacion->Tipo = "rechazado";
+                $notificacion->Tipo = "rechazado";
                 break;
         }
 
         $notificacion->reservas_id = $idReserva;
         // dd($notificacion);
         $notificacion->save();
+
 
         $registroUR= new UsuariosNotificacion();
         $registroUR->usuarios_id = $idDocente;

@@ -2,6 +2,25 @@
 
 @section('notificaciones/asignacion')
 {{-- {{ dd(get_defined_vars()) }} --}}
+<?php
+//  notificacionId y reservaId
+use App\Models\UsuariosNotificacion;
+use App\Models\Notificaciones;
+use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
+
+$timezone = 'America/La_Paz';
+
+$notificacion = Notificaciones::where('id', $notificacionId)->first();
+
+$fecha = Carbon::parse($notificacion->fecha_actual_sistema)->setTimezone('America/La_Paz'); // Convertimos a la zona horaria correcta
+$fechaActual = Carbon::now('America/La_Paz'); // Nos aseguramos que ambas fechas estén en la misma zona horaria
+
+$fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
+$diferencia = $fecha->diffForHumans($fechaActual);
+// dd($diferencia);
+
+?>
+
 <div class="container mt-3">
     <div class="card vercard">
         <!-- ASUNTO DE LA ASIGNACION -->
@@ -9,7 +28,7 @@
         <div class="card-body bg-content">
             <!-- FECHA DE LLEGADA DE NOTIFICACION -->
             <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
-                <small class="fechaLlegada">Sab, 06 de Mayo (hace 17 horas)</small>
+                <small class="fechaLlegada">{{ $fechaFormateada }} ({{ $diferencia }})</small>
             </div>
             <!-- MENSAJE O MOTIVO INSERTADO AL ENVIAR CORREO -->
             <div class="contenido-mensaje" style="max-width: 30rem; margin: auto;">
