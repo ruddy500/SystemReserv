@@ -1,0 +1,122 @@
+.graficoUsoAmbientes{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.chart {
+    width: 800px; /* Adjusted width for more bars */
+    height: 450px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 40px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.bar {
+    width: calc(10% - 10px); /* Adjusted width for more bars */
+    position: relative;
+    background-color: #007bff;
+    border-radius: 5px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 0;
+    transition: height 0.5s ease-in-out;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    padding-bottom: 5px;
+}
+
+.bar:nth-child(2) {
+    background-color: #28a745;
+}
+
+.bar:nth-child(3) {
+    background-color: #dc3545;
+}
+
+.bar:nth-child(4) {
+    background-color: #ffc107;
+}
+
+.bar:nth-child(5) {
+    background-color: #17a2b8;
+}
+
+.bar:nth-child(6) {
+    background-color: #6f42c1;
+}
+
+.bar:nth-child(7) {
+    background-color: #fd7e14;
+}
+
+.bar:nth-child(8) {
+    background-color: #e83e8c;
+}
+
+.bar:nth-child(9) {
+    background-color: #20c997;
+}
+
+.bar:nth-child(10) {
+    background-color: #6610f2;
+}
+
+.bar::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    white-space: nowrap;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.btn-imprimir{
+    padding-top: 20px; ;
+}
+
+@media (max-width: 1200px) {
+    .chart {
+        width: 100%;
+        padding: 20px;
+        padding-bottom: 100px;
+    }
+
+    .bar {
+        width: calc(100% / 10 - 8px);
+        margin: 0 4px;
+        font-size: 9px;
+    }
+    .bar::after {
+        transform: translateX(-50%) rotate(-90deg); /* Centra y rota el texto verticalmente */
+        bottom: -60px; /* Ajusta la posición vertical de las etiquetas */
+        white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+    }
+}
