@@ -11,6 +11,8 @@
     $reservas = Reservas::all();
     $tamReservas = Reservas::count();
     // dd($reservas,$tamReservas);
+
+    
 ?>
 {{-- {{ dd(get_defined_vars()) }} --}}
 <div class="card-body bg-content" style="border-radius: 5px;">
@@ -298,7 +300,10 @@
             </div> 
 
         
-       
+            <?php 
+            // Elimina todas las reservas con estado 'rechazado'
+            Reservas::where('Estado', 'rechazado')->delete();
+            ?>
     
     </div>
 </div>

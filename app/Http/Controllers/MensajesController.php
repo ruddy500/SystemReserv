@@ -105,6 +105,7 @@ class MensajesController extends Controller
             $Asunto = "Rechazo de solicitud de Reserva";
             $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido Rechazada";
             // eliminar la reserva de pendientes
+            
             // $reserva->delete();
 
             return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
