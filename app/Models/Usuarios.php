@@ -25,7 +25,7 @@ class Usuarios extends Authenticatable
     }
     
     public function notificaciones(){
-        return $this->belongsToMany(Notifiaciones::class,'usuarios_notificacion');
+        return $this->belongsToMany(Notificaciones::class,'usuarios_notificacion');
     }
     /**
      * The attributes that are mass assignable.
