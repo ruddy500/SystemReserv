@@ -15,7 +15,7 @@ class CreateNotificacionesTable extends Migration
     {
         Schema::create('notificaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('fecha_actual_sistema',30)->nullable();
+            $table->dateTime('fecha_actual_sistema')->nullable();
             $table->enum('Estado', ['leido','no leido'])->nullable();
             $table->enum('Tipo', ['sugerencia', 'rechazado','asignacion'])->nullable();
             $table->integer('reservas_id')->nullable();

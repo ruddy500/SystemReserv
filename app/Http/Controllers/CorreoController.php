@@ -42,11 +42,9 @@ class CorreoController extends Controller
         $idDocente = $reserva->docentes_id;
 
         $fechaEnvio = Carbon::now('America/La_Paz');
-        // Formatear la fecha de envío
-        $fechaEnvioFormateada = $fechaEnvio->locale('es')->isoFormat('D [de] MMMM');
-        
+       
         $notificacion = new Notificaciones();
-        $notificacion->fecha_actual_sistema =  $fechaEnvioFormateada;
+        $notificacion->fecha_actual_sistema =  $fechaEnvio;
         $notificacion->Estado =  "no leido";
         switch ($tipoSeleccionado) {
             case 'asignar':

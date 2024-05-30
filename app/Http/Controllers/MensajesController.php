@@ -35,9 +35,8 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Asignacion de solicitud de Reserva";
-            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nSe informa que su solicitud de reserva ha sido Aceptada.";
-
-
+            $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nSe informa que su solicitud de reserva ha sido aceptada.";
+            
             $idAmbiente = intval($checkboxValues); 
             $periodosSelecReserva = PeriodosSeleccionado :: where('reservas_id',$idReserva)->get();
             $fechaReserva = $reserva->fecha;
@@ -90,7 +89,7 @@ class MensajesController extends Controller
             $correoDestino = $DocenteAux->email;
 
             $Asunto = "Sugerencia de solicitud de Reserva";
-            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a que no encontramos un ambiente disponible para su solicitud de reserva, le sugerimos las siguientes alternativas:";
+            $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a que no encontramos un ambiente disponible para su solicitud de reserva, le sugerimos las siguientes alternativas:";
 
             return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } elseif ($tipoSeleccionado == 'rechazar') {
@@ -103,7 +102,7 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Rechazo de solicitud de Reserva";
-            $Contenido = "Estimado/a. \nEsperemos que este mensaje te encuentre muy bien.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido Rechazada";
+            $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido rechazada";
             // eliminar la reserva de pendientes
             
             // $reserva->delete();
