@@ -128,6 +128,8 @@ date_default_timezone_set('America/La_Paz');
     use App\Models\Motivos;
     use App\Models\MateriasSeleccionado;
     $reserva = Reservas::find($idReserva); //extraemos la reserva actual
+    
+
     $idDocente = $reserva->docentes_id;
     $DocenteAux = Usuarios::find($idDocente);
     $tipoReserva = $reserva->Tipo ; //vamos a mostrar el tipo de la reserva
@@ -271,6 +273,11 @@ date_default_timezone_set('America/La_Paz');
                         <!-- <td>1, Leticia Coca Blanco<br>3, Vladimir Costas</td> ASI SE TENDRIA QUE VER -->
                     </tr>
                 </table>
+                <?php 
+                $reserva->Estado = 'rechazado';
+                $reserva->save();
+
+                ?>
             </section>
             <p class="center-text">Agradecemos tu atención y estamos aquí para cualquier consulta.<br>Atentamente, Administrador.</p>
             <div class="footer">

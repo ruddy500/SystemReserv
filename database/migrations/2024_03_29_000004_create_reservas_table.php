@@ -18,7 +18,7 @@ class CreateReservasTable extends Migration
             $table->integer('CantEstudiante')->nullable();
             $table->integer('TotalEstudiantes')->nullable();
             $table->enum('Tipo', ['individual', 'grupal'])->nullable();
-            $table->enum('Estado', ['asignado', 'pendiente','sugerido'])->nullable();
+            $table->enum('Estado', ['asignado', 'pendiente','sugerido','rechazado'])->nullable();
             $table->string('fecha',10)->nullable();
             $table->string('TipoAmbiente',15)->nullable();
 

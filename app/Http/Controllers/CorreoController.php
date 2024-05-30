@@ -47,7 +47,7 @@ class CorreoController extends Controller
         
         $notificacion = new Notificaciones();
         $notificacion->fecha_actual_sistema =  $fechaEnvioFormateada;
-        $notificacion->Estado =  "en espera";
+        $notificacion->Estado =  "no leido";
         switch ($tipoSeleccionado) {
             case 'asignar':
                 $notificacion->Tipo = "asignacion";
@@ -71,7 +71,7 @@ class CorreoController extends Controller
         $registroUR->notificaciones_id = $notificacion->id;
         $registroUR->save();
         // dd($registroUR);
-        
+
         //**************************************
 
         $menu = view('componentes/menu'); // Crear la vista del menú
