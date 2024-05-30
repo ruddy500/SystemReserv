@@ -10,17 +10,17 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.lista',compact('menu'));
     }
-    public function mostrarSugerencia(){
+    public function mostrarSugerencia($reservaId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.sugerencia',compact('menu'));
+        return view('notificaciones.sugerencia',compact('menu','reservaId'));
     }
-    public function mostrarAsignacion(){
+    public function mostrarAsignacion($reservaId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.asignacion',compact('menu'));
+        return view('notificaciones.asignacion',compact('menu','reservaId'));
     }
-    public function mostrarRechazo(){
+    public function mostrarRechazo($reservaId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.rechazo',compact('menu'));
+        return view('notificaciones.rechazo',compact('menu','reservaId'));
     }
     public function mostrarDifusion(){
         $menu = view('componentes/menu'); // Crear la vista del menú

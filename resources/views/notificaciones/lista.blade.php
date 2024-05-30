@@ -30,7 +30,7 @@ $notificaciones = Notificaciones::all();
                         
                                 @case('asignacion')
                                     <!-- NOTIFICACION DE ASIGNACION -->
-                                    <a href="{{ route('notificaciones.asignacion',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" aria-current="true" onclick="openNotification(this,'{{ $idReserva }}')">
+                                    <a href="{{ route('notificaciones.asignacion',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" aria-current="true" onclick="openNotification(this)">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1 notif">Asignación de solicitud de reserva</h5>
                                             <div class="position-relative">
@@ -44,7 +44,7 @@ $notificaciones = Notificaciones::all();
                                     @break
                                 @case('sugerencia')
                                     <!-- NOTIFICACION DE SUGERENCIA -->
-                                    <a href="{{ route('notificaciones.sugerencia',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this,'{{ $idReserva }}')">
+                                    <a href="{{ route('notificaciones.sugerencia',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1 notif">Sugerencia de solicitud de reserva</h5>
                                             <div class="position-relative">
@@ -58,7 +58,7 @@ $notificaciones = Notificaciones::all();
                                     @break
                                 @case('rechazado')
                                     <!-- NOTIFICACION DE RECHAZO -->
-                                    <a href="{{ route('notificaciones.rechazo',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this,'{{ $idReserva }}')">
+                                    <a href="{{ route('notificaciones.rechazo',['reservaId' => $idReserva]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1 notif">Rechazo de solicitud de reserva</h5>
                                             <div class="position-relative">
