@@ -301,9 +301,10 @@
 
         
             <?php 
-            // Elimina todas las reservas con estado 'rechazado'
-            Reservas::where('Estado', 'rechazado')->delete();
             ?>
+            {{--  Elimina todas las reservas con estado 'rechazado' --}}
+            {{--  Reservas::where('Estado', 'rechazado')->delete(); --}}
+            
     
     </div>
 </div>

@@ -10,21 +10,21 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.lista',compact('menu'));
     }
-    public function mostrarSugerencia(){
+    public function mostrarSugerencia($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.sugerencia',compact('menu'));
+        return view('notificaciones.sugerencia',compact('menu','reservaId','notificacionId'));
     }
-    public function mostrarAsignacion(){
+    public function mostrarAsignacion($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.asignacion',compact('menu'));
+        return view('notificaciones.asignacion',compact('menu','reservaId','notificacionId'));
     }
-    public function mostrarRechazo(){
+    public function mostrarRechazo($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.rechazo',compact('menu'));
+        return view('notificaciones.rechazo',compact('menu','reservaId','notificacionId'));
     }
-    public function mostrarDifusion(){
+    public function mostrarDifusion($notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.difusion',compact('menu'));
+        return view('notificaciones.difusion',compact('menu','notificacionId'));
     }
 
     //CONTROLADORES ADMINISTRADOR
