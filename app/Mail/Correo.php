@@ -26,6 +26,7 @@ class Correo extends Mailable
 
     public function build()
     {
+        //entra aqui como segundo
         switch ($this->tipoMensaje) {
             case 'asignar':
                 $view = 'mensajes.mensajeAsignacion';

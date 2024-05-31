@@ -20,7 +20,7 @@ class CorreoController extends Controller
 {
 
     public function enviarCorreo(Request $request)
-    {
+    {   //entra aqui primero cuando se le da a enviar 
         // dd($request->all());
         // Recibir datos del formulario
         $asunto = $request->input('asunto');
@@ -38,10 +38,6 @@ class CorreoController extends Controller
             'body' => $mensaje
         ];
 
-        // Enviar correo
-        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva));
-        
-
         //***** Creacion de notificaciones *****
     
         $reserva = Reservas::where('id',$idReserva)->first(); 
@@ -53,11 +49,12 @@ class CorreoController extends Controller
         $notificacion = new Notificaciones();
         $notificacion->fecha_actual_sistema =  $fechaEnvio;
         $notificacion->Estado =  "no leido";
+
         switch ($tipoSeleccionado) {
             case 'asignar':
                 $notificacion->Tipo = "asignacion";
 
-                //****** Cambia estado de asignar ******
+            //     //****** Cambia estado de asignar ******
                 $reserva = Reservas::find($idReserva);
                 $idAmbiente = intval($ambientesSeleccionado); 
                 $periodosSelecReserva = PeriodosSeleccionado :: where('reservas_id',$idReserva)->get();
@@ -99,7 +96,7 @@ class CorreoController extends Controller
                     $reserva->save();
 
                 }
-               //*******************************************
+                //*******************************************
                 
                 break;
             
@@ -124,6 +121,11 @@ class CorreoController extends Controller
         // dd($registroUR);
 
         //**************************************
+
+        //luego entra aqui segundo correo.php
+        // Enviar correo
+        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva));
+        
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.admin.principal', compact('menu'));

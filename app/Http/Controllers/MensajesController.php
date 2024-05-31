@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservas;
-// use App\Models\Horarios;
-// use App\Models\Fechas;
-// use App\Models\PeriodosSeleccionado;
-// use App\Models\ReservasAmbiente;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
@@ -37,7 +33,6 @@ class MensajesController extends Controller
             $Asunto = "Asignacion de solicitud de Reserva";
             $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nSe informa que su solicitud de reserva ha sido aceptada.";
             
-           
             return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } elseif ($tipoSeleccionado == 'sugerir') {
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
