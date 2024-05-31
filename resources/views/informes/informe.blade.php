@@ -1,6 +1,23 @@
 @extends('index')
 
 @section('informes/informe')
+<?php
+    use App\Models\Ambientes;
+    use App\Models\Reservas;
+    use App\Models\Usuarios;
+    use App\Models\Motivos;
+    use App\Models\MateriasSeleccionado;
+    use App\Models\Materias;
+    use App\Models\PeriodosSeleccionado;
+    use App\Models\Periodos;
+    use App\Models\ReservasAmbiente;
+    use App\Models\NombreAmbientes;
+    use App\Models\TipoAmbientes;
+    use App\Models\DocentesMaterias;
+
+    $reservasAmbientes = ReservasAmbiente::all();
+
+?>
 <div class="container mt-3">
     <div class="card vercard">
         <h3 class="card-header">Informe de uso de ambientes</h3>
@@ -23,22 +40,86 @@
                     </thead>
                     <tbody> 
                         <thead class="bg-custom-lista-fila-blanco">
-                            <tr>
-                                <th class="text-center h4 text-black">690 A</th>
-                                <th class="text-center h4 text-black">20-05-2024</th>
-                                <th class="text-center h4 text-black">08:15 - 09:45</th>
-                                <th class="text-center h4 text-black">Algoritmos</th>
-                                <th class="text-center h4 text-black">Examen primer parcial</th>
-                                <th class="text-center h4 text-black">Leticia Blanco Coca</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center h4 text-black">690 A</th>
-                                <th class="text-center h4 text-black">20-05-2024</th>
-                                <th class="text-center h4 text-black">08:15 - 09:45</th>
-                                <th class="text-center h4 text-black">Elementos de programación</th>
-                                <th class="text-center h4 text-black">Examen primer parcial</th>
-                                <th class="text-center h4 text-black">Leticia Blanco Coca</th>
-                            </tr>
+
+                            @foreach ($reservasAmbientes as $reservasAmbiente )
+                               
+                               <?php 
+                                    $idReserva = $reservasAmbiente->reservas_id;
+                                    $reserva = Reservas::where('id',$idReserva)->first();
+                                    
+                                    $idAmbiente = $reservasAmbiente->ambientes_id;
+                                    $registroAmbiente = Ambientes::where('id',$idAmbiente)->first();
+                                    $idNombreAmbiente = $registroAmbiente->nombre_ambientes_id;
+                                    $registroNA = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+                                    $nombreAmbiente = $registroNA->Nombre;
+
+                                    $fecha = $reserva->fecha;
+    
+                                    $motivoId = $reserva->motivos_id;
+                                    $registroMotivo = Motivos::where('id',$motivoId)->first();
+                                    $motivo = $registroMotivo->Nombre;
+
+                                    $idDocente = $reserva->docentes_id;
+                                    $registroDocente = Usuarios::where('id',$idDocente)->first();
+                                    $nombreDocente = $registroDocente->name;
+
+                                    $registrosMatSelec = MateriasSeleccionado::where('reservas_id',$idReserva)->get();
+                                    //   $tamañoMatSelec = count($regiatrosMatSelec);
+                                    $idMateria = $registrosMatSelec[0]->materias_id;
+
+                                    $registroMateria = Materias::where('id',$idMateria)->first();
+                                    $nombreMateria = $registroMateria->Nombre;
+
+                                    $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+                                    $tamPeriodosSeleccionado = count($periodosSeleccionados);
+                                    // dd($tamPeriodoSelec);
+
+                                    if($tamPeriodosSeleccionado == 1){
+                                            $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                            
+                                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                                            $periodo = $periodoBuscar->HoraIntervalo;
+                                            $partes_P = explode('-', $periodo);
+                                            
+                                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                            $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                                        
+                                    }else{
+
+                                            $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                            $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+
+                                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                                            $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+                                            $periodo = $periodoBuscar->HoraIntervalo;
+                                            $periodo2 = $periodoBuscar2->HoraIntervalo;
+                                            
+                                            $partes_P = explode('-', $periodo);
+                                            $partes_P2 = explode('-', $periodo2);
+                                            //dd($partes_P,$partes_P2);
+
+                                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                                            $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                                            
+                                            // if($i==1){dd($horaInicio,$horaFin);}
+                                        
+                                    }
+
+                               ?>
+
+                                <tr>
+                                    <th class="text-center h4 text-black">{{ $nombreAmbiente }}</th>
+                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                    <th class="text-center h4 text-black">{{ $horaInicio }} - {{ $horaFin }}</th>
+                                    <th class="text-center h4 text-black">{{ $nombreMateria }}</th>
+                                    <th class="text-center h4 text-black">{{ $motivo }}</th>
+                                    <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                </tr>
+                                
+                            @endforeach
+                           
+                            
                         </thead>
                     </tbody>
                 </table>
