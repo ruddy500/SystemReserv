@@ -51,10 +51,7 @@
             <hr>
             <div class="detalleReserva">
                 <!-- DETALLE DE RESERVA -->
-                <label for="detalle" class="col-form-label" style="font-weight: bold;">Detalle reserva (Poner si es individual o grupal):</label>
-                <hr>
-                <div class="tabla-Detalle">
-                    <?php
+                <?php
                        $registroUN = UsuariosNotificacion::where('notificaciones_id',$notificacionId)->first();
                        $docenteId = $registroUN->usuarios_id;
                        $registroDocente = Usuarios::where('id',$docenteId)->first();
@@ -116,9 +113,11 @@
                         
                         }
 
-
-
-                    ?>
+                ?>
+                <label for="detalle" class="col-form-label" style="font-weight: bold;">Detalle reserva ({{ $tipoReserva }}):</label>
+                <hr>
+                <div class="tabla-Detalle">
+                    
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
