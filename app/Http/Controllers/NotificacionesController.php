@@ -36,9 +36,9 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.admin.lista',compact('menu'));
     }
-    public function mostrarSugerenciaAdmin(){
+    public function mostrarSugerenciaAdmin($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.admin.sugerencia',compact('menu'));
+        return view('notificaciones.admin.sugerencia',compact('menu','reservaId','notificacionId'));
     }
 
     public function sugerenciaRechazo(Request $request)
