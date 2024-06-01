@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('notificaciones/sugerencia')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="container mt-3">
     <div class="card vercard">
         <!-- ASUNTO DE LA SUGERENCIA -->

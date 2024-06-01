@@ -35,10 +35,12 @@
             <tbody> 
 
                 @for ( $i=0 ; $i < $tamanioReservas ; $i++)
+                    
                     <?php
                         $idReserva = $reservasAsig[$i]->id;
                         $tipo = $reservasAsig[$i]->Tipo;
                         $fecha = $reservasAsig[$i]->fecha;
+                        $idDocente = $reservasAsig[$i]->docentes_id ;
                         
                         $registroRA =  $reservasAmbiente->firstWhere('reservas_id', $idReserva);
                         // dd($registroRA);
@@ -95,43 +97,42 @@
                         }
 
                     ?>
-            
-                     <!-- Fila blanca -->
-                    <thead class="bg-custom-lista-fila-blanco">
-                        <tr>
-                            <th class="text-center h4 text-black">{{ $nombreAMB }}</th>
-                            <th class="text-center h4 text-black">{{ $fecha }}</th>
-                            <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                            <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                            <th class="text-center h4 text-black">{{ $motivo }}</th>
-                            
-                            
-                            
-                            <th class="text-center h4 text-black">
+                    @if ($idDocente == auth()->user()->id)
+                        <!-- Fila blanca -->
+                        <thead class="bg-custom-lista-fila-blanco">
+                            <tr>
+                                <th class="text-center h4 text-black">{{ $nombreAMB }}</th>
+                                <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
+                                <th class="text-center h4 text-black">{{ $horaFin }}</th>
+                                <th class="text-center h4 text-black">{{ $motivo }}</th>
+                                
+                                
+                                
+                                <th class="text-center h4 text-black">
 
-                                <div class="d-flex justify-content-center">
-                                    <div class="circle2">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="circle2">
 
-                                        @if ($tipo=='individual')
-                                            <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                            </a>
-                                        @elseif($tipo=='grupal')
-                                            <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
-                                            </a>
-                                        @endif
+                                            @if ($tipo=='individual')
+                                                <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                </a>
+                                            @elseif($tipo=='grupal')
+                                                <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                                </a>
+                                            @endif
+
+                                        </div>
 
                                     </div>
-
-                                </div>
-                            
-                            </th>
-                        </tr>	
-                    </thead>
-
-
-
+                                
+                                </th>
+                            </tr>	
+                        </thead>
+                    @endif
+                     
                 @endfor
 
 

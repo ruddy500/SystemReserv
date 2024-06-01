@@ -10,6 +10,8 @@
                 <form method="POST" action="{{ url('/enviar-correo') }}">
                     @csrf <!-- Agregar el token CSRF -->
                     <input type="hidden" name="tipo_seleccionado" value={{ $tipoSeleccionado }}>
+                    <input type="hidden" name="ambientes_seleccionado" value={{ $checkboxValues }}>
+                    
                     {{-- se esta enviando el id De la Reserva --}}
                     <input type="hidden" name="idReserva" value={{ $idReserva }}>
                     <div class="form-group row mb-3">

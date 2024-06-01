@@ -16,8 +16,6 @@
         use App\Models\DocentesMaterias;
         use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
   
-        // Establecer la zona horaria predeterminada
-        date_default_timezone_set('America/La_Paz');
     ?>
 <head>
     <meta charset="UTF-8">

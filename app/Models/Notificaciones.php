@@ -9,7 +9,7 @@ class Notificaciones extends Model
 {
     use HasFactory;
     public $timestamps = false; 
-
+  
     public function usuarios(){
         return $this->belongsToMany(Usuarios::class,'usuarios_notificacion');
     }
