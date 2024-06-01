@@ -103,8 +103,6 @@ $notificaciones = Notificaciones::all();
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     updateNotificationCount();
-
-    // Añadir un evento para ocultar el punto azul y actualizar la cuenta cuando se abra una notificación
     document.querySelectorAll('.list-group-item').forEach(function(item) {
         item.addEventListener('click', function() {
             openNotification(item);
@@ -118,16 +116,24 @@ function updateNotificationCount() {
     var visibleDotsCount = 0;
 
     notificationDots.forEach(function(dot) {
-        if (dot.style.display !== 'none') {
+        if (window.getComputedStyle(dot).display !== 'none') {
             visibleDotsCount++;
         }
     });
+
+    console.log("Visible Dots Count: ", visibleDotsCount); // Depuración
 
     var notificationsIcon = document.getElementById('notificaciones-icon');
     if (notificationsIcon) {
         var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
         if (notificationCountSpan) {
-            notificationCountSpan.textContent = visibleDotsCount;
+            if (visibleDotsCount > 0) {
+                notificationCountSpan.textContent = visibleDotsCount;
+                notificationCountSpan.style.display = 'flex'; // Mostrar el círculo rojo
+            } else {
+                notificationCountSpan.style.display = 'none'; // Ocultar el círculo rojo
+            }
+            console.log("Notification Count Updated: ", visibleDotsCount); // Depuración
         }
     }
 }
@@ -136,7 +142,6 @@ function openNotification(element) {
     var estado = element.querySelector('.notification-dot');
     if (estado) {
         estado.style.display = 'none';
-        alert("Notificación abierta");
     }
 }
 </script>
