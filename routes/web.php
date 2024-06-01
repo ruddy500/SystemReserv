@@ -95,6 +95,11 @@ Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES DOCENTE
 Route::get('/notificaciones/lista',[NotificacionesController::class,'mostrarLista'])->name('notificaciones.lista');
 Route::get('/notificaciones/sugerencia/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerencia'])->name('notificaciones.sugerencia');
+
+//aqui se recepsionara el rechazo de solicitud de sugerencia
+Route::post('/notificaciones/sugerenciaRechazo', [NotificacionesController::class,'sugerenciaRechazo'])->name('notificaciones.sugerenciaRechazo');  
+
+
 Route::get('/notificaciones/asignacion/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarAsignacion'])->name('notificaciones.asignacion');
 Route::get('/notificaciones/rechazo/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarRechazo'])->name('notificaciones.rechazo');
 Route::get('/notificaciones/difusion/{notificacionId}',[NotificacionesController::class,'mostrarDifusion'])->name('notificaciones.difusion');
