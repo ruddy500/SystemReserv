@@ -11,14 +11,14 @@ use App\Models\Ambientes;
 use App\Models\Materias;
 use App\Models\PeriodosSeleccionado;
 use App\Models\Periodos;
+use App\Models\Notificaciones;
 use App\Models\ReservasAmbiente;
 use App\Models\NombreAmbientes;
 use App\Models\TipoAmbientes;
 use App\Models\DocentesMaterias;
 use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
 
-// Establecer la zona horaria predeterminada
-date_default_timezone_set('America/La_Paz');
+
 ?>
 
 <?php 
@@ -83,12 +83,15 @@ date_default_timezone_set('America/La_Paz');
     ?>
 
 <?php
-// Obtener la fecha y hora actual en la zona horaria de Bolivia
-$fechaEnvio = Carbon::now('America/La_Paz');
+$timezone = 'America/La_Paz';
 
-// Formatear la fecha de envío
-$fechaEnvioFormateada = $fechaEnvio->locale('es')->isoFormat('dddd, D [de] MMMM');
-$horaEnvio = $fechaEnvio->format('H:i');
+$notificacion = Notificaciones::where('id', $notificacionId)->first();
+
+$fecha = Carbon::parse($notificacion->fecha_actual_sistema)->setTimezone('America/La_Paz'); // Convertimos a la zona horaria correcta
+$fechaActual = Carbon::now('America/La_Paz'); // Nos aseguramos que ambas fechas estén en la misma zona horaria
+
+$fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
+$diferencia = $fecha->diffForHumans($fechaActual);
 ?>
 
 <div class="container mt-3">
@@ -99,7 +102,7 @@ $horaEnvio = $fechaEnvio->format('H:i');
             <!-- FECHA DE LLEGADA DE NOTIFICACION -->
             <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
                 <small class="fechaLlegada">
-                    <?php echo $fechaEnvioFormateada; ?> (a las <?php echo $horaEnvio; ?>)
+                    {{ $fechaFormateada }} ({{ $diferencia }})
                 </small>
             </div>
             <!-- MENSAJE O MOTIVO INSERTADO AL ENVIAR CORREO -->
