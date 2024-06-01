@@ -101,13 +101,42 @@ $notificaciones = Notificaciones::all();
     </div>
 </div>
 <script>
-    function openNotification(element) {
-    // Hacer desaparecer el círculo azul
+document.addEventListener('DOMContentLoaded', function() {
+    updateNotificationCount();
+
+    // Añadir un evento para ocultar el punto azul y actualizar la cuenta cuando se abra una notificación
+    document.querySelectorAll('.list-group-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            openNotification(item);
+            updateNotificationCount();
+        });
+    });
+});
+
+function updateNotificationCount() {
+    var notificationDots = document.querySelectorAll('.notification-dot');
+    var visibleDotsCount = 0;
+
+    notificationDots.forEach(function(dot) {
+        if (dot.style.display !== 'none') {
+            visibleDotsCount++;
+        }
+    });
+
+    var notificationsIcon = document.getElementById('notificaciones-icon');
+    if (notificationsIcon) {
+        var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
+        if (notificationCountSpan) {
+            notificationCountSpan.textContent = visibleDotsCount;
+        }
+    }
+}
+
+function openNotification(element) {
     var estado = element.querySelector('.notification-dot');
     if (estado) {
-        estado.style.display = 'none'; // hace que el circulo de color azul no se muestre
-        alert("Notificación abierta"); // si se abre la notificacion se  muestra esta alerta 
-                                       // hayque darle en ecepatar y luego volver atras para ver que esta funcionado
+        estado.style.display = 'none';
+        alert("Notificación abierta");
     }
 }
 </script>
