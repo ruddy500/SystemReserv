@@ -6,8 +6,8 @@
         <h3 class="card-header">Enviar mensaje masivo</h3>
         <div class="card-body bg-content">
             <div class="cuerpo-correo">
-                <form method="POST" action="">
-                    <!-- Agregar el token CSRF -->
+                <form method="POST" action="{{ url('/enviar-correo-masivo') }}">
+                    @csrf <!-- Agregar el token CSRF -->
                     <input type="hidden" name="tipo_seleccionado" value="">
                     {{-- se esta enviando el id De la Reserva --}}
                     <input type="hidden" name="idReserva" value="">
@@ -15,23 +15,19 @@
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">De:</label>
                         <div class="col-md-6 col-md-4">
-                        <input type="text" value="" name="emisor" class="form-control" id="emisor"/>
+                        <input type="text" value="{{$emisor}}" name="emisor" class="form-control" id="emisor"/>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">Para:</label>
                         <div class="col-md-6 col-md-4">
-                            <select id="para-masivo" name="masivo" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione destinatario(s)" required>
+                            <select id="correos" name="correos[]" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione destinatario(s)" required>
                                 <!-- Captura  el correo de los docentes -->
-                                <option value= ""> leticia@gmail.com</option>
-                                <option value= ""> catari@gmail.com</option>
-                                <option value= ""> carla@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                            </select>
-                        </div>
+                                @foreach ($correos->skip(1) as $correo)
+                                <option value="{{ $correo->id }}">{{ $correo->email }}</option>
+                                @endforeach
+                            </select>                          
+                        </div> 
                     </div>
                     <!-- CAMPO PARA PONER EL ASUNTO -->
                     <div class="form-group row mb-3">
@@ -55,11 +51,15 @@
         </div>
     </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form');
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevenir el envío del formulario por defecto 
+            event.preventDefault(); // Prevenir el envío del formulario por defecto
+            
+            // Aquí podrías agregar validaciones adicionales antes de mostrar la mensaje de alerta
+            
             Swal.fire({
                 icon: 'success',
                 title: '¡Mensaje enviado!',
@@ -68,10 +68,11 @@
                 timer: 2000, // Cerrar automáticamente después de 2 segundos
                 didClose: () => {
                     // Agregar aquí el código para enviar el formulario después de cerrar la alerta
-                    //form.submit(); Esto enviará el formulario
+                    form.submit(); // Esto enviará el formulario
                 }
             });
         });
     });
 </script>
+
 @endsection

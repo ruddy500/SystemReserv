@@ -95,6 +95,11 @@ Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES DOCENTE
 Route::get('/notificaciones/lista',[NotificacionesController::class,'mostrarLista'])->name('notificaciones.lista');
 Route::get('/notificaciones/sugerencia/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerencia'])->name('notificaciones.sugerencia');
+
+//aqui se recepsionara el rechazo de solicitud de sugerencia
+Route::post('/notificaciones/sugerenciaRechazo', [NotificacionesController::class,'sugerenciaRechazo'])->name('notificaciones.sugerenciaRechazo');  
+
+
 Route::get('/notificaciones/asignacion/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarAsignacion'])->name('notificaciones.asignacion');
 Route::get('/notificaciones/rechazo/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarRechazo'])->name('notificaciones.rechazo');
 Route::get('/notificaciones/difusion/{notificacionId}',[NotificacionesController::class,'mostrarDifusion'])->name('notificaciones.difusion');
@@ -105,6 +110,9 @@ Route::get('/notificaciones/admin/lista',[NotificacionesController::class,'mostr
 Route::get('/notificaciones/admin/sugerencia',[NotificacionesController::class,'mostrarSugerenciaAdmin'])->name('notificaciones.admin.sugerencia');
 //RUTA PARA MOSTRAR AVISOS
 Route::get('/avisos/aviso',[AvisosController::class,'mostrar'])->name('avisos.aviso');
+
+Route::post('/enviar-correo-masivo', [CorreoController::class, 'enviarCorreoMasivo'])->name('enviarCorreoMasivo'); //enviar correos masivos (no dormi:v)
+
 //RUTA PARA MOSTRAR INFORMES
 Route::get('/informes/informe',[InformesController::class,'mostrar'])->name('informes.informe');
 
