@@ -45,7 +45,7 @@ $notificaciones = Notificaciones::all();
             
 
             <!-- NOTIFICACION DE RECHAZO DE SUGERENCIA -->
-            <a href="{{ route('notificaciones.admin.sugerencia',['reservaId' => $idReserva,'notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
+            <a href="{{ route('notificaciones.admin.sugerenciaRechazo',['reservaId' => $idReserva,'notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1 notif">Sugerencia de solicitud de reserva rechazada</h5>
                     <div class="position-relative">
@@ -58,7 +58,7 @@ $notificaciones = Notificaciones::all();
 
 @elseif($notificacion->Tipo === 'sugerencia' && $fueSugerido==='si' && $EstadoReserva==='asignado')
             <!-- CONTENIDO PARA OTRO TIPO DE RESERVA -->
-            <a href="{{ route('notificaciones.admin.sugerencia') }}" class="list-group-item list-group-item-action" aria-current="true" onclick="openNotification(this)">
+            <a href="{{ route('notificaciones.admin.sugerenciaAsignacion') }}" class="list-group-item list-group-item-action" aria-current="true" onclick="openNotification(this)">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1 notif">Sugerencia de solicitud de reserva aceptada</h5>
                     <div class="position-relative">
