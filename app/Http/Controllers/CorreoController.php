@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
+
+use App\Models\Usuarios;
 use App\Mail\Correo;
+use App\Mail\Masivo;
 use App\Models\Reservas;
 use App\Models\ReservasAmbiente;
 use App\Models\Notificaciones;
@@ -129,5 +132,39 @@ class CorreoController extends Controller
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.admin.principal', compact('menu'));
+    }
+
+    public function enviarCorreoMasivo(Request $request){
+        //obtener la tabla users
+        $usuarios = Usuarios::all();
+        $tam = $usuarios->count();
+        // Recibir datos del formulario
+        $emisor = $request->input('emisor');
+        $asunto = $request->input('asunto');
+        $mensaje = $request->input('mensaje');
+        $correos = $request->input('correos');
+
+        // Detalles para el correo
+        $details = [
+            'title' => $asunto,
+            'emisor' => $emisor,
+            'body' => $mensaje
+        ];
+
+        //tamanio de los correos seleccionados
+        $tamCorreos = count($correos);
+
+        // Iterar sobre cada correo en $correos y luego enviar los correos
+        for ($j = 0; $j < $tamCorreos; $j++) {
+            for ($i = 0; $i < $tam; $i++) {
+                if ($usuarios[$i]->id == $correos[$j]) {
+                    $destino = $usuarios[$i]->email;
+                    Mail::to($destino)->send(new  Masivo($details, $asunto));
+                    //echo "$destino<br>";
+                }
+            }
+        }
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('reservas.admin.principal', compact('menu'));  
     }
 }

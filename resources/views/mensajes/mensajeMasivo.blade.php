@@ -104,20 +104,31 @@
     </style>
 </head>
 <body>
+        <?php
+            use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
+            // Obtener la fecha y hora actual en la zona horaria de Bolivia
+            $fechaEnvio = Carbon::now('America/La_Paz');
+
+            // Formatear la fecha de envío
+            $fechaEnvioFormateada = $fechaEnvio->locale('es')->isoFormat('dddd, D [de] MMMM');
+            $horaEnvio = $fechaEnvio->format('H:i');
+
+        ?>
     <div class="container">
         <header class="header">
             <h1>Comunicado de  Sistema de reservas FcyT</h1>
-            <p>Sábado, 18 de mayo (hace 17 horas)</p>
+            <h2>{{ $details['title'] }}</h2>
+            <p><?php echo $fechaEnvioFormateada; ?> (a las <?php echo $horaEnvio; ?>)</p>
         </header>
         <main class="main-content">
             <div class="centered-text">
                 <p>Estimado/a,</p>
                 <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT.</p>
                 <!--este es el mensaje que se enviara-->
-                <p>Informamos a todos nuestros usuarios que las solicitudes de reservas de ambientes para sus respectivas actividades podran realizarse desde la fecha 24-05-2024</p>
+                <p>{{ $details['body'] }}</p>
 
             </div>
-            <p class="center-text">Agradecemos tu atención y estamos aquí para cualquier consulta.<br>Atentamente, Administrador.</p>
+            <p class="center-text">Agradecemos tu atención y estamos aquí para cualquier consulta.<br>Atentamente, {{ $details['emisor'] }}.</p>
             <div class="footer">
                 <p>Este mensaje ha sido generado automáticamente por el sistema de reservas. Si no esperabas este correo, o tienes alguna duda, por favor contáctanos.</p>
             </div>
