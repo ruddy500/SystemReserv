@@ -16,7 +16,7 @@ use App\Models\Fechas;
 use App\Models\UsuariosNotificacion;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
-date_default_timezone_set('America/La_Paz');
+
 
 
 class CorreoController extends Controller
@@ -159,6 +159,31 @@ class CorreoController extends Controller
             for ($i = 0; $i < $tam; $i++) {
                 if ($usuarios[$i]->id == $correos[$j]) {
                     $destino = $usuarios[$i]->email;
+                    //******notificaciones*****
+                    $fechaEnvio = Carbon::now('America/La_Paz');
+                    $fechaEnvio->addHours(4);
+                    
+                    $notificacion = new Notificaciones();
+                    $notificacion->fecha_actual_sistema =  $fechaEnvio;
+                    $notificacion->Estado =  "no leido";
+                    $notificacion->tipo = "difusion";
+                    
+                    $notificacion->reservas_id = 0;
+                    $notificacion->contenidoDifusion = $contenidoDifusion = json_encode([
+                        'asunto' => $asunto,
+                        'mensaje' => $mensaje
+                    ]);
+                    // dd($notificacion);
+                    $notificacion->save();
+
+
+                    $registroUR= new UsuariosNotificacion();
+                    $registroUR->usuarios_id = $usuarios[$i]->id;
+                    $registroUR->notificaciones_id = $notificacion->id;
+                    $registroUR->save();
+            
+            
+                    //*************************
                     Mail::to($destino)->send(new  Masivo($details, $asunto));
                     //echo "$destino<br>";
                 }

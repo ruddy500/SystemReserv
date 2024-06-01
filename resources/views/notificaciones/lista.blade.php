@@ -82,7 +82,7 @@ $notificaciones = Notificaciones::all();
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
                                             <div class="position-relative">
-                                                <small class="text-body-secondary">{{ $fecha }}</small>
+                                                <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
                                                 <span class="notification-dot"></span>
                                             </div>
                                         </div>
