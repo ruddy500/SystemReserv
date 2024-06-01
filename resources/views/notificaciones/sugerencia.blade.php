@@ -278,6 +278,7 @@
                 <!-- Agregar campos ocultos si es necesario -->
                 <input type="hidden" name="notificacion_id" value="{{ $notificacionId }}">
                 <input type="hidden" name="reserva_id" value="{{ $reservaId }}">
+                <input type="hidden" name="fecha_actual" id="fecha_actual">
             </form>
 
             <!-- BOTONES DE ACEPTAR Y RECHAZAR -->
@@ -290,6 +291,7 @@
                     <!-- Agregar campos ocultos si es necesario -->
                     <input type="hidden" name="notificacion_id" value="{{ $notificacionId }}">
                     <input type="hidden" name="reserva_id" value="{{ $reservaId }}">
+                    <input type="hidden" name="fecha_actual2" id="fecha_actual2">
                 </form>
                 
                 <button id="cancelar" type="button" class="btn btn-cancelar">Rechazar</button>
@@ -314,24 +316,70 @@
             })
             .then((result) => {
                 if (result.isConfirmed) {
+                    // Obtener la fecha y hora actual
+                    let fechaActual = obtenerFechaActual();
+                    // Asignar la fecha y hora actual al campo oculto
+                    document.getElementById('fecha_actual').value = fechaActual;
                     document.getElementById('aceptar-form').submit();
                 }
             });
         });
 
-        // Botón Rechazar
         document.querySelector('.btn-cancelar').addEventListener('click', function () {
-            Swal.fire({
-                icon: 'error',
-                title: '¡Cancelado!',
-                text: 'Su sugerencia de ambientes ha sido cancelada',
-                confirmButtonText: 'Rechazar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('rechazar-form').submit();
-                }
-            });
-        });
+    Swal.fire({
+        icon: 'error',
+        title: '¡Cancelado!',
+        text: 'Su sugerencia de ambientes ha sido cancelada',
+        confirmButtonText: 'Rechazar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Obtener la fecha y hora actual
+            let fechaActual2 = obtenerFechaActual2();
+            // Asignar la fecha y hora actual al campo oculto
+            document.getElementById('fecha_actual2').value = fechaActual2;
+            // Enviar el formulario
+            document.getElementById('rechazar-form').submit();
+        }
+    });
+});
+
+function obtenerFechaActual() {
+    let fecha = new Date();
+    let year = fecha.getFullYear();
+    let month = String(fecha.getMonth() + 1).padStart(2, '0');
+    let day = String(fecha.getDate()).padStart(2, '0');
+    let hours = String(fecha.getHours()).padStart(2, '0');
+    let minutes = String(fecha.getMinutes()).padStart(2, '0');
+    let seconds = String(fecha.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+function obtenerFechaActual2() {
+    let fecha = new Date();
+    let year = fecha.getFullYear();
+    let month = String(fecha.getMonth() + 1).padStart(2, '0');
+    let day = String(fecha.getDate()).padStart(2, '0');
+    let hours = String(fecha.getHours()).padStart(2, '0');
+    let minutes = String(fecha.getMinutes()).padStart(2, '0');
+    let seconds = String(fecha.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+        // Botón Rechazar
+        // document.querySelector('.btn-cancelar').addEventListener('click', function () {
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: '¡Cancelado!',
+        //         text: 'Su sugerencia de ambientes ha sido cancelada',
+        //         confirmButtonText: 'Rechazar'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             document.getElementById('rechazar-form').submit();
+        //         }
+        //     });
+        // });
+
+        
         
     });
 </script>
