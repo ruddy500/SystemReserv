@@ -110,6 +110,9 @@ Route::get('/notificaciones/admin/lista',[NotificacionesController::class,'mostr
 Route::get('/notificaciones/admin/sugerencia/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerenciaAdmin'])->name('notificaciones.admin.sugerencia');
 //RUTA PARA MOSTRAR AVISOS
 Route::get('/avisos/aviso',[AvisosController::class,'mostrar'])->name('avisos.aviso');
+
+Route::post('/enviar-correo-masivo', [CorreoController::class, 'enviarCorreoMasivo'])->name('enviarCorreoMasivo'); //enviar correos masivos (no dormi:v)
+
 //RUTA PARA MOSTRAR INFORMES
 Route::get('/informes/informe',[InformesController::class,'mostrar'])->name('informes.informe');
 

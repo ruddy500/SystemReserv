@@ -80,7 +80,7 @@ $notificaciones = Notificaciones::all();
                         <h5 class="mb-1 notif">Sugerencia de solicitud de reserva aceptada</h5>
                         <div class="position-relative">
                             <small class="text-body-secondary">25 de Mayo</small>
-                            <span class="notification-dot"></span>
+                            <span class="notification-dot" id="estado"></span>
                         </div>
                     </div>
                     <p class="mb-1">leticia@gmail.com</p>
@@ -101,13 +101,47 @@ $notificaciones = Notificaciones::all();
     </div>
 </div>
 <script>
-    function openNotification(element) {
-    // Hacer desaparecer el círculo azul
+document.addEventListener('DOMContentLoaded', function() {
+    updateNotificationCount();
+    document.querySelectorAll('.list-group-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            openNotification(item);
+            updateNotificationCount();
+        });
+    });
+});
+
+function updateNotificationCount() {
+    var notificationDots = document.querySelectorAll('.notification-dot');
+    var visibleDotsCount = 0;
+
+    notificationDots.forEach(function(dot) {
+        if (window.getComputedStyle(dot).display !== 'none') {
+            visibleDotsCount++;
+        }
+    });
+
+    console.log("Visible Dots Count: ", visibleDotsCount); // Depuración
+
+    var notificationsIcon = document.getElementById('notificaciones-icon');
+    if (notificationsIcon) {
+        var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
+        if (notificationCountSpan) {
+            if (visibleDotsCount > 0) {
+                notificationCountSpan.textContent = visibleDotsCount;
+                notificationCountSpan.style.display = 'flex'; // Mostrar el círculo rojo
+            } else {
+                notificationCountSpan.style.display = 'none'; // Ocultar el círculo rojo
+            }
+            console.log("Notification Count Updated: ", visibleDotsCount); // Depuración
+        }
+    }
+}
+
+function openNotification(element) {
     var estado = element.querySelector('.notification-dot');
     if (estado) {
-        estado.style.display = 'none'; // hace que el circulo de color azul no se muestre
-        alert("Notificación abierta"); // si se abre la notificacion se  muestra esta alerta 
-                                       // hayque darle en ecepatar y luego volver atras para ver que esta funcionado
+        estado.style.display = 'none';
     }
 }
 </script>
