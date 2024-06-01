@@ -12,6 +12,7 @@
     use App\Models\Periodos;
 
     $reservasAsig = Reservas::where('Estado',"asignado")->get();
+    // dd($reservasAsig);
     $tamanioReservas = count($reservasAsig);
     $reservasAmbiente = ReservasAmbiente::all();
     $ambientes = Ambientes::all();
