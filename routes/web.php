@@ -107,7 +107,12 @@ Route::get('/notificaciones/difusion/{notificacionId}',[NotificacionesController
 
 //RUTA PARA VER LA LISTA DE NOTIFICACIONES ADMINISTRADOR
 Route::get('/notificaciones/admin/lista',[NotificacionesController::class,'mostrarListaAdmin'])->name('notificaciones.admin.lista');
-Route::get('/notificaciones/admin/sugerencia/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerenciaAdmin'])->name('notificaciones.admin.sugerencia');
+
+Route::get('/notificaciones/admin/sugerenciaRechazo/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerenciaAdmin'])->name('notificaciones.admin.sugerenciaRechazo');
+
+Route::get('/notificaciones/admin/sugerenciaAsignacion/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarSugerenciaAdminAsignacion'])->name('notificaciones.admin.sugerenciaAsignacion');
+
+
 //RUTA PARA MOSTRAR AVISOS
 Route::get('/avisos/aviso',[AvisosController::class,'mostrar'])->name('avisos.aviso');
 

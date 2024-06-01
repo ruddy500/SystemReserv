@@ -49,9 +49,16 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.admin.lista',compact('menu'));
     }
+
+    // para rechazar
     public function mostrarSugerenciaAdmin($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.admin.sugerencia',compact('menu','reservaId','notificacionId'));
+        return view('notificaciones.admin.sugerenciaRechazo',compact('menu','reservaId','notificacionId'));
+    }
+
+    public function mostrarSugerenciaAdminAsignacion($reservaId,$notificacionId){
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('notificaciones.admin.sugerenciaAsignacion',compact('menu','reservaId','notificacionId'));
     }
 
     public function sugerenciaRechazo(Request $request)
@@ -71,6 +78,5 @@ class NotificacionesController extends Controller
         return redirect()->route('notificaciones.lista');
     }
 
-   
 
 }
