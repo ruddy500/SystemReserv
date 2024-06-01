@@ -15,7 +15,7 @@
                     <div class="form-group row mb-3">
                         <label for="colFormLabel" class="col-sm-2 col-form-label">De:</label>
                         <div class="col-md-6 col-md-4">
-                        <input type="text" value="" name="emisor" class="form-control" id="emisor"/>
+                        <input type="text" value="{{$emisor}}" name="emisor" class="form-control" id="emisor"/>
                         </div>
                     </div>
                     <div class="form-group row mb-3">
@@ -23,15 +23,11 @@
                         <div class="col-md-6 col-md-4">
                             <select id="para-masivo" name="masivo" class="selectpicker custom-select form-control btn-lg" multiple="true" data-size="5" data-actions-box="true" data-show-deselect-all="false" title="Seleccione destinatario(s)" required>
                                 <!-- Captura  el correo de los docentes -->
-                                <option value= ""> leticia@gmail.com</option>
-                                <option value= ""> catari@gmail.com</option>
-                                <option value= ""> carla@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                                <option value= ""> henryVillarroel09@gmail.com</option>
-                            </select>
-                        </div>
+                                @foreach ($correos as $correo)
+                                <option value= "{{ $correo->id }}"> {{ $correo->email }} </option>
+                                @endforeach
+                            </select>                          
+                        </div> 
                     </div>
                     <!-- CAMPO PARA PONER EL ASUNTO -->
                     <div class="form-group row mb-3">
