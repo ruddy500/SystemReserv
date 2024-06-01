@@ -330,7 +330,7 @@
                 }
                 
                 // Debugging: mostrar los arrays capturados
-               dd($nombresAmbientes, $capacidadesAmbientes, $ubicacionesAmbientes, $tiposAmbientes);
+              // dd($nombresAmbientes, $capacidadesAmbientes, $ubicacionesAmbientes, $tiposAmbientes);
                 ?>
             {{-- {{ dd(get_defined_vars()) }} --}}
                 <h2>Detalle de los ambiente Sugeridos:</h2>
