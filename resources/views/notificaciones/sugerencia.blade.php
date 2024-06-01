@@ -31,7 +31,7 @@
     $fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
     $diferencia = $fecha->diffForHumans($fechaActual);
     // dd($diferencia);
-
+    
 ?>
 <div class="container mt-3">
     <div class="card vercard">
@@ -274,6 +274,15 @@
             <!-- BOTONES DE ACEPTAR Y RECHAZAR -->
             <div class="aceptar-rechazar" style="position: relative; display: flex; justify-content: center;">
                 <button type="submit" class="btn btn-aceptar">Aceptar</button>
+
+                <!-- Formulario para el botón de Rechazar -->
+                <form id="rechazar-form" action="{{ route('notificaciones.sugerenciaRechazo') }}" method="POST" style="display: none;">
+                    @csrf
+                    <!-- Agregar campos ocultos si es necesario -->
+                    <input type="hidden" name="notificacion_id" value="{{ $notificacionId }}">
+                    <input type="hidden" name="reserva_id" value="{{ $reservaId }}">
+                </form>
+                
                 <button id="cancelar" type="button" class="btn btn-cancelar">Rechazar</button>
             </div>
             <hr>
@@ -303,8 +312,13 @@
                 title: '¡Cancelado!',
                 text: 'Su sugerencia de ambientes ha sido cancelada',
                 confirmButtonText: 'Rechazar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('rechazar-form').submit();
+                }
             });
         });
+        
     });
 </script>
 @endsection

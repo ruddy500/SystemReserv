@@ -22,6 +22,9 @@ class CreateReservasTable extends Migration
             $table->string('fecha',10)->nullable();
             $table->string('TipoAmbiente',15)->nullable();
 
+            $table->enum('Fuesugerido', ['si','no'])->nullable();
+
+
             $table->foreignId('motivos_id')
                 ->nullable()
                 ->constrained('motivos')
