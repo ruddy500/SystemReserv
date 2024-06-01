@@ -234,7 +234,7 @@ $diferencia = $fecha->diffForHumans($fechaActual);
                             </tr>
                         </thead>
                         <tbody>
-                            tr>
+                            <tr>
                             <th>{{$nombresAmbientes[0]}}</th>
                             <td>{{ $capacidadesAmbientes[0]}}</td>
                             <td>{{$ubicacionesAmbientes[0]}}</td>
