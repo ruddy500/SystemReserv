@@ -22,7 +22,6 @@ use App\Http\Controllers\InformesController;
 
 
 
-
 Route::get('/',[RaizController::class,'mostrar'])->middleware('auth'); //inicio del proyecto
 Route::get('/inicio',[InicioController::class,'mostrar'])->name('inicio');
 Route::get('/ambientes', [NombreAmbientesController::class, 'mostrar'])->name('ambientes.index');
@@ -122,6 +121,8 @@ Route::post('/enviar-correo-masivo', [CorreoController::class, 'enviarCorreoMasi
 
 //RUTA PARA MOSTRAR INFORMES
 Route::get('/informes/informe',[InformesController::class,'mostrar'])->name('informes.informe');
+
+Route::get('/informes/pdf', [InformesController::class, 'generarPDF'])->name('informe.pdf');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

@@ -144,9 +144,14 @@
                     <div class="bar" data-height="55" data-tooltip="Laboratorio">55</div>
                 </div>
             </div> --}}
+
             <div class="modal-footer btn-imprimir">
-                <button type="submit" class="btn btn-primary submitBtn custom-btn">Imprimir pdf</button>
+                <a href="{{ route('informe.pdf') }}" class="btn btn-primary submitBtn custom-btn">Imprimir PDF</a>
             </div>
+            
+            {{-- <div class="modal-footer btn-imprimir">
+                <button type="submit" class="btn btn-primary submitBtn custom-btn">Imprimir pdf</button>
+            </div> --}}
         </div>
     </div>
 </div>
