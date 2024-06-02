@@ -122,7 +122,7 @@ $fechaFormateada2 = $notificacionllego->locale('es')->isoFormat('dddd, D [de] MM
             <div class="contenido-mensaje" style="max-width: 30rem; margin: auto;">
                 <p style="margin-bottom: 5px;">Estimado/a Administrador.</p>
                 <!-- PONER EL NOMBRE DEL DOCENTE  Y ACEPTADO O RECHAZADO-->
-                <p style="margin-bottom: 5px;"> {{$DocenteAux->name}} a Aceptado o Rechazado la sugerencia de solicitud de reserva de ambientes:</p>
+                <p style="margin-bottom: 5px;"> {{$DocenteAux->name}} a Aceptado la sugerencia de solicitud de reserva de ambientes:</p>
             </div>
             <hr>
             <div class="detalleReserva">
