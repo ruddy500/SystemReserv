@@ -139,8 +139,8 @@
         </header>
         <main class="main-content">
             <div class="centered-text">
-                <p>Estimado/a,</p>
-                <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido aceptada.</p>
+                <p>{{ $details['body'] }}</p>  
+                {{-- <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido aceptada.</p> --}}
             </div>
             
             {{-- Aqui se obtiene los datos de la reserva --}}

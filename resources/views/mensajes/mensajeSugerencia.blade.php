@@ -152,8 +152,7 @@
         </header>
         <main class="main-content">
             <div class="centered-text">
-                <p>Estimado/a,</p>
-                <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido Sugerida para su aprobacion o rechazo.</p>
+                <p>{{ $details['body'] }}</p>
             </div>
 
              {{-- Aqui se obtiene los datos de la reserva --}}

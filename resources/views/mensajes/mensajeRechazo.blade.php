@@ -199,8 +199,8 @@ date_default_timezone_set('America/La_Paz');
         </header>
         <main class="main-content">
             <div class="centered-text">
-                <p>Estimado/a,</p>
-                <p>¡Esperamos que este mensaje te encuentre muy bien! Te escribimos desde el Sistema de Reservas FCyT. Se informa que su solicitud de reserva ha sido Rechazada.</p>
+                <p>{{ $details['body'] }}</p>
+                
             </div>
             <section class="reservation-details">
                 <h2>Detalle de reserva ({{$tipoReserva}}):</h2>

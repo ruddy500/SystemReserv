@@ -133,7 +133,7 @@ class MensajesController extends Controller
             //buscamos el correo del docente
             $correoDestino = $DocenteAux->email;
             $Asunto = "Rechazo de solicitud de Reserva";
-            $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido rechazada";
+            $Contenido = "Estimado/a. \n¡Esperamos que este mensaje te encuentre muy bien!.\nTe escribimos desde el Sistema de Reservas FCyT.\nDebido a la no existencia de ambientes para su solicitud de reserva se informa que su solicitud ha sido rechazada.";
             // eliminar la reserva de pendientes
             
             // $reserva->delete();
