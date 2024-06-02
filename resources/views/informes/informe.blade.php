@@ -125,7 +125,7 @@
                 </table>
             </div>
             <!-- TOP 10 DE LOS AMBIENTES MAS USADOS -->
-            <div class="Ambientesusados">
+            {{-- <div class="Ambientesusados">
                 <label class="col-form-label">Top 10 ambientes más usados:</label>
             </div>
             <div class="graficoUsoAmbientes">
@@ -143,7 +143,7 @@
                     <div class="bar" data-height="10" data-tooltip="693 B">10</div>
                     <div class="bar" data-height="55" data-tooltip="Laboratorio">55</div>
                 </div>
-            </div>
+            </div> --}}
             <div class="modal-footer btn-imprimir">
                 <button type="submit" class="btn btn-primary submitBtn custom-btn">Imprimir pdf</button>
             </div>
