@@ -58,4 +58,21 @@ class NotificacionesController extends Controller
         return redirect()->route('notificaciones.lista');
     }
 
+    public function sugerenciaAceptada(Request $request)
+    {
+        // Obtén los datos del formulario
+        $notificacionId = $request->input('notificacion_id');
+        $idReserva = $request->input('reserva_id');
+
+        $reserva = Reservas::find($idReserva); //extraemos la reserva actual
+
+        $reserva->Estado = "asignado";
+        $reserva->Fuesugerido='si';
+        $reserva->save();
+
+
+        // Redireccionar o devolver una respuesta
+        return redirect()->route('notificaciones.lista');
+    }
+
 }

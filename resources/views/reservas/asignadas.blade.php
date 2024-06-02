@@ -12,8 +12,6 @@
     use App\Models\Periodos;
 
     $reservasAsig = Reservas::where('Estado',"asignado")->get();
-    // dd($reservasAsig);
-    $tamanioReservas = count($reservasAsig);
     $reservasAmbiente = ReservasAmbiente::all();
     $ambientes = Ambientes::all();
     $nombreAmbientes = NombreAmbientes::all();
@@ -34,111 +32,74 @@
             </thead>
             
             <tbody> 
+                @foreach ($reservasAsig as $reserva)
+                    @if ($reserva->docentes_id == auth()->user()->id)
+                        @php
+                            $idReserva = $reserva->id;
+                            $tipo = $reserva->Tipo;
+                            $fecha = $reserva->fecha;
 
-                @for ( $i=0 ; $i < $tamanioReservas ; $i++)
-                    
-                    <?php
-                        $idReserva = $reservasAsig[$i]->id;
-                        $tipo = $reservasAsig[$i]->Tipo;
-                        $fecha = $reservasAsig[$i]->fecha;
-                        $idDocente = $reservasAsig[$i]->docentes_id ;
-                        
-                        $registroRA =  $reservasAmbiente->firstWhere('reservas_id', $idReserva);
-                        // dd($registroRA);
-                        $idAmbiente = $registroRA->ambientes_id;
-                        $registroAMB=  $ambientes->firstWhere('id', $idAmbiente);
-                        // dd($registroAMB);
-                        $idNombreAMB = $registroAMB->nombre_ambientes_id;
-                        $registroNombAMB = $nombreAmbientes->firstWhere('id', $idNombreAMB);
-                        // dd($registroNombAMB);
-                        $nombreAMB = $registroNombAMB->Nombre;
-                        // dd($nombreAMB);
-                     
-                        $idMotivo = $reservasAsig[$i]->motivos_id;
-                        $registroMotivo = Motivos::where('id',$idMotivo)->first();
-                        $motivo = $registroMotivo->Nombre;
+                            $idMotivo = $reserva->motivos_id;
+                            $registroMotivo = Motivos::where('id', $idMotivo)->first();
+                            $motivo = $registroMotivo->Nombre;
 
-                        $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
-                        $tamPeriodosSeleccionado = count($periodosSeleccionados);
-                        // dd($tamPeriodoSelec);
+                            $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id', $idReserva)->get();
+                            $tamPeriodosSeleccionado = count($periodosSeleccionados);
+                            $horaInicio = '';
+                            $horaFin = '';
 
-                        if($tamPeriodosSeleccionado == 1){
-                            $periodoId = $periodosSeleccionados[0]->periodos_id;
+                            if ($tamPeriodosSeleccionado > 0) {
+                                $periodoId = $periodosSeleccionados[0]->periodos_id;
+                                $periodoBuscar = Periodos::where('id', $periodoId)->first();
+                                $partes_P = explode('-', $periodoBuscar->HoraIntervalo);
+                                $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+
+                                if ($tamPeriodosSeleccionado > 1) {
+                                    $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+                                    $periodoBuscar2 = Periodos::where('id', $periodoId2)->first();
+                                    $partes_P2 = explode('-', $periodoBuscar2->HoraIntervalo);
+                                    $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                                } else {
+                                    $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                                }
+                            }
+                        @endphp
+
+                        @foreach ($reservasAmbiente->where('reservas_id', $idReserva) as $registroRA)
+                            @php
+                                $idAmbiente = $registroRA->ambientes_id;
+                                $registroAMB = $ambientes->firstWhere('id', $idAmbiente);
+                                $idNombreAMB = $registroAMB->nombre_ambientes_id;
+                                $registroNombAMB = $nombreAmbientes->firstWhere('id', $idNombreAMB);
+                                $nombreAMB = $registroNombAMB->Nombre;
+                            @endphp
                             
-                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();
-                            $periodo = $periodoBuscar->HoraIntervalo;
-                            $partes_P = explode('-', $periodo);
-                            // if($i==2){dd($partes_P);}
-                            
-                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                            $horaFin = trim(str_replace(' ', '', $partes_P[1]));
-                        
-                            // if($i==2){ dd($horaInicio,$horaFin);}
-                            // dd($horaInicio,$horaFin);
-                        }else{
-        
-                            $periodoId = $periodosSeleccionados[0]->periodos_id;
-                            $periodoId2 = $periodosSeleccionados[1]->periodos_id;
-
-                            $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
-                            $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
-
-                            $periodo = $periodoBuscar->HoraIntervalo;
-                            $periodo2 = $periodoBuscar2->HoraIntervalo;
-                            
-                            $partes_P = explode('-', $periodo);
-                            $partes_P2 = explode('-', $periodo2);
-                            //dd($partes_P,$partes_P2);
-
-                            $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
-                            $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
-                            
-                            // if($i==1){dd($horaInicio,$horaFin);}
-                        
-                        }
-
-                    ?>
-                    @if ($idDocente == auth()->user()->id)
-                        <!-- Fila blanca -->
-                        <thead class="bg-custom-lista-fila-blanco">
                             <tr>
-                                <th class="text-center h4 text-black">{{ $nombreAMB }}</th>
-                                <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                <th class="text-center h4 text-black">{{ $horaInicio }}</th>
-                                <th class="text-center h4 text-black">{{ $horaFin }}</th>
-                                <th class="text-center h4 text-black">{{ $motivo }}</th>
-                                
-                                
-                                
-                                <th class="text-center h4 text-black">
-
+                                <td class="text-center h4 text-black">{{ $nombreAMB }}</td>
+                                <td class="text-center h4 text-black">{{ $fecha }}</td>
+                                <td class="text-center h4 text-black">{{ $horaInicio }}</td>
+                                <td class="text-center h4 text-black">{{ $horaFin }}</td>
+                                <td class="text-center h4 text-black">{{ $motivo }}</td>
+                                <td class="text-center h4 text-black">
                                     <div class="d-flex justify-content-center">
                                         <div class="circle2">
-
-                                            @if ($tipo=='individual')
-                                                <a href="{{ route('reservas.verIndividual',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                            @if ($tipo == 'individual')
+                                                <a href="{{ route('reservas.verIndividual', ['idReserva' => $idReserva]) }}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>    
                                                 </a>
-                                            @elseif($tipo=='grupal')
-                                                <a href="{{ route('reservas.verGrupal',['idReserva'=>$idReserva])}}" class="btn btn-fab" title="Ver"> 
-                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>	
+                                            @elseif ($tipo == 'grupal')
+                                                <a href="{{ route('reservas.verGrupal', ['idReserva' => $idReserva]) }}" class="btn btn-fab" title="Ver"> 
+                                                    <i class="bi bi-box-arrow-up-right" style="color: white;"></i>    
                                                 </a>
                                             @endif
-
                                         </div>
-
                                     </div>
-                                
-                                </th>
-                            </tr>	
-                        </thead>
+                                </td>
+                            </tr>
+                        @endforeach
                     @endif
-                     
-                @endfor
-
-
+                @endforeach
             </tbody>
-
         </table>
     </div>
 </div>

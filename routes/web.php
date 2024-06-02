@@ -99,6 +99,8 @@ Route::get('/notificaciones/sugerencia/{reservaId}/{notificacionId}',[Notificaci
 //aqui se recepsionara el rechazo de solicitud de sugerencia
 Route::post('/notificaciones/sugerenciaRechazo', [NotificacionesController::class,'sugerenciaRechazo'])->name('notificaciones.sugerenciaRechazo');  
 
+//aqui se recepsionara el aceptacion de solicitud de sugerencia
+Route::post('/notificaciones/sugerenciaAceptada', [NotificacionesController::class,'sugerenciaAceptada'])->name('notificaciones.sugerenciaAceptada');  
 
 Route::get('/notificaciones/asignacion/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarAsignacion'])->name('notificaciones.asignacion');
 Route::get('/notificaciones/rechazo/{reservaId}/{notificacionId}',[NotificacionesController::class,'mostrarRechazo'])->name('notificaciones.rechazo');

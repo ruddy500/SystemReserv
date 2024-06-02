@@ -271,6 +271,15 @@
                 <p style="margin-bottom: 5px;">Atentamente, Administración.</p>
             </div>
             <hr>
+
+              <!-- Formulario para el botón de Rechazar -->
+              <form id="aceptar-form" action="{{ route('notificaciones.sugerenciaAceptada') }}" method="POST" style="display: none;">
+                @csrf
+                <!-- Agregar campos ocultos si es necesario -->
+                <input type="hidden" name="notificacion_id" value="{{ $notificacionId }}">
+                <input type="hidden" name="reserva_id" value="{{ $reservaId }}">
+            </form>
+
             <!-- BOTONES DE ACEPTAR Y RECHAZAR -->
             <div class="aceptar-rechazar" style="position: relative; display: flex; justify-content: center;">
                 <button type="submit" class="btn btn-aceptar">Aceptar</button>
@@ -302,6 +311,11 @@
                 title: '¡Aceptado!',
                 text: 'Su sugerencia ha sido aceptada exitosamente',
                 confirmButtonText: 'Aceptar'
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('aceptar-form').submit();
+                }
             });
         });
 
@@ -320,26 +334,5 @@
         });
         
     });
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const form = document.querySelector('form');
-    //     form.addEventListener('submit', function(event) {
-    //         event.preventDefault(); // Prevenir el envío del formulario por defecto
-            
-    //         // Aquí podrías agregar validaciones adicionales antes de mostrar la mensaje de alerta
-            
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: '¡Mensaje enviado!',
-    //             text: 'Tu mensaje se ha enviado correctamente.',
-    //             showConfirmButton: false,
-    //             timer: 2000, // Cerrar automáticamente después de 2 segundos
-    //             didClose: () => {
-    //                 // Agregar aquí el código para enviar el formulario después de cerrar la alerta
-    //                 form.submit(); // Esto enviará el formulario
-    //             }
-    //         });
-    //     });
-    // });
 </script>
 @endsection
