@@ -1,20 +1,22 @@
 @extends('index')
 
 @section('notificaciones/difusion')
+{{-- {{ dd(get_defined_vars()) }} --}}
+
 <div class="container mt-3">
     <div class="card vercard">
         <!-- ASUNTO DEL MENSAJE MASIVO O DIFUSION-->
-        <h3 class="card-header">Poner asunto del mensaje masivo</h3>
+        <h3 class="card-header">{{ $asunto }}</h3>
         <div class="card-body bg-content">
             <!-- FECHA DE LLEGADA DE NOTIFICACION -->
             <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
-                <small class="fechaLlegada">Sab, 06 de Mayo (hace 17 horas)</small>
+                <small class="fechaLlegada">{{ $fechaFormateada }} ({{ $diferencia }})</small>
             </div>
             <!-- MENSAJE O MOTIVO INSERTADO AL ENVIAR CORREO -->
             <div class="contenido-mensaje" style="max-width: 30rem; margin: auto;">
                 <p style="margin-bottom: 5px;">Estimado/a.</p>
                 <p style="margin-bottom: 5px;">¡Esperamos que este mensaje le encuentre muy bien. Te escribimos desde el Sistema de Reservas FCyT.</p>
-                <p style="margin-bottom: 5px;">Aqui se puede poner el contenido del mensaje que enviara el administrador</p>
+                <p style="margin-bottom: 5px;">{{ $mensaje }}</p>
             </div>
             <hr>
             <!-- MENSAJE FINAL -->

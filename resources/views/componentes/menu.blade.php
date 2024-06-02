@@ -7,12 +7,14 @@
         <div class="notificaciones">
             @if (auth()->check())
                 @if (auth()->user()->role == 'admin')
-                    <a href="{{ route('notificaciones.admin.lista') }}" class="notificaciones-link" data-count="10">
+                    <a href="{{ route('notificaciones.admin.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
+                        <span class="notification-count">10</span>
                     </a>
                 @else
-                    <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" data-count="10">
+                    <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
+                        <span class="notification-count">10</span>
                     </a>
                 @endif
             @endif

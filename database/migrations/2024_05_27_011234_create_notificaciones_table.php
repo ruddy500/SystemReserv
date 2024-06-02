@@ -17,8 +17,9 @@ class CreateNotificacionesTable extends Migration
             $table->id();
             $table->dateTime('fecha_actual_sistema')->nullable();
             $table->enum('Estado', ['leido','no leido'])->nullable();
-            $table->enum('Tipo', ['sugerencia', 'rechazado','asignacion'])->nullable();
+            $table->enum('Tipo', ['sugerencia', 'rechazado','asignacion','difusion'])->nullable();
             $table->integer('reservas_id')->nullable();
+            $table->text('contenidoDifusion')->nullable();
 
         });
     }

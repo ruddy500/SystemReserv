@@ -1,5 +1,7 @@
 @extends('index')
-
+<?php 
+dd(get_defined_vars());
+?>
 @section('notificaciones/admin/sugerencia')
 <div class="container mt-3">
     <div class="card vercard">

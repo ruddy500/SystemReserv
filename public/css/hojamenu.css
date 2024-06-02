@@ -290,25 +290,24 @@ a {
 
 /* Estilos para el enlace de notificaciones */
 .notificaciones-link {
-    position: relative; /* Necesario para posicionar el pseudo-elemento relativo al enlace */
+    position: relative;
+    display: inline-block;
 }
 
-/* Estilos para el pseudo-elemento del indicador de notificaciones */
-.notificaciones-link::after {
-    content: attr(data-count); /* Usa el atributo data-count como contenido */
-    position: absolute; /* Posiciona el pseudo-elemento de forma absoluta */
-    top: -5px; /* Coloca el pseudo-elemento 5 píxeles arriba del enlace */
-    right: -5px; /* Coloca el pseudo-elemento 5 píxeles a la derecha del enlace */
-    background-color: red; /* Fondo rojo */
-    color: white; /* Texto blanco */
-    font-size: 10px; /* Tamaño de fuente */
-    padding: 2px 5px; /* Relleno alrededor del texto */
-    border-radius: 50%; /* Bordes redondeados para crear un círculo */
+.notification-count {
+    position: absolute;
+    top: -8px;
+    right: -1px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
 }
+
 
 /* Ajuste de tamaño de fuente y espaciado para el encabezado */
 .header .bi-person {

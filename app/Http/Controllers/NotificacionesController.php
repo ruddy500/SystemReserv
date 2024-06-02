@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservas;
-use App\Models\Usuarios;
-use App\Models\Motivos;
-use App\Models\MateriasSeleccionado;
+use App\Models\Notificaciones;
+use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
 
 class NotificacionesController extends Controller
 { 
@@ -28,7 +27,21 @@ class NotificacionesController extends Controller
     }
     public function mostrarDifusion($notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.difusion',compact('menu','notificacionId'));
+
+        $timezone = 'America/La_Paz';
+        $notificacion = Notificaciones::where('id', $notificacionId)->first();
+
+        $fecha = Carbon::parse($notificacion->fecha_actual_sistema)->setTimezone($timezone);
+        $fechaActual = Carbon::now($timezone);
+        $contenidoDifusion = json_decode($notificacion->contenidoDifusion, true);
+
+        // Ahora puedes acceder a 'asunto' y 'mensaje' desde $contenidoDifusion
+        $asunto = $contenidoDifusion['asunto'];
+        $mensaje = $contenidoDifusion['mensaje'];
+
+        $fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
+        $diferencia = $fecha->diffForHumans($fechaActual);
+        return view('notificaciones.difusion',compact('menu','notificacionId','fechaFormateada','diferencia','mensaje','asunto'));
     }
 
     //CONTROLADORES ADMINISTRADOR
@@ -36,9 +49,16 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('notificaciones.admin.lista',compact('menu'));
     }
-    public function mostrarSugerenciaAdmin(){
+
+    // para rechazar
+    public function mostrarSugerenciaAdmin($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.admin.sugerencia',compact('menu'));
+        return view('notificaciones.admin.sugerenciaRechazo',compact('menu','reservaId','notificacionId'));
+    }
+
+    public function mostrarSugerenciaAdminAsignacion($reservaId,$notificacionId){
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('notificaciones.admin.sugerenciaAsignacion',compact('menu','reservaId','notificacionId'));
     }
 
     public function sugerenciaRechazo(Request $request)
@@ -74,5 +94,4 @@ class NotificacionesController extends Controller
         // Redireccionar o devolver una respuesta
         return redirect()->route('notificaciones.lista');
     }
-
 }
