@@ -125,13 +125,13 @@
                 </table>
             </div>
             <!-- TOP 10 DE LOS AMBIENTES MAS USADOS -->
-            {{-- <div class="Ambientesusados">
+            <!-- <div class="Ambientesusados">
                 <label class="col-form-label">Top 10 ambientes más usados:</label>
             </div>
             <div class="graficoUsoAmbientes">
-                <div class="chart">
+                <div class="chart"> -->
                     <!-- DATA-HEIGHT ES LAS VECES QUE SE USO UN AMBIENTE -->
-                    <h2 class="chart-title">Ambientes</h2>
+                    <!-- <h2 class="chart-title">Ambientes</h2>
                     <div class="bar" data-height="80" data-tooltip="Auditorio">80</div>
                     <div class="bar" data-height="60" data-tooltip="690 A">60</div>
                     <div class="bar" data-height="40" data-tooltip="690 B">40</div>
@@ -143,19 +143,15 @@
                     <div class="bar" data-height="10" data-tooltip="693 B">10</div>
                     <div class="bar" data-height="55" data-tooltip="Laboratorio">55</div>
                 </div>
-            </div> --}}
-
+            </div> -->
             <div class="modal-footer btn-imprimir">
                 <a href="{{ route('informe.pdf') }}" class="btn btn-primary submitBtn custom-btn">Imprimir PDF</a>
             </div>
-            
-            {{-- <div class="modal-footer btn-imprimir">
-                <button type="submit" class="btn btn-primary submitBtn custom-btn">Imprimir pdf</button>
-            </div> --}}
         </div>
     </div>
 </div>
-<script>
+<!-- CODIDO SCRIPT PARA EL GRAFICO ESTADISTICO -->
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         const bars = document.querySelectorAll('.bar');
         bars.forEach((bar, index) => {
@@ -165,5 +161,5 @@
             }, index * 500);
         })
     })
-</script>
+</script> -->
 @endsection

@@ -131,7 +131,7 @@ class CorreoController extends Controller
         
 
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.admin.principal', compact('menu'));
+        return view('reservas.admin.asignadas', compact('menu'));
     }
 
     public function enviarCorreoMasivo(Request $request){
@@ -190,6 +190,6 @@ class CorreoController extends Controller
             }
         }
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.admin.principal', compact('menu'));  
+        return view('inicio', compact('menu'));  
     }
 }

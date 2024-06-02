@@ -91,6 +91,20 @@ $fechaActual = Carbon::now('America/La_Paz'); // Nos aseguramos que ambas fechas
 
 $fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
 $diferencia = $fecha->diffForHumans($fechaActual);
+
+
+
+// hora en el que llego la notificacion 
+$notificacionllego = Carbon::parse($notificacion->fecha_respuesta_Sugerencia, 'America/La_Paz');
+
+// Obtener la fecha y hora actual en la misma zona horaria
+$fechaActual = Carbon::now('America/La_Paz');
+
+// Calcular la diferencia en tiempo
+$diferencia2 = $notificacionllego->diffForHumans($fechaActual);
+// dd($diferencia2);
+// Formatear la fecha
+$fechaFormateada2 = $notificacionllego->locale('es')->isoFormat('dddd, D [de] MMMM');
 ?>
 @section('notificaciones/admin/sugerencia')
 <div class="container mt-3">
@@ -100,7 +114,7 @@ $diferencia = $fecha->diffForHumans($fechaActual);
         <div class="card-body bg-content">
             <!-- FECHA DE LLEGADA DE NOTIFICACION -->
             <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
-                <small class="fechaLlegada">Sab, 18 de Mayo (hace 2 horas)</small>
+                <small class="fechaLlegada">{{ $notificacionllego }} ({{ $diferencia2 }})</small>
             </div>
             <!-- MENSAJE O MOTIVO INSERTADO AL ENVIAR CORREO -->
             <div class="contenido-mensaje" style="max-width: 30rem; margin: auto;">
@@ -234,7 +248,7 @@ $diferencia = $fecha->diffForHumans($fechaActual);
                             </tr>
                         </thead>
                         <tbody>
-                            tr>
+                            <tr>
                             <th>{{$nombresAmbientes[0]}}</th>
                             <td>{{ $capacidadesAmbientes[0]}}</td>
                             <td>{{$ubicacionesAmbientes[0]}}</td>

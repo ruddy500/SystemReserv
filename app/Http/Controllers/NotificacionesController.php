@@ -63,6 +63,7 @@ class NotificacionesController extends Controller
 
     public function sugerenciaRechazo(Request $request)
     {
+        // dd($request->input('fecha_actual'));
         // Obtén los datos del formulario
         $notificacionId = $request->input('notificacion_id');
         $idReserva = $request->input('reserva_id');
@@ -72,6 +73,10 @@ class NotificacionesController extends Controller
         $reserva->Estado = "rechazado";
         $reserva->Fuesugerido='si';
         $reserva->save();
+
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual2');
+        $notificacion->save();
 
 
         // Redireccionar o devolver una respuesta
@@ -90,6 +95,9 @@ class NotificacionesController extends Controller
         $reserva->Fuesugerido='si';
         $reserva->save();
 
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual');
+        $notificacion->save();
 
         // Redireccionar o devolver una respuesta
         return redirect()->route('notificaciones.lista');
