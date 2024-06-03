@@ -93,7 +93,8 @@ $fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
 $diferencia = $fecha->diffForHumans($fechaActual);
 
 
-
+// Configurar Carbon para usar el idioma español
+Carbon::setLocale('es');
 // hora en el que llego la notificacion 
 $notificacionllego = Carbon::parse($notificacion->fecha_respuesta_Sugerencia, 'America/La_Paz');
 

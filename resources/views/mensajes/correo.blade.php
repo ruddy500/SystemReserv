@@ -35,7 +35,7 @@
                     <div class="form-group mb-3">
             
                         <div class="col-md-12">
-                            <textarea name="mensaje" class="form-control" id="mensaje" placeholder="{{ $Contenido }}" rows="5"></textarea>
+                            <textarea name="mensaje" class="form-control" id="mensaje"  rows="5">{{ $Contenido }}</textarea>
                         </div>                    
                     </div>
                     <div class="modal-footer">
