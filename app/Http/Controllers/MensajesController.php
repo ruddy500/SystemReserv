@@ -39,6 +39,10 @@ class MensajesController extends Controller
             
             return view('mensajes.correo', compact('menu', 'idReserva', 'checkboxValues', 'tipoSeleccionado', 'correoEmisor', 'correoDestino', 'Asunto','Contenido'));
         } elseif ($tipoSeleccionado == 'sugerir') {
+            // $fechaRegistro = Fechas::where('dia',$dia)->where('mes',$mes)->where('anio',$anio)->first();
+        //     $res = ReservasAmbiente::where('reservas_id',$idReserva)->get();
+        //    // $res = ReservasAmbiente::find($idReserva);
+        //     dd($res);
             $reserva = Reservas::find($idReserva); //extraemos la reserva actual
             $idDocente = $reserva->docentes_id;
             $DocenteAux = Usuarios::find($idDocente);
@@ -61,13 +65,14 @@ class MensajesController extends Controller
             }
             $periodosSelecReserva = PeriodosSeleccionado :: where('reservas_id',$idReserva)->get();
             $fechaReserva = $reserva->fecha;
+            //dd($periodosSelecReserva,$fechaReserva);
             $partes_F = explode('-', $fechaReserva);
             $dia = (int) $partes_F[0]; 
             $mes = (int) $partes_F[1];
             $anio = (int) substr($partes_F[2], -2);
             $fechaRegistro = Fechas::where('dia',$dia)->where('mes',$mes)->where('anio',$anio)->first();
             $idFechaReserva = $fechaRegistro->id;
-         //   dd( $periodosSelecReserva, $fechaReserva, $partes_F, $fechaRegistro, $idFechaReserva);
+          //  dd( $periodosSelecReserva, $fechaReserva, $partes_F, $fechaRegistro, $idFechaReserva);
             
             $registroRAMB = new ReservasAmbiente();
             $registroRAMB->ambientes_id = $valor1;
@@ -79,7 +84,10 @@ class MensajesController extends Controller
             $registroRAMB2->reservas_id = (int) $idReserva;
             $registroRAMB2->save() ;
             // dd($registroRAMB, $registroRAMB2);
+            // $res = ReservasAmbiente::where('reservas_id',$idReserva)->get();
 
+            // $res = ReservasAmbiente::find($idReserva);
+            //  dd($res);
             if(count($periodosSelecReserva)== 1){
                 $idPeriodo = $periodosSelecReserva[0]->periodos_id;
                 $horariosAmbiente = Horarios::where('ambientes_id',$valor1)->where('fechas_id',$idFechaReserva)->where('periodos_id',$idPeriodo)->first();

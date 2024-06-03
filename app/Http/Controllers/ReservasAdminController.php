@@ -220,6 +220,7 @@ class ReservasAdminController extends Controller
             $ambientesEncontradosComplet = $ambientesEncontradosComplet->merge(Horarios::where('fechas_id', $fechaRegistro->id)
             ->where('periodos_id', $idPeri)
             ->where('ambientes_id', $ambient->id)
+            ->where('Estado', 1) //aumente esto
             ->get());
 
            }
@@ -262,7 +263,7 @@ class ReservasAdminController extends Controller
 }
 }
 
-   // dd($ambientesTIPO_UBICACION);
+    //dd($ambientesTIPO_UBICACION);
         // Aquí tienes la colección de ambientes encontrados que coinciden con la fecha y el período
        //return redirect()->route('reservas.verificar',['idReserva' => $idReserva])->with('ambientesEncontradosComplet',$ambientesEncontradosComplet);
        return redirect()->route('reservas.verificar',['idReserva'=>$idReserva])->with('ambientesTIPO_UBICACION',$ambientesTIPO_UBICACION);
@@ -297,6 +298,7 @@ class ReservasAdminController extends Controller
              $ambientesDosPeriodos_uno =  $ambientesDosPeriodos_uno->merge(Horarios::where('fechas_id', $fechaRegistro->id)
              ->where('periodos_id', $idPeri)
              ->where('ambientes_id', $ambient->id)
+             ->where('Estado', 1) //aumente esto
              ->get());
             }
          }
@@ -319,6 +321,7 @@ class ReservasAdminController extends Controller
              $ambientesDosPeriodos_dos =  $ambientesDosPeriodos_dos->merge(Horarios::where('fechas_id', $fechaRegistro->id)
              ->where('periodos_id', $idPeri2)
              ->where('ambientes_id', $ambient->id)
+             ->where('Estado', 1) //aumente esto
              ->get());
             }
          }
@@ -374,7 +377,7 @@ class ReservasAdminController extends Controller
                 }
             }
             }
-
+//dd($ambientesTIPO_UBICACION_Dos);
         return redirect()->route('reservas.verificar',['idReserva'=>$idReserva])->with('ambientesTIPO_UBICACION_Dos',$ambientesTIPO_UBICACION_Dos);
 
         }

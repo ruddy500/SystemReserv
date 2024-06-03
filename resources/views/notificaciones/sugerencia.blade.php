@@ -38,9 +38,9 @@
         <!-- ASUNTO DE LA SUGERENCIA -->
         <h3 class="card-header">Sugerencia de solicitud de reserva</h3>
         <div class="card-body bg-content">
-            <!-- FECHA DE LLEGADA DE NOTIFICACION -->
-            <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
-                <small class="fechaLlegada">Sab, 18 de Mayo (hace 2 horas)</small>
+             <!-- FECHA DE LLEGADA DE NOTIFICACION -->
+             <div class="notifLLegada" style="display: flex; justify-content: flex-end;">
+                <small class="fechaLlegada">{{ $fechaFormateada }} ({{ $diferencia }})</small>
             </div>
             <!-- MENSAJE O MOTIVO INSERTADO AL ENVIAR CORREO -->
             <div class="contenido-mensaje" style="max-width: 30rem; margin: auto;">
