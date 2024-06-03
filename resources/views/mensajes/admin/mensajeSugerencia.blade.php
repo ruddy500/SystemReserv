@@ -115,53 +115,62 @@
 </head>
 
 <body>
+        <?php
+            use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
+            // Obtener la fecha y hora actual en la zona horaria de Bolivia
+            $fechaEnvio = Carbon::now('America/La_Paz');
+
+            // Formatear la fecha de envío
+            $fechaEnvioFormateada = $fechaEnvio->locale('es')->isoFormat('dddd, D [de] MMMM');
+            $horaEnvio = $fechaEnvio->format('H:i');
+        ?>
     <div class="container">
         <header class="header">
-            <h1>Sugerencia de solicitud de Reserva Rechazada</h1>
-            <p>Sábado, 18 de mayo (hace 17 horas)</p>
+            <h1>Sugerencia de solicitud de Reserva {{ $details['estado'] }}</h1>
+            <p><?php echo $fechaEnvioFormateada; ?> (a las <?php echo $horaEnvio; ?>)</p>
         </header>
         <main class="main-content">
             <div class="centered-text">
                 <p>Estimado/a Administrador,</p>
-                <!--NOMBRE DEL DOCENTE QUE ACEPTO LA SOLICUTUD-->
-                <p>Leticia Blanco Coca a Rechazado la sugerencia de solicitud de reserva de ambientes.</p>
+                <!--NOMBRE DEL DOCENTE QUE ACEPTO O RECHAZO LA SOLICUTUD-->
+                <p>{{ $details['docente'] }} a {{ $details['estado'] }} la sugerencia de solicitud de reserva de ambientes.</p>
             </div>
             <section class="reservation-details">
                 <h2>Detalle de reserva (Individual O Grupal):</h2>
                 <table>
                     <tr>
                         <td>Nombre docente:</td>
-                        <td>Leticia Blanco Coca</td>
+                        <td>{{ $details['docente'] }}</td>
                     </tr>
                     <tr>
                         <td>Cantidad de estudiantes:</td>
-                        <td>95</td>
+                        <td>{{ $details['cantidad'] }}</td>
                     </tr>
                     <tr>
                         <td>Motivo reserva:</td>
-                        <td>Examen primer parcial</td>
+                        <td>{{ $details['motivo'] }}</td>
                     </tr>
                     <tr>
                         <td>Fecha:</td>
-                        <td>05/06/2024</td>
+                        <td>{{ $details['fecha'] }}</td>
                     </tr>
                     <tr>
                         <td>Periodo:</td>
-                        <td>8:15 - 9:45</td>
+                        <td>{{ $details['periodo'] }}</td>
                     </tr>
                     <tr>
                         <td>Tipo de ambiente:</td>
-                        <td>Aula común</td>
+                        <td>{{ $details['ambiente'] }}</td>
                     </tr>
                     <tr>
                         <td>Materia:</td>
-                        <td>Elementos de programación</td>
+                        <td>{{ $details['materia'] }}</td>
                     </tr>
                     <tr>
                         <td>Grupo(s):</td>
                         <!--SI ES INIVIDUAL SOLO MOSTRAR EL NUMERO DE GRUPO-->
                         <!--SI ES GRUPAL  MOSTRAR EL NUMERO DE GRUPO Y DOCENTE-->
-                        <td>1, Leticia Coca Blanco<br>3, Vladimir Costas</td>
+                        <td>{{ $details['grupo'] }}</td>
                     </tr>
                 </table>
             </section>
@@ -170,21 +179,21 @@
                 <div class="column-container">
                     <!-- PARA EL AMBIENTE 1 -->
                     <ul class="assigned-list">
-                        <li><span>Ambiente:</span> 690 A</li>
-                        <li><span>Capacidad:</span> 100</li>
-                        <li><span>Ubicación:</span> Edificio Nuevo</li>
-                        <li><span>Tipo de ambiente:</span> Aula común</li>
-                        <li><span>Periodo:</span> 8:15 - 9:45</li>
-                        <li><span>Fecha:</span> 05/06/2024</li>
+                        <li><span>Ambiente:</span> {{ $details['ambiente1'] }}</li>
+                        <li><span>Capacidad:</span> {{ $details['capacidad1'] }}</li>
+                        <li><span>Ubicación:</span> {{ $details['ubicacion1'] }}</li>
+                        <li><span>Tipo de ambiente:</span> {{ $details['tipo1'] }}</li>
+                        <li><span>Periodo:</span> {{ $details['periodo1'] }}</li>
+                        <li><span>Fecha:</span> {{ $details['fecha1'] }}</li>
                     </ul>
                     <ul class="assigned-list">
                         <!-- PARA EL AMBIENTE 2 -->
-                        <li><span>Ambiente:</span> 690 A</li>
-                        <li><span>Capacidad:</span> 100</li>
-                        <li><span>Ubicación:</span> Edificio Nuevo</li>
-                        <li><span>Tipo de ambiente:</span> Aula común</li>
-                        <li><span>Periodo:</span> 8:15 - 9:45</li>
-                        <li><span>Fecha:</span> 05/06/2024</li>
+                        <li><span>Ambiente:</span> {{ $details['ambiente2'] }}</li>
+                        <li><span>Capacidad:</span> {{ $details['capacidad2'] }}</li>
+                        <li><span>Ubicación:</span> {{ $details['ubicacion2'] }}</li>
+                        <li><span>Tipo de ambiente:</span> {{ $details['tipo2'] }}</li>
+                        <li><span>Periodo:</span> {{ $details['periodo2'] }}</li>
+                        <li><span>Fecha:</span> {{ $details['fecha2'] }}</li>
                     </ul>
                 </div>
             </section>
@@ -202,5 +211,3 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>

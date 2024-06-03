@@ -267,7 +267,7 @@ class NotificacionesController extends Controller
                 $gruposMateria[] = "$grupo, $nombreDocente";               
             }              
             foreach($gruposMateria as $entry){
-                $dato = $entry . "\n";
+                $dato = $entry . "<br>";
             }                   
         }
         return $dato;
