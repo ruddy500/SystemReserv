@@ -266,9 +266,7 @@ class NotificacionesController extends Controller
                 $grupo = $materia->Grupo;
                 $gruposMateria[] = "$grupo, $nombreDocente";               
             }              
-            foreach($gruposMateria as $entry){
-                $dato = $entry . "<br>";
-            }                   
+            $dato = implode(' | ', $gruposMateria);                  
         }
         return $dato;
     }
