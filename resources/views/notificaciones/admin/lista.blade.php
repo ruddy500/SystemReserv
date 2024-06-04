@@ -36,7 +36,8 @@ $notificaciones = Notificaciones::all();
                     $correo= $Usuario->email;
 
                     $Reserva = Reservas::where('id',$idReserva)->first();
-                    $fueSugerido = $Reserva->Fuesugerido; 
+                    // $fueSugerido = $Reserva->Fuesugerido; 
+                    $fueSugerido = $Reserva ? $Reserva->Fuesugerido : null;
                     $EstadoReserva=$Reserva->Estado;
                 ?>
 
