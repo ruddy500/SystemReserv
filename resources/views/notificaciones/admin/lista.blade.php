@@ -38,7 +38,8 @@ $notificaciones = Notificaciones::all();
                     $Reserva = Reservas::where('id',$idReserva)->first();
                     // $fueSugerido = $Reserva->Fuesugerido; 
                     $fueSugerido = $Reserva ? $Reserva->Fuesugerido : null;
-                    $EstadoReserva=$Reserva->Estado;
+                    // $EstadoReserva=$Reserva->Estado;
+                    $EstadoReserva = $Reserva ? $Reserva->Estado : null;
                 ?>
 
 @if($notificacion->Tipo === 'sugerencia' && $fueSugerido==='si' && $EstadoReserva==='rechazado')
