@@ -62,12 +62,36 @@ class NotificacionesController extends Controller
     //CONTROLADORES ADMINISTRADOR
     public function mostrarListaAdmin(){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('notificaciones.admin.lista',compact('menu'));
+
+        // Obtener todas las notificaciones
+        $notificaciones = Notificaciones::all();
+
+        // Inicializar un arreglo para almacenar los IDs
+        $idsLeidos = [];
+
+        // dd(count($notificaciones));
+
+        for ($i = 0; $i < count($notificaciones); $i++) {
+            if ($notificaciones[$i]->Estado === 'leido') {
+               // Si el estado es 'leido', guardar el id en el arreglo
+                $idsLeidos[] = $notificaciones[$i]->reservas_id;
+            }
+        }
+
+        // dd($idsLeidos);
+        // Verificar si el ID 3 está en el arreglo
+        $idABuscar = 6;
+        $idPresente = in_array($idABuscar, $idsLeidos);
+        dd($idPresente);
+
+        return view('notificaciones.admin.lista',compact('menu','idsLeidos'));
     }
 
     // para rechazar
     public function mostrarSugerenciaAdmin($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+
+
         return view('notificaciones.admin.sugerenciaRechazo',compact('menu','reservaId','notificacionId'));
     }
 
@@ -93,6 +117,7 @@ class NotificacionesController extends Controller
 
         $notificacion= Notificaciones::find($notificacionId);
         $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual2');
+        $notificacion->Estado='leido';
         $notificacion->save();
 
 
@@ -117,6 +142,7 @@ class NotificacionesController extends Controller
 
         $notificacion= Notificaciones::find($notificacionId);
         $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual');
+        $notificacion->Estado='leido';
         $notificacion->save();
 
         // Redireccionar o devolver una respuesta

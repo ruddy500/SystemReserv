@@ -25,6 +25,7 @@ use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilment
     use App\Models\Usuarios;
     use App\Models\Motivos;
     use App\Models\MateriasSeleccionado;
+    // dd($idsLeidos);
     $idReserva= $reservaId;
     $reserva = Reservas::find($idReserva); //extraemos la reserva actual
     

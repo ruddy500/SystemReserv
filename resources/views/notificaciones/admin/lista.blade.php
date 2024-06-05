@@ -9,6 +9,7 @@ use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilment
 
 $notificaciones = Notificaciones::all();
 
+// dd($idsLeidos);
 ?>
 @section('notificaciones/admin/lista')
 <div class="container mt-3">
