@@ -79,10 +79,10 @@ class NotificacionesController extends Controller
         }
 
         // dd($idsLeidos);
-        // Verificar si el ID 3 está en el arreglo
-        $idABuscar = 6;
-        $idPresente = in_array($idABuscar, $idsLeidos);
-        dd($idPresente);
+        // // Verificar si el ID 3 está en el arreglo
+        // $idABuscar = 6;
+        // $idPresente = in_array($idABuscar, $idsLeidos);
+        // dd($idPresente);
 
         return view('notificaciones.admin.lista',compact('menu','idsLeidos'));
     }
@@ -90,6 +90,9 @@ class NotificacionesController extends Controller
     // para rechazar
     public function mostrarSugerenciaAdmin($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->Estado='leido';
+        $notificacion->save();
 
 
         return view('notificaciones.admin.sugerenciaRechazo',compact('menu','reservaId','notificacionId'));
@@ -97,6 +100,10 @@ class NotificacionesController extends Controller
 
     public function mostrarSugerenciaAdminAsignacion($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->Estado='leido';
+        $notificacion->save();
         return view('notificaciones.admin.sugerenciaAsignacion',compact('menu','reservaId','notificacionId'));
     }
 
@@ -117,7 +124,7 @@ class NotificacionesController extends Controller
 
         $notificacion= Notificaciones::find($notificacionId);
         $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual2');
-        $notificacion->Estado='leido';
+        // $notificacion->Estado='leido';
         $notificacion->save();
 
 
@@ -142,7 +149,7 @@ class NotificacionesController extends Controller
 
         $notificacion= Notificaciones::find($notificacionId);
         $notificacion->fecha_respuesta_Sugerencia=$request->input('fecha_actual');
-        $notificacion->Estado='leido';
+        // $notificacion->Estado='leido';
         $notificacion->save();
 
         // Redireccionar o devolver una respuesta
