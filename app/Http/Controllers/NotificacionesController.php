@@ -26,6 +26,10 @@ class NotificacionesController extends Controller
     //CONTROLADORES DOCENTE
     public function mostrarLista(){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        // dd(session('datoAdmin'));
+        // Guarda el valor actualizado en la sesión
+        session(['datoDocente' => 200]);
+    
         return view('notificaciones.lista',compact('menu'));
     }
     public function mostrarSugerencia($reservaId,$notificacionId){
@@ -83,6 +87,20 @@ class NotificacionesController extends Controller
         // $idABuscar = 6;
         // $idPresente = in_array($idABuscar, $idsLeidos);
         // dd($idPresente);
+
+
+        // Inicializar la variable para contar notificaciones no leídas
+    $dato = 0;
+
+    // Contar las notificaciones no leídas
+    foreach ($notificaciones as $notificacion) {
+        if ($notificacion->Estado === 'no leido') {
+            $dato += 1;
+        }
+    }
+
+    // Guarda el valor actualizado en la sesión
+    session(['datoAdmin' => $dato]);
 
         return view('notificaciones.admin.lista',compact('menu','idsLeidos'));
     }

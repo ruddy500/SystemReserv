@@ -1,7 +1,10 @@
 @if(auth()->check())
 @extends('index')
 @section('menu')
+{{-- {{dd(get_defined_vars())}} --}}
+
 <body id="body-pd">
+    
     <header class="header" id="header">
         <!-- <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div> -->
         <div class="notificaciones">
@@ -9,12 +12,12 @@
                 @if (auth()->user()->role == 'admin')
                     <a href="{{ route('notificaciones.admin.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
-                        <span class="notification-count">10</span>
+                        <span class="notification-count">{{ session('datoAdmin', 0) }}</span>
                     </a>
                 @else
                     <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
-                        <span class="notification-count">10</span>
+                        <span class="notification-count">{{ session('datoDocente', 0) }}</span>
                     </a>
                 @endif
             @endif

@@ -101,48 +101,48 @@ $notificaciones = Notificaciones::all();
     </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    updateNotificationCount();
-    document.querySelectorAll('.list-group-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-            openNotification(item);
-            updateNotificationCount();
-        });
-    });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     updateNotificationCount();
+//     document.querySelectorAll('.list-group-item').forEach(function(item) {
+//         item.addEventListener('click', function() {
+//             openNotification(item);
+//             updateNotificationCount();
+//         });
+//     });
+// });
 
-function updateNotificationCount() {
-    var notificationDots = document.querySelectorAll('.notification-dot');
-    var visibleDotsCount = 0;
+// function updateNotificationCount() {
+//     var notificationDots = document.querySelectorAll('.notification-dot');
+//     var visibleDotsCount = 0;
 
-    notificationDots.forEach(function(dot) {
-        if (window.getComputedStyle(dot).display !== 'none') {
-            visibleDotsCount++;
-        }
-    });
+//     notificationDots.forEach(function(dot) {
+//         if (window.getComputedStyle(dot).display !== 'none') {
+//             visibleDotsCount++;
+//         }
+//     });
 
-    console.log("Visible Dots Count: ", visibleDotsCount); // Depuración
+//     console.log("Visible Dots Count: ", visibleDotsCount); // Depuración
 
-    var notificationsIcon = document.getElementById('notificaciones-icon');
-    if (notificationsIcon) {
-        var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
-        if (notificationCountSpan) {
-            if (visibleDotsCount > 0) {
-                notificationCountSpan.textContent = visibleDotsCount;
-                notificationCountSpan.style.display = 'flex'; // Mostrar el círculo rojo
-            } else {
-                notificationCountSpan.style.display = 'none'; // Ocultar el círculo rojo
-            }
-            console.log("Notification Count Updated: ", visibleDotsCount); // Depuración
-        }
-    }
-}
+//     var notificationsIcon = document.getElementById('notificaciones-icon');
+//     if (notificationsIcon) {
+//         var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
+//         if (notificationCountSpan) {
+//             if (visibleDotsCount > 0) {
+//                 notificationCountSpan.textContent = visibleDotsCount;
+//                 notificationCountSpan.style.display = 'flex'; // Mostrar el círculo rojo
+//             } else {
+//                 notificationCountSpan.style.display = 'none'; // Ocultar el círculo rojo
+//             }
+//             console.log("Notification Count Updated: ", visibleDotsCount); // Depuración
+//         }
+//     }
+// }
 
-function openNotification(element) {
-    var estado = element.querySelector('.notification-dot');
-    if (estado) {
-        estado.style.display = 'none';
-    }
-}
+// function openNotification(element) {
+//     var estado = element.querySelector('.notification-dot');
+//     if (estado) {
+//         estado.style.display = 'none';
+//     }
+// }
 </script>
 @endsection
