@@ -25,7 +25,7 @@
         <div class="perfil-usuario">
             <i class="bi bi-person-circle" id="user-icon"></i>
             <div class="dropdpwn-menu" id="dropdown-menu">
-                <a href="#" class="perfil-link dropdown-item"><i class="bi bi-person"></i><span>Perfil</span></a>
+                <!-- <a href="#" class="perfil-link dropdown-item"><i class="bi bi-person"></i><span>Perfil</span></a> -->
                 <a href="{{route('login.destroy')}}" class="dropdown-item"><i class="bi bi-box-arrow-right"></i><span>Salir</span></a>
             </div>
         </div>
