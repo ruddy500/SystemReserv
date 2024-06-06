@@ -8,11 +8,19 @@ use App\Models\Usuarios;
 use App\Mail\Correo;
 use App\Mail\Masivo;
 use App\Models\Reservas;
+use App\Models\Ambientes;
+use App\Models\NombreAmbientes;
+use App\Models\TipoAmbientes;
 use App\Models\ReservasAmbiente;
 use App\Models\Notificaciones;
 use App\Models\PeriodosSeleccionado;
 use App\Models\Horarios;
 use App\Models\Fechas;
+use App\Models\Motivos;
+use App\Models\MateriasSeleccionado;
+use App\Models\Materias;
+use App\Models\Periodos;
+use App\Models\DocentesMaterias;
 use App\Models\UsuariosNotificacion;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
@@ -22,7 +30,7 @@ use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilment
 class CorreoController extends Controller
 {
 
-    public function enviarCorreo(Request $request)
+       public function enviarCorreo(Request $request)
     {   //entra aqui primero cuando se le da a enviar 
         // dd($request->all());
         // Recibir datos del formulario
@@ -127,13 +135,162 @@ class CorreoController extends Controller
 
         //luego entra aqui segundo correo.php
         // Enviar correo
-        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva));
+        $datosReserva = $this->getDatosReserva($idReserva);
+        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
         
 
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('reservas.admin.asignadas', compact('menu'));
     }
 
+    public function getDatosReserva($idReserva){
+
+              $registroReserva = Reservas::where('id',$idReserva)->first();
+              $tipoReserva = $registroReserva->Tipo ;
+              
+              $idDocente = $registroReserva->docentes_id;
+              $registroDocente = Usuarios::where('id',$idDocente)->first();
+              $nombreDocente = $registroDocente->name;
+
+              $cantidadEstudiante = $registroReserva->CantEstudiante;
+
+              $motivoId = $registroReserva->motivos_id;
+              $registroMotivo = Motivos::where('id',$motivoId)->first();
+              $motivo = $registroMotivo->Nombre;
+
+              $fecha = $registroReserva->fecha;
+              
+              $tipoAmbiente = $registroReserva->TipoAmbiente;
+            //  
+              $registrosMatSelec = MateriasSeleccionado::where('reservas_id',$idReserva)->get();
+            //   $tamañoMatSelec = count($regiatrosMatSelec);
+              $idMateria = $registrosMatSelec[0]->materias_id;
+
+              $registroMateria = Materias::where('id',$idMateria)->first();
+              $nombreMateria = $registroMateria->Nombre;
+
+              $periodosSelec = $this->getPeriodosSelec($idReserva);
+              $datosAmbiente = $this->getDatosAmbiente($idReserva);
+
+              $grupos = $this->getGrupo($tipoReserva,$registrosMatSelec);
+            //   dd($grupos);
+              return [
+                'tipoReserva' => $tipoReserva,
+                'nombreDocente' => $nombreDocente,
+                'cantidadEstudiante'=>$cantidadEstudiante,
+                'motivo'=>$motivo,
+                'fecha'=>$fecha,
+                'tipoAmbiente'=>$tipoAmbiente,
+                'nombreMateria'=>$nombreMateria,
+                'horas'=>$periodosSelec,
+                'gruposMateria'=>$grupos ,
+                'datosAmbiente'=>$datosAmbiente,
+            ];
+
+    }
+
+    public function getDatosAmbiente($idReserva){
+        $registroRA = ReservasAmbiente::where('reservas_id',$idReserva)->first();
+        $idAmbiente = $registroRA->ambientes_id;
+        $registroAmbiente = Ambientes::where('id',$idAmbiente)->first();
+        
+        $idNombreAmb = $registroAmbiente->nombre_ambientes_id;
+        $registroNombreAmb = NombreAmbientes::where('id',$idNombreAmb)->first();
+        $nombreAmbiente = $registroNombreAmb->Nombre;
+
+        $capacidadAmbiente = $registroAmbiente->Capacidad;
+
+        $ubicacionAmbiente = $registroAmbiente->Ubicacion;
+
+        $idTipoAmb = $registroAmbiente->tipo_ambientes_id;
+        $registroTipoAmb = TipoAmbientes::where('id',$idTipoAmb)->first();
+        $tipoAmbiente = $registroTipoAmb->Nombre;
+
+
+        return [
+            'nombreAmbiente' => $nombreAmbiente,
+            'capacidadAmbiente'=>$capacidadAmbiente ,
+            'ubicacionAmbiente' => $ubicacionAmbiente,
+            'tipoAmbiente'=> $tipoAmbiente  ,
+        ];
+    }
+
+    public function getGrupo($tipoReserva,$registrosMatSelec){
+                $gruposMateria = [];
+        
+                if ($tipoReserva == "individual") {
+                    foreach ($registrosMatSelec as $registroMatSelec) {
+
+                        $idMateria = $registroMatSelec->materias_id;
+                        $materia = Materias::where('id',$idMateria)->first();
+                        $gruposMateria[] = $materia->Grupo;
+                
+                    }
+                    $gruposMateria = implode(',', $gruposMateria);
+                } else {
+                    foreach ($registrosMatSelec as $registroMatSelec) {
+                        $idMateria = $registroMatSelec->materias_id;
+                        $materia = Materias::where('id',$idMateria)->first();
+                        
+                        $registroDocMat = DocentesMaterias::where('materias_id',$idMateria)->first();
+                        $idDocente = $registroDocMat->docentes_id;
+                        $registroDocente = Usuarios::where('id',$idDocente)->first();
+                        $nombreDocente = $registroDocente->name;
+                        
+                        $grupo = $materia->Grupo;
+                        $gruposMateria[] = "$grupo, $nombreDocente";
+                    }
+                    $gruposMateria = implode("<br>", $gruposMateria);
+                    
+                }
+                
+                return $gruposMateria;
+
+    }
+    public function getPeriodosSelec($idReserva){
+
+              $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+              $tamPeriodosSeleccionado = count($periodosSeleccionados);
+               // dd($tamPeriodoSelec);
+              if($tamPeriodosSeleccionado == 1){
+                    $periodoId = $periodosSeleccionados[0]->periodos_id;
+                    
+                    $periodoBuscar = Periodos :: where('id',$periodoId)->first();
+                    $periodo = $periodoBuscar->HoraIntervalo;
+                    $partes_P = explode('-', $periodo);
+                    
+                    $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                    $horaFin = trim(str_replace(' ', '', $partes_P[1]));
+                
+              }else{
+
+                    $periodoId = $periodosSeleccionados[0]->periodos_id;
+                    $periodoId2 = $periodosSeleccionados[1]->periodos_id;
+
+                    $periodoBuscar = Periodos :: where('id',$periodoId)->first();     
+                    $periodoBuscar2 = Periodos :: where('id',$periodoId2)->first();
+
+                    $periodo = $periodoBuscar->HoraIntervalo;
+                    $periodo2 = $periodoBuscar2->HoraIntervalo;
+                    
+                    $partes_P = explode('-', $periodo);
+                    $partes_P2 = explode('-', $periodo2);
+                    //dd($partes_P,$partes_P2);
+
+                    $horaInicio = trim(str_replace(' ', '', $partes_P[0]));
+                    $horaFin = trim(str_replace(' ', '', $partes_P2[1]));
+                    
+                    // if($i==1){dd($horaInicio,$horaFin);}
+                
+              }
+
+              return [
+                'horaInicio' => $horaInicio,
+                'horaFin' => $horaFin,
+            ];
+
+
+    }
     public function enviarCorreoMasivo(Request $request){
         //obtener la tabla users
         $usuarios = Usuarios::all();
