@@ -19,6 +19,7 @@ use App\Http\Controllers\CorreoController;
 use App\Http\Controllers\NotificacionesController;
 use App\Http\Controllers\AvisosController;
 use App\Http\Controllers\InformesController;
+use App\Http\Controllers\AnunciosController;
 
 
 
@@ -123,6 +124,9 @@ Route::post('/enviar-correo-masivo', [CorreoController::class, 'enviarCorreoMasi
 Route::get('/informes/informe',[InformesController::class,'mostrar'])->name('informes.informe');
 
 Route::get('/informes/pdf', [InformesController::class, 'generarPDF'])->name('informe.pdf');
+
+//RUTA PARA ANUNCIOS
+Route::get('/anuncios', [AnunciosController::class, 'mostrar'])->name('anuncios.index');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {
