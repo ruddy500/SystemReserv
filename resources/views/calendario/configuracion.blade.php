@@ -3,7 +3,7 @@
 @section('contenido-configuracion')
 <div class="cont-config" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
     <form id="formulario-configuraciongestion" action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
-        <!-- CAMPO NOMBRE DE EVENTO -->
+        <!-- CAMPO DE GESTION ACADEMICA -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Gestión académica y Periodo de exámenes</label>
         </div>
@@ -35,6 +35,7 @@
                 </div>
             </div>
         </div>
+        <!-- CAMPO DE PRIMER PARCIAL EXAMENES DE MESA -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Primer ciclo de exámenes de mesa</label>
         </div>
@@ -56,6 +57,7 @@
                 </div>
             </div>
         </div>
+        <!-- CAMPO DE PRIMEROS PARCIALES -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Primer ciclo de exámenes</label>
         </div>
@@ -77,6 +79,7 @@
                 </div>
             </div>
         </div>
+        <!-- CAMPO SEGUNDOS PARCIALES -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Segundo ciclo de exámenes</label>
         </div>
@@ -98,6 +101,7 @@
                 </div>
             </div>
         </div>
+        <!-- CAMPO TERCEROS PARCIALES COMO FINAL, MESA, INSTANCIA Y ETC -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Tercer ciclo de exámenes</label>
         </div>
