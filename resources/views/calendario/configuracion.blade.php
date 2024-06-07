@@ -1,24 +1,29 @@
 @extends('calendario/principal')
 
 @section('contenido-configuracion')
+<style>
+    @media (max-width: 576px) {
+        .row.mb-3 [class^="col"] {
+            margin-top: 10px;
+        }
+    }
+</style>
 <div class="cont-config" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
     <form id="formulario-configuraciongestion" action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         <!-- CAMPO DE GESTION ACADEMICA -->
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Gestión académica y Periodo de exámenes</label>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="mb-3">
-                    <label for="gestion-name" class="col-form-label h4">Gestión:</label>
-                    <input type="text" class="form-control" id="fechaini" placeholder="1-20XX">
-                </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="gestion-name" class="col-form-label h4">Gestión:</label>
+                <input type="text" class="form-control" id="fechaini" placeholder="1-20XX">
             </div>
-            <div class="col">
+            <div class="col-md-6">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div id="datepicker-gestionini" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -26,7 +31,7 @@
                     <span class="input-group-addon"></span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div id="datepicker-gestionfinal" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -39,8 +44,8 @@
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Primer ciclo de exámenes de mesa</label>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div id="datepicker-ppmesaini" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -48,7 +53,7 @@
                     <span class="input-group-addon"></span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div id="datepicker-ppmesafinal" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -61,8 +66,8 @@
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Primer ciclo de exámenes</label>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div id="datepicker-ppini" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -70,7 +75,7 @@
                     <span class="input-group-addon"></span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div id="datepicker-ppfinal" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -83,8 +88,8 @@
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Segundo ciclo de exámenes</label>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div id="datepicker-spini" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -92,7 +97,7 @@
                     <span class="input-group-addon"></span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div id="datepicker-spfinal" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -105,8 +110,8 @@
         <div class="tituloConfiguracion">
             <label class="col-form-label" style="font-weight: bold;">Tercer ciclo de exámenes</label>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div id="datepicker-tercerini" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -114,7 +119,7 @@
                     <span class="input-group-addon"></span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div id="datepicker-tercerfinal" class="input-group date" data-date-format="dd-mm-yyyy">
