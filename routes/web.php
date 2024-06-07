@@ -20,6 +20,7 @@ use App\Http\Controllers\NotificacionesController;
 use App\Http\Controllers\AvisosController;
 use App\Http\Controllers\InformesController;
 use App\Http\Controllers\AnunciosController;
+use App\Http\Controllers\CalendarioController;
 
 
 
@@ -127,6 +128,12 @@ Route::get('/informes/pdf', [InformesController::class, 'generarPDF'])->name('in
 
 //RUTA PARA ANUNCIOS
 Route::get('/anuncios', [AnunciosController::class, 'mostrar'])->name('anuncios.index');
+
+//RUTA PARA CALENDARIO DEL ADMINISTRADOR
+Route::get('/calendario', [CalendarioController::class,'mostrar'])->name('calendario.principal');
+Route::get('/calendario/inicio', [CalendarioController::class,'inicio'])->name('calendario.inicio');
+Route::get('/calendario/evento', [CalendarioController::class,'evento'])->name('calendario.evento');
+Route::get('/calendario/configuracion', [CalendarioController::class,'configuracion'])->name('calendario.configuracion');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

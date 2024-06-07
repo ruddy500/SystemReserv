@@ -57,6 +57,8 @@
       @yield('informes/informe')
       @yield('anuncios')
 
+      @yield('calendario/principal')
+
 
 
 

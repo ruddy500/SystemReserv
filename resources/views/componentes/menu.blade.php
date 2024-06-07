@@ -50,7 +50,7 @@
                          <a href="{{ route('avisos.aviso') }}" class="nav_link" title="Avisos" onclick=""><i class="bi bi-megaphone"></i><span class="nav_name">Avisos</span> </a>
                          <a href="{{ route('informes.informe') }}" class="nav_link" title="Informes" onclick=""><i class="bi bi-file-earmark-pdf"></i><span class="nav_name">Informes</span> </a>
                          <a href="{{ route('anuncios.index') }}" class="nav_link" title="Anuncios" onclick=""><i class="bi bi-pin"></i><span class="nav_name">Anuncios</span> </a>
-                         <a href="#" class="nav_link" title="Calendario" onclick=""><i class="bi bi-calendar2-day"></i><span class="nav_name">Calendario</span> </a>
+                         <a href="{{ route('calendario.principal') }}" class="nav_link" title="Calendario" onclick=""><i class="bi bi-calendar2-day"></i><span class="nav_name">Calendario</span> </a>
                          @else
                          <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio" onclick="activarBoton(this)"onclick="activarBoton(this)"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a>  
                          <a href="{{ route('reservas.principal') }}" class="nav_link" title="Reserva" onclick="activarBoton(this)"><i class="bi bi-journal-check"></i><span class="nav_name">Reservas</span> </a>
