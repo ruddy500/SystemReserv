@@ -67,7 +67,70 @@ $(function () {
         language: 'es',
         autoclose: true,
         todayHighlight: true,
+    }).datepicker('update', new Date());
+
+
+    //DATEPICKER PARA LA CONFIGURACION DE GESTION ACADEMICA
+    $("#datepicker-gestionini").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
       }).datepicker('update', new Date());
+  
+      $("#datepicker-gestionfinal").datepicker({
+          language: 'es',
+          autoclose: true,
+          todayHighlight: true,
+      }).datepicker('update', new Date());
+      //DATEPICKER PARA PRIMEROS EXAMENES DE MESA
+    $("#datepicker-ppmesaini").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
+      }).datepicker('update', new Date());
+  
+      $("#datepicker-ppmesafinal").datepicker({
+          language: 'es',
+          autoclose: true,
+          todayHighlight: true,
+      }).datepicker('update', new Date());
+      //DATEPICKER PARA PRIMER CICLO DE EXAMENES
+    $("#datepicker-ppini").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
+      }).datepicker('update', new Date());
+  
+      $("#datepicker-ppfinal").datepicker({
+          language: 'es',
+          autoclose: true,
+          todayHighlight: true,
+      }).datepicker('update', new Date());
+      //DATEPICKER PARA SEGUNDO CICLO DE EXAMENES
+    $("#datepicker-spini").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
+      }).datepicker('update', new Date());
+  
+      $("#datepicker-spfinal").datepicker({
+          language: 'es',
+          autoclose: true,
+          todayHighlight: true,
+      }).datepicker('update', new Date());
+      //DATEPICKER PARA TERCER CICLO DE EXAMENES
+    $("#datepicker-tercerini").datepicker({
+        language: 'es',
+        autoclose: true,
+        todayHighlight: true,
+      }).datepicker('update', new Date());
+  
+      $("#datepicker-tercerfinal").datepicker({
+          language: 'es',
+          autoclose: true,
+          todayHighlight: true,
+      }).datepicker('update', new Date());
+    
   });
 
 });
