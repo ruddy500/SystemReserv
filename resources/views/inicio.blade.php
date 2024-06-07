@@ -41,6 +41,10 @@
       background-color:#ffeeba;
       margin-top: 15px;
     }
+    .texto-bienv p {
+        margin: 3px 0; /* Reduce el margen entre los párrafos */
+    }
+
     @media (min-width: 1350px) {
         .container-inicio {
             margin-left: -65px; 
@@ -61,7 +65,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="texto-bienv">
-                                    <p>Texto aquí (izquierda)</p>
+                                        <p><small>La Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón (UMSS) fue fundada en la década del 60 como un Instituto de Ciencias Básicas.</small></p>
+                                        <p><small>En 1972, se creó la Facultad de Ciencias Puras y Naturales, que posteriormente se convirtió en la Facultad de Ciencias y Tecnología en 1979.</small></p>
+                                        <p><small>Esta facultad alberga programas académicos en diversas áreas científicas y tecnológicas, incluyendo ingeniería eléctrica, industrial y mecánica, entre otros.</small></p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

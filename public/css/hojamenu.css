@@ -172,7 +172,7 @@ a {
     color: white;
     text-decoration:none;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
     /* Aquí colocas tus estilos específicos para pantallas pequeñas */
     .logo-fcyt {
         max-width: 31%; /* Ancho máximo de la imagen */
@@ -198,7 +198,7 @@ a {
         font-size: 18px;
     }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
         padding-left: calc(var(--nav-width) + 2rem);
@@ -344,7 +344,7 @@ a {
 
 
 /* Ajustes para pantallas pequeñas */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
     .perfil-usuario .dropdpwn-menu {
         right: 10px; /* Ajusta la posición desde la derecha */
         left: auto; /* Asegura que no se alinee desde la izquierda */
@@ -353,7 +353,7 @@ a {
 }
 
 /* Ajustes para pantallas medianas y grandes */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
     .perfil-usuario .dropdpwn-menu {
         right: 50px; /* Vuelve a la posición fija desde la derecha */
         left: auto; /* Elimina la alineación desde la izquierda */
