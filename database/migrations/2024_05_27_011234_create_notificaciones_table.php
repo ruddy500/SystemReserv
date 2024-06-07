@@ -20,6 +20,7 @@ class CreateNotificacionesTable extends Migration
             $table->enum('Tipo', ['sugerencia', 'rechazado','asignacion','difusion'])->nullable();
             $table->integer('reservas_id')->nullable();
             $table->text('contenidoDifusion')->nullable();
+            $table->enum('EstadoDocente', ['leido','no leido'])->default('no leido'); // Valor por defecto
             $table->dateTime('fecha_respuesta_Sugerencia')->nullable();
         });
     }

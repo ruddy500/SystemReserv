@@ -40,7 +40,16 @@ $notificaciones = Notificaciones::all();
                                             <h5 class="mb-1 notif">Asignación de solicitud de reserva</h5>
                                             <div class="position-relative">
                                                 <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
-                                                <span class="notification-dot" id="estado"></span>
+                                                {{-- <span class="notification-dot" id="estado"></span> --}}
+                                                <?php 
+                                                $idPresente = in_array($idReserva, $idsLeidos);
+                                                ?>
+                                                @if ($idPresente == false)
+                                                    <span class="notification-dot"></span>
+    
+                                                @else
+                                                    {{-- <span display='none' class="notification-dot"></span> --}}
+                                                @endif
                                             </div>
                                         </div>
                                         <p class="mb-1">adaEnterprissoft@gmail.com</p>
@@ -54,7 +63,16 @@ $notificaciones = Notificaciones::all();
                                             <h5 class="mb-1 notif">Sugerencia de solicitud de reserva</h5>
                                             <div class="position-relative">
                                                 <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
-                                                <span class="notification-dot"></span>
+                                                {{-- <span class="notification-dot"></span> --}}
+                                                <?php 
+                                                $idPresente = in_array($idReserva, $idsLeidos);
+                                                ?>
+                                                @if ($idPresente == false)
+                                                    <span class="notification-dot"></span>
+    
+                                                @else
+                                                    {{-- <span display='none' class="notification-dot"></span> --}}
+                                                @endif
                                             </div>
                                         </div>
                                         <p class="mb-1">adaEnterprissoft@gmail.com</p>
@@ -68,7 +86,16 @@ $notificaciones = Notificaciones::all();
                                             <h5 class="mb-1 notif">Rechazo de solicitud de reserva</h5>
                                             <div class="position-relative">
                                                 <small class="text-body-secondary">{{ $fechaEnvioFormateada  }}</small>
-                                                <span class="notification-dot"></span>
+                                                {{-- <span class="notification-dot"></span> --}}
+                                                <?php 
+                                                    $idPresente = in_array($idReserva, $idsLeidos);
+                                                ?>
+                                                 @if ($idPresente == false)
+                                                        <span class="notification-dot"></span>
+    
+                                                @else
+                                                        {{-- <span display='none' class="notification-dot"></span> --}}
+                                                @endif
                                             </div>
                                         </div>
                                         <p class="mb-1">adaEnterprissoft@gmail.com</p>
@@ -101,48 +128,6 @@ $notificaciones = Notificaciones::all();
     </div>
 </div>
 <script>
-// document.addEventListener('DOMContentLoaded', function() {
-//     updateNotificationCount();
-//     document.querySelectorAll('.list-group-item').forEach(function(item) {
-//         item.addEventListener('click', function() {
-//             openNotification(item);
-//             updateNotificationCount();
-//         });
-//     });
-// });
 
-// function updateNotificationCount() {
-//     var notificationDots = document.querySelectorAll('.notification-dot');
-//     var visibleDotsCount = 0;
-
-//     notificationDots.forEach(function(dot) {
-//         if (window.getComputedStyle(dot).display !== 'none') {
-//             visibleDotsCount++;
-//         }
-//     });
-
-//     console.log("Visible Dots Count: ", visibleDotsCount); // Depuración
-
-//     var notificationsIcon = document.getElementById('notificaciones-icon');
-//     if (notificationsIcon) {
-//         var notificationCountSpan = notificationsIcon.querySelector('.notification-count');
-//         if (notificationCountSpan) {
-//             if (visibleDotsCount > 0) {
-//                 notificationCountSpan.textContent = visibleDotsCount;
-//                 notificationCountSpan.style.display = 'flex'; // Mostrar el círculo rojo
-//             } else {
-//                 notificationCountSpan.style.display = 'none'; // Ocultar el círculo rojo
-//             }
-//             console.log("Notification Count Updated: ", visibleDotsCount); // Depuración
-//         }
-//     }
-// }
-
-// function openNotification(element) {
-//     var estado = element.querySelector('.notification-dot');
-//     if (estado) {
-//         estado.style.display = 'none';
-//     }
-// }
 </script>
 @endsection

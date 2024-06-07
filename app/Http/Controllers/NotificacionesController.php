@@ -26,22 +26,62 @@ class NotificacionesController extends Controller
     //CONTROLADORES DOCENTE
     public function mostrarLista(){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        // dd(auth()->user()->name);
+        $notificaciones = Notificaciones::all();
+
+        // Inicializar un arreglo para almacenar los IDs
+        $idsLeidos = [];
+
+        // dd(count($notificaciones));
+
+        for ($i = 0; $i < count($notificaciones); $i++) {
+            $reserva= Reservas::find($notificaciones[$i]->reservas_id);
+            $docente=Usuarios::find($reserva->docentes_id);
+            // dd($docente);
+            if ($notificaciones[$i]->EstadoDocente === 'leido' && $docente->name === auth()->user()->name  ) {
+               // Si el estado es 'leido', guardar el id en el arreglo
+                $idsLeidos[] = $notificaciones[$i]->reservas_id;
+            }
+        }
+        // dd($idsLeidos);
         // dd(session('datoAdmin'));
+
+        // Inicializar la variable para contar notificaciones no leídas
+        $datoDocente = 0;
+
+        // Contar las notificaciones no leídas
+        foreach ($notificaciones as $notificacion) {
+            $reserva= Reservas::find($notificacion->reservas_id);
+            $docente=Usuarios::find($reserva->docentes_id);
+            if ($notificacion->EstadoDocente === 'no leido'&& $docente->name === auth()->user()->name) {
+                $datoDocente += 1;
+            }
+        }
         // Guarda el valor actualizado en la sesión
-        session(['datoDocente' => 200]);
+        session(['datoDocente' => $datoDocente]);
+
     
-        return view('notificaciones.lista',compact('menu'));
+        return view('notificaciones.lista',compact('menu','idsLeidos'));
     }
     public function mostrarSugerencia($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->EstadoDocente='leido';
+        $notificacion->save();
         return view('notificaciones.sugerencia',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarAsignacion($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->EstadoDocente='leido';
+        $notificacion->save();
         return view('notificaciones.asignacion',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarRechazo($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
+        $notificacion= Notificaciones::find($notificacionId);
+        $notificacion->EstadoDocente='leido';
+        $notificacion->save();
         return view('notificaciones.rechazo',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarDifusion($notificacionId){
@@ -76,7 +116,8 @@ class NotificacionesController extends Controller
         // dd(count($notificaciones));
 
         for ($i = 0; $i < count($notificaciones); $i++) {
-            if ($notificaciones[$i]->Estado === 'leido') {
+            $reserva= Reservas::find($notificaciones[$i]->reservas_id);
+            if ($notificaciones[$i]->Estado === 'leido' && $reserva->Fuesugerido ==='si') {
                // Si el estado es 'leido', guardar el id en el arreglo
                 $idsLeidos[] = $notificaciones[$i]->reservas_id;
             }
@@ -94,7 +135,8 @@ class NotificacionesController extends Controller
 
     // Contar las notificaciones no leídas
     foreach ($notificaciones as $notificacion) {
-        if ($notificacion->Estado === 'no leido') {
+        $reserva= Reservas::find($notificacion->reservas_id);
+        if ($notificacion->Estado === 'no leido'&& $reserva->Fuesugerido ==='si') {
             $dato += 1;
         }
     }

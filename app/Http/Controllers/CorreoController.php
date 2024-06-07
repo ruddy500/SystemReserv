@@ -135,8 +135,17 @@ class CorreoController extends Controller
 
         //luego entra aqui segundo correo.php
         // Enviar correo
+        $datosReserva = null;
+       if($tipoSeleccionado != "rechazar"){
         $datosReserva = $this->getDatosReserva($idReserva);
         Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+        
+       }else{
+        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+        
+       }
+            
+        
         
 
         $menu = view('componentes/menu'); // Crear la vista del menú
