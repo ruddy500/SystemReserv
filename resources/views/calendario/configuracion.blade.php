@@ -129,8 +129,18 @@
             </div>
         </div>
         <div class="botonGuardar" style="margin-top:20px; text-align: right;">
-            <button type="button" class="btn btn-primary custom-btn">Guardar</button>
+            <button type="button" class="btn btn-primary custom-btn" id="guardarBtn">Guardar</button>
         </div>
     </form>
 </div>
+<script>
+    document.getElementById('guardarBtn').addEventListener('click', function() {
+        Swal.fire({
+            text: 'Configuración guardada exitosamente',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+
+        });
+    });
+</script>
 @endsection
