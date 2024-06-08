@@ -12,28 +12,37 @@
                         <!-- CAMPO NOMBRE DE EVENTO -->
                         <div class="mb-3">
                             <label for="formTitulo-Anuncio" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="titulo-anuncio">
+                            <input type="text" class="form-control" id="titulo-anuncio" required>
+                            <div class="invalid-feedback">
+                               
+                            </div>
                         </div>
-                        <!-- CAMPO FECHA INCIAL -->
+                        <!-- CAMPO FECHA INICIAL -->
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha inicial:</label>
                             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha" class="form-control" type="text" readonly />
+                                <input name="fecha" class="form-control" type="text" readonly required>
                                 <span class="input-group-addon"></span>
+                                <div class="invalid-feedback">
+                                   
+                                </div>
                             </div>
                         </div>
                         <!-- CAMPO FECHA FINAL -->
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha final:</label>
                             <div id="datepicker-final" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha" class="form-control" type="text" readonly />
+                                <input name="fecha" class="form-control" type="text" readonly required>
                                 <span class="input-group-addon"></span>
+                                <div class="invalid-feedback">
+                                    
+                                </div>
                             </div>
                         </div>
                     
                         <div class="modal-footer">
-                            <!-- Agrega un evento onclick para mostrar la alerta de éxito -->
-                            <button type="button" class="btn btn-aceptar" onclick="">Aceptar</button>
+                            <!-- Cambia el tipo de botón a "submit" para el formulario -->
+                            <button type="submit" class="btn btn-aceptar">Aceptar</button>
                             <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
                         </div>    
                     </form>
@@ -42,3 +51,32 @@
         </div>
     </div>
 </div>
+
+<!-- Script de validación y SweetAlert -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var forms = document.querySelectorAll('.needs-validation');
+        
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Evento publicado exitosamente',
+                        confirmButtonText: 'Aceptar'                      
+                    });
+                    // form.reset();
+                    // form.classList.remove('was-validated');
+                    // var modal = bootstrap.Modal.getInstance(document.getElementById('formularioEvento'));
+                    // modal.hide();
+                    //LOGICA PARA CAPTURAR LOS DATOS Y GUARDAR LOS DATOS DEL FORMULARIO
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    });
+</script>
