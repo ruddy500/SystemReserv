@@ -9,6 +9,10 @@ class CalendarioController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('calendario.inicio', compact('menu'));
     }
+    public function mostrarDocente(){
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('calendario.principalDocente', compact('menu'));
+    }
     public function inicio(){
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('calendario.inicio', compact('menu'));
