@@ -135,7 +135,7 @@ Route::get('/calendario/inicio', [CalendarioController::class,'inicio'])->name('
 Route::get('/calendario/evento', [CalendarioController::class,'evento'])->name('calendario.evento');
 Route::get('/calendario/configuracion', [CalendarioController::class,'configuracion'])->name('calendario.configuracion');
 //RUTA PARA CALENDARIO DEL Docente
-Route::get('/calendario', [CalendarioController::class,'mostrarDocente'])->name('calendario.principalDocente');
+// Route::get('/calendario', [CalendarioController::class,'mostrarDocente'])->name('calendario.principalDocente');
 
 // Route::post('/login',[LoginController::class,'logear'])->name('loging');
 /*Route::get('/login', function () {

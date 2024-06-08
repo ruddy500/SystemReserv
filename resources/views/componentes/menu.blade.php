@@ -54,7 +54,7 @@
                          @else
                          <a href="{{ route('inicio') }}" class="nav_link active" title="Inicio" onclick="activarBoton(this)"onclick="activarBoton(this)"> <i class="bi bi-house"></i> <span class="nav_name">Inicio</span> </a>  
                          <a href="{{ route('reservas.principal') }}" class="nav_link" title="Reserva" onclick="activarBoton(this)"><i class="bi bi-journal-check"></i><span class="nav_name">Reservas</span> </a>
-                         <a href="{{ route('calendario.principalDocente') }}" class="nav_link" title="Calendario" onclick=""><i class="bi bi-calendar2-day"></i><span class="nav_name">Calendario</span> </a>
+                         <a href="#" class="nav_link" title="Calendario" onclick=""><i class="bi bi-calendar2-day"></i><span class="nav_name">Calendario</span> </a>
                          @endif
                      @endif
                     
