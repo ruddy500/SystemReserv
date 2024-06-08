@@ -29,7 +29,7 @@
                         <th class="text-center h4 text-black">
                             <div class="d-flex justify-content-center">
                                 <div class="circle5">
-                                    <a href="#" class="btn btn-fab" title="Eliminar"> 
+                                    <a href="#" class="btn btn-fab btn-eliminar" title="Eliminar"> 
                                         <i class="bi bi-trash3-fill" style="color: white;"></i>
                                     </a>						
                                 </div>
@@ -41,4 +41,35 @@
         </table>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.btn-eliminar');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: '¿Está seguro de eliminar el Evento?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28A745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Aquí puedes agregar la lógica para eliminar el anuncio
+                        Swal.fire({
+                            title: 'Eliminado',
+                            text: "¡El evento ha sido eliminado",
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+                        })
+                    }
+                })
+            });
+        });
+    });
+</script>
 @endsection
