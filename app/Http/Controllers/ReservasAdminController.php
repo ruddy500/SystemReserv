@@ -11,6 +11,8 @@ use App\Models\Horarios;
 use App\Models\Ambientes;
 use App\Models\Motivos;
 use App\Models\TipoAmbientes;
+use App\Models\ReservasAmbiente;
+use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
 
 class ReservasAdminController extends Controller
 {
@@ -19,6 +21,70 @@ class ReservasAdminController extends Controller
     {  
 
         $menu = view('componentes/menu'); // Crear la vista del menú
+        
+        // Configurar Carbon para usar el idioma español
+        Carbon::setLocale('es');
+        
+        // Obtener la fecha y hora actual en la misma zona horaria y formatearla
+        $fechaHoraActual = Carbon::now('America/La_Paz');
+
+        $fechaActual = $fechaHoraActual->format('d-m-Y');
+        $horaActual = $fechaHoraActual->format('H:i');
+
+        // $horaPrueba = '14:50';
+        
+        // $fecha2 = "09-06-2024";
+        
+        // Convertir las fechas a instancias de Carbon
+        
+        // $carbonFecha2 = Carbon::createFromFormat('d-m-Y H:i', $fecha2 . ' ' . $horaPrueba);
+        // Convertir la fecha y hora actual a instancias de Carbon
+        $carbonFechaHoraActual = Carbon::createFromFormat('d-m-Y H:i', $fechaActual . ' ' . $horaActual);
+        
+        $reservas=Reservas::all();
+        $horarios =Horarios::all();
+        
+        foreach ($horarios as $horas) {
+            if($horas->Estado===0  ){
+                // echo $horas->id;
+                $idFecha = $horas->fechas_id;
+                $fecha=Fechas::find($idFecha);
+                // obtenemos la fecha de las horarios
+                $dia=$fecha->dia;
+                $mes=$fecha->mes;
+                $parte1 = "20";
+                $parte2 = $fecha->anio;
+                $anio = $parte1 . $parte2;
+                $fechaFormateada = sprintf('%02d-%02d-%04d', $dia, $mes, $anio);
+                // obtenemos los periodos
+                $idperiodo=$horas->periodos_id;
+                $periodo=Periodos::find($idperiodo);
+                $rango=$periodo->HoraIntervalo;
+                // Separar el rango en partes utilizando el delimitador " - "
+                $partes = explode(' - ', $rango);
+                // Obtener la segunda parte del rango que es la hora de finalización
+                $horaFinalizacion = $partes[1];
+                // dd($hora);
+                // dd($fechaFormateada);
+                // echo $horas->id . ' ';
+                // echo $idFecha. ' ';
+                // echo $fechaFormateada . ' ';
+                $horaPrueba =$horaFinalizacion;
+                $fecha2 = $fechaFormateada;
+                $carbonFecha2 = Carbon::createFromFormat('d-m-Y H:i', $fecha2 . ' ' . $horaPrueba);
+                // Comparar las fechas
+                if ($carbonFechaHoraActual->greaterThan($carbonFecha2)) {
+                    // echo "La fecha formateada es mayor que fecha2";
+                    $horas->Estado=1;
+                    $horas->save();
+                    
+                } else {
+                    // echo "La fecha formateada no es mayor que fecha2";
+                }
+                // echo $horaFinalizacion . ' ';
+            }
+            // dd("comprobar");
+        }
         return view('reservas.admin.asignadas', compact('menu'));
     }
 
