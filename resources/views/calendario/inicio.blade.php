@@ -6,7 +6,7 @@
         <div id='calendar'></div>
 </div>
 <!-- sin este script no se podra visulizar el calendario POR LO QUE ES NECESARIO-->
-<script>
+<!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -19,5 +19,5 @@
             });
             calendar.render();
         });
-    </script>
+    </script> -->
 @endsection
