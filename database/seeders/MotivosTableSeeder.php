@@ -22,6 +22,8 @@ class MotivosTableSeeder extends Seeder
                         ]);
         Motivos::create(['Nombre'=>"Examen segunda instancia",
                         ]);
+        Motivos::create(['Nombre'=>"Examen de mesa",
+                        ]);
         Motivos::create(['Nombre'=>"Taller",
                         ]);
         Motivos::create(['Nombre'=>"Seminario",
