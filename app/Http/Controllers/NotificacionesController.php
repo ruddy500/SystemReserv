@@ -292,7 +292,28 @@ class NotificacionesController extends Controller
             'emisor' => $emisor
         ];
         // Enviar correo
-        Mail::to($correoDestino)->send(new Sugerencia($details, $asunto));
+        $andres=$reserva->Tipo;
+        if($andres=="grupal"){
+            $correos=$reserva->docentes_grupal;
+            $tamU=count($correos);
+
+            $usuarios= Usuarios ::all(); //correos users
+            $tamUs=$usuarios->count();
+
+            for($i=0;$i<$tamU;$i++){
+                $idDoc=$correos[$i];
+                for($j=0;$j<$tamUs;$j++){
+                    if($usuarios[$j]->id==$idDoc){
+                        $emailU=$usuarios[$j]->email;
+                        Mail::to($emailU)->send(new Sugerencia($details, $asunto));
+                        //echo "$email<br>";
+                    }
+                }
+            }
+        }else{
+            Mail::to($correoDestino)->send(new Sugerencia($details, $asunto));
+        }
+        
     }
 
     public function Ambiente($reservaId)
