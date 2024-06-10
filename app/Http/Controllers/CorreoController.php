@@ -165,7 +165,7 @@ class CorreoController extends Controller
                     for($j=0;$j<$tamUs;$j++){
                         if($usuarios[$j]->id==$idDoc){
                             $email=$usuarios[$j]->email;
-                            Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+                            Mail::to($email)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
                             //echo "$email<br>";
                         }
                     }
