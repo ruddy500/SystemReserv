@@ -16,19 +16,27 @@
         </div>
     </div>
 </div>
-<script>
 
-document.addEventListener('DOMContentLoaded', function() {
-  const calendarEl = document.getElementById('calendar')
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'es', // Para mostrar el calendario en español
-    events: [
-              { title: 'Evento 1', start: '2024-06-01' },
-              { title: 'Evento 2', start: '2024-06-07', end: '2024-06-10' },
-          ]//ESTOS SON EVENTOS DE PRUEBA, LOS EVENTOS DEBEN CREARSE DESDE UN CONTROLADOR
-  })
-  calendar.render()
-})
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Obtener los eventos pasados desde el controlador
+      const eventos = @json($eventos);
+      const calendarEl = document.getElementById('calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale: 'es', // Para mostrar el calendario en español
+          events: eventos, // Aquí se pasan los eventos obtenidos desde el controlador
+          eventDidMount: function(info) {
+              // Aplica el color de fondo específico a cada evento
+              if (info.event.extendedProps.color) {
+                  info.el.style.backgroundColor = info.event.extendedProps.color;
+              }
+              // Puedes agregar más estilos si es necesario
+           
+          }
+      });
+      calendar.render();
+  });
 </script>
+
 @endsection
