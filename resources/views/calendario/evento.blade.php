@@ -31,9 +31,34 @@
                         <th class="text-center h4 text-black">
                             <div class="d-flex justify-content-center">
                                 <div class="circle5">
-                                    <a href="#" class="btn btn-fab btn-eliminar" title="Eliminar"> 
-                                        <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                    </a>						
+                                    <form method="POST" action="{{ url('/guardar-ids-evento') }}">
+                                        @csrf <!-- Agregar el token CSRF -->
+                                        <a href="#" class="btn btn-fab btn-eliminar" title="Eliminar"> 
+                                            <i class="bi bi-trash3-fill" style="color: white;"></i>
+                                            <input type="hidden" name="id-evento" id="id-evento" value="{{$evento->id}}">
+                                        </a>
+                                            @if(session('success'))
+                                                <script>
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Eliminado',
+                                                        text: '{{ session('success') }}',
+                                                        confirmButtonText: 'Aceptar'
+                                                    });
+                                                </script>
+                                            @endif 
+
+                                            @if(session('message'))
+                                                <script>
+                                                    Swal.fire({
+                                                        icon: 'warning',
+                                                        title: 'Error',
+                                                        text: '{{ session('message') }}',
+                                                        confirmButtonText: 'Aceptar'
+                                                    });
+                                                </script>
+                                            @endif 
+                                    </form>						
                                 </div>
                             </div>
                         </th>
@@ -52,6 +77,7 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
+                const form = this.closest('form');
                 Swal.fire({
                     title: '¿Está seguro de eliminar el Evento?',
                     text: "¡No podrás revertir esto!",
@@ -64,16 +90,13 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Aquí puedes agregar la lógica para eliminar el anuncio
-                        Swal.fire({
-                            title: 'Eliminado',
-                            text: "¡El evento ha sido eliminado",
-                            icon: 'success',
-                            confirmButtonText: 'Aceptar',
-                        })
+                        form.submit(); // Enviar el formulario si el usuario confirma
+                        
                     }
                 })
             });
         });
     });
 </script>
+
 @endsection
