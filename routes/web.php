@@ -137,6 +137,8 @@ Route::get('/calendario/inicio', [CalendarioController::class,'inicio'])->name('
 Route::get('/calendario/evento', [CalendarioController::class,'evento'])->name('calendario.evento');
 Route::post('/calendario/evento/registroEvento', [CalendarioController::class,'registrarEvento'])->name('calendario.evento.registrar');
 Route::get('/calendario/configuracion', [CalendarioController::class,'configuracion'])->name('calendario.configuracion');
+
+Route::post('guardar-ids-evento', [CalendarioController::class, 'eliminar'])->name('guardar-ids-evento'); //para eliminar eventos
 //RUTA PARA CALENDARIO DEL DOCENTE
 Route::get('/calendario/principalDocente', [CalendarioController::class,'mostrarDocente'])->name('calendario.principalDocente');
 

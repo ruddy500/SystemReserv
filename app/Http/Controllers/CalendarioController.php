@@ -73,4 +73,17 @@ class CalendarioController extends Controller
         // return view('calendario.evento', compact('menu'));
         return redirect()->route('calendario.evento');
     }
+
+    public function eliminar(Request $request){
+        $id = $request->input('id-evento');
+        $evento = Eventos::find($id);// Busca el evento por su ID
+        if($evento){
+            $evento->delete();
+            $menu = view('componentes/menu'); // Crear la vista del menú
+            return redirect()->route('calendario.evento',compact('menu'))->with('success', '¡El evento ha sido eliminado');
+        }else{
+            $menu = view('componentes/menu'); // Crear la vista del menú
+            return redirect()->route('calendario.evento',compact('menu'))->with('message', '¡Error al eliminar');
+        }
+    }
 }
