@@ -62,6 +62,7 @@
       @yield('anuncios')
 
       @yield('calendario/principal')
+      @yield('calendario/principalDocente')
 
 
 
