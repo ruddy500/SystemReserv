@@ -8,11 +8,13 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <form id="formulario-anuncio" action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <form id="formulario-anuncio" action="{{ route('calendario.evento.registrar') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        @csrf
+                      
                         <!-- CAMPO NOMBRE DE EVENTO -->
                         <div class="mb-3">
                             <label for="formTitulo-Anuncio" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="titulo-anuncio" required>
+                            <input name="nombre_evento" type="text" class="form-control" id="titulo-anuncio" required>
                             <div class="invalid-feedback">
                                
                             </div>
@@ -21,7 +23,7 @@
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha inicial:</label>
                             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha" class="form-control" type="text" readonly required>
+                                <input name="fecha_inicial" class="form-control" type="text" readonly required>
                                 <span class="input-group-addon"></span>
                                 <div class="invalid-feedback">
                                    
@@ -32,7 +34,7 @@
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha final:</label>
                             <div id="datepicker-final" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha" class="form-control" type="text" readonly required>
+                                <input name="fecha_final" class="form-control" type="text" readonly required>
                                 <span class="input-group-addon"></span>
                                 <div class="invalid-feedback">
                                     
@@ -63,7 +65,7 @@
                     event.preventDefault();
                     event.stopPropagation();
                 } else {
-                    event.preventDefault();
+                    // event.preventDefault();
                     Swal.fire({
                         icon: 'success',
                         text: 'Evento publicado exitosamente',

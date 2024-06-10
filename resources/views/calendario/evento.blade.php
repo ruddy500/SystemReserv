@@ -1,6 +1,7 @@
 @extends('calendario/principal')
 
 @section('contenido-evento')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="cont-envento">
     <div class="boton-evento">
         <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal" data-bs-target="#formularioEvento" data-bs-whatever="@mdo" style="margin-top:20px;">Registrar evento</button>
@@ -20,11 +21,12 @@
 			</thead>
             <!-- CONTENIDO TABLA -->
             <tbody> 
+                @foreach ( $eventos as $evento )
                 <thead class="bg-custom-lista-fila-blanco">
                     <tr>
-                        <th class="text-center h4 text-black">Dia del ingeniebrio</th>
-                        <th class="text-center h4 text-black">21-05-2024</th>
-                        <th class="text-center h4 text-black">21-05-2024</th>
+                        <th class="text-center h4 text-black">{{ $evento->Nombre }}</th>
+                        <th class="text-center h4 text-black">{{ $evento->FechaInicial }}</th>
+                        <th class="text-center h4 text-black">{{ $evento->FechaFinal }}</th>
                         <!-- BOTON ELIMINAR EVENTOS -->
                         <th class="text-center h4 text-black">
                             <div class="d-flex justify-content-center">
@@ -37,6 +39,8 @@
                         </th>
                     </tr>
                 </thead>
+                @endforeach
+              
             </tbody>
         </table>
     </div>

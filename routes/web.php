@@ -135,6 +135,7 @@ Route::post('/guardar-ids', [AnunciosController::class, 'eliminar'])->name('guar
 Route::get('/calendario', [CalendarioController::class,'mostrar'])->name('calendario.principal');
 Route::get('/calendario/inicio', [CalendarioController::class,'inicio'])->name('calendario.inicio');
 Route::get('/calendario/evento', [CalendarioController::class,'evento'])->name('calendario.evento');
+Route::post('/calendario/evento/registroEvento', [CalendarioController::class,'registrarEvento'])->name('calendario.evento.registrar');
 Route::get('/calendario/configuracion', [CalendarioController::class,'configuracion'])->name('calendario.configuracion');
 //RUTA PARA CALENDARIO DEL DOCENTE
 Route::get('/calendario/principalDocente', [CalendarioController::class,'mostrarDocente'])->name('calendario.principalDocente');

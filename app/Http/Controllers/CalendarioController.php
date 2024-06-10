@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Eventos;
 use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
@@ -19,10 +21,27 @@ class CalendarioController extends Controller
     }
     public function evento(){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('calendario.evento', compact('menu'));
+        $eventos = Eventos::all();
+        return view('calendario.evento', compact('menu','eventos'));
     }
     public function configuracion(){
         $menu = view('componentes/menu'); // Crear la vista del menú
         return view('calendario.configuracion', compact('menu'));
+    }
+
+    public function registrarEvento(Request $request){
+
+        $nombre = $request->nombre_evento;
+        $fechaIni = $request->fecha_inicial;
+        $fechaFin = $request->fecha_final;
+
+        $evento = new Eventos();
+        $evento->Nombre = $nombre;
+        $evento->FechaInicial = $fechaIni;
+        $evento->FechaFinal = $fechaFin;
+        $evento->save();
+
+        // return view('calendario.evento', compact('menu'));
+        return redirect()->route('calendario.evento');
     }
 }
