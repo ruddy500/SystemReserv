@@ -81,13 +81,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
-    <!-- Incluye Moment.js si es necesario -->
-    <!-- <script src='https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js'></script> -->
-    <!-- Incluye el JS de FullCalendar -->
-    <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script> -->
-    <!-- Opcional: incluye jQuery y Bootstrap JS si decides usarlos -->
-    <!-- <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script> -->
-    <!-- <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script> -->
+    <!-- ESCRIPT PARA FULLCALENDAR -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
     </body>
     
 </html>
