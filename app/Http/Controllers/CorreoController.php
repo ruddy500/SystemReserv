@@ -50,7 +50,7 @@ class CorreoController extends Controller
         ];
 
         //***** Creacion de notificaciones *****
-    
+   
         $reserva = Reservas::where('id',$idReserva)->first(); 
         $idDocente = $reserva->docentes_id;
 

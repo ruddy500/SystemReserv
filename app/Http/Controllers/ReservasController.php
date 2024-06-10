@@ -261,7 +261,6 @@ class ReservasController extends Controller
         $options = $request->input('options');
         $fecha = $request->input('fecha');
 
-       
 
 
 
@@ -276,6 +275,10 @@ class ReservasController extends Controller
         }
 
         $materias = json_decode($request->input('materias'), true);
+
+        // dd($materias);
+        $docentesId = $this->getDocentes($materias);
+        // dd($docentesId);
 
         $cantidadIngresada = $request->cantidad;
         $motivoSeleccionado = $request->motivo;
@@ -296,6 +299,7 @@ class ReservasController extends Controller
         $reserva->CantEstudiante = $cantidadIngresada;
         $reserva->motivos_id = $id_Motivo;
         $reserva->docentes_id = $request->usuario;
+        $reserva->docentes_grupal = $docentesId;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "grupal";
         $reserva->fecha = $fecha;
@@ -331,6 +335,18 @@ class ReservasController extends Controller
 
         // redirigimos a la ruta 
         return redirect()->route('reservas.principal');
+    }
+
+    public function getDocentes($materiasId){
+      $docentes = [];
+
+      foreach ($materiasId as $materiaId) {
+        $docenteId = DocentesMaterias::where('materias_id',$materiaId)->first();
+        $docentes[]= $docenteId->docentes_id;
+
+      }
+      $docentesUnicos = array_unique($docentes);
+        return $docentesUnicos;
     }
     
     public function actualizarReserva(Request $request, $idReserva){

@@ -8,9 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Reservas extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'CantEstudiante',
+        'TotalEstudiantes',
+        'Tipo',
+        'Estado',
+        'fecha',
+        'TipoAmbiente',
+        'Fuesugerido',
+        'motivos_id',
+        'docentes_grupal', // Asegúrate de que esto esté en los fillables
+    ];
+    protected $casts = [
+        'docentes_grupal' => 'array', // Esto permite que Laravel maneje automáticamente el almacenamiento como JSON
+    ];
+    
     public $timestamps = false;
     protected $table = 'reservas';
 
+    
     public function docente(){
         return $this->belongsTo(Usuarios::class, 'docentes_id');
     }
