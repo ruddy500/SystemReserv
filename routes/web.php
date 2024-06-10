@@ -128,7 +128,9 @@ Route::get('/informes/pdf', [InformesController::class, 'generarPDF'])->name('in
 
 //RUTA PARA ANUNCIOS
 Route::get('/anuncios', [AnunciosController::class, 'mostrar'])->name('anuncios.index');
+Route::post('/guardar-anuncio', [AnunciosController::class, 'guardar'])->name('guardar-anuncio'); //guarda los anuncios no dormi Arnolin
 
+Route::post('/guardar-ids', [AnunciosController::class, 'eliminar'])->name('guardar-ids'); //para eliminar
 //RUTA PARA CALENDARIO DEL ADMINISTRADOR
 Route::get('/calendario', [CalendarioController::class,'mostrar'])->name('calendario.principal');
 Route::get('/calendario/inicio', [CalendarioController::class,'inicio'])->name('calendario.inicio');

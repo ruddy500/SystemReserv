@@ -17,7 +17,8 @@ class CreateAnunciosTable extends Migration
             $table->id();
             $table->string('Titulo',100)->nullable();
             $table->text('Contenido')->nullable();
-            
+            $table->string('Fecha')->nullable();
+            $table->string('Hora')->nullable();
         });
     }
 

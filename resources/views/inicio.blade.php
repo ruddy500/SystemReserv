@@ -79,18 +79,14 @@
                         </div>
                         <!-- LISTA DE ANUNCIOS -->
                         <div class="lista-anuncios">
-                            <div class="card c-anuncio">
-                                <div class="card-body">
-                                    <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i>    Titulo del anuncio</h5>
-                                    <p class="card-text"> Aqui viene el Texto del anuncio</p>
+                            @for ($i=0;$i<$tam;$i++)
+                                <div class="card c-anuncio">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i>    {{$anuncios[$i]->Titulo}}</h5>
+                                        <p class="card-text"> {{$anuncios[$i]->Contenido}}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card c-anuncio ">
-                                <div class="card-body">
-                                    <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i>    Titulo del anuncio</h5>
-                                    <p class="card-text">Aqui viene el Texto del anuncio</p>
-                                </div>
-                            </div>
+                            @endfor
                         </div>
                     </div>
                 </div>
@@ -107,11 +103,11 @@
                             <!-- DATOS INFORMACION USUARIO -->
                             <ul class="list-group">
                                 <li class="list-group-item list-group-item-dark">Tipo de usuario</li>
-                                <li class="list-group-item">Administrador</li>
+                                <li class="list-group-item">{{auth()->user()->role}}</li>
                                 <li class="list-group-item list-group-item-dark">Nombre de usuario</li>
-                                <li class="list-group-item">Henrry Cavill</li>
+                                <li class="list-group-item">{{auth()->user()->name}}</li>
                                 <li class="list-group-item list-group-item-dark">Email</li>
-                                <li class="list-group-item">adEnterpriseSoft@gmail.com</li>
+                                <li class="list-group-item">{{auth()->user()->email}}</li>
                             </ul>
                             <div class="text-center">
                                 <img src="{{ asset('imagenes/logoUmss-01.png') }}" alt="l" class="logo-umss">
