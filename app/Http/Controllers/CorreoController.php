@@ -136,14 +136,51 @@ class CorreoController extends Controller
         //luego entra aqui segundo correo.php
         // Enviar correo
         $datosReserva = null;
-       if($tipoSeleccionado != "rechazar"){
-        $datosReserva = $this->getDatosReserva($idReserva);
-        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
-        
-       }else{
-        Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
-        
-       }
+
+        $andres=$reserva->Tipo;
+
+        if($andres=="grupal"){ //grupal
+
+            $correos=$reserva->docentes_grupal;
+            $tamU=count($correos);
+
+            $usuarios= Usuarios ::all(); //correos users
+            $tamUs=$usuarios->count();
+
+            if($tipoSeleccionado != "rechazar"){
+                for($i=0;$i<$tamU;$i++){
+                    $idDoc=$correos[$i];
+                    for($j=0;$j<$tamUs;$j++){
+                        if($usuarios[$j]->id==$idDoc){
+                            $email=$usuarios[$j]->email;
+                            $datosReserva = $this->getDatosReserva($idReserva);
+                            Mail::to($email)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+                            //echo "$email<br>";
+                        }
+                    }
+                }
+            }else{
+                for($i=0;$i<$tamU;$i++){
+                    $idDoc=$correos[$i];
+                    for($j=0;$j<$tamUs;$j++){
+                        if($usuarios[$j]->id==$idDoc){
+                            $email=$usuarios[$j]->email;
+                            Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+                            //echo "$email<br>";
+                        }
+                    }
+                }
+            }
+        }else{//si es individual
+            if($tipoSeleccionado != "rechazar"){
+                $datosReserva = $this->getDatosReserva($idReserva);
+                Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+                
+               }else{
+                Mail::to($correoDestino)->send(new Correo($details, $asunto,$tipoSeleccionado,$idReserva,$datosReserva));
+               }
+        }
+       
             
         
         
