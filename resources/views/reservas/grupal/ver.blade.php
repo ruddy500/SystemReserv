@@ -33,7 +33,7 @@ $reserva = Reservas::find($idReserva); //extraemos la reserva actual
 $motivoReserva = $reserva->motivo->Nombre;
 
 $reservaMateria = Reservas::with('materiasSeleccionado')->find($idReserva);
-
+// dd($reservaMateria);
 if ($reservaMateria) {
     $numeros = $reservaMateria->materiasSeleccionado->pluck('materias_id')->toArray();
     // Aquí $numeros contendrá los números (idMateria) de las materias seleccionadas de la reserva con ID 1
@@ -154,6 +154,7 @@ $tamPeriodosSeleccionado = count($periodosSeleccionados);
                                 </thead>
                                 <thead class="text-center">
                                     <tbody class="text-center">
+                                        
                                         @foreach($numeros as $numero)
                                         <tr>
                                             <?php 
