@@ -33,7 +33,11 @@
             
             <tbody> 
                 @foreach ($reservasAsig as $reserva)
-                    @if ($reserva->docentes_id == auth()->user()->id)
+                    @php
+                    $docentesReserva = $reserva->docentes_grupal; //arreglo con id de los Docentes
+                    
+                    @endphp
+                    @if ((is_array($docentesReserva) && in_array(auth()->user()->id, $docentesReserva)) || ($docentesReserva === null && auth()->user()->id === $reserva->docentes_id))
                         @php
                             $idReserva = $reserva->id;
                             $tipo = $reserva->Tipo;
