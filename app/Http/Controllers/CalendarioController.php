@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eventos;
+use App\Models\ConfiguracionCalendario;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -84,6 +85,56 @@ class CalendarioController extends Controller
 
         // return view('calendario.evento', compact('menu'));
         return redirect()->route('calendario.evento');
+    }
+
+    public function configurarCalendario(Request $request){
+
+        $fechaIniSemestre = $request->fecha_i;
+        $fechaFinSemestre = $request->fecha_f;
+
+        $fechaIniMesa = $request->fecha_ini_mesa;
+        $fechaFinMesa = $request->fecha_fin_mesa;
+        //$nombre = $request->nombre_evento;
+        $fechaIni = $request->fecha_ini_primer;
+        $fechaFin = $request->fecha_fin_primer;
+      //  dd($fechaIni,$fechaFin);
+        $fechaIni2 = $request->fecha_ini_segundo;
+        $fechaFin2 = $request->fecha_fin_segundo;
+
+        $fechaIni3 = $request->fecha_ini_tercero;
+        $fechaFin3 = $request->fecha_fin_tercero;
+
+        $confiSemestre = new ConfiguracionCalendario();
+        $confiSemestre->CicloExamen = "Semestre";
+        $confiSemestre->FechaInicial = $fechaIniSemestre;
+        $confiSemestre->FechaFinal = $fechaFinSemestre;
+        $confiSemestre->save();
+
+        $confiMesa = new ConfiguracionCalendario();
+        $confiMesa->CicloExamen = "Mesa";
+        $confiMesa->FechaInicial = $fechaIniMesa;
+        $confiMesa->FechaFinal = $fechaFinMesa;
+        $confiMesa->save();
+
+        $confi = new ConfiguracionCalendario();
+        $confi->CicloExamen = "PrimerParcial";
+        $confi->FechaInicial = $fechaIni;
+        $confi->FechaFinal = $fechaFin;
+        $confi->save();
+
+        $confi2 = new ConfiguracionCalendario();
+        $confi2->CicloExamen = "SegundoParcial";
+        $confi2->FechaInicial = $fechaIni2;
+        $confi2->FechaFinal = $fechaFin2;
+        $confi2->save();
+
+        $confi3 = new ConfiguracionCalendario();
+        $confi3->CicloExamen = "Final";
+        $confi3->FechaInicial = $fechaIni3;
+        $confi3->FechaFinal = $fechaFin3;
+        $confi3->save();
+        // return view('calendario.evento', compact('menu'));
+        return redirect()->route('calendario.configuracion');
     }
 
     public function eliminar(Request $request){
