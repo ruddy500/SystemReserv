@@ -9,7 +9,7 @@
       font-weight: bold;
       text-align: center;
     }
-    .list-group-item {
+    .mod{
       text-align: center;
     }
     .ml-3 { 
@@ -39,7 +39,7 @@
         color:$orange-100 ;
     }
     .c-anuncio {
-      background-color:#ffeeba;
+      background-color:#ffeeba75;
       margin-top: 15px;
     }
     .texto-bienv p {
@@ -60,24 +60,34 @@
             <div class="col-md-9">
                 <div class="card custom-width mt-3">
                     <div class="card-body">
-                        <h5 class="card-title" style="text-align: center;">Bienvenidos al sistema de reservas  de la FCyT</h5>
-                        <!-- BIENVENIDA DEL SISTEMA -->
-                        <div class="container bienvenida-sistema">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="texto-bienv">
-                                        <p><small>La Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón (UMSS) fue fundada en la década del 60 como un Instituto de Ciencias Básicas.</small></p>
-                                        <p><small>En 1972, se creó la Facultad de Ciencias Puras y Naturales, que posteriormente se convirtió en la Facultad de Ciencias y Tecnología en 1979.</small></p>
-                                        <p><small>Esta facultad alberga programas académicos en diversas áreas científicas y tecnológicas, incluyendo ingeniería eléctrica, industrial y mecánica, entre otros.</small></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="picture-fcyt">
-                                        <img src="{{ asset('imagenes/fcytPicture.jpg') }}" alt="l" class="fotofacultad">
-                                    </div>
-                                </div>
+                        <h5 class="card-title" style="text-align: center; color: #2B4C6F; font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0); -webkit-text-stroke: 1px;">Bienvenidos al sistema de reservas de la FCyT</h5>
+
+                        <hr style="margin-top:0.1px; margin-bottom: 0.1px;">
+                        <div style="background-color: #f0f0f0; height: 35px;">
+                            <div class="titulo-reglas" style="margin-top:0.1px;">
+                                <label class="col-form-label">Uso de ambientes</label>
                             </div>
                         </div>
+                        <hr style="margin-top:0.1px;">
+                        <!-- aqui poner las reglas de uso de ambiente poner la semilla-->
+                            <div class="texto-bienv">
+                                <!-- PONER TITULO AQUI -->
+                                <div class="titulo-regla-ambiente">
+                                    <label class="col-form-label">Reglas:</label>
+                                </div>
+                                <!-- Crear dinamicamente cuando se registren las reglas -->
+                                <p><small>1. bla bla bla bla</small></p>
+                                <p><small>2. bla bla bla bla</small></p>
+                                <p><small>3. bla bla bla bla</small></p>
+                                <p><small>4. bla bla bla bla</small></p>
+                            </div>
+                        <hr style="margin-bottom: 0.1px;">
+                        <div style="background-color: #f0f0f0; height: 35px;">
+                            <div class="titulo-anuncio" style="margin-top:0.1px;">
+                                <label class="col-form-label">Anuncios importantes</label>
+                            </div>
+                        </div>
+                        <hr style="margin-top:0.1px;">
                         <!-- LISTA DE ANUNCIOS -->
                         <div class="lista-anuncios">
                             @for ($i=0;$i<$tam;$i++)
@@ -103,12 +113,12 @@
                             </div>
                             <!-- DATOS INFORMACION USUARIO -->
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-dark">Tipo de usuario</li>
-                                <li class="list-group-item">{{auth()->user()->role}}</li>
-                                <li class="list-group-item list-group-item-dark">Nombre de usuario</li>
-                                <li class="list-group-item">{{auth()->user()->name}}</li>
-                                <li class="list-group-item list-group-item-dark">Email</li>
-                                <li class="list-group-item">{{auth()->user()->email}}</li>
+                                <li class="list-group-item mod list-group-item-dark">Tipo de usuario</li>
+                                <li class="list-group-item mod">{{auth()->user()->role}}</li>
+                                <li class="list-group-item mod list-group-item-dark">Nombre de usuario</li>
+                                <li class="list-group-item mod">{{auth()->user()->name}}</li>
+                                <li class="list-group-item mod list-group-item-dark">Email</li>
+                                <li class="list-group-item mod">{{auth()->user()->email}}</li>
                             </ul>
                             <div class="text-center">
                                 <img src="{{ asset('imagenes/logoUmss-01.png') }}" alt="l" class="logo-umss">

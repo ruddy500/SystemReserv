@@ -6,10 +6,17 @@
         <h3 class="card-header">Anuncios</h3>
         <div class="card-body">
             <div class="boton-anuncio">
-                <button type="button" class="btn btn-primary custom-btn" data-bs-toggle="modal" data-bs-target="#formularioAnuncio" data-bs-whatever="@mdo">Registrar anuncio</button>
+                <button type="button" class="btn btn-primary dropdown-toggle custom-btn" data-bs-toggle="dropdown" aria-expanded="false">
+				Registrar
+				</button>
+				<ul class="dropdown-menu">
+				<li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formularioAnuncio" data-bs-whatever="@mdo">Anuncios</button></li>
+			    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formularioReglas" data-bs-whatever="@mdo">Reglas</button></li>
+				</ul>
             </div>
-            <!-- INCLUYE EL MODAL DE REGISTRO DE ANUNCIO-->
+            <!-- INCLUYE EL MODAL DE REGISTRO DE ANUNCIO Y REGLAS-->
             @include('anuncios.registro')
+            @include('anuncios.reglas')
             <!-- TABLA DE LISTA DE ANUNCIOS -->
             <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
                 <table class="table table-striped table-hover table-bordered">
@@ -18,6 +25,7 @@
                             <th class="text-center h4 text-white">Fecha</th>
                             <th class="text-center h4 text-white">Hora</th>
                             <th class="text-center h4 text-white">Titulo</th>
+                            <th class="text-center h4 text-white">Tipo</th>
                             <th class="text-center h4 text-white">Opciones</th>
                         </tr>
                     </thead>
@@ -27,6 +35,7 @@
                                 <td class="text-center h4 text-black">{{$anuncios[$i]->Fecha}}</td>
                                 <td class="text-center h4 text-black">{{$anuncios[$i]->Hora}}</td>
                                 <td class="text-center h4 text-black">{{$anuncios[$i]->Titulo}}</td>
+                                <td class="text-center h4 text-black">PONER AQUI EL TIPO: Regla o anuncio</td>
                                 <!-- BOTON ELIMINAR ANUNCIO -->
                                 <td class="text-center h4 text-black">
                                     <div class="d-flex justify-content-center">

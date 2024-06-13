@@ -124,6 +124,13 @@
                     </tbody>
                 </table>
             </div>
+            <!-- PONER AQUI AMBIENTES MAS USADO Y MENOS USADO -->
+            <div class="Ambientemasusado">
+                <label class="col-form-label">Ambiente más usado: 690A 70 Veces asignado</label>
+            </div>
+            <div class="Ambientemenosusado">
+                <label class="col-form-label">Ambiente menos usado: Auditorio 2 veces asignado</label>
+            </div>
             <!-- TOP 10 DE LOS AMBIENTES MAS USADOS -->
             <!-- <div class="Ambientesusados">
                 <label class="col-form-label">Top 10 ambientes más usados:</label>
