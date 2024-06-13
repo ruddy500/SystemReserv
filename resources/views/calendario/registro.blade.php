@@ -80,5 +80,15 @@
                 form.classList.add('was-validated');
             }, false);
         });
+
+        // Añadir evento al botón "Cancelar"
+        document.querySelector('.btn-cancelar').addEventListener('click', function () {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Evento cancelado',
+                confirmButtonText: 'Aceptar',
+            }).then((result) => {
+            });
+        });
     });
 </script>
