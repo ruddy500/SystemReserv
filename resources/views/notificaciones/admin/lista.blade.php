@@ -12,6 +12,7 @@ $notificaciones = Notificaciones::all();
 // dd($idsLeidos);
 ?>
 @section('notificaciones/admin/lista')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="container mt-3">
 	<div class="card">
 		<h3 class="card-header">Historial de notificaciones</h3>

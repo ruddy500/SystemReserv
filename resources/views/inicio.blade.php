@@ -3,6 +3,7 @@
 
 
 @section('inicio')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <style>
     .list-group-item-dark {
       font-weight: bold;

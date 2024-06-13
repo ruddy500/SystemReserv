@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('notificaciones/lista')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <?php
 use App\Models\UsuariosNotificacion;
 use App\Models\Reservas;
@@ -17,7 +18,8 @@ $notificaciones = Notificaciones::all();
             <div class="list-group">
 
                 @foreach ( $notificaciones as $notificacion)
-                    <?php
+                @if ($notificacion->Tipo != "difusion")
+                <?php
                        
                         $fecha = Carbon::parse($notificacion->fechaEnvio)->locale('es');
                         // Formatear la fecha de envío
@@ -34,7 +36,8 @@ $notificaciones = Notificaciones::all();
                         $registroUN = UsuariosNotificacion::where('notificaciones_id',$idNotificacion)->first();
                         $idDocente = $registroUN->usuarios_id;
 
-                    ?>
+                ?>
+
                     @if ($tipo == "individual")
                        
                         @if ($idDocente == auth()->user()->id)
@@ -86,7 +89,7 @@ $notificaciones = Notificaciones::all();
                                         </a>
                                         
                                         @break
-                                    @case('rechazado')
+                                    @default
                                         <!-- NOTIFICACION DE RECHAZO -->
                                         <a href="{{ route('notificaciones.rechazo',['reservaId' => $idReserva,'notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
                                             <div class="d-flex w-100 justify-content-between">
@@ -110,19 +113,8 @@ $notificaciones = Notificaciones::all();
                                     
                                         @break
                                 
-                                    @default
-                                        <!-- NOTIFICACION MENSAJE MASIVO -->
-                                        <a href="{{ route('notificaciones.difusion',['notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action list-group-item-info" onclick="openNotification(this)">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
-                                                <div class="position-relative">
-                                                    <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
-                                                    <span class="notification-dot"></span>
-                                                </div>
-                                            </div>
-                                            <p class="mb-1">adaEnterprissoft@gmail.com</p>
-                                        </a>
-                            @endswitch
+                                    
+                                @endswitch
                         @endif
 
                         
@@ -183,7 +175,7 @@ $notificaciones = Notificaciones::all();
                                             </a>
                                             
                                             @break
-                                        @case('rechazado')
+                                        @default
                                       
                                             <!-- NOTIFICACION DE RECHAZO -->
                                             <a href="{{ route('notificaciones.rechazo',['reservaId' => $idReserva,'notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action" onclick="openNotification(this)">
@@ -208,24 +200,38 @@ $notificaciones = Notificaciones::all();
                                         
                                             @break
                                     
-                                        @default
-                                            <!-- NOTIFICACION MENSAJE MASIVO -->
-                                            <a href="{{ route('notificaciones.difusion',['notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action list-group-item-info" onclick="openNotification(this)">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
-                                                    <div class="position-relative">
-                                                        <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
-                                                        <span class="notification-dot"></span>
-                                                    </div>
-                                                </div>
-                                                <p class="mb-1">adaEnterprissoft@gmail.com</p>
-                                            </a>
-                                @endswitch
+                                        
+                                        @endswitch
                             @endif
                         @endforeach
                         
                     @endif
                   
+                @else 
+                <?php
+                       
+                        $fecha = Carbon::parse($notificacion->fechaEnvio)->locale('es');
+                        // Formatear la fecha de envío
+                        $fechaEnvioFormateada = $fecha->isoFormat('D [de] MMMM');
+                        // dd($fecha,$fechaEnvioFormateada);
+                       
+                        $idNotificacion = $notificacion->id;
+        
+                ?>
+                <!-- NOTIFICACION MENSAJE MASIVO -->
+                <a href="{{ route('notificaciones.difusion',['notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action list-group-item-info" onclick="openNotification(this)">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
+                        <div class="position-relative">
+                            <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
+                            <span class="notification-dot"></span>
+                        </div>
+                    </div>
+                    <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                </a>
+
+                @endif
+                    
                 @endforeach
                
                

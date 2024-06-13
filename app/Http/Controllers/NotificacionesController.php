@@ -28,35 +28,43 @@ class NotificacionesController extends Controller
         $menu = view('componentes/menu'); // Crear la vista del menú
         // dd(auth()->user()->name);
         $notificaciones = Notificaciones::all();
-
+      
         // Inicializar un arreglo para almacenar los IDs
         $idsLeidos = [];
-
-        // dd(count($notificaciones));
-
-        for ($i = 0; $i < count($notificaciones); $i++) {
-            $reserva= Reservas::find($notificaciones[$i]->reservas_id);
-            $docente=Usuarios::find($reserva->docentes_id);
-            // dd($docente);
-            if ($notificaciones[$i]->EstadoDocente === 'leido' && $docente->name === auth()->user()->name  ) {
-               // Si el estado es 'leido', guardar el id en el arreglo
-                $idsLeidos[] = $notificaciones[$i]->reservas_id;
-            }
-        }
-        // dd($idsLeidos);
-        // dd(session('datoAdmin'));
-
         // Inicializar la variable para contar notificaciones no leídas
         $datoDocente = 0;
 
-        // Contar las notificaciones no leídas
-        foreach ($notificaciones as $notificacion) {
-            $reserva= Reservas::find($notificacion->reservas_id);
-            $docente=Usuarios::find($reserva->docentes_id);
-            if ($notificacion->EstadoDocente === 'no leido'&& $docente->name === auth()->user()->name) {
-                $datoDocente += 1;
+        // dd(count($notificaciones));
+        
+           
+            for ($i = 0; $i < count($notificaciones); $i++) {
+                $tipo = $notificaciones[$i]->Tipo;
+                
+                if($tipo != "difusion"){
+                    $reserva= Reservas::find($notificaciones[$i]->reservas_id);
+                    $docente=Usuarios::find($reserva->docentes_id);
+                    if ($notificaciones[$i]->EstadoDocente === 'leido' && $docente->name === auth()->user()->name  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                         $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                     }
+                }
+                
             }
-        }
+             // Contar las notificaciones no leídas
+            foreach ($notificaciones as $notificacion) {
+                $tipo = $notificacion->Tipo;
+                if($tipo != "difusion"){
+                    $reserva= Reservas::find($notificacion->reservas_id);
+                    $docente=Usuarios::find($reserva->docentes_id);
+                    if ($notificacion->EstadoDocente === 'no leido'&& $docente->name === auth()->user()->name) {
+                        $datoDocente += 1;
+                    }
+                }
+                
+            }
+
+        
+
         // Guarda el valor actualizado en la sesión
         session(['datoDocente' => $datoDocente]);
 
@@ -105,42 +113,49 @@ class NotificacionesController extends Controller
 
     //CONTROLADORES ADMINISTRADOR
     public function mostrarListaAdmin(){
+        
         $menu = view('componentes/menu'); // Crear la vista del menú
 
         // Obtener todas las notificaciones
         $notificaciones = Notificaciones::all();
-
+    
         // Inicializar un arreglo para almacenar los IDs
         $idsLeidos = [];
+        
+        // Inicializar la variable para contar notificaciones no leídas
+        $dato = 0;
 
         // dd(count($notificaciones));
 
-        for ($i = 0; $i < count($notificaciones); $i++) {
-            $reserva= Reservas::find($notificaciones[$i]->reservas_id);
-            if ($notificaciones[$i]->Estado === 'leido' && $reserva->Fuesugerido ==='si') {
-               // Si el estado es 'leido', guardar el id en el arreglo
-                $idsLeidos[] = $notificaciones[$i]->reservas_id;
+            for ($i = 0; $i < count($notificaciones); $i++) {
+                $tipo = $notificaciones[$i]->Tipo;
+                if($tipo != "difusion"){
+                    $reserva= Reservas::find($notificaciones[$i]->reservas_id);
+                    if ($notificaciones[$i]->Estado === 'leido' && $reserva->Fuesugerido ==='si') {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                    }
+                }
+                
             }
-        }
 
-        // dd($idsLeidos);
-        // // Verificar si el ID 3 está en el arreglo
-        // $idABuscar = 6;
-        // $idPresente = in_array($idABuscar, $idsLeidos);
-        // dd($idPresente);
+            
 
+            // Contar las notificaciones no leídas
+            foreach ($notificaciones as $notificacion) {
+                $tipo = $notificacion->Tipo;
+                
+                if($tipo != "difusion"){
+                    $reserva= Reservas::find($notificacion->reservas_id);
+                    if ($notificacion->Estado === 'no leido'&& $reserva->Fuesugerido ==='si') {
+                        $dato += 1;
+                    }
+                }
+                
+            }
+        
 
-        // Inicializar la variable para contar notificaciones no leídas
-    $dato = 0;
-
-    // Contar las notificaciones no leídas
-    foreach ($notificaciones as $notificacion) {
-        $reserva= Reservas::find($notificacion->reservas_id);
-        if ($notificacion->Estado === 'no leido'&& $reserva->Fuesugerido ==='si') {
-            $dato += 1;
-        }
-    }
-
+        
     // Guarda el valor actualizado en la sesión
     session(['datoAdmin' => $dato]);
 
