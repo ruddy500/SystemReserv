@@ -23,8 +23,20 @@ class CalendarioController extends Controller
                 'textColor' => 'white', 
             ];
         });
+
+        $configuraciones = ConfiguracionCalendario::all()->map(function ($configuracion) {
+            return [
+                'title' => $configuracion->CicloExamen,
+                'start' => Carbon::parse($configuracion->FechaInicial)->toDateString(),
+                'end' => Carbon::parse($configuracion->FechaFinal)->addDay()->toDateString(),
+                // 'end' => Carbon::parse($evento->FechaFinal)->toDateString(),
+                'display'=> 'background',
+                'color'=>'#CCFFCC',// Color de fondo del evento (verde claro)
+                'textColor' => 'white', 
+            ];
+        });
     
-        return view('calendario.inicio', compact('menu','eventos'));
+        return view('calendario.inicio', compact('menu','eventos','configuraciones'));
     }
 
     public function mostrarDocente(){
@@ -41,8 +53,20 @@ class CalendarioController extends Controller
                 'textColor' => 'white', 
             ];
         });
+
+        $configuraciones = ConfiguracionCalendario::all()->map(function ($configuracion) {
+            return [
+                'title' => $configuracion->CicloExamen,
+                'start' => Carbon::parse($configuracion->FechaInicial)->toDateString(),
+                'end' => Carbon::parse($configuracion->FechaFinal)->addDay()->toDateString(),
+                // 'end' => Carbon::parse($evento->FechaFinal)->toDateString(),
+                'display'=> 'background',
+                'color'=>'#CCFFCC',// Color de fondo del evento (verde claro)
+                'textColor' => 'white', 
+            ];
+        });
     
-        return view('calendario.principalDocente', compact('menu','eventos'));
+        return view('calendario.principalDocente', compact('menu','eventos','configuraciones'));
     }
     public function inicio(){
         $menu = view('componentes/menu'); // Crear la vista del menú
@@ -59,7 +83,19 @@ class CalendarioController extends Controller
             ];
         });
 
-        return view('calendario.inicio', compact('menu','eventos'));
+        $configuraciones = ConfiguracionCalendario::all()->map(function ($configuracion) {
+            return [
+                'title' => $configuracion->CicloExamen,
+                'start' => Carbon::parse($configuracion->FechaInicial)->toDateString(),
+                'end' => Carbon::parse($configuracion->FechaFinal)->addDay()->toDateString(),
+                // 'end' => Carbon::parse($evento->FechaFinal)->toDateString(),
+                'display'=> 'background',
+                'color'=>'#CCFFCC',// Color de fondo del evento (verde claro)
+                'textColor' => 'white', 
+            ];
+        });
+
+        return view('calendario.inicio', compact('menu','eventos','configuraciones'));
     }
     public function evento(){
         $menu = view('componentes/menu'); // Crear la vista del menú

@@ -2,6 +2,7 @@
 
 
 @section('calendario/principal')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <div class="container mt-3">
 	<div class="card  vercard">
 		<h3 class="card-header">Calendario</h3>
