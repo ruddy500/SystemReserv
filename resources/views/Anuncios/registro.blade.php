@@ -57,6 +57,11 @@ document.getElementById('btn-cancelar').addEventListener('click', function() {
         icon: 'warning',
         title: 'Aviso cancelado',
         confirmButtonText: 'Aceptar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Resetear el formulario
+            document.getElementById('formulario-anuncio').reset();
+        }
     })
 })
 </script>
