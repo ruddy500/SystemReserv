@@ -23,7 +23,7 @@
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha inicial:</label>
                             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha_inicial" class="form-control" type="text" readonly required>
+                                <input name="fecha_inicial" class="form-control" type="text" readonly placeholder="dd-mm-aaaa" required>
                                 <span class="input-group-addon"></span>
                                 <div class="invalid-feedback">
                                    
@@ -34,7 +34,7 @@
                         <div class="mb-3">
                             <label for="fecha-name" class="col-form-label h4">Fecha final:</label>
                             <div id="datepicker-final" class="input-group date" data-date-format="dd-mm-yyyy">
-                                <input name="fecha_final" class="form-control" type="text" readonly required>
+                                <input name="fecha_final" class="form-control" type="text" readonly placeholder="dd-mm-aaaa" required>
                                 <span class="input-group-addon"></span>
                                 <div class="invalid-feedback">
                                     
@@ -69,7 +69,8 @@
                     Swal.fire({
                         icon: 'success',
                         text: 'Evento publicado exitosamente',
-                        confirmButtonText: 'Aceptar'                      
+                        confirmButtonText: 'Aceptar',
+                        timer: 2000,                      
                     });
                     // form.reset();
                     // form.classList.remove('was-validated');
@@ -88,6 +89,7 @@
                 text: 'Evento cancelado',
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
+                window.location.href = "{{ route('calendario.evento') }}";
             });
         });
     });
