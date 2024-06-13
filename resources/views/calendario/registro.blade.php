@@ -90,6 +90,9 @@
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
                 window.location.href = "{{ route('calendario.evento') }}";
+                // var form = document.getElementById('formulario-anuncio');
+                //     form.reset();
+                //     form.classList.remove('was-validated');
             });
         });
     });
