@@ -70,17 +70,19 @@
                         </div>
                         <hr style="margin-top:0.1px;">
                         <!-- aqui poner las reglas de uso de ambiente poner la semilla-->
-                            <div class="texto-bienv">
-                                <!-- PONER TITULO AQUI -->
-                                <div class="titulo-regla-ambiente">
-                                    <label class="col-form-label">Reglas:</label>
+                            <div class = "reglas">
+                                <div class="texto-bienv">
+                                    <!-- PONER TITULO AQUI -->
+                                    <div class="titulo-regla-ambiente">
+                                        <label class="col-form-label">Reglas:</label>
+                                    </div>
+                                    <!-- Crear dinamicamente cuando se registren las reglas -->
+                                    <p><small>1. bla bla bla bla</small></p>
+                                    <p><small>2. bla bla bla bla</small></p>
+                                    <p><small>3. bla bla bla bla</small></p>
+                                    <p><small>4. bla bla bla bla</small></p>
                                 </div>
-                                <!-- Crear dinamicamente cuando se registren las reglas -->
-                                <p><small>1. bla bla bla bla</small></p>
-                                <p><small>2. bla bla bla bla</small></p>
-                                <p><small>3. bla bla bla bla</small></p>
-                                <p><small>4. bla bla bla bla</small></p>
-                            </div>
+                            </div>  
                         <hr style="margin-bottom: 0.1px;">
                         <div style="background-color: #f0f0f0; height: 35px;">
                             <div class="titulo-anuncio" style="margin-top:0.1px;">
