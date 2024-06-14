@@ -359,11 +359,13 @@ class CorreoController extends Controller
         $tamCorreos = count($correos);
 
         // Iterar sobre cada correo en $correos y luego enviar los correos
+        $contadorDeNotificaciones=0;
         for ($j = 0; $j < $tamCorreos; $j++) {
             for ($i = 0; $i < $tam; $i++) {
                 if ($usuarios[$i]->id == $correos[$j]) {
                     $destino = $usuarios[$i]->email;
-                    //******notificaciones*****
+                    if($contadorDeNotificaciones===0){
+                        //******notificaciones*****
                     $fechaEnvio = Carbon::now('America/La_Paz');
                     $fechaEnvio->addHours(4);
                     
@@ -387,7 +389,9 @@ class CorreoController extends Controller
                     $registroUR->save();
             
             
-                    //*************************
+                    //**********************
+                    $contadorDeNotificaciones=$contadorDeNotificaciones+1;
+                    }
                     Mail::to($destino)->send(new  Masivo($details, $asunto));
                     //echo "$destino<br>";
                 }

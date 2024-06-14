@@ -224,9 +224,22 @@ $notificaciones = Notificaciones::all();
                         <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
                         <div class="position-relative">
                             <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
-                            <span class="notification-dot"></span>
+                            <?php 
+                                $idPresente = in_array($idNotificacion,$idsLeidosMasivo);
+                                // dd($idsLeidosMasivo);
+                                // dd($idPresente);
+                                ?>
+                                @if ($idPresente == false)
+                                <span class="notification-dot"></span>
+
+                                @else
+                                {{-- <span display='none' class="notification-dot"></span> --}}
+                                @endif
+                            {{-- <span class="notification-dot"></span> --}}
                         </div>
                     </div>
+                    {{-- {{dd($idsLeidosMasivo)}} --}}
+                    
                     <p class="mb-1">adaEnterprissoft@gmail.com</p>
                 </a>
 

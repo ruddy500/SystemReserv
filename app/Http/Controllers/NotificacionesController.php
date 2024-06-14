@@ -34,9 +34,62 @@ class NotificacionesController extends Controller
         // Inicializar la variable para contar notificaciones no leídas
         $datoDocente = 0;
 
+        $idsLeidosMasivo=[];
+
         // dd(count($notificaciones));
         
-           
+        for ($i = 0; $i < count($notificaciones); $i++) {
+            $tipo = $notificaciones[$i]->Tipo;
+            if($tipo==="difusion"){
+                if(auth()->user()->name ==="Henry"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteHenry === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+                if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteRosemary === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+                if(auth()->user()->name ==="Leticia Blanco Coca"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteLeticia === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+                if(auth()->user()->name ==="Catari"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteCatari === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+                if(auth()->user()->name ==="Cussi"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteCussi === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+                if(auth()->user()->name ==="Corina Flores"){
+                        
+                    if ($notificaciones[$i]->EstadoDocenteCorina === 'leido'  ) {
+                        // Si el estado es 'leido', guardar el id en el arreglo
+                        $idsLeidosMasivo[] = $notificaciones[$i]->id;
+                    }
+                }
+
+
+            }
+            
+        }
+        // dd($idsLeidosMasivo);
+        
             /* for ($i = 0; $i < count($notificaciones); $i++) {
                 $tipo = $notificaciones[$i]->Tipo;
                 
@@ -122,8 +175,11 @@ class NotificacionesController extends Controller
                             }
                         }
                     }
+                    
                 }
             }
+
+            // dd($idsLeidosMasivo);
              // Contar las notificaciones no leídas
             /* foreach ($notificaciones as $notificacion) {
                 $tipo = $notificacion->Tipo;
@@ -194,7 +250,7 @@ class NotificacionesController extends Controller
         session(['datoDocente' => $datoDocente]);
 
     
-        return view('notificaciones.lista',compact('menu','idsLeidos'));
+        return view('notificaciones.lista',compact('menu','idsLeidos','idsLeidosMasivo'));
     }
     public function mostrarSugerencia($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
@@ -316,6 +372,39 @@ class NotificacionesController extends Controller
 
         $fechaFormateada = $fecha->locale('es')->isoFormat('dddd, D [de] MMMM');
         $diferencia = $fecha->diffForHumans($fechaActual);
+        // dd("hola");
+        if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteRosemary='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Leticia Blanco Coca"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteLeticia='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Catari"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCatari='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Cussi"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCussi='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Henry"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteHenry='leido';
+            // dd("stop");
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Corina Flores"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCorina='leido';
+            $notificacion->save();
+        }
+
         return view('notificaciones.difusion',compact('menu','notificacionId','fechaFormateada','diferencia','mensaje','asunto'));
     }
 
