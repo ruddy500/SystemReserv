@@ -20,7 +20,12 @@ class CreateNotificacionesTable extends Migration
             $table->enum('Tipo', ['sugerencia', 'rechazado','asignacion','difusion'])->nullable();
             $table->integer('reservas_id')->nullable();
             $table->text('contenidoDifusion')->nullable();
-            $table->enum('EstadoDocente', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteRosemary', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteLeticia', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteCatari', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteCussi', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteHenry', ['leido','no leido'])->default('no leido'); // Valor por defecto
+            $table->enum('EstadoDocenteCorina', ['leido','no leido'])->default('no leido'); // Valor por defecto
             $table->dateTime('fecha_respuesta_Sugerencia')->nullable();
         });
     }

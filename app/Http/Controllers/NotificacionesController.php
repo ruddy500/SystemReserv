@@ -37,31 +37,156 @@ class NotificacionesController extends Controller
         // dd(count($notificaciones));
         
            
-            for ($i = 0; $i < count($notificaciones); $i++) {
+            /* for ($i = 0; $i < count($notificaciones); $i++) {
                 $tipo = $notificaciones[$i]->Tipo;
                 
                 if($tipo != "difusion"){
                     $reserva= Reservas::find($notificaciones[$i]->reservas_id);
                     $docente=Usuarios::find($reserva->docentes_id);
-                    if ($notificaciones[$i]->EstadoDocente === 'leido' && $docente->name === auth()->user()->name  ) {
-                        // Si el estado es 'leido', guardar el id en el arreglo
-                         $idsLeidos[] = $notificaciones[$i]->reservas_id;
-                     }
+
+                    if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteRosemary === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+                    if(auth()->user()->name ==="Leticia Blanco Coca"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteLeticia === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+                    if(auth()->user()->name ==="Catari"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteCatari === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+                    if(auth()->user()->name ==="Cussi"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteCussi === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+                    if(auth()->user()->name ==="Henry"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteHenry === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+                    if(auth()->user()->name ==="Corina Flores"){
+                        
+                        if ($notificaciones[$i]->EstadoDocenteCorina === 'leido' && $docente->name === auth()->user()->name  ) {
+                            // Si el estado es 'leido', guardar el id en el arreglo
+                            $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                        }
+                    }
+
+                    
                 }
                 
+            } */
+            $user = auth()->user(); // Obtener el usuario autenticado una vez
+            $userName = $user->name;
+            
+            // Mapear los nombres de usuario a los campos de estado
+            $estadoDocenteFields = [
+                "Rosemary Torrico Bascope" => "EstadoDocenteRosemary",
+                "Leticia Blanco Coca" => "EstadoDocenteLeticia",
+                "Catari" => "EstadoDocenteCatari",
+                "Cussi" => "EstadoDocenteCussi",
+                "Henry" => "EstadoDocenteHenry",
+                "Corina Flores" => "EstadoDocenteCorina"
+            ];
+            
+            // Verificar si el usuario autenticado tiene un campo de estado correspondiente
+            if (isset($estadoDocenteFields[$userName])) {
+                $estadoField = $estadoDocenteFields[$userName];
+
+                // Iterar sobre las notificaciones
+                foreach ($notificaciones as $notificacion) {
+                    if ($notificacion->Tipo !== "difusion") {
+                        $reserva = Reservas::find($notificacion->reservas_id);
+                        if ($reserva) {
+                            $docente = Usuarios::find($reserva->docentes_id);
+                            if ($docente && $docente->name === $userName) {
+                                if ($notificacion->$estadoField === 'leido') {
+                                    // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificacion->reservas_id;
+                                }
+                            }
+                        }
+                    }
+                }
             }
              // Contar las notificaciones no leídas
-            foreach ($notificaciones as $notificacion) {
+            /* foreach ($notificaciones as $notificacion) {
                 $tipo = $notificacion->Tipo;
                 if($tipo != "difusion"){
                     $reserva= Reservas::find($notificacion->reservas_id);
                     $docente=Usuarios::find($reserva->docentes_id);
-                    if ($notificacion->EstadoDocente === 'no leido'&& $docente->name === auth()->user()->name) {
-                        $datoDocente += 1;
+                    if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+                        if ($notificacion->EstadoDocenteRosemary === 'no leido'&& $docente->name === auth()->user()->name) {
+                            $datoDocente += 1;
+                        }
                     }
+                    if(auth()->user()->name ==="Leticia Blanco Coca"){
+                        if ($notificacion->EstadoDocenteLeticia === 'no leido'&& $docente->name === auth()->user()->name) {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Catari"){
+                        if ($notificacion->EstadoDocenteCatari === 'no leido'&& $docente->name === auth()->user()->name) {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Henry"){
+                        if ($notificacion->EstadoDocenteHenry === 'no leido'&& $docente->name === auth()->user()->name) {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Corina Flores"){
+                        if ($notificacion->EstadoDocenteCorina === 'no leido'&& $docente->name === auth()->user()->name) {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                
                 }
                 
+            } */
+           // Inicializar contador
+    $datoDocente = 0;
+
+    // Verificar si el usuario autenticado tiene un campo de estado correspondiente
+    if (isset($estadoDocenteFields[$userName])) {
+        $estadoField = $estadoDocenteFields[$userName];
+
+        // Iterar sobre las notificaciones
+        foreach ($notificaciones as $notificacion) {
+            if ($notificacion->Tipo !== "difusion") {
+                $reserva = Reservas::find($notificacion->reservas_id);
+                if ($reserva) {
+                    $docente = Usuarios::find($reserva->docentes_id);
+                    if ($docente && $docente->name === $userName) {
+                        if ($notificacion->$estadoField === 'no leido') {
+                            // Incrementar contador si el estado es 'no leido'
+                            $datoDocente += 1;
+                        }
+                    }
+                }
             }
+        }
+    }
+
 
         
 
@@ -73,23 +198,106 @@ class NotificacionesController extends Controller
     }
     public function mostrarSugerencia($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        $notificacion= Notificaciones::find($notificacionId);
-        $notificacion->EstadoDocente='leido';
-        $notificacion->save();
+        if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteRosemary='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Leticia Blanco Coca"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteLeticia='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Catari"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCatari='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Cussi"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCussi='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Henry"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteHenry='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Corina Flores"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCorina='leido';
+            $notificacion->save();
+        }
         return view('notificaciones.sugerencia',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarAsignacion($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        $notificacion= Notificaciones::find($notificacionId);
-        $notificacion->EstadoDocente='leido';
-        $notificacion->save();
+        if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteRosemary='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Leticia Blanco Coca"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteLeticia='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Catari"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCatari='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Cussi"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCussi='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Henry"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteHenry='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Corina Flores"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCorina='leido';
+            $notificacion->save();
+        }
+        
+        
         return view('notificaciones.asignacion',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarRechazo($reservaId,$notificacionId){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        $notificacion= Notificaciones::find($notificacionId);
-        $notificacion->EstadoDocente='leido';
-        $notificacion->save();
+        if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteRosemary='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Leticia Blanco Coca"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteLeticia='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Catari"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCatari='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Cussi"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCussi='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Henry"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteHenry='leido';
+            $notificacion->save();
+        }
+        if(auth()->user()->name ==="Corina Flores"){
+            $notificacion= Notificaciones::find($notificacionId);
+            $notificacion->EstadoDocenteCorina='leido';
+            $notificacion->save();
+        }
         return view('notificaciones.rechazo',compact('menu','reservaId','notificacionId'));
     }
     public function mostrarDifusion($notificacionId){
