@@ -14,8 +14,10 @@
     use App\Models\NombreAmbientes;
     use App\Models\TipoAmbientes;
     use App\Models\DocentesMaterias;
+    use App\Models\ConfiguracionCalendario;
 
     $reservasAmbientes = ReservasAmbiente::all();
+    $configuraciones = ConfiguracionCalendario::all();
 
 ?>
 <div class="container mt-3">
@@ -23,7 +25,7 @@
         <h3 class="card-header">Informe de uso de ambientes</h3>
         <div class="card-body bg-content">
             <div class="Ambientesusados">
-                <label class="col-form-label">Ambientes asignados gestión 1/2024:</label>
+                <label class="col-form-label">Ambientes asignados gestión {{ isset($configuraciones[0]->Gestion) ? $configuraciones[0]->Gestion : '1-20XX' }} :</label>
             </div>
             <!-- TABLA DE AMBIENTES ASIGNADOS O USADOS -->
             <div class="table-responsive margin" style="max-height: 350px; overflow-y: auto;">
