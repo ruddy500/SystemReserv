@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Registro reglas de uso de ambientes </h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Reglas de Ambientes </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -13,7 +13,7 @@
                         @include('componentes.validacion')
                         <!-- CAMPO TITULO DE ANUNCIO -->
                         <div class="mb-3">
-                            <label for="titulo-reglas" class="form-label">Titulo:</label>
+                            <label for="titulo-reglas" class="form-label">Regla #1:</label>
                             <input type="text" class="form-control" name="titulo-reglas" id="titulo-reglas" required>
                             <div class="invalid-feedback">
                                 <!-- Mensaje de error -->
@@ -21,7 +21,7 @@
                         </div>
                         <!-- Sección para agregar reglas dinámicamente -->
                         <div id="reglas-container"></div>
-                        <button type="button" class="btn btn-light" id="btn-agregar-regla"  style="margin-bottom:20px;">Agregar regla</button>
+                        <button type="button" class="btn btn-light" id="btn-agregar-regla"  style="margin-bottom:20px;">Agregar Regla</button>
 
                         <div class="modal-footer">
                             <!-- Botón Publicar con SweetAlert2 -->
@@ -71,7 +71,7 @@
 </style>
 
 <script>
-    let reglaCounter = 1; // Contador de reglas
+    let reglaCounter = 2; // Contador de reglas
 
     document.getElementById('btn-agregar-regla').addEventListener('click', function() {
         agregarRegla();
@@ -130,7 +130,7 @@
 
     function actualizarNumerosReglas() {
         const reglas = document.querySelectorAll('.regla-item');
-        reglaCounter = 1;
+        reglaCounter = 2;
         reglas.forEach(regla => {
             const label = regla.querySelector('.regla-label');
             label.innerText = `Regla #${reglaCounter}:`;

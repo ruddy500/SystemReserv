@@ -65,7 +65,7 @@
                         <hr style="margin-top:0.1px; margin-bottom: 0.1px;">
                         <div style="background-color: #f0f0f0; height: 35px;">
                             <div class="titulo-reglas" style="margin-top:0.1px;">
-                                <label class="col-form-label">Uso de ambientes</label>
+                                <label class="col-form-label"><i class="bi bi-exclamation-triangle"></i> Reglas de Uso de Ambientes FCyT</label>
                             </div>
                         </div>
                         <hr style="margin-top:0.1px;">
@@ -73,20 +73,20 @@
                             <div class = "reglas">
                                 <div class="texto-bienv">
                                     <!-- PONER TITULO AQUI -->
-                                    <div class="titulo-regla-ambiente">
+                                    <!-- <div class="titulo-regla-ambiente">
                                         <label class="col-form-label">Reglas:</label>
-                                    </div>
+                                    </div> -->
                                     <!-- Crear dinamicamente cuando se registren las reglas -->
-                                    <p><small>1. bla bla bla bla</small></p>
-                                    <p><small>2. bla bla bla bla</small></p>
-                                    <p><small>3. bla bla bla bla</small></p>
-                                    <p><small>4. bla bla bla bla</small></p>
+                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
+                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
+                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
+                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
                                 </div>
                             </div>  
                         <hr style="margin-bottom: 0.1px;">
                         <div style="background-color: #f0f0f0; height: 35px;">
                             <div class="titulo-anuncio" style="margin-top:0.1px;">
-                                <label class="col-form-label">Anuncios importantes</label>
+                                <label class="col-form-label"><i class="bi bi-pin"></i> Anuncios Importantes</label>
                             </div>
                         </div>
                         <hr style="margin-top:0.1px;">
@@ -95,7 +95,7 @@
                             @for ($i=0;$i<$tam;$i++)
                                 <div class="card c-anuncio">
                                     <div class="card-body">
-                                        <h5 class="card-title"><i class="bi bi-exclamation-triangle"></i>    {{$anuncios[$i]->Titulo}}</h5>
+                                        <h5 class="card-title"><i class="bi bi-pin"></i>    {{$anuncios[$i]->Titulo}}</h5>
                                         <p class="card-text"> {{$anuncios[$i]->Contenido}}</p>
                                     </div>
                                 </div>

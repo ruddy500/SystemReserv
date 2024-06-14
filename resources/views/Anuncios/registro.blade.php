@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Registro de anuncio </h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Anuncio Importante</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -21,10 +21,9 @@
                         </div>
                         <!-- CAMPO CONTENIDO ANUNCIO -->
                         <div class="mb-3">
-                            <label for="contenido-anuncio-text" class="form-label">Contenido:</label>
+                            <label for="contenido-anuncio-text" class="form-label">Descripción:</label>
                             <textarea class="form-control" name="contenido-anuncio" id="contenido-anuncio" required></textarea>
                             <div class="invalid-feedback">
-                                
                             </div>
                         </div>
                     
