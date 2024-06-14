@@ -102,9 +102,13 @@ class CalendarioController extends Controller
         $eventos = Eventos::all();
         return view('calendario.evento', compact('menu','eventos'));
     }
+
     public function configuracion(){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('calendario.configuracion', compact('menu'));
+        $configuraciones = ConfiguracionCalendario::all();
+        return view('calendario.configuracion', compact('menu','configuraciones'));
+
+        
     }
 
     public function registrarEvento(Request $request){
@@ -123,8 +127,12 @@ class CalendarioController extends Controller
         return redirect()->route('calendario.evento');
     }
 
+    
     public function configurarCalendario(Request $request){
+    //    dd($request->all());
+        ConfiguracionCalendario::truncate();
 
+        $gestion = $request->gestion;
         $fechaIniSemestre = $request->fecha_i;
         $fechaFinSemestre = $request->fecha_f;
 
@@ -141,34 +149,41 @@ class CalendarioController extends Controller
         $fechaFin3 = $request->fecha_fin_tercero;
 
         $confiSemestre = new ConfiguracionCalendario();
+        $confiSemestre->Gestion = $gestion; 
         $confiSemestre->CicloExamen = "Semestre";
         $confiSemestre->FechaInicial = $fechaIniSemestre;
         $confiSemestre->FechaFinal = $fechaFinSemestre;
         $confiSemestre->save();
 
         $confiMesa = new ConfiguracionCalendario();
+        $confiMesa->Gestion = $gestion; 
         $confiMesa->CicloExamen = "Mesa";
         $confiMesa->FechaInicial = $fechaIniMesa;
         $confiMesa->FechaFinal = $fechaFinMesa;
         $confiMesa->save();
 
         $confi = new ConfiguracionCalendario();
+        $confi->Gestion = $gestion; 
         $confi->CicloExamen = "PrimerParcial";
         $confi->FechaInicial = $fechaIni;
         $confi->FechaFinal = $fechaFin;
         $confi->save();
 
         $confi2 = new ConfiguracionCalendario();
+        $confi2->Gestion = $gestion; 
         $confi2->CicloExamen = "SegundoParcial";
         $confi2->FechaInicial = $fechaIni2;
         $confi2->FechaFinal = $fechaFin2;
         $confi2->save();
 
+        
         $confi3 = new ConfiguracionCalendario();
+        $confi3->Gestion = $gestion; 
         $confi3->CicloExamen = "Final";
         $confi3->FechaInicial = $fechaIni3;
         $confi3->FechaFinal = $fechaFin3;
         $confi3->save();
+        
         // return view('calendario.evento', compact('menu'));
         return redirect()->route('calendario.configuracion');
     }

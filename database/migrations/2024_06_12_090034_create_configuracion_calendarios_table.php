@@ -15,6 +15,7 @@ class CreateConfiguracionCalendariosTable extends Migration
     {
         Schema::create('configuracion_calendarios', function (Blueprint $table) {
             $table->id();
+            $table->string('Gestion')->nullable();
             $table->string('CicloExamen')->nullable();
             $table->string('FechaInicial')->nullable();
             $table->string('FechaFinal')->nullable();
