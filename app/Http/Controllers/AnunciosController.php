@@ -19,6 +19,19 @@ class AnunciosController extends Controller
         return view('anuncios.index', compact('menu','anuncios','tam','reglas','t'));
     }
 
+
+    public function mostrarAnuncios(){
+        $anuncios = Anuncios::all();
+        $tam = $anuncios->count();
+
+        $reglas = Reglas::all();
+        $t = $reglas->count();
+
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return view('anuncios.tablaAnuncios', compact('menu','anuncios','tam','reglas','t'));
+    }
+
+
     public function guardar(Request $request){
         $titulo = $request->input('titulo-anuncio');
         $texto = $request->input('contenido-anuncio');
@@ -35,7 +48,7 @@ class AnunciosController extends Controller
         $anuncio->save();
 
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return redirect()->route('anuncios.index',compact('menu'))->with('success', 'Anuncio registrado exitosamente.');
+        return redirect()->route('Anuncios.tablaAnuncios',compact('menu'))->with('success', 'Anuncio registrado exitosamente.');
     }
 
     public function eliminar(Request $request){
@@ -46,11 +59,11 @@ class AnunciosController extends Controller
         if ($anuncio) {  // Verifica si se encontró el anuncio
             $anuncio->delete(); // Elimina el anuncio
             $menu = view('componentes/menu'); // Crear la vista del menú
-            return redirect()->route('anuncios.index',compact('menu'))->with('success', '¡El anuncio ha sido eliminado');
+            return redirect()->route('Anuncios.tablaAnuncios',compact('menu'))->with('success', '¡El anuncio ha sido eliminado');
             
         } else {
             $menu = view('componentes/menu'); // Crear la vista del menú
-            return redirect()->route('anuncios.index',compact('menu'))->with('message', '¡Error al eliminar');
+            return redirect()->route('Anuncios.tablaAnuncios',compact('menu'))->with('message', '¡Error al eliminar');
         }
     }
 }
