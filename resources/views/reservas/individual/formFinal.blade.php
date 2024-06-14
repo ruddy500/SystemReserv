@@ -147,6 +147,178 @@ $totalEstudiantes = 0;
     </div>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.needs-validation');
+        var btnAceptar = document.getElementById('btn-aceptar');
+        var fechaInput = document.getElementById('fechaInput');
+        var cantidadInput = document.querySelector('input[name="cantidad"]');
+        var motivo = document.querySelector('select[name="motivo"]');
+        var tipoAmbiente = document.querySelector('select[name="tipoAmbiente"]');
+        var cancelar = document.querySelector('#cancelar');
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var maxCheckboxes = 2;
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            if (!form.checkValidity()) {
+                event.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+
+            if (checkedCheckboxes.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Error..',
+                    text: 'Seleccione al menos un horario',
+                    confirmButtonText: 'Aceptar',
+                });
+            } else if (checkedCheckboxes.length === maxCheckboxes) {
+                var checkedIndexes = Array.from(checkboxes).map((cb, i) => cb.checked ? i : -1).filter(index => index !== -1);
+                if (Math.abs(checkedIndexes[1] - checkedIndexes[0]) !== 1) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Error...',
+                        text: 'Por favor seleccione horarios contiguos.',
+                        confirmButtonText: 'Aceptar',
+                    });
+                } else {
+                    sendFormData();
+                }
+            } else if (checkedCheckboxes.length === 1) {
+                sendFormData();
+            }
+        });
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                checkboxes.forEach(function(cb) {
+                    if (!cb.checked) {
+                        cb.disabled = checkedCheckboxes.length >= maxCheckboxes;
+                    } else {
+                        cb.disabled = false;
+                    }
+                });
+            });
+        });
+
+        cantidadInput.addEventListener('input', function() {
+            btnAceptar.disabled = !cantidadInput.checkValidity();
+        });
+
+        cancelar.addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'info',
+                title: 'Reserva cancelada',
+                text: 'Has cancelado la reserva.',
+                confirmButtonText: 'Aceptar',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/reservas";
+                }
+            });
+        });
+
+        function sendFormData() {
+            var formData = new FormData(form);
+            fetch('{{ route("reservas.guardarIndividual") }}', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                        confirmButtonText: 'Aceptar',
+                    });
+                } else if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data.message,
+                        confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/reservas";
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // $('#datepicker').datepicker({
+        //     startDate: '+0d',
+        //     language: 'es',
+        //     autoclose: true,
+        //     daysOfWeekDisabled: [0, 6],
+        //     todayHighlight: true
+        // });
+
+        $('#datepicker').on('changeDate', function() {
+            fechaInput.value = $(this).datepicker('getFormattedDate');
+            form.classList.remove('was-validated');
+        });
+    });
+</script>
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.needs-validation');
+        var btnAceptar = document.getElementById('btn-aceptar');
+        var fechaInput = document.getElementById('fechaInput');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+            // Obtiene los datos del formulario para enviarlos al controlador
+            var formData = new FormData(form);
+
+            fetch('{{ route("reservas.guardarIndividual") }}', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                        confirmButtonText: 'Aceptar',
+                    });
+                } else if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data.message,
+                        confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirecciona o realiza otra acción necesaria después de éxito
+                            window.location.href = "/reservas";
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+
 <script>
     // Validación de los campos de capacidad de estudiantes, motivo y fecha
     (function () {
@@ -280,7 +452,7 @@ $totalEstudiantes = 0;
             });
         });
     });
-</script>
+</>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var form = document.querySelector('.needs-validation');
@@ -303,4 +475,4 @@ $totalEstudiantes = 0;
             }
         });
     });
-</script>
+</script> --}}

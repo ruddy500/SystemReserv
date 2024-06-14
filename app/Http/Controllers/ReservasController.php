@@ -12,7 +12,7 @@ use App\Models\Periodos;
 
 use App\Models\DocentesMaterias;
 use App\Models\Fechas;
-use App\Models\Horarios;
+use App\Models\Eventos;
 use App\Models\MateriasSeleccionado;
 use App\Models\PeriodosSeleccionado;
 use Illuminate\Validation\ValidationException;
@@ -166,176 +166,472 @@ class ReservasController extends Controller
         }
       }
 
-    public function guardarIndividual(Request $request)
-    {
-        // obtenemos el id del tipoAmbiente
-        $inttipoAmbiente = $request->input('tipoAmbiente');
-        // dd($tipoAmbiente);
-        // buscamos el tipo Ambiente por su id
-        $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
-        // dd($tipoambiente);
+    // public function guardarIndividual(Request $request)
+    // {
+    //     // obtenemos el id del tipoAmbiente
+    //     $inttipoAmbiente = $request->input('tipoAmbiente');
+    //     // dd($tipoAmbiente);
+    //     // buscamos el tipo Ambiente por su id
+    //     $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+    //     // dd($tipoambiente);
 
-        $options = $request->input('options');
-        $fecha = $request->input('fecha');
+    //     $options = $request->input('options');
+    //     $fecha = $request->input('fecha');
 
-        $materias = json_decode($request->input('lista'), true);
+    //     $materias = json_decode($request->input('lista'), true);
 
         
 
 
 
-        // llenamos los periodos en el horario
-        for ($i = 0; $i < count($options); $i++) {
-            $id = $options[$i];
-            $periodoSeleccionado = new PeriodosSeleccionado();
+    //     // llenamos los periodos en el horario
+    //     for ($i = 0; $i < count($options); $i++) {
+    //         $id = $options[$i];
+    //         $periodoSeleccionado = new PeriodosSeleccionado();
 
+    //         $periodoSeleccionado->periodos_id = $id;
+    //         // Guardar en la base de datos
+    //         $periodoSeleccionado->save();
+    //     }
+
+    //     $cantidadIngresada = $request->cantidad;
+    //     $motivoSeleccionado = $request->motivo;
+    //     // dd($motivoSeleccionado);
+
+    //     // vamos a buscar en  el Motivo lo que se ingreso
+    //     $motivo = Motivos::find($motivoSeleccionado);
+    //     // dd($motivo);
+    //     // aqui traemos el id del Motivo
+    //     $id_Motivo = $motivo->id;
+
+    //     // aqui vamos a interactuar con la base de datos
+    //     $reserva = new Reservas();
+    //     $reserva->CantEstudiante = $cantidadIngresada;
+    //     $reserva->motivos_id = $id_Motivo;
+    //     $reserva->docentes_id = $request->usuario;
+    //     $reserva->Estado = "pendiente";
+    //     $reserva->Tipo = "individual";
+    //     $reserva->fecha = $fecha;
+    //     $reserva->TipoAmbiente = $tipoambiente->Nombre;
+    //     $reserva->save();
+
+    //     $totalEstudiantes = 0;
+    //     // aqui se va añadir materias seleccionado a la base de datos
+    //     for ($i = 0; $i < count($materias); $i++) {
+    //         $valor = $materias[$i];
+
+    //         $materiaSeleccionada = new MateriasSeleccionado();
+    //         $materiaSeleccionada->materias_id = $valor;
+    //         $materiaSeleccionada->reservas_id = $reserva->id;
+    //         $materia = Materias::where('id', $valor)->first();
+    //         $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+
+    //         //Guardar en la base de datos
+    //         $materiaSeleccionada->save();
+    //     }
+
+    //     // ahora traemos el ultimo registro de la reserva
+    //     $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //     $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
+    //     $ultimoRegistro->save();
+
+
+    //     // llenaremos los campos en Periodos seleccionados
+    //     $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //     $ultimoId = $ultimoRegistro->id;
+    //     // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+    //     PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
+
+    //     // redirigimos a la ruta 
+    //     return redirect()->route('reservas.principal');
+    // }
+
+    public function guardarIndividual(Request $request)
+    {
+        // Validación de la fecha
+        $fechaSeleccionada = \DateTime::createFromFormat('d-m-Y', $request->fecha);
+        $fechaSeleF = $fechaSeleccionada->format('Y-m-d');
+        
+        // Obtener todos los eventos
+        $eventos = Eventos::all();
+        
+        foreach ($eventos as $evento) {
+            // Define el rango de fechas permitido
+            $fechaIn = \DateTime::createFromFormat('d-m-Y', $evento->FechaInicial);
+            $fechaInF = $fechaIn->format('Y-m-d');
+    
+            $fechaFin = \DateTime::createFromFormat('d-m-Y', $evento->FechaFinal);
+            $fechaFinF = $fechaFin->format('Y-m-d');
+    
+            // Verifica si la fecha está dentro del rango permitido
+            if ($fechaSeleF >= $fechaInF && $fechaSeleF <= $fechaFinF) {
+                // Prepara la respuesta para enviar al modal
+                $response = [
+                    'status' => 'error',
+                    'message' => 'No se puede realizar reserva en fecha seleccionada',
+                ];
+                return response()->json($response, 422); // Devuelve una respuesta JSON con código de estado 422
+            }
+        }
+    
+        // Procesar la reserva si no hay conflictos de fecha
+        $inttipoAmbiente = $request->input('tipoAmbiente');
+        $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+    
+        $options = $request->input('options');
+        $materias = json_decode($request->input('lista'), true);
+    
+        // Llenar los periodos en el horario
+        foreach ($options as $id) {
+            $periodoSeleccionado = new PeriodosSeleccionado();
             $periodoSeleccionado->periodos_id = $id;
-            // Guardar en la base de datos
             $periodoSeleccionado->save();
         }
-
+    
         $cantidadIngresada = $request->cantidad;
         $motivoSeleccionado = $request->motivo;
-        // dd($motivoSeleccionado);
-
-        // vamos a buscar en  el Motivo lo que se ingreso
+    
+        // Obtener el motivo seleccionado
         $motivo = Motivos::find($motivoSeleccionado);
-        // dd($motivo);
-        // aqui traemos el id del Motivo
-        $id_Motivo = $motivo->id;
-
-        // aqui vamos a interactuar con la base de datos
+    
         $reserva = new Reservas();
         $reserva->CantEstudiante = $cantidadIngresada;
-        $reserva->motivos_id = $id_Motivo;
+        $reserva->motivos_id = $motivo->id;
         $reserva->docentes_id = $request->usuario;
         $reserva->Estado = "pendiente";
         $reserva->Tipo = "individual";
-        $reserva->fecha = $fecha;
+        $reserva->fecha = $request->fecha;
         $reserva->TipoAmbiente = $tipoambiente->Nombre;
         $reserva->save();
-
+    
         $totalEstudiantes = 0;
-        // aqui se va añadir materias seleccionado a la base de datos
-        for ($i = 0; $i < count($materias); $i++) {
-            $valor = $materias[$i];
-
+    
+        // Añadir materias seleccionadas a la base de datos
+        foreach ($materias as $valor) {
             $materiaSeleccionada = new MateriasSeleccionado();
             $materiaSeleccionada->materias_id = $valor;
             $materiaSeleccionada->reservas_id = $reserva->id;
-            $materia = Materias::where('id', $valor)->first();
-            $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
-
-            //Guardar en la base de datos
+            $materia = Materias::find($valor);
+            $totalEstudiantes += $materia->Inscritos;
             $materiaSeleccionada->save();
         }
-
-        // ahora traemos el ultimo registro de la reserva
-        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
-        $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
-        $ultimoRegistro->save();
-
-
-        // llenaremos los campos en Periodos seleccionados
-        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
-        $ultimoId = $ultimoRegistro->id;
-        // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
-        PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
-
-        // redirigimos a la ruta 
-        return redirect()->route('reservas.principal');
+    
+        // Actualizar el total de estudiantes en la reserva
+        $reserva->TotalEstudiantes = $totalEstudiantes;
+        $reserva->save();
+    
+        // Actualizar las filas donde reservas_id es NULL con el ID de la reserva deseada
+        PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $reserva->id]);
+    
+        $response = [
+            'status' => 'success',
+            'message' => 'Reserva registrada exitosamente.',
+        ];
+    
+        return response()->json($response);
     }
+    
 
+    // public function guardarGrupal(Request $request)
+    // {
+        
+    // $fechaSeleccionada = \DateTime::createFromFormat('d-m-Y', $request->fecha);
+    // $fechaSeleF = $fechaSeleccionada->format('Y-m-d');
+    // $eventos = Eventos::all() ;
+    // $tamEventos = count($eventos);
+
+    // if($tamEventos > 0){
+    //     foreach ($eventos as $evento) {
+    //         // Define el rango de fechas permitido
+    //         $fechaIn = \DateTime::createFromFormat('d-m-Y', $evento->FechaInicial);
+    //         $fechaInF = $fechaIn->format('Y-m-d');
+    
+    //         $fechaFin = \DateTime::createFromFormat('d-m-Y', $evento->FechaFinal);
+    //         $fechaFinF = $fechaFin->format('Y-m-d');
+        
+    //          // Verifica si la fecha está dentro del rango permitido
+    //         if ($fechaSeleF >= $fechaInF && $fechaSeleF <= $fechaFinF) {
+    //             // Prepara la respuesta para enviar al modal
+    //             $response = [
+    //                 'status' => 'error',
+    //                 'message' => 'No se puede realizar reserva en fecha seleccionada',
+    //             ];
+    //             // dd($response);
+    //             return response()->json($response, 422); // Devuelve una respuesta JSON con código de estado 422 (Unprocessable Entity)
+    //         }else{
+    
+    //             // obtenemos el id del tipoAmbiente
+    //             $inttipoAmbiente = $request->input('tipoAmbiente');
+    //             // dd($tipoAmbiente);
+    //             // buscamos el tipo Ambiente por su id
+    //             $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+    //             // dd($tipoambiente);
+
+
+    //             $options = $request->input('options');
+    //             $fecha = $request->input('fecha');
+
+
+
+
+    //             // llenamos los periodos en el horario
+    //             for ($i = 0; $i < count($options); $i++) {
+    //                 $id = $options[$i];
+    //                 $periodoSeleccionado = new PeriodosSeleccionado();
+
+    //                 $periodoSeleccionado->periodos_id = $id;
+    //                 // Guardar en la base de datos
+    //                 $periodoSeleccionado->save();
+    //             }
+
+    //             $materias = json_decode($request->input('materias'), true);
+
+    //             // dd($materias);
+    //             $docentesId = $this->getDocentes($materias);
+    //             // dd($docentesId);
+
+    //             $cantidadIngresada = $request->cantidad;
+    //             $motivoSeleccionado = $request->motivo;
+    //             // dd($motivoSeleccionado);
+
+    //             // vamos a buscar en  el Motivo lo que se ingreso
+    //             $motivo = Motivos::find($motivoSeleccionado);
+    //             // dd($motivo);
+    //             // aqui traemos el id del Motivo
+    //             $id_Motivo = $motivo->id;
+    //             //dd($id_Motivo);
+
+
+
+
+    //             // aqui vamos a interactuar con la base de datos
+    //             $reserva = new Reservas();
+    //             $reserva->CantEstudiante = $cantidadIngresada;
+    //             $reserva->motivos_id = $id_Motivo;
+    //             $reserva->docentes_id = $request->usuario;
+    //             $reserva->docentes_grupal = $docentesId;
+    //             $reserva->Estado = "pendiente";
+    //             $reserva->Tipo = "grupal";
+    //             $reserva->fecha = $fecha;
+    //             $reserva->TipoAmbiente = $tipoambiente->Nombre;
+    //             $reserva->save();
+
+    //             $totalEstudiantes = 0;
+    //             // aqui se va añadir materias seleccionado a la base de datos
+    //             for ($i = 0; $i < count($materias); $i++) {
+    //                 $valor = $materias[$i];
+
+    //                 $materiaSeleccionada = new MateriasSeleccionado();
+    //                 $materiaSeleccionada->materias_id = $valor;
+    //                 $materiaSeleccionada->reservas_id = $reserva->id;
+    //                 $materia = Materias::where('id', $valor)->first();
+    //                 $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+
+    //                 //Guardar en la base de datos
+    //                 $materiaSeleccionada->save();
+    //             }
+
+    //             // ahora traemos el ultimo registro de la reserva
+    //             $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //             $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
+    //             $ultimoRegistro->save();
+
+    //             // llenaremos los campos en Periodos seleccionados
+    //             $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //             $ultimoId = $ultimoRegistro->id;
+    //             // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+    //             PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
+        
+    //             $response = [
+    //                 'status' => 'success',
+    //                 'message' => 'Reserva registrada exitosamente.',
+    //             ];
+    //         }
+    
+    //     }
+    // }else{
+    //         // obtenemos el id del tipoAmbiente
+    //         $inttipoAmbiente = $request->input('tipoAmbiente');
+    //         // dd($tipoAmbiente);
+    //         // buscamos el tipo Ambiente por su id
+    //         $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
+    //         // dd($tipoambiente);
+    
+    
+    //         $options = $request->input('options');
+    //         $fecha = $request->input('fecha');
+    
+    
+    
+    
+    //         // llenamos los periodos en el horario
+    //         for ($i = 0; $i < count($options); $i++) {
+    //             $id = $options[$i];
+    //             $periodoSeleccionado = new PeriodosSeleccionado();
+    
+    //             $periodoSeleccionado->periodos_id = $id;
+    //             // Guardar en la base de datos
+    //             $periodoSeleccionado->save();
+    //         }
+    
+    //         $materias = json_decode($request->input('materias'), true);
+    
+    //         // dd($materias);
+    //         $docentesId = $this->getDocentes($materias);
+    //         // dd($docentesId);
+    
+    //         $cantidadIngresada = $request->cantidad;
+    //         $motivoSeleccionado = $request->motivo;
+    //         // dd($motivoSeleccionado);
+    
+    //         // vamos a buscar en  el Motivo lo que se ingreso
+    //         $motivo = Motivos::find($motivoSeleccionado);
+    //         // dd($motivo);
+    //         // aqui traemos el id del Motivo
+    //         $id_Motivo = $motivo->id;
+    //         //dd($id_Motivo);
+    
+    
+    
+    
+    //         // aqui vamos a interactuar con la base de datos
+    //         $reserva = new Reservas();
+    //         $reserva->CantEstudiante = $cantidadIngresada;
+    //         $reserva->motivos_id = $id_Motivo;
+    //         $reserva->docentes_id = $request->usuario;
+    //         $reserva->docentes_grupal = $docentesId;
+    //         $reserva->Estado = "pendiente";
+    //         $reserva->Tipo = "grupal";
+    //         $reserva->fecha = $fecha;
+    //         $reserva->TipoAmbiente = $tipoambiente->Nombre;
+    //         $reserva->save();
+    
+    //         $totalEstudiantes = 0;
+    //         // aqui se va añadir materias seleccionado a la base de datos
+    //         for ($i = 0; $i < count($materias); $i++) {
+    //             $valor = $materias[$i];
+    
+    //             $materiaSeleccionada = new MateriasSeleccionado();
+    //             $materiaSeleccionada->materias_id = $valor;
+    //             $materiaSeleccionada->reservas_id = $reserva->id;
+    //             $materia = Materias::where('id', $valor)->first();
+    //             $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
+    
+    //             //Guardar en la base de datos
+    //             $materiaSeleccionada->save();
+    //         }
+    
+    //         // ahora traemos el ultimo registro de la reserva
+    //         $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //         $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
+    //         $ultimoRegistro->save();
+    
+    //         // llenaremos los campos en Periodos seleccionados
+    //         $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
+    //         $ultimoId = $ultimoRegistro->id;
+    //         // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
+    //         PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
+    
+    
+
+    //         $response = [
+    //             'status' => 'success',
+    //             'message' => 'Reserva registrada exitosamente.',
+    //         ];
+        
+    // }
+   
+    // return response()->json($response);
+      
+      
+    // }
 
     public function guardarGrupal(Request $request)
-    {
+{
+    $fechaSeleccionada = \DateTime::createFromFormat('d-m-Y', $request->fecha);
+    $fechaSeleF = $fechaSeleccionada->format('Y-m-d');
 
-        // obtenemos el id del tipoAmbiente
-        $inttipoAmbiente = $request->input('tipoAmbiente');
-        // dd($tipoAmbiente);
-        // buscamos el tipo Ambiente por su id
-        $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
-        // dd($tipoambiente);
+    $eventos = Eventos::all();
 
+    foreach ($eventos as $evento) {
+        // Define el rango de fechas permitido
+        $fechaIn = \DateTime::createFromFormat('d-m-Y', $evento->FechaInicial);
+        $fechaInF = $fechaIn->format('Y-m-d');
 
-        $options = $request->input('options');
-        $fecha = $request->input('fecha');
+        $fechaFin = \DateTime::createFromFormat('d-m-Y', $evento->FechaFinal);
+        $fechaFinF = $fechaFin->format('Y-m-d');
 
-
-
-
-        // llenamos los periodos en el horario
-        for ($i = 0; $i < count($options); $i++) {
-            $id = $options[$i];
-            $periodoSeleccionado = new PeriodosSeleccionado();
-
-            $periodoSeleccionado->periodos_id = $id;
-            // Guardar en la base de datos
-            $periodoSeleccionado->save();
+        // Verifica si la fecha está dentro del rango permitido
+        if ($fechaSeleF >= $fechaInF && $fechaSeleF <= $fechaFinF) {
+            $response = [
+                'status' => 'error',
+                'message' => 'No se puede realizar reserva en fecha seleccionada',
+            ];
+            return response()->json($response, 422); // Devuelve una respuesta JSON con código de estado 422 (Unprocessable Entity)
         }
+    }
 
-        $materias = json_decode($request->input('materias'), true);
+    // Creación de la reserva
+    // Obtención de datos del formulario
+    $inttipoAmbiente = $request->input('tipoAmbiente');
+    $tipoambiente = TipoAmbientes::find($inttipoAmbiente);
 
-        // dd($materias);
-        $docentesId = $this->getDocentes($materias);
-        // dd($docentesId);
+    $options = $request->input('options');
+    $fecha = $request->input('fecha');
+    $cantidadIngresada = $request->input('cantidad');
+    $motivoSeleccionado = $request->input('motivo');
 
-        $cantidadIngresada = $request->cantidad;
-        $motivoSeleccionado = $request->motivo;
-        // dd($motivoSeleccionado);
+    // Guardar periodos seleccionados
+    foreach ($options as $id) {
+        $periodoSeleccionado = new PeriodosSeleccionado();
+        $periodoSeleccionado->periodos_id = $id;
+        $periodoSeleccionado->save();
+    }
 
-        // vamos a buscar en  el Motivo lo que se ingreso
-        $motivo = Motivos::find($motivoSeleccionado);
-        // dd($motivo);
-        // aqui traemos el id del Motivo
-        $id_Motivo = $motivo->id;
-        //dd($id_Motivo);
+    // Obtener docentes y materias
+    $materias = json_decode($request->input('materias'), true);
+    $docentesId = $this->getDocentes($materias);
 
+    // Guardar reserva
+    $reserva = new Reservas();
+    $reserva->CantEstudiante = $cantidadIngresada;
+    $reserva->motivos_id = $motivoSeleccionado;
+    $reserva->docentes_id = $request->input('usuario');
+    $reserva->docentes_grupal = $docentesId;
+    $reserva->Estado = "pendiente";
+    $reserva->Tipo = "grupal";
+    $reserva->fecha = $fecha;
+    $reserva->TipoAmbiente = $tipoambiente->Nombre;
+    $reserva->save();
 
-
-
-        // aqui vamos a interactuar con la base de datos
-        $reserva = new Reservas();
-        $reserva->CantEstudiante = $cantidadIngresada;
-        $reserva->motivos_id = $id_Motivo;
-        $reserva->docentes_id = $request->usuario;
-        $reserva->docentes_grupal = $docentesId;
-        $reserva->Estado = "pendiente";
-        $reserva->Tipo = "grupal";
-        $reserva->fecha = $fecha;
-        $reserva->TipoAmbiente = $tipoambiente->Nombre;
-        $reserva->save();
-
-        $totalEstudiantes = 0;
-        // aqui se va añadir materias seleccionado a la base de datos
-        for ($i = 0; $i < count($materias); $i++) {
-            $valor = $materias[$i];
-
-            $materiaSeleccionada = new MateriasSeleccionado();
-            $materiaSeleccionada->materias_id = $valor;
-            $materiaSeleccionada->reservas_id = $reserva->id;
-            $materia = Materias::where('id', $valor)->first();
-            $totalEstudiantes = $totalEstudiantes + $materia->Inscritos;
-
-            //Guardar en la base de datos
+    // Guardar materias seleccionadas
+    $totalEstudiantes = 0;
+    foreach ($materias as $valor) {
+        $materiaSeleccionada = new MateriasSeleccionado();
+        $materiaSeleccionada->materias_id = $valor;
+        $materiaSeleccionada->reservas_id = $reserva->id;
+        $materia = Materias::find($valor);
+        if ($materia) {
+            $totalEstudiantes += $materia->Inscritos;
             $materiaSeleccionada->save();
         }
-
-        // ahora traemos el ultimo registro de la reserva
-        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
-        $ultimoRegistro->TotalEstudiantes = $totalEstudiantes;
-        $ultimoRegistro->save();
-
-        // llenaremos los campos en Periodos seleccionados
-        $ultimoRegistro = Reservas::orderBy('id', 'desc')->first();
-        $ultimoId = $ultimoRegistro->id;
-        // Actualiza las filas donde reservas_id es NULL con el ID de la reserva deseada
-        PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $ultimoId]);
-
-
-        // redirigimos a la ruta 
-        return redirect()->route('reservas.principal');
     }
+
+    // Actualizar el total de estudiantes en la reserva
+    $reserva->TotalEstudiantes = $totalEstudiantes;
+    $reserva->save();
+
+    // Actualizar periodos seleccionados con el ID de la reserva
+    PeriodosSeleccionado::whereNull('reservas_id')->update(['reservas_id' => $reserva->id]);
+
+    // Respuesta de éxito
+    $response = [
+        'status' => 'success',
+        'message' => 'Reserva registrada exitosamente.',
+    ];
+
+    return response()->json($response);
+}
 
     public function getDocentes($materiasId){
       $docentes = [];
