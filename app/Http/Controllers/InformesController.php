@@ -14,6 +14,8 @@ use App\Models\PeriodosSeleccionado;
 use App\Models\Periodos;
 use App\Models\ReservasAmbiente;
 use App\Models\NombreAmbientes;
+use App\Models\ConfiguracionCalendario;
+
 class InformesController extends Controller
 {
     public function mostrar(){
@@ -24,6 +26,8 @@ class InformesController extends Controller
     public function generarPDF()
     {
         $reservasAmbientes = ReservasAmbiente::all();
+        $configuraciones = ConfiguracionCalendario::all();
+
 
         $data = [];
         foreach ($reservasAmbientes as $reservasAmbiente) {
@@ -73,11 +77,12 @@ class InformesController extends Controller
                 'horaFin' => $horaFin,
                 'nombreMateria' => $nombreMateria,
                 'motivo' => $motivo,
-                'nombreDocente' => $nombreDocente
+                'nombreDocente' => $nombreDocente,
+
             ];
         }
 
-        $pdf = PDF::loadView('informes.informe_pdf', compact('data'));
+        $pdf = PDF::loadView('informes.informe_pdf', compact('data','configuraciones'));
 
         return $pdf->download('informe_uso_ambientes.pdf');
     }

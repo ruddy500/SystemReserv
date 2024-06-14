@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Informe de Uso de Ambientes</title>
+    <title>Informe de Uso de Ambientes Gestion</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -24,6 +24,7 @@
 </head>
 <body>
     <h2>Informe de Uso de Ambientes</h2>
+    <p>Gestión: {{ isset($configuraciones[0]->Gestion) ? $configuraciones[0]->Gestion : '1-20XX' }}</p>
     <table>
         <thead>
             <tr>
