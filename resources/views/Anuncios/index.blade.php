@@ -6,6 +6,11 @@
         <h3 class="card-header">Anuncios</h3>
         <div class="card-body">
             <div class="boton-anuncio">
+                
+                <!-- <a href="" class="btn btn-primary custom-btn borde"><i class="bi bi-exclamation-triangle"></i> Reglas de Ambientes</a>
+
+                <a href="" class="btn btn-primary custom-btn borde"><i class="bi bi-pin"></i> Anuncios Importantes</a> -->
+
                 <button type="button" class="btn btn-primary dropdown-toggle custom-btn" data-bs-toggle="dropdown" aria-expanded="false">
 				Registrar
 				</button>
@@ -32,11 +37,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for ($i=0;$i<$tam;$i++)
+                        @for ($i=0;$i<$t;$i++)
                             <tr class="bg-custom-lista-fila-blanco">
-                                <td class="text-center h4 text-black">{{$anuncios[$i]->Fecha}}</td>
-                                <td class="text-center h4 text-black">{{$anuncios[$i]->Hora}}</td>
-                                <td class="h4 text-black"><strong>Regla #{{$i+1}}:</strong> {{$anuncios[$i]->Titulo}}</td>
+                                <td class="text-center h4 text-black">{{$reglas[$i]->Fecha}}</td>
+                                <td class="text-center h4 text-black">{{$reglas[$i]->Hora}}</td>
+                                <td class="h4 text-black"><strong>Regla #{{$i+1}}:</strong> {{$reglas[$i]->Regla}}</td>
                                 <!-- BOTON ELIMINAR ANUNCIO -->
                                 <td class="text-center h4 text-black">
                                     <div class="d-flex justify-content-center">
@@ -45,7 +50,7 @@
                                             @csrf <!-- Agregar el token CSRF -->
                                                 <a href="#" class="btn btn-fab btn-eliminar" title="Eliminar"> 
                                                     <i class="bi bi-trash3-fill" style="color: white;"></i>
-                                                    <input type="hidden" name="id-anuncio" id="id-anuncio" value="{{$anuncios[$i]->id}}">
+                                                    <input type="hidden" name="id-anuncio" id="id-anuncio" value="{{$reglas[$i]->id}}">
                                                 </a>                        
                                             </div>
                                         </form>

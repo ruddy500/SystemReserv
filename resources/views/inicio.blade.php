@@ -77,10 +77,10 @@
                                         <label class="col-form-label">Reglas:</label>
                                     </div> -->
                                     <!-- Crear dinamicamente cuando se registren las reglas -->
-                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
-                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
-                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
-                                    <p></i><small><small>1. </small>bla bla bla bla</small></p>
+                                    
+                                    @for ($i=0;$i<$t;$i++)
+                                        <p></i><small><small>{{$i+1}}. </small>{{$reglas[$i]->Regla}}</small></p>
+                                    @endfor
                                 </div>
                             </div>  
                         <hr style="margin-bottom: 0.1px;">

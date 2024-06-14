@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Anuncios;
+
+use App\Models\Reglas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class AnunciosController extends Controller
@@ -9,8 +11,12 @@ class AnunciosController extends Controller
     public function mostrar(){
         $anuncios = Anuncios::all();
         $tam = $anuncios->count();
+
+        $reglas = Reglas::all();
+        $t = $reglas->count();
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('anuncios.index', compact('menu','anuncios','tam'));
+        return view('anuncios.index', compact('menu','anuncios','tam','reglas','t'));
     }
 
     public function guardar(Request $request){

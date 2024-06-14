@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReglasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AmbientesController;
 use App\Http\Controllers\InicioController;
@@ -128,6 +129,7 @@ Route::get('/informes/pdf', [InformesController::class, 'generarPDF'])->name('in
 
 //RUTA PARA ANUNCIOS
 Route::get('/anuncios', [AnunciosController::class, 'mostrar'])->name('anuncios.index');
+
 Route::post('/guardar-anuncio', [AnunciosController::class, 'guardar'])->name('guardar-anuncio'); //guarda los anuncios no dormi Arnolin
 
 Route::post('/guardar-ids', [AnunciosController::class, 'eliminar'])->name('guardar-ids'); //para eliminar
