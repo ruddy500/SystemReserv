@@ -2,6 +2,7 @@
 
 <?php 
 use App\Models\Materias;
+use App\Models\Eventos;
 
 $totalEstudiantes = 0;
         // aqui se va añadir materias seleccionado a la base de datos
@@ -12,8 +13,26 @@ $totalEstudiantes = 0;
 
         }
 // dd($totalEstudiantes);
+$eventos = Eventos::all();
 
+$fechas = [];
+foreach ($eventos as $evento) {
+    $fechaInicio = \DateTime::createFromFormat('d-m-Y', $evento->FechaInicial);
+    $fechaInF = $fechaInicio->format('Y-m-d');
 
+    $fechaFinal = \DateTime::createFromFormat('d-m-Y', $evento->FechaFinal);
+    $fechaFinF = $fechaFinal->format('Y-m-d');
+
+    // Incrementar la fecha inicial para incluirla en el array
+    $fecha = new \DateTime($fechaInF); // Crear objeto DateTime desde la fecha inicial
+    while ($fecha <= $fechaFinal) {
+        $fechas[] = $fecha->format('Y-m-d');
+        $fecha->modify('+1 day');
+    }
+
+        
+    }
+// dd($fechas);
 ?>
 
 @section('contenido-registrarIndividual')
@@ -150,196 +169,41 @@ $totalEstudiantes = 0;
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector('.needs-validation');
-        var btnAceptar = document.getElementById('btn-aceptar');
-        var fechaInput = document.getElementById('fechaInput');
-        var cantidadInput = document.querySelector('input[name="cantidad"]');
-        var motivo = document.querySelector('select[name="motivo"]');
-        var tipoAmbiente = document.querySelector('select[name="tipoAmbiente"]');
-        var cancelar = document.querySelector('#cancelar');
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        var maxCheckboxes = 2;
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-            if (!form.checkValidity()) {
-                event.stopPropagation();
-                form.classList.add('was-validated');
-                return;
-            }
-
-            if (checkedCheckboxes.length === 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Error..',
-                    text: 'Seleccione al menos un horario',
-                    confirmButtonText: 'Aceptar',
-                });
-            } else if (checkedCheckboxes.length === maxCheckboxes) {
-                var checkedIndexes = Array.from(checkboxes).map((cb, i) => cb.checked ? i : -1).filter(index => index !== -1);
-                if (Math.abs(checkedIndexes[1] - checkedIndexes[0]) !== 1) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Error...',
-                        text: 'Por favor seleccione horarios contiguos.',
-                        confirmButtonText: 'Aceptar',
-                    });
-                } else {
-                    sendFormData();
-                }
-            } else if (checkedCheckboxes.length === 1) {
-                sendFormData();
+        // Datepicker initialization
+        $('#datepicker').datepicker({
+            startDate: '+0d',
+            language: 'es',
+            autoclose: true,
+            daysOfWeekDisabled: [0],
+            todayHighlight: true,
+            beforeShowDay: function(date) {
+                // Asumiendo que $fechas está correctamente definido en tu PHP
+                var disabledDates = <?php echo json_encode($fechas); ?>;
+                var formattedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+                return {
+                    enabled: !(Array.isArray(disabledDates) && disabledDates.includes(formattedDate))
+                };
             }
         });
 
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                var checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                checkboxes.forEach(function(cb) {
-                    if (!cb.checked) {
-                        cb.disabled = checkedCheckboxes.length >= maxCheckboxes;
-                    } else {
-                        cb.disabled = false;
-                    }
-                });
-            });
-        });
-
-        cantidadInput.addEventListener('input', function() {
-            btnAceptar.disabled = !cantidadInput.checkValidity();
-        });
-
-        cancelar.addEventListener('click', function(event) {
-            event.preventDefault();
-            Swal.fire({
-                icon: 'info',
-                title: 'Reserva cancelada',
-                text: 'Has cancelado la reserva.',
-                confirmButtonText: 'Aceptar',
-                allowOutsideClick: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "/reservas";
-                }
-            });
-        });
-
-        function sendFormData() {
-            var formData = new FormData(form);
-            fetch('{{ route("reservas.guardarIndividual") }}', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'error') {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: data.message,
-                        confirmButtonText: 'Aceptar',
-                    });
-                } else if (data.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: data.message,
-                        confirmButtonText: 'Aceptar',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "/reservas";
+        // Validación de los campos de capacidad de estudiantes, motivo y fecha
+        (function () {
+            'use strict'
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation')
+                Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault()
+                            event.stopPropagation()
                         }
-                    });
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            }, false)
+        })();
 
-        // $('#datepicker').datepicker({
-        //     startDate: '+0d',
-        //     language: 'es',
-        //     autoclose: true,
-        //     daysOfWeekDisabled: [0, 6],
-        //     todayHighlight: true
-        // });
-
-        $('#datepicker').on('changeDate', function() {
-            fechaInput.value = $(this).datepicker('getFormattedDate');
-            form.classList.remove('was-validated');
-        });
-    });
-</script>
-
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector('.needs-validation');
-        var btnAceptar = document.getElementById('btn-aceptar');
-        var fechaInput = document.getElementById('fechaInput');
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe automáticamente
-
-            // Obtiene los datos del formulario para enviarlos al controlador
-            var formData = new FormData(form);
-
-            fetch('{{ route("reservas.guardarIndividual") }}', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'error') {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: data.message,
-                        confirmButtonText: 'Aceptar',
-                    });
-                } else if (data.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: data.message,
-                        confirmButtonText: 'Aceptar',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Redirecciona o realiza otra acción necesaria después de éxito
-                            window.location.href = "/reservas";
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
-</script>
-
-
-<script>
-    // Validación de los campos de capacidad de estudiantes, motivo y fecha
-    (function () {
-        'use strict'
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation')
-            Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        }, false)
-    })()
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+        // Control de checkboxes
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
         var maxCheckboxes = 2;
 
@@ -361,6 +225,7 @@ $totalEstudiantes = 0;
             });
         });
 
+        // Validación antes de enviar el formulario
         var form = document.querySelector('.needs-validation');
         form.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -434,7 +299,7 @@ $totalEstudiantes = 0;
             }
         });
 
-        // Aquí es donde agregas el controlador de eventos al botón "Cancelar"
+        // Cancelar reserva
         var cancelar = document.querySelector('#cancelar');
         cancelar.addEventListener('click', function(event) {
             event.preventDefault();
@@ -451,22 +316,10 @@ $totalEstudiantes = 0;
                 }
             });
         });
-    });
-</>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector('.needs-validation');
+
+        // Validación de cantidad input
         var btnAceptar = document.getElementById('btn-aceptar');
         var cantidadInput = document.querySelector('input[name="cantidad"]');
-
-        form.addEventListener('submit', function(event) {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        });
-
         cantidadInput.addEventListener('input', function() {
             if (cantidadInput.checkValidity()) {
                 btnAceptar.disabled = false;
@@ -475,4 +328,4 @@ $totalEstudiantes = 0;
             }
         });
     });
-</script> --}}
+</script>
