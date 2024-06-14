@@ -36,6 +36,8 @@ class CalendarioController extends Controller
             ];
         });
     
+        $configuraciones = $configuraciones->slice(1)->values();
+       
         return view('calendario.inicio', compact('menu','eventos','configuraciones'));
     }
 
@@ -54,6 +56,7 @@ class CalendarioController extends Controller
             ];
         });
 
+
         $configuraciones = ConfiguracionCalendario::all()->map(function ($configuracion) {
             return [
                 'title' => $configuracion->CicloExamen,
@@ -66,6 +69,9 @@ class CalendarioController extends Controller
             ];
         });
     
+       
+        $configuraciones = $configuraciones->slice(1)->values();
+       
         return view('calendario.principalDocente', compact('menu','eventos','configuraciones'));
     }
     public function inicio(){
@@ -95,6 +101,9 @@ class CalendarioController extends Controller
             ];
         });
 
+       
+        $configuraciones = $configuraciones->slice(1)->values();
+       
         return view('calendario.inicio', compact('menu','eventos','configuraciones'));
     }
     public function evento(){
