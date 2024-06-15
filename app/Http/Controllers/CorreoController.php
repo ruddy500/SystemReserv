@@ -23,6 +23,7 @@ use App\Models\Periodos;
 use App\Models\DocentesMaterias;
 use App\Models\UsuariosNotificacion;
 use App\Models\Anuncios;
+use App\Models\Reglas;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
 
@@ -397,9 +398,14 @@ class CorreoController extends Controller
                 }
             }
         }
+        //
         $anuncios = Anuncios::all();
         $tam = $anuncios->count();
+
+        $reglas = Reglas::all();
+        $t = $reglas->count();
+
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('inicio', compact('menu','tam','anuncios'));  
+        return view('inicio',compact('menu','anuncios','tam','reglas','t'));
     }
 }
