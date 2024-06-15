@@ -14,15 +14,16 @@
                         <!-- CAMPO TITULO DE ANUNCIO -->
                         <div class="mb-3">
                             <label for="titulo-reglas" class="form-label">Regla #1:</label>
-                            <input type="text" class="form-control" name="titulo-reglas" id="titulo-reglas" required>
+                            <input type="text" class="form-control" name="regla-1" id="regla-1" required>
                             <div class="invalid-feedback">
-                                <!-- Mensaje de error -->
+                                Este campo es obligatorio.
                             </div>
                         </div>
                         <!-- Sección para agregar reglas dinámicamente -->
                         <div id="reglas-container"></div>
                         <button type="button" class="btn btn-light" id="btn-agregar-regla"  style="margin-bottom:20px;">Agregar Regla</button>
-
+                        
+                        <input type="hidden" name="tam" id="tam" readonly>
                         <div class="modal-footer">
                             <!-- Botón Publicar con SweetAlert2 -->
                             <button type="submit" class="btn btn-aceptar" id="btn-publicar">Publicar</button>
@@ -72,10 +73,13 @@
 
 <script>
     let reglaCounter = 2; // Contador de reglas
-
+    let tamanio = document.getElementById('tam');
+    tamanio.value = 1;
     document.getElementById('btn-agregar-regla').addEventListener('click', function() {
         agregarRegla();
+        tamanio.value = reglaCounter-1;
     });
+
 
     function agregarRegla() {
         // Crear un nuevo div para la regla
@@ -136,5 +140,6 @@
             label.innerText = `Regla #${reglaCounter}:`;
             reglaCounter++;
         });
+        tamanio.value = tamanio.value-1;
     }
 </script>
