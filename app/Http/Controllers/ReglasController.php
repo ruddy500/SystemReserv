@@ -36,7 +36,22 @@ class ReglasController extends Controller
          }
     }
 
+    public function guardar(Request $request){
+        dd($request);
+        $regla = $request->input('regla');
+        
+        $carbon = Carbon::now('America/La_Paz');
+        $fecha = $carbon->format('d-m-Y');
+        $hora = $carbon->format('H:i:s');
+        //creamos la fila 
+        $anuncio = new Anuncios();
+        $anuncio->Regla=$regla;
+        $anuncio->Fecha=$fecha;
+        $anuncio->Hora=$hora;
+        $anuncio->save();
 
-
+        $menu = view('componentes/menu'); // Crear la vista del menú
+        return redirect()->route('Anuncios.tablaReglas',compact('menu'))->with('success', 'Reglas registrado exitosamente.');
+    }
 
 }
