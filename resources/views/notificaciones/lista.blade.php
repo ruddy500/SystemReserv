@@ -2,13 +2,17 @@
 
 @section('notificaciones/lista')
 {{-- {{ dd(get_defined_vars()) }} --}}
+
 <?php
 use App\Models\UsuariosNotificacion;
+use App\Models\Usuarios;
 use App\Models\Reservas;
 use App\Models\Notificaciones;
 use Carbon\Carbon; // Asegúrate de usar Carbon para manipular fechas fácilmente
 
 $notificaciones = Notificaciones::all();
+$registroAdmi = Usuarios::where('role','admin')->first();
+$correoAdmin = $registroAdmi->email;
 
 ?>
 <div class="container mt-3">
@@ -19,24 +23,24 @@ $notificaciones = Notificaciones::all();
 
                 @foreach ( $notificaciones as $notificacion)
                 @if ($notificacion->Tipo != "difusion")
-                <?php
-                       
-                        $fecha = Carbon::parse($notificacion->fechaEnvio)->locale('es');
-                        // Formatear la fecha de envío
-                        $fechaEnvioFormateada = $fecha->isoFormat('D [de] MMMM');
-                        // dd($fecha,$fechaEnvioFormateada);
-                        $tipoReserva = $notificacion->Tipo;
-                        $idReserva = $notificacion->reservas_id;
-                        $idNotificacion = $notificacion->id;
-        
-                        $registroReserva = Reservas::where('id',$idReserva)->first();
-                        $tipo = $registroReserva->Tipo;
-                       
+                    <?php
+                        
+                            $fecha = Carbon::parse($notificacion->fechaEnvio)->locale('es');
+                            // Formatear la fecha de envío
+                            $fechaEnvioFormateada = $fecha->isoFormat('D [de] MMMM');
+                            // dd($fecha,$fechaEnvioFormateada);
+                            $tipoReserva = $notificacion->Tipo;
+                            $idReserva = $notificacion->reservas_id;
+                            $idNotificacion = $notificacion->id;
+            
+                            $registroReserva = Reservas::where('id',$idReserva)->first();
+                            $tipo = $registroReserva->Tipo;
+                        
 
-                        $registroUN = UsuariosNotificacion::where('notificaciones_id',$idNotificacion)->first();
-                        $idDocente = $registroUN->usuarios_id;
+                            $registroUN = UsuariosNotificacion::where('notificaciones_id',$idNotificacion)->first();
+                            $idDocente = $registroUN->usuarios_id;
 
-                ?>
+                    ?>
 
                     @if ($tipo == "individual")
                        
@@ -62,7 +66,7 @@ $notificaciones = Notificaciones::all();
                                                     @endif
                                                 </div>
                                             </div>
-                                            <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                            <p class="mb-1">{{ $correoAdmin }}</p>
                                         </a>
                                     
                                         @break
@@ -85,7 +89,7 @@ $notificaciones = Notificaciones::all();
                                                     @endif
                                                 </div>
                                             </div>
-                                            <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                            <p class="mb-1">{{ $correoAdmin }}</p>
                                         </a>
                                         
                                         @break
@@ -108,7 +112,7 @@ $notificaciones = Notificaciones::all();
                                                     @endif
                                                 </div>
                                             </div>
-                                            <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                            <p class="mb-1">{{ $correoAdmin }}</p>
                                         </a>
                                     
                                         @break
@@ -147,7 +151,7 @@ $notificaciones = Notificaciones::all();
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                                <p class="mb-1">{{ $correoAdmin }}</p>
                                             </a>
                                         
                                             @break
@@ -170,7 +174,7 @@ $notificaciones = Notificaciones::all();
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                                <p class="mb-1">{{ $correoAdmin }}</p>
                                             </a>
                                             
                                             @break
@@ -194,7 +198,7 @@ $notificaciones = Notificaciones::all();
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                                                <p class="mb-1">{{ $correoAdmin }}</p>
                                             </a>
                                         
                                             @break
@@ -215,12 +219,20 @@ $notificaciones = Notificaciones::all();
                         // dd($fecha,$fechaEnvioFormateada);
                        
                         $idNotificacion = $notificacion->id;
+
+                        $contenidoDif = $notificacion->contenidoDifusion;
+                        $data = json_decode($contenidoDif, true);
+
+                        // Obtén el valor del campo "asunto"
+                        $asunto = $data['asunto'];
+
+                        // dd($asunto);
         
                 ?>
                 <!-- NOTIFICACION MENSAJE MASIVO -->
                 <a href="{{ route('notificaciones.difusion',['notificacionId' => $idNotificacion]) }}" class="list-group-item list-group-item-action list-group-item-info" onclick="openNotification(this)">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1 notif">Inicio de recepción solicitudes reservas</h5>
+                        <h5 class="mb-1 notif">{{ $asunto }}</h5>
                         <div class="position-relative">
                             <small class="text-body-secondary">{{ $fechaEnvioFormateada }}</small>
                             <?php 
@@ -239,7 +251,7 @@ $notificaciones = Notificaciones::all();
                     </div>
                     {{-- {{dd($idsLeidosMasivo)}} --}}
                     
-                    <p class="mb-1">adaEnterprissoft@gmail.com</p>
+                    <p class="mb-1">{{ $correoAdmin }}</p>
                 </a>
 
                 @endif
