@@ -12,12 +12,18 @@
                 @if (auth()->user()->role == 'admin')
                     <a href="{{ route('notificaciones.admin.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
-                        <span class="notification-count">{{ session('datoAdmin', 0) }}</span>
+                        {{-- <span class="notification-count">{{ session('datoAdmin', 0) }}</span> --}}
+                        @if (session('datoAdmin', 0) != 0)
+                            <span class="notification-count">{{ session('datoAdmin') }}</span>
+                        @endif
                     </a>
                 @else
                     <a href="{{ route('notificaciones.lista') }}" class="notificaciones-link" id="notificaciones-icon">
                         <i class="bi bi-bell-fill"></i>
-                        <span class="notification-count">{{ session('datoDocente', 0) }}</span>
+                        {{-- <span class="notification-count">{{ session('datoDocente', 0) }}</span> --}}
+                        @if (session('datoDocente', 0) != 0)
+                            <span class="notification-count">{{ session('datoDocente') }}</span>
+                        @endif
                     </a>
                 @endif
             @endif
