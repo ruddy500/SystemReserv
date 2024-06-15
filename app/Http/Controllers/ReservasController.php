@@ -105,7 +105,16 @@ class ReservasController extends Controller
     {
         $periodos = Periodos::all();
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('reservas.editar', compact('menu','periodos','idReserva'));
+
+        $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id', $idReserva)->pluck('periodos_id');
+        $periodosSeleccionados =  $periodosSeleccionados->toArray();
+        $registroReserva = Reservas::where('id',$idReserva)->first();
+        
+        $fechaR = $registroReserva->fecha;
+        $fechaRF = \DateTime::createFromFormat('d-m-Y', $fechaR);
+    //    dd($registroReserva,$fechaR,$fechaRF);
+        // dd($fecha, $periodosSeleccionados);
+        return view('reservas.editar', compact('menu','periodos','idReserva','fechaRF','periodosSeleccionados'));
     }
 
     public function consultarMaterias(Request $request)

@@ -19,7 +19,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="gestion-name" class="col-form-label h4">Gestión:</label>
-                <input type="text" class="form-control" id="gestion" name="gestion" placeholder="{{ isset($configuraciones[0]->Gestion) ? $configuraciones[0]->Gestion : '1-20XX' }}">
+                <input type="text" class="form-control" id="gestion" name="gestion" value="{{ old('$configuraciones[0]->Gestion', isset($configuraciones[0]->Gestion) ? $configuraciones[0]->Gestion : '1-20XX') }}" >
     
                 {{-- <input type="text" class="form-control" id="fechaini" placeholder="1-20XX"> --}}
             </div>
@@ -32,7 +32,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechaInicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_i" type="text" class="form-control" placeholder="{{ isset($configuraciones[0]->FechaInicial) ? $configuraciones[0]->FechaInicial : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_i" type="text" class="form-control" value="{{ old('$configuraciones[0]->FechaInicial',isset($configuraciones[0]->FechaInicial) ? $configuraciones[0]->FechaInicial : 'dd-mm-yyyy') }}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -43,7 +43,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_f" type="text" class="form-control" placeholder="{{ isset($configuraciones[0]->FechaFinal) ? $configuraciones[0]->FechaFinal : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_f" type="text" class="form-control" value="{{ old('$configuraciones[0]->FechaFinal', isset($configuraciones[0]->FechaFinal) ? $configuraciones[0]->FechaFinal : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -62,7 +62,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_ini_mesa" type="text" class="form-control" placeholder="{{ isset($configuraciones[1]->FechaInicial) ? $configuraciones[1]->FechaInicial : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_ini_mesa" type="text" class="form-control"  value="{{ old('$configuraciones[1]->FechaInicial', isset($configuraciones[1]->FechaInicial) ? $configuraciones[1]->FechaInicial : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -74,7 +74,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechafinal-name" class="col-form-label h4">Fecha final:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_fin_mesa" type="text" class="form-control" placeholder="{{ isset($configuraciones[1]->FechaFinal) ? $configuraciones[1]->FechaFinal : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_fin_mesa" type="text" class="form-control" value="{{ old('$configuraciones[1]->FechaFinal', isset($configuraciones[1]->FechaFinal) ? $configuraciones[1]->FechaFinal : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -93,7 +93,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_ini_primer" type="text" class="form-control" placeholder="{{ isset($configuraciones[2]->FechaInicial) ? $configuraciones[2]->FechaInicial : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_ini_primer" type="text" class="form-control" value="{{ old('$configuraciones[2]->FechaInicial',isset($configuraciones[2]->FechaInicial) ? $configuraciones[2]->FechaInicial : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -106,7 +106,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha final:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_fin_primer" type="text" class="form-control" placeholder="{{ isset($configuraciones[2]->FechaFinal) ? $configuraciones[2]->FechaFinal : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_fin_primer" type="text" class="form-control" value="{{ old('$configuraciones[2]->FechaFinal',isset($configuraciones[2]->FechaFinal) ? $configuraciones[2]->FechaFinal : 'dd-mm-yyyy')}}" readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -125,7 +125,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_ini_segundo" type="text" class="form-control" placeholder="{{ isset($configuraciones[3]->FechaInicial) ? $configuraciones[3]->FechaInicial : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_ini_segundo" type="text" class="form-control" value="{{ old('$configuraciones[3]->FechaInicial', isset($configuraciones[3]->FechaInicial) ? $configuraciones[3]->FechaInicial : 'dd-mm-yyyy') }}"   readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -137,7 +137,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha final:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_fin_segundo" type="text" class="form-control" placeholder="{{ isset($configuraciones[3]->FechaFinal) ? $configuraciones[3]->FechaFinal : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_fin_segundo" type="text" class="form-control" value="{{ old('$configuraciones[3]->FechaFinal',isset($configuraciones[3]->FechaFinal) ? $configuraciones[3]->FechaFinal : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -156,7 +156,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha inicial:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_ini_tercero" type="text" class="form-control" placeholder="{{ isset($configuraciones[4]->FechaInicial) ? $configuraciones[4]->FechaInicial : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_ini_tercero" type="text" class="form-control" value="{{ old('$configuraciones[4]->FechaInicial',isset($configuraciones[4]->FechaInicial) ? $configuraciones[4]->FechaInicial : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -167,7 +167,7 @@
                 <!-- CAMPO DE FECHA CON CALENDARIO -->
                 <label for="fechainicial-name" class="col-form-label h4">Fecha final:</label>
                 <div class="input-group date datepicker">
-                    <input name="fecha_fin_tercero" type="text" class="form-control" placeholder="{{ isset($configuraciones[4]->FechaFinal) ? $configuraciones[4]->FechaFinal : 'dd-mm-yyyy' }}" readonly>
+                    <input name="fecha_fin_tercero" type="text" class="form-control" value="{{ old('$configuraciones[4]->FechaFinal',isset($configuraciones[4]->FechaFinal) ? $configuraciones[4]->FechaFinal : 'dd-mm-yyyy')}}"  readonly>
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -208,7 +208,8 @@
                 language: 'es',
                 autoclose: true,
                 todayHighlight: true,
-                startDate: '+0d'
+                startDate: '+0d',
+                daysOfWeekDisabled: [0],
             });
 
             // Configurar el evento del botón de guardar
