@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <form id="formulario-reglas" method="POST" action="" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <form id="formulario-reglas" method="POST" action="{{ url('/guardar-regla') }}" enctype="multipart/form-data" class="needs-validation" novalidate>
                         @csrf <!-- Agregar el token CSRF -->
                         @include('componentes.validacion')
                         <!-- CAMPO TITULO DE ANUNCIO -->

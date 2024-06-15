@@ -137,7 +137,7 @@ Route::get('/anuncios/tablaAnuncios', [AnunciosController::class, 'mostrarAnunci
 
 
 Route::post('/guardar-anuncio', [AnunciosController::class, 'guardar'])->name('guardar-anuncio'); //guarda los anuncios no dormi Arnolin
-
+Route::post('/guardar-regla', [ReglasController::class, 'guardar'])->name('guardar-regla'); //guarda la regla
 //eliminar anuncios
 Route::post('/guardar-ids', [AnunciosController::class, 'eliminar'])->name('guardar-ids'); //para eliminar
 Route::post('/guardar-ids-regla', [ReglasController::class, 'eliminar'])->name('guardar-ids-regla'); //para eliminar
