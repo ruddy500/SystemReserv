@@ -142,7 +142,6 @@ $notificaciones = Notificaciones::all();
                                                         ?>
                                                         @if ($idPresente == false)
                                                             <span class="notification-dot"></span>
-
                                                         @else
                                                             {{-- <span display='none' class="notification-dot"></span> --}}
                                                         @endif

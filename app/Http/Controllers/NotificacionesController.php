@@ -90,12 +90,147 @@ class NotificacionesController extends Controller
         }
         // dd($idsLeidosMasivo);
         
-            /* for ($i = 0; $i < count($notificaciones); $i++) {
+            for ($i = 0; $i < count($notificaciones); $i++) {
                 $tipo = $notificaciones[$i]->Tipo;
                 
                 if($tipo != "difusion"){
                     $reserva= Reservas::find($notificaciones[$i]->reservas_id);
                     $docente=Usuarios::find($reserva->docentes_id);
+                    // ********************************Manejaremos Reservas Grupales************************
+                    if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+                        
+                        if($reserva->Tipo ==='grupal'){
+                            if(count($reserva->docentes_grupal)>1){
+
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteRosemary === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                                }
+                            }
+
+                            
+                        }
+                        
+                    }
+
+                    if(auth()->user()->name ==="Leticia Blanco Coca"){
+                        // dd(count($reserva->docentes_grupal));
+                        if($reserva->Tipo ==='grupal'){
+                            if(count($reserva->docentes_grupal)>1){
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteLeticia === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                            }
+                            }
+                            
+                        }  
+                    }
+
+                    if(auth()->user()->name ==="Corina Flores"){
+                        
+                        if($reserva->Tipo ==='grupal'){
+
+                            if(count($reserva->docentes_grupal)>1){
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteCorina === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                                }
+
+                            }
+
+                            
+                        }
+                    }
+
+                    if(auth()->user()->name ==="Catari"){
+                        
+                        if($reserva->Tipo ==='grupal'){
+
+                            if(count($reserva->docentes_grupal)>1){
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteCatari === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                                }
+
+                            }
+
+                            
+                        }
+                    }
+
+                    if(auth()->user()->name ==="Cussi"){
+                        
+                        if($reserva->Tipo ==='grupal'){
+
+                            if(count($reserva->docentes_grupal)>1){
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteCussi === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                                }
+
+                            }
+
+                            
+                        }
+                    }
+
+                    if(auth()->user()->name ==="Henry"){
+                        
+                        if($reserva->Tipo ==='grupal'){
+
+                            if(count($reserva->docentes_grupal)>1){
+                                $idNombre1=$reserva->docentes_grupal[0];
+                                $idNombre2=$reserva->docentes_grupal[1];
+
+                                $nombre1 =Usuarios::find($idNombre1)->name;
+                                $nombre2 =Usuarios::find($idNombre2)->name;
+                        
+
+                                if ($notificaciones[$i]->EstadoDocenteHenry === 'leido' && ($nombre1 === auth()->user()->name || $nombre2 === auth()->user()->name )) {
+                                // Si el estado es 'leido', guardar el id en el arreglo
+                                    $idsLeidos[] = $notificaciones[$i]->reservas_id;
+                                }
+
+                            }
+
+                            
+                        }
+                    }
 
                     if(auth()->user()->name ==="Rosemary Torrico Bascope"){
                         
@@ -143,7 +278,8 @@ class NotificacionesController extends Controller
                     
                 }
                 
-            } */
+            }
+
             $user = auth()->user(); // Obtener el usuario autenticado una vez
             $userName = $user->name;
             
@@ -158,28 +294,28 @@ class NotificacionesController extends Controller
             ];
             
             // Verificar si el usuario autenticado tiene un campo de estado correspondiente
-            if (isset($estadoDocenteFields[$userName])) {
-                $estadoField = $estadoDocenteFields[$userName];
+            // if (isset($estadoDocenteFields[$userName])) {
+            //     $estadoField = $estadoDocenteFields[$userName];
 
-                // Iterar sobre las notificaciones
-                foreach ($notificaciones as $notificacion) {
-                    if ($notificacion->Tipo !== "difusion") {
-                        $reserva = Reservas::find($notificacion->reservas_id);
-                        if ($reserva) {
-                            $docente = Usuarios::find($reserva->docentes_id);
-                            if ($docente && $docente->name === $userName) {
-                                if ($notificacion->$estadoField === 'leido') {
-                                    // Si el estado es 'leido', guardar el id en el arreglo
-                                    $idsLeidos[] = $notificacion->reservas_id;
-                                }
-                            }
-                        }
-                    }
+            //     // Iterar sobre las notificaciones
+            //     foreach ($notificaciones as $notificacion) {
+            //         if ($notificacion->Tipo !== "difusion") {
+            //             $reserva = Reservas::find($notificacion->reservas_id);
+            //             if ($reserva) {
+            //                 $docente = Usuarios::find($reserva->docentes_id);
+            //                 if ($docente && $docente->name === $userName) {
+            //                     if ($notificacion->$estadoField === 'leido') {
+            //                         // Si el estado es 'leido', guardar el id en el arreglo
+            //                         $idsLeidos[] = $notificacion->reservas_id;
+            //                     }
+            //                 }
+            //             }
+            //         }
                     
-                }
-            }
+            //     }
+            // }
 
-            // dd($idsLeidosMasivo);
+            // dd($idsLeidos);  aqui se lee los id de las reservas de un solo docente
              // Contar las notificaciones no leídas de difusion
             /* foreach ($notificaciones as $notificacion) {
                 $tipo = $notificacion->Tipo;
