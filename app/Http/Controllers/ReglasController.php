@@ -41,7 +41,8 @@ class ReglasController extends Controller
         $tam = $request->input('tam');
 
         for($i=0;$i<$tam;$i++){
-            $regla = $request->input('regla-$i');
+            $incremento=$i+1;
+            $regla = $request->input("regla-{$incremento}");
             $carbon = Carbon::now('America/La_Paz');
             $fecha = $carbon->format('d-m-Y');
             $hora = $carbon->format('H:i:s');
