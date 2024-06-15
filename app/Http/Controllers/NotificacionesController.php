@@ -180,7 +180,7 @@ class NotificacionesController extends Controller
             }
 
             // dd($idsLeidosMasivo);
-             // Contar las notificaciones no leídas
+             // Contar las notificaciones no leídas de difusion
             /* foreach ($notificaciones as $notificacion) {
                 $tipo = $notificacion->Tipo;
                 if($tipo != "difusion"){
@@ -241,9 +241,57 @@ class NotificacionesController extends Controller
                 }
             }
         }
+
+
     }
+    $datoMasivo=0;
+    foreach ($notificaciones as $notificacion) {
+                $tipo = $notificacion->Tipo;
+                if($tipo === "difusion"){
+                    if(auth()->user()->name ==="Rosemary Torrico Bascope"){
+                        if ($notificacion->EstadoDocenteRosemary === 'no leido') {
+                            $datoDocente += 1;
+                            
+                        }
+                    }
+                    if(auth()->user()->name ==="Leticia Blanco Coca"){
+                        if ($notificacion->EstadoDocenteLeticia === 'no leido') {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Catari"){
+                        if ($notificacion->EstadoDocenteCatari === 'no leido') {
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Henry"){
+                        if ($notificacion->EstadoDocenteHenry === 'no leido'){
+                            $datoDocente += 1;
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Corina Flores"){
+                        if ($notificacion->EstadoDocenteCorina === 'no leido') {
+                            $datoDocente += 1;
+                            
+                            // dd($datoDocente);
+                        }
+                    }
+                    if(auth()->user()->name ==="Cussi"){
+                        if ($notificacion->EstadoDocenteCussi === 'no leido') {
+                            $datoDocente += 1;
+                            
+                            // dd($datoDocente);
+                        }
+                    }
+                
+                }
+                
+            }
 
-
+            // dd($datoMasivo);
         
 
         // Guarda el valor actualizado en la sesión
