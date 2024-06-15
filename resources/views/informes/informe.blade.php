@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('informes/informe')
+{{-- {{ dd(get_defined_vars()) }} --}}
 <?php
     use App\Models\Ambientes;
     use App\Models\Reservas;
@@ -128,10 +129,39 @@
             </div>
             <!-- PONER AQUI AMBIENTES MAS USADO Y MENOS USADO -->
             <div class="Ambientemasusado">
-                <label class="col-form-label">Ambiente más usado: 690A 70 Veces asignado</label>
+                <label class="col-form-label">
+                    @if (isset($datos['ambienteMasUsado']) && !empty($datos['ambienteMasUsado']))
+                        Ambiente más usado: {{ $datos['ambienteMasUsado']['ambiente'] }}
+                        ({{ $datos['ambienteMasUsado']['cantidadApariciones'] }} 
+                            @if ($datos['ambienteMasUsado']['cantidadApariciones'] == 1)
+                                vez asignado
+                            @else
+                                veces asignado
+                            @endif
+                        )
+                    @else
+                        Ambiente más usado: No hay ambientes asignados
+                    @endif  
+                        
+                </label>
             </div>
+            
             <div class="Ambientemenosusado">
-                <label class="col-form-label">Ambiente menos usado: Auditorio 2 veces asignado</label>
+                <label class="col-form-label">
+                    @if (isset($datos['ambienteMenosUsado']) && !empty($datos['ambienteMenosUsado']))
+                        Ambiente menos usado: {{ $datos['ambienteMenosUsado']['ambiente'] }}
+                        ({{ $datos['ambienteMenosUsado']['cantidadApariciones'] }} 
+                            @if ($datos['ambienteMenosUsado']['cantidadApariciones'] == 1)
+                                vez asignado
+                            @else
+                                veces asignado
+                            @endif
+                        )
+                    @else
+                        Ambiente menos usado: No hay ambientes asignados
+                    @endif  
+                
+                </label>
             </div>
             <!-- TOP 10 DE LOS AMBIENTES MAS USADOS -->
             <!-- <div class="Ambientesusados">

@@ -15,12 +15,75 @@ use App\Models\Periodos;
 use App\Models\ReservasAmbiente;
 use App\Models\NombreAmbientes;
 use App\Models\ConfiguracionCalendario;
+use Illuminate\Support\Facades\DB;
 
 class InformesController extends Controller
 {
+    public function getMasUsadoAmb(){
+        $reservasPorAmbiente = ReservasAmbiente::select('ambientes_id', DB::raw('COUNT(*) as cantidad'))
+        ->groupBy('ambientes_id')
+        ->orderByDesc('cantidad')
+        ->first();
+
+        $datos = [];
+        if ($reservasPorAmbiente) {
+            // Si se encontraron registros, obtener los valores
+            $ambienteIdMasFrecuente = $reservasPorAmbiente->ambientes_id;
+            $registroAmbiente = Ambientes::where('id',$ambienteIdMasFrecuente)->first();
+            $idNombreAmbiente = $registroAmbiente->nombre_ambientes_id;
+            $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+            $ambiente = $registroNombreID->Nombre;
+
+            $cantidadApariciones = $reservasPorAmbiente->cantidad;
+
+            $datos = ['ambiente'=>$ambiente,
+                      'cantidadApariciones'=>$cantidadApariciones];
+        
+            // echo "El ambientes_id más frecuente es: $ambiente, aparece $cantidadApariciones veces.";
+        }
+
+      return $datos;
+    }
+
+    public function getMenosUsadoAmb(){
+        $reservasPorAmbienteMenosFrecuente = ReservasAmbiente::select('ambientes_id', DB::raw('COUNT(*) as cantidad'))
+            ->groupBy('ambientes_id') // Agrupa por ambientes_id para contar cuántas reservas hay por cada ambiente
+            ->orderBy('cantidad') // Ordena los resultados en orden ascendente según la cantidad de reservas
+            ->first(); // Obtiene el primer resultado de la consulta ordenada (menos frecuente)
+
+            $datos = [];
+        if ($reservasPorAmbienteMenosFrecuente) {
+            // Si se encontraron registros, obtener los valores
+            $ambienteIdMenosFrecuente = $reservasPorAmbienteMenosFrecuente->ambientes_id;
+            $registroAmbiente = Ambientes::where('id',$ambienteIdMenosFrecuente)->first();
+            $idNombreAmbiente = $registroAmbiente->nombre_ambientes_id;
+            $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+            $ambiente = $registroNombreID->Nombre;
+
+            $cantidadApariciones = $reservasPorAmbienteMenosFrecuente->cantidad;
+
+            $datos = ['ambiente'=>$ambiente,
+                      'cantidadApariciones'=>$cantidadApariciones];
+        
+            // echo "El ambientes_id más frecuente es: $ambiente, aparece $cantidadApariciones veces.";
+        }
+
+      return $datos;
+    }
     public function mostrar(){
         $menu = view('componentes/menu'); // Crear la vista del menú
-        return view('informes.informe', compact('menu'));
+       
+        
+        // dd($reservasPorAmbiente);
+        $ambienteMasUsado = $this->getMasUsadoAmb();
+        $ambienteMenosUsado = $this->getMenosUsadoAmb();
+        // dd($ambienteMasUsado,$ambienteMenosUsado);
+
+        $datos = ['ambienteMasUsado'=>$ambienteMasUsado,
+                  'ambienteMenosUsado'=>$ambienteMenosUsado,
+                ];
+// dd($datos);
+        return view('informes.informe', compact('menu','datos'));
     }
 
     public function generarPDF()
@@ -82,7 +145,15 @@ class InformesController extends Controller
             ];
         }
 
-        $pdf = PDF::loadView('informes.informe_pdf', compact('data','configuraciones'));
+        $ambienteMasUsado = $this->getMasUsadoAmb();
+        $ambienteMenosUsado = $this->getMenosUsadoAmb();
+        // dd($ambienteMasUsado,$ambienteMenosUsado);
+
+        $datos = ['ambienteMasUsado'=>$ambienteMasUsado,
+                  'ambienteMenosUsado'=>$ambienteMenosUsado,
+                ];
+
+        $pdf = PDF::loadView('informes.informe_pdf', compact('data','configuraciones','datos'));
 
         return $pdf->download('informe_uso_ambientes.pdf');
     }
