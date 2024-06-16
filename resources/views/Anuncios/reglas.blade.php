@@ -23,7 +23,7 @@
                         <div id="reglas-container"></div>
                         <button type="button" class="btn btn-light" id="btn-agregar-regla"  style="margin-bottom:20px;">Agregar Regla</button>
                         
-                        <input type="hidden" name="tam" id="tam" readonly>
+                        {{-- <input type="hidden" name="tam" id="tam" readonly> --}}
                         <div class="modal-footer">
                             <!-- Botón Publicar con SweetAlert2 -->
                             <button type="submit" class="btn btn-aceptar" id="btn-publicar">Publicar</button>
@@ -72,16 +72,99 @@
 </style>
 
 <script>
-    let reglaCounter = 2; // Contador de reglas
-    let tamanio = document.getElementById('tam');
-    tamanio.value = 1;
+    let reglaCounter = 1; // Contador de reglas, comenzando desde 1 porque ya existe regla-1 estáticamente
+
+    // Event listener para el botón "Agregar Regla"
     document.getElementById('btn-agregar-regla').addEventListener('click', function() {
         agregarRegla();
-        tamanio.value = reglaCounter-1;
     });
 
-
+    // Función para agregar una nueva regla dinámicamente
     function agregarRegla() {
+        // Incrementar el contador de reglas
+        reglaCounter++;
+
+        // Crear un nuevo div para la regla
+        const nuevaReglaDiv = document.createElement('div');
+        nuevaReglaDiv.classList.add('mb-3', 'regla-item', 'input-group');
+        nuevaReglaDiv.setAttribute('id', `regla-${reglaCounter}-container`);
+
+        // Crear el label para la nueva regla
+        const nuevaReglaLabel = document.createElement('label');
+        nuevaReglaLabel.classList.add('form-label', 'regla-label');
+        nuevaReglaLabel.setAttribute('for', `regla-${reglaCounter}`);
+        nuevaReglaLabel.innerText = `Regla #${reglaCounter}:`;
+
+        // Crear el textarea para la nueva regla
+        const nuevaReglaTextarea = document.createElement('textarea');
+        nuevaReglaTextarea.classList.add('form-control');
+        nuevaReglaTextarea.setAttribute('name', `regla-${reglaCounter}`);
+        nuevaReglaTextarea.setAttribute('id', `regla-${reglaCounter}`);
+        nuevaReglaTextarea.setAttribute('aria-label', 'Regla');
+        nuevaReglaTextarea.required = true;
+
+        // Crear el botón de eliminar
+        const btnEliminar = document.createElement('button');
+        btnEliminar.type = 'button';
+        btnEliminar.classList.add('btn-eliminar-regla', 'input-group-text');
+        btnEliminar.innerText = '-';
+        btnEliminar.setAttribute('onclick', `eliminarRegla('regla-${reglaCounter}-container')`);
+
+        // Añadir el label, textarea y botón de eliminar al div de la nueva regla
+        nuevaReglaDiv.appendChild(nuevaReglaLabel);
+        nuevaReglaDiv.appendChild(nuevaReglaTextarea);
+        nuevaReglaDiv.appendChild(btnEliminar);
+
+        // Añadir el div de la nueva regla al contenedor de reglas
+        document.getElementById('reglas-container').appendChild(nuevaReglaDiv);
+    }
+
+    // Función para eliminar una regla
+    function eliminarRegla(reglaId) {
+        const reglaDiv = document.getElementById(reglaId);
+        reglaDiv.remove();
+        actualizarNumerosReglas();
+    }
+
+    // Función para actualizar los números de las reglas después de eliminar una
+    function actualizarNumerosReglas() {
+        const reglas = document.querySelectorAll('.regla-item');
+        reglaCounter = 1; // Reiniciar el contador
+        reglas.forEach((regla, index) => {
+            reglaCounter++;
+            const label = regla.querySelector('.regla-label');
+            label.innerText = `Regla #${reglaCounter}:`;
+            const textarea = regla.querySelector('textarea');
+            textarea.setAttribute('name', `regla-${reglaCounter}`);
+            textarea.setAttribute('id', `regla-${reglaCounter}`);
+        });
+    }
+
+    // Event listener para el formulario de reglas (submit)
+    document.getElementById('formulario-reglas').addEventListener('submit', function(event) {
+        guardarReglas();
+    });
+
+    // Función para guardar las reglas
+    function guardarReglas() {
+        const reglas = document.querySelectorAll('.regla-item textarea');
+        const valoresReglas = [];
+        reglas.forEach(regla => {
+            valoresReglas.push(regla.value);
+        });
+
+    }
+</script>
+
+{{-- <script>
+    let reglaCounter = 2; // Contador de reglas
+
+    document.getElementById('btn-agregar-regla').addEventListener('click', function() {
+        agregarRegla();
+    });
+
+    function agregarRegla() { 
+        
         // Crear un nuevo div para la regla
         const nuevaReglaDiv = document.createElement('div');
         nuevaReglaDiv.classList.add('mb-3', 'regla-item', 'input-group');
@@ -108,25 +191,25 @@
         btnEliminar.innerText = '-';
         btnEliminar.setAttribute('onclick', `eliminarRegla('regla-${reglaCounter}-container')`);
 
-        // Crear el feedback de validación para la nueva regla
-        const nuevaReglaFeedback = document.createElement('div');
-        nuevaReglaFeedback.classList.add('invalid-feedback');
-        nuevaReglaFeedback.innerText = 'Este campo es obligatorio.';
-
-        // Añadir el label, textarea, feedback y botón de eliminar al div de la nueva regla
+        // Añadir el label, textarea y botón de eliminar al div de la nueva regla
         nuevaReglaDiv.appendChild(nuevaReglaLabel);
         nuevaReglaDiv.appendChild(nuevaReglaTextarea);
         nuevaReglaDiv.appendChild(btnEliminar);
-        nuevaReglaDiv.appendChild(nuevaReglaFeedback);
 
         // Añadir el div de la nueva regla al contenedor de reglas
         document.getElementById('reglas-container').appendChild(nuevaReglaDiv);
 
         // Incrementar el contador de reglas
-        reglaCounter++;
+        reglaCounter ++;
+        
     }
 
-    function eliminarRegla(reglaId) {
+//     function eliminarRegla(reglaId) {
+//         const reglaDiv = document.getElementById(reglaId);
+//         reglaDiv.remove();
+        
+// }
+function eliminarRegla(reglaId) {
         const reglaDiv = document.getElementById(reglaId);
         reglaDiv.remove();
         actualizarNumerosReglas();
@@ -142,4 +225,16 @@
         });
         tamanio.value = tamanio.value-1;
     }
+
+    function guardarReglas() {
+        const reglas = document.querySelectorAll('.regla-item textarea');
+        const valoresReglas = [];
+        reglas.forEach(regla => {
+            valoresReglas.push(regla.value);
+        });
+        // Simplemente imprime los valores de las reglas para verificar
+        console.log(valoresReglas);
+    }
 </script>
+ --}}
+
