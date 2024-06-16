@@ -175,7 +175,7 @@ fetch('/ambientes/editar/'+horarioId+'/'+ambienteId+'/'+fechaId+'/cambiar-estado
         const descripcionValue = descripcionTextarea.value;
 
         // Expresión regular para validar letras y espacios
-        const regex = /^[a-zA-Z\s]*$/;
+        //const regex = /^[a-zA-Z\s]*$/;
 
         // Verificar si el valor cumple con la expresión regular
         if (regex.test(descripcionValue)) {
