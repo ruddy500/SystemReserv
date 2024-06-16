@@ -20,54 +20,58 @@ use Illuminate\Support\Facades\DB;
 class InformesController extends Controller
 {
     public function getMasUsadoAmb(){
-        $reservasPorAmbiente = ReservasAmbiente::select('ambientes_id', DB::raw('COUNT(*) as cantidad'))
-        ->groupBy('ambientes_id')
-        ->orderByDesc('cantidad')
-        ->first();
+     
+      $reservasAsignadas = Reservas::where('Estado','asignado')->pluck('id');
+      $reservasAmbientes = ReservasAmbiente::whereIn('reservas_id', $reservasAsignadas)->get();
 
-        $datos = [];
-        if ($reservasPorAmbiente) {
-            // Si se encontraron registros, obtener los valores
-            $ambienteIdMasFrecuente = $reservasPorAmbiente->ambientes_id;
-            $registroAmbiente = Ambientes::where('id',$ambienteIdMasFrecuente)->first();
-            $idNombreAmbiente = $registroAmbiente->nombre_ambientes_id;
-            $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
-            $ambiente = $registroNombreID->Nombre;
+      $conteoAmbientes = $reservasAmbientes->groupBy('ambientes_id')
+        ->map->count();
 
-            $cantidadApariciones = $reservasPorAmbiente->cantidad;
+      // Ordenar por la cantidad de repeticiones en orden descendente
+      $conteoAmbientes = $conteoAmbientes->sortByDesc(function ($count) {
+        return $count;
+        });
+    
+        $idNombreAmbiente = $conteoAmbientes->keys()->first();
+        $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+        $ambiente = $registroNombreID->Nombre;
 
-            $datos = ['ambiente'=>$ambiente,
-                      'cantidadApariciones'=>$cantidadApariciones];
-        
-            // echo "El ambientes_id más frecuente es: $ambiente, aparece $cantidadApariciones veces.";
-        }
+        $cantidadRepeticiones = $conteoAmbientes->first();
 
+    //   dd($ambienteMasRepetido,$cantidadRepeticiones);
+      $datos = ['ambiente'=>$ambiente,
+      'cantidadApariciones'=>$cantidadRepeticiones,
+    ];
+
+    // dd($datos);
+    
       return $datos;
     }
 
     public function getMenosUsadoAmb(){
-        $reservasPorAmbienteMenosFrecuente = ReservasAmbiente::select('ambientes_id', DB::raw('COUNT(*) as cantidad'))
-            ->groupBy('ambientes_id') // Agrupa por ambientes_id para contar cuántas reservas hay por cada ambiente
-            ->orderBy('cantidad') // Ordena los resultados en orden ascendente según la cantidad de reservas
-            ->first(); // Obtiene el primer resultado de la consulta ordenada (menos frecuente)
-
-            $datos = [];
-        if ($reservasPorAmbienteMenosFrecuente) {
-            // Si se encontraron registros, obtener los valores
-            $ambienteIdMenosFrecuente = $reservasPorAmbienteMenosFrecuente->ambientes_id;
-            $registroAmbiente = Ambientes::where('id',$ambienteIdMenosFrecuente)->first();
-            $idNombreAmbiente = $registroAmbiente->nombre_ambientes_id;
-            $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
-            $ambiente = $registroNombreID->Nombre;
-
-            $cantidadApariciones = $reservasPorAmbienteMenosFrecuente->cantidad;
-
+      
+            $reservasAsignadas = Reservas::where('Estado','asignado')->pluck('id');
+            $reservasAmbientes = ReservasAmbiente::whereIn('reservas_id', $reservasAsignadas)->get();
+      
+            $conteoAmbientes = $reservasAmbientes->groupBy('ambientes_id')
+              ->map->count();
+      
+            // Ordenar por la cantidad de repeticiones en orden descendente
+            $conteoAmbientes = $conteoAmbientes->sortBy(function ($count) {
+              return $count;
+              });
+          
+              $idNombreAmbiente = $conteoAmbientes->keys()->first();
+              $registroNombreID = NombreAmbientes::where('id',$idNombreAmbiente)->first();
+              $ambiente = $registroNombreID->Nombre;
+      
+              $cantidadRepeticiones = $conteoAmbientes->first();
+      
+          //   dd($ambienteMasRepetido,$cantidadRepeticiones);
             $datos = ['ambiente'=>$ambiente,
-                      'cantidadApariciones'=>$cantidadApariciones];
-        
-            // echo "El ambientes_id más frecuente es: $ambiente, aparece $cantidadApariciones veces.";
-        }
-
+            'cantidadApariciones'=>$cantidadRepeticiones,
+          ];
+      
       return $datos;
     }
     public function mostrar(){
