@@ -13,7 +13,7 @@
                         @include('componentes.validacion')
                         <!-- CAMPO TITULO DE ANUNCIO -->
                         <div class="mb-3">
-                            <label for="titulo-reglas" class="form-label">Regla :</label>
+                            <label for="titulo-reglas" class="form-label">Regla #1:</label>
                             <input type="text" class="form-control" name="regla-1" id="regla-1" required>
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
