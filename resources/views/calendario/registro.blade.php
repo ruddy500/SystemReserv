@@ -69,7 +69,7 @@
                     Swal.fire({
                         icon: 'success',
                         text: 'Evento publicado exitosamente',
-                        confirmButtonText: 'Aceptar',
+                        showConfirmButton: false,
                         timer: 2000,                      
                     });
                     // form.reset();
