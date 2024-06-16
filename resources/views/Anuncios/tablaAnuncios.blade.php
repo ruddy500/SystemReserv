@@ -1,4 +1,4 @@
-@extends('Anuncios/index')
+@extends('anuncios/index')
 
 @section('contenido-anuncios')
 <!-- TABLA DE LISTA DE ANUNCIOS -->
