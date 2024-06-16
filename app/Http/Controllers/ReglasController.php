@@ -38,17 +38,19 @@ class ReglasController extends Controller
 
     public function guardar(Request $request){
 
-        $tam = $request->input('tam');
+        $data = $request->all();
+        // Eliminar el elemento "_token"
+        unset($data['_token']);
+    //    dd($data);
 
-        for($i=0;$i<$tam;$i++){
-            $incremento=$i+1;
-            $regla = $request->input("regla-{$incremento}");
+        foreach($data as $key => $value){
+            //   dd($key,$value);
             $carbon = Carbon::now('America/La_Paz');
             $fecha = $carbon->format('d-m-Y');
             $hora = $carbon->format('H:i:s');
             //creamos la fila 
             $anuncio = new Reglas();
-            $anuncio->Regla=$regla;
+            $anuncio->Regla=$value;
             $anuncio->Fecha=$fecha;
             $anuncio->Hora=$hora;
             $anuncio->save();
