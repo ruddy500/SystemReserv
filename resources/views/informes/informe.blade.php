@@ -49,6 +49,7 @@
                                <?php 
                                     $idReserva = $reservasAmbiente->reservas_id;
                                     $reserva = Reservas::where('id',$idReserva)->first();
+                                    $estado = $reserva->Estado;
                                     
                                     $idAmbiente = $reservasAmbiente->ambientes_id;
                                     $registroAmbiente = Ambientes::where('id',$idAmbiente)->first();
@@ -110,16 +111,21 @@
                                     }
 
                                ?>
+                                    @if ($estado == "asignado")
+                                    
+                                        <tr>
+                                            <th class="text-center h4 text-black">{{ $nombreAmbiente }}</th>
+                                            <th class="text-center h4 text-black">{{ $fecha }}</th>
+                                            <th class="text-center h4 text-black">{{ $horaInicio }} - {{ $horaFin }}</th>
+                                            <th class="text-center h4 text-black">{{ $nombreMateria }}</th>
+                                            <th class="text-center h4 text-black">{{ $motivo }}</th>
+                                            <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
+                                        </tr>
+                                    
+                                        
+                                    @endif
 
-                                <tr>
-                                    <th class="text-center h4 text-black">{{ $nombreAmbiente }}</th>
-                                    <th class="text-center h4 text-black">{{ $fecha }}</th>
-                                    <th class="text-center h4 text-black">{{ $horaInicio }} - {{ $horaFin }}</th>
-                                    <th class="text-center h4 text-black">{{ $nombreMateria }}</th>
-                                    <th class="text-center h4 text-black">{{ $motivo }}</th>
-                                    <th class="text-center h4 text-black">{{ $nombreDocente }}</th>
-                                </tr>
-                                
+                               
                             @endforeach
                            
                             
