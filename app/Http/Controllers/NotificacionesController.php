@@ -20,6 +20,8 @@ use App\Models\ReservasAmbiente;
 use App\Models\NombreAmbientes;
 use App\Models\TipoAmbientes;
 use App\Models\DocentesMaterias;
+use App\Models\Fechas;
+use App\Models\Horarios;
 
 class NotificacionesController extends Controller
 { 
@@ -665,6 +667,7 @@ class NotificacionesController extends Controller
 
     public function sugerenciaRechazo(Request $request)
     {
+        // dd("hola mundo");
         //enviar el correo
         $this->enviarCorreo($request,false);
         // dd($request->input('fecha_actual'));
@@ -683,7 +686,72 @@ class NotificacionesController extends Controller
         // $notificacion->Estado='leido';
         $notificacion->save();
 
+        // $periodoSeleccionado = PeriodosSeleccionado::find()
+        $periodosSeleccionados = PeriodosSeleccionado::where('reservas_id',$idReserva)->get();
+        $reservasAmbiente = ReservasAmbiente::where('reservas_id',$idReserva)->get();
+        // dd($reservasAmbiente);
 
+        $reserva = Reservas::find($idReserva);
+        $fecha = $reserva->fecha;
+
+        // Utilizamos explode para separar la cadena por el delimitador "-"
+        $partes = explode("-", $fecha);
+
+        // Asignamos los valores a las variables individuales
+        $a = $partes[0]; // Día: 17
+        $b = $partes[1]; // Mes: 06
+        $mesCorto = substr($b, -1);
+        // dd($mesCorto);
+        $c = $partes[2]; // Año: 2024
+        $anioCorto = substr($c, -2);
+        // dd($anioCorto);
+        $registro = Fechas::where('dia', $a)
+                ->where('mes', $mesCorto)
+                ->where('anio', $anioCorto)
+                ->first();
+        // dd($registro);
+        $idFecha = $registro->id;
+        // dd($idFecha);
+        
+
+        $idAmbiente1=$reservasAmbiente[0]->ambientes_id;
+        $idAmbiente2=$reservasAmbiente[1]->ambientes_id;
+        // dd(count($periodosSeleccionados));
+        // dd($idAmbiente2);
+        $horarios = Horarios::all();
+        if(count($periodosSeleccionados)===1){
+            $idPeriodo1=$periodosSeleccionados[0]->periodos_id;
+            for ($i=0; $i < count($horarios); $i++) { 
+                $fechaHorarioID = $horarios[$i]->fechas_id;
+                $peridoHorarioID = $horarios[$i]->periodos_id;
+                $ambienteHorarioID = $horarios[$i]->ambientes_id;
+                if($fechaHorarioID===$idFecha && $peridoHorarioID ===$idPeriodo1 &&
+                ($ambienteHorarioID===$idAmbiente1 ||$ambienteHorarioID===$idAmbiente2) ){
+                    $horarios[$i]->Estado=1;
+                    $horarios[$i]->save();
+
+                }
+            }
+        }
+
+        if(count($periodosSeleccionados)===2){
+            $idPeriodo1=$periodosSeleccionados[0]->periodos_id;
+            $idPeriodo2=$periodosSeleccionados[1]->periodos_id;
+            for ($i=0; $i < count($horarios); $i++) { 
+                $fechaHorarioID = $horarios[$i]->fechas_id;
+                $peridoHorarioID = $horarios[$i]->periodos_id;
+                $ambienteHorarioID = $horarios[$i]->ambientes_id;
+                if($fechaHorarioID===$idFecha && ($peridoHorarioID ===$idPeriodo1 || $peridoHorarioID ===$idPeriodo2) &&
+                ($ambienteHorarioID===$idAmbiente1 ||$ambienteHorarioID===$idAmbiente2) ){
+                    $horarios[$i]->Estado=1;
+                    $horarios[$i]->save();
+
+                }
+            }
+        }
+        
+        // dd($idPeriodo1);
+        // $idPeriodo2=$periodosSeleccionados[1]->periodos_id;
         // Redireccionar o devolver una respuesta
         return redirect()->route('notificaciones.lista');
     }
