@@ -61,8 +61,8 @@ class UsuariosTableSeeder extends Seeder
 
         $user6 = new Usuarios;
         $user6->name = 'Corina Flores';
-        $user6->email = 'arnoldcopa2@gmail.com';
-        $user6->password ='1234';
+        $user6->email = 'corinaflores.v@fcyt.umss.edu.bo';
+        $user6->password ='corinaflores';
         $user6->role = 'docente';
         $user6->save();
 
